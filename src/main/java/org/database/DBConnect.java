@@ -21,7 +21,7 @@ public class DBConnect {
         return connection;
     }
 
-    public static void main(String[] args) {
-        connect();
-    }
+    // public static void main(String[] args) {
+    //     System.out.println(connect());
+    // }
 }

@@ -28,7 +28,7 @@
                   </Label>
                   <TextField fx:id="email" promptText="e-mail" />
                   <PasswordField fx:id="password" promptText="mot de passe" />
-                  <Button fx:id="submit" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Login" VBox.vgrow="ALWAYS" />
+                  <Button fx:id="submit" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#loginPressed" text="Login" VBox.vgrow="ALWAYS" />
                   <HBox fillHeight="false" prefHeight="1.0" prefWidth="1.0" VBox.vgrow="NEVER">
                      <children>
                         <Label text="Pas de compte? Cliquez " />

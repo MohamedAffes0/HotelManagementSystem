@@ -18,7 +18,7 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 	stage = primaryStage;
-	VBox root = FXMLLoader.load(getClass().getResource("/signup.fxml"));
+	VBox root = FXMLLoader.load(getClass().getResource("/login.fxml"));
 
         var scene = new Scene(root, 640, 400);
 	

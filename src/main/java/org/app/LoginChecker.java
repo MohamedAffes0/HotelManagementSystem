@@ -4,15 +4,15 @@ import java.sql.*;
 import org.database.DBConnect;
 
 public class LoginChecker {
-    public static boolean loginCheck() {
+    public static boolean loginCheck(String emailText, String passwordText) {
         Connection connection = DBConnect.connect();
         System.err.println("Connection: " + connection);
         if (connection != null) {
             String sql = "{ call check_login(?, ?, ?) }";
             try {
                 CallableStatement stmt = connection.prepareCall(sql);
-                stmt.setString(1, "med@gmail.com");
-                stmt.setString(2, "1234");
+                stmt.setString(1, emailText);
+                stmt.setString(2, passwordText);
                 stmt.registerOutParameter(3, Types.INTEGER);
 
                 stmt.execute();

@@ -13,13 +13,16 @@ import javafx.stage.Stage;
  * JavaFX App
  */
 public class App extends Application {
+    private static Stage stage;
 
     @Override
-    public void start(Stage stage) throws Exception{
-	VBox root = FXMLLoader.load(getClass().getResource("/ui.fxml"));
+    public void start(Stage primaryStage) throws Exception{
+	stage = primaryStage;
+	VBox root = FXMLLoader.load(getClass().getResource("/signup.fxml"));
 
-        var scene = new Scene(root);
-
+        var scene = new Scene(root, 640, 400);
+	
+	stage.setTitle("Hotel Management Dashboard");
         stage.setScene(scene);
         stage.show();
     }

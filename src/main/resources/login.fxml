@@ -28,8 +28,16 @@
                   </Label>
                   <TextField fx:id="email" promptText="e-mail" />
                   <PasswordField fx:id="password" promptText="mot de passe" />
-                  <Button fx:id="submit" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#loginPressed" text="Login" VBox.vgrow="ALWAYS" />
-                  <HBox fillHeight="false" prefHeight="1.0" prefWidth="1.0" VBox.vgrow="NEVER">
+                  <Label fx:id="error" maxWidth="1.7976931348623157E308" text=" " textFill="#ff4d4d">
+                     <padding>
+                        <Insets top="-12.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Label>
+                  <Button fx:id="submit" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#loginPressed" text="Login" />
+                  <HBox fillHeight="false" prefHeight="1.0" prefWidth="1.0">
                      <children>
                         <Label text="Pas de compte? Cliquez " />
                         <Label fx:id="signup" layoutX="10.0" layoutY="10.0" onMouseClicked="#loadSignup" text="ici" underline="true" />

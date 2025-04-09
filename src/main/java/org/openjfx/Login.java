@@ -19,6 +19,9 @@ public class Login {
     private PasswordField password;
 
     @FXML
+    private Label error;
+
+    @FXML
     private Label signup;
 
     @FXML

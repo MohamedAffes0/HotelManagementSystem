@@ -12,9 +12,9 @@ import org.database.DBConnect;
 import oracle.jdbc.OracleTypes;
 
 public class ReservationChecker {
-    private static class ReservationDate {
-        private Date dateDebut;
-        private Date dateFin;
+    public static class ReservationDate {
+        public Date dateDebut;
+        public Date dateFin;
 
         public ReservationDate(Date dateDebut, Date dateFin) {
             this.dateDebut = dateDebut;
@@ -24,7 +24,7 @@ public class ReservationChecker {
     public static ArrayList<ReservationDate> reservationCheck(int id_chambre) {
         Connection connection = null;
         CallableStatement stmt = null;
-        ArrayList<ReservationDate> reservationDate = new ArrayList<>();
+        ArrayList<ReservationDate> reservationDates = new ArrayList<>();
         try {
             connection = DBConnect.connect();
             if (connection != null) {
@@ -41,7 +41,7 @@ public class ReservationChecker {
                         Date dateDebut = result.getDate("date_debut");
                         Date DateFin = result.getDate("date_fin");
 
-                        reservationDate.add(new ReservationDate(dateDebut, DateFin));
+                        reservationDates.add(new ReservationDate(dateDebut, DateFin));
                     }
                 } finally {
                     if (result != null) {
@@ -53,7 +53,7 @@ public class ReservationChecker {
                     }
                 }
 
-                return reservationDate;
+                return reservationDates;
             } else {
                 System.err.println("Échec de la connexion à la base de données.");
                 return null;

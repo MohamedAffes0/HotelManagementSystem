@@ -3,9 +3,13 @@ package org.openjfx;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.Parent;
+import javafx.fxml.FXMLLoader;
+import javafx.collections.ObservableList;
 
 public class MainMenu {
+    private App main;
 
     @FXML
     private Button chambres;
@@ -17,14 +21,14 @@ public class MainMenu {
     private Button comptes;
 
     @FXML
-    private ScrollPane contentContainer;
+    private AnchorPane contentContainer;
 
     @FXML
     private Button reservations;
 
     @FXML
-    void chambresPressed(ActionEvent event) {
-
+    void chambresPressed(ActionEvent event) throws Exception{
+	changeCurrentMenu("/chambres.fxml");
     }
 
     @FXML
@@ -42,5 +46,20 @@ public class MainMenu {
 
     }
 
+    void MainMenu() throws Exception{
+	main = new App();
+    }
+    
+    private void changeCurrentMenu(String menuPath) throws Exception{
+	Parent menu = FXMLLoader.load(getClass().getResource(menuPath));
+
+    	contentContainer.getChildren().clear();
+    	contentContainer.getChildren().add(menu);
+
+    	AnchorPane.setTopAnchor(menu, 0.0);
+    	AnchorPane.setBottomAnchor(menu, 0.0);
+    	AnchorPane.setLeftAnchor(menu, 0.0);
+    	AnchorPane.setRightAnchor(menu, 0.0);
+    }
 }
 

@@ -36,8 +36,8 @@ public class ReservationAdd {
                 System.err.println("Échec de la connexion à la base de données.");
                 return false; // Indique que la connexion a échoué
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
             return false; // Indique que la connexion a échoué
         } finally {
             // toujour executer le bloc finally
@@ -49,8 +49,8 @@ public class ReservationAdd {
                 if (connection != null) {
                     connection.close();
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
+            } catch (SQLException exception) {
+                exception.printStackTrace();
             }
         }
     }

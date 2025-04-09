@@ -4,22 +4,22 @@ import java.sql.*;
 import org.database.DBConnect;
 
 public class UserAdd {
-    public static boolean userAdd(int cin, String nomText, String prenomText, String emailText, String passwordText,
+    public static boolean userAdd(String nomText, String prenomText, String emailText, String passwordText,
             boolean isAdmin, boolean isActive) {
         Connection connection = null;
         CallableStatement stmt = null;
         try {
             connection = DBConnect.connect();
             if (connection != null) {
-                String sql = "{ call add_employe(?, ?, ?, ?, ?, ?, ?) }";
+                String sql = "{ call add_employe(?, ?, ?, ?, ?, ?) }";
                 stmt = connection.prepareCall(sql);
-                stmt.setInt(1, cin);
-                stmt.setString(2, nomText);
-                stmt.setString(3, prenomText);
-                stmt.setString(4, emailText);
-                stmt.setString(5, passwordText);
-                stmt.setInt(6, isAdmin ? 1 : 0);
-                stmt.setInt(7, isActive ? 1 : 0);
+                // stmt.setInt(1, cin);
+                stmt.setString(1, nomText);
+                stmt.setString(2, prenomText);
+                stmt.setString(3, emailText);
+                stmt.setString(4, passwordText);
+                stmt.setInt(5, isAdmin ? 1 : 0);
+                stmt.setInt(6, isActive ? 1 : 0);
 
                 stmt.execute();
                 return true; // Indique que l'ajout a réussi
@@ -31,6 +31,7 @@ public class UserAdd {
             e.printStackTrace();
             return false;
         } finally {
+            // toujour executer le bloc finally
             // Fermeture des ressources JDBC
             try {
                 if (stmt != null) {
@@ -46,6 +47,6 @@ public class UserAdd {
     }
 
     public static void main(String[] args) {
-        System.out.println(userAdd(11196672, "med", "affes", "med@gmail.com", "1234", true, true));
+        System.out.println(userAdd("maisa", "ben mouuurad", "maisa@gmail.com", "1234", false, false));
     }
 }

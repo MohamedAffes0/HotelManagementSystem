@@ -2,7 +2,7 @@ package org.models;
 
 import java.sql.Date;
 
-public class Reservation {
+public class ReservationModel {
     private int id_reservation;
     private Date date_debut;
     private Date date_fin;
@@ -11,7 +11,7 @@ public class Reservation {
     private int client_hotel;
     private int chambre;
 
-    public Reservation(int id, Date d_debut, Date d_fin, boolean paid, int employe, int client_hotel, int chambre) {
+    public ReservationModel(int id, Date d_debut, Date d_fin, boolean paid, int employe, int client_hotel, int chambre) {
         this.id_reservation = id;
         this.date_debut = d_debut;
         this.date_fin = d_fin;

@@ -28,7 +28,7 @@ public class Login {
     private Button submit;
 
     @FXML
-    void loginPressed(ActionEvent event) {
+    void loginPressed(ActionEvent event) throws Exception{
         String emailText = email.getText();
         String passwordText = password.getText();
 
@@ -52,7 +52,8 @@ public class Login {
                 break;
             case INACTIVE_USER:
                 System.out.println("Login failed. User is inactive.");
-                error.setText("Login failed. User is inactive.");
+	        App main = new App();
+	        main.changeScene("/confirmationPending.fxml");
                 break;
             case CONNEXION_FAILED:
                 System.out.println("Login failed. Connection error.");

@@ -27,8 +27,8 @@ public class ReservationDelete {
                 System.err.println("Échec de la connexion à la base de données.");
                 return false;
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
             return false;
         } finally {
             // toujour executer le bloc finally
@@ -40,8 +40,8 @@ public class ReservationDelete {
                 if (connection != null) {
                     connection.close();
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
+            } catch (SQLException exception) {
+                exception.printStackTrace();
             }
         }
     }

@@ -6,7 +6,7 @@ public class RoomModel {
     private int etage;
     private int nb_personnes;
     private float prix;
-    private int etat;
+    private int etat; //-- 0 for libre, 1 for occupée --, 2 for maintenance --
 
     public RoomModel(int id, String type, int etage, int nb_personne, float prix, int etat){
         this.id_chambre = id;

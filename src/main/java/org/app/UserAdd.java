@@ -47,8 +47,8 @@ public class UserAdd {
                 System.err.println("Échec de la connexion à la base de données.");
                 return CreationStatus.CONNEXION_FAILED; // Indique que la connexion a échoué
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
             return CreationStatus.CONNEXION_FAILED; // Indique que la connexion a échoué
         } finally {
             // toujour executer le bloc finally
@@ -60,8 +60,8 @@ public class UserAdd {
                 if (connection != null) {
                     connection.close();
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
+            } catch (SQLException exception) {
+                exception.printStackTrace();
             }
         }
     }

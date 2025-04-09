@@ -2,42 +2,46 @@ package org.app;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.sql.Date;
 
 import org.database.DBConnect;
-import org.models.ReservationModel;
 
 import oracle.jdbc.OracleTypes;
 
-public class ReservationSelect {
-    public static ArrayList<ReservationModel> userSelect() {
+public class ReservationChecker {
+    public static class ReservationDate {
+        public Date dateDebut;
+        public Date dateFin;
+
+        public ReservationDate(Date dateDebut, Date dateFin) {
+            this.dateDebut = dateDebut;
+            this.dateFin = dateFin;
+        }
+    }
+    public static ArrayList<ReservationDate> reservationCheck(int id_chambre) {
         Connection connection = null;
         CallableStatement stmt = null;
-        ArrayList<ReservationModel> reservations = new ArrayList<>();
+        ArrayList<ReservationDate> reservationDates = new ArrayList<>();
         try {
             connection = DBConnect.connect();
             if (connection != null) {
-                String sql = "{ call get_all_reservation(?) }";
+                String sql = "{ call check_reservation(?, ?) }";
                 stmt = connection.prepareCall(sql);
-                stmt.registerOutParameter(1, OracleTypes.CURSOR);                
+                stmt.setInt(1, id_chambre);
+                stmt.registerOutParameter(2, OracleTypes.CURSOR);                
 
                 stmt.execute();
                 ResultSet result = null;
                 try {
-                    result = (ResultSet) stmt.getObject(1);
+                    result = (ResultSet) stmt.getObject(2);
                     while (result.next()) {
-                        int id = result.getInt("id_reservation");
                         Date dateDebut = result.getDate("date_debut");
                         Date DateFin = result.getDate("date_fin");
-                        boolean isPaid = result.getInt("paid") == 1? true : false;
-                        int employee = result.getInt("employe");
-                        int client = result.getInt("client_hotel");
-                        int chambre = result.getInt("chambre");
 
-                        reservations.add(new ReservationModel(id, dateDebut, DateFin, isPaid, employee, client, chambre));
+                        reservationDates.add(new ReservationDate(dateDebut, DateFin));
                     }
                 } finally {
                     if (result != null) {
@@ -49,7 +53,7 @@ public class ReservationSelect {
                     }
                 }
 
-                return reservations;
+                return reservationDates;
             } else {
                 System.err.println("Échec de la connexion à la base de données.");
                 return null;
@@ -73,13 +77,16 @@ public class ReservationSelect {
         }
     }
 
-    // public static void main(String[] args) {
-    //     ArrayList<ReservationModel> reservations = userSelect();
-    //     for (int i = 0; i < reservations.size(); i++) {
-    //         System.out.println(reservations.get(i).getIdReservation() + " " + 
-    //         reservations.get(i).getDateDebut() + " " + reservations.get(i).getDateFin() 
-    //         + " " + reservations.get(i).isPaid() + " " + reservations.get(i).getEmploye() 
-    //         + " " + reservations.get(i).getClientHotel() + " " + reservations.get(i).getChambre());
-    //     }
-    // }
+    public static void main(String[] args) {
+        // Exemple d'utilisation de la méthode reservationCheck
+        int id = 1; // Remplacez par l'ID de la réservation que vous souhaitez vérifier
+        ArrayList<ReservationDate> reservations = reservationCheck(id);
+        if (reservations != null) {
+            for (ReservationDate reservation : reservations) {
+                System.out.println("Date de début : " + reservation.dateDebut + ", Date de fin : " + reservation.dateFin);
+            }
+        } else {
+            System.out.println("Aucune réservation trouvée.");
+        }
+    }
 }

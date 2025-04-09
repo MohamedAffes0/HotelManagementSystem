@@ -3,8 +3,10 @@ package org.app;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.sql.Date;
 
+import org.app.ReservationChecker.ReservationDate;
 import org.database.DBConnect;
 
 public class ReservationAdd {
@@ -15,6 +17,21 @@ public class ReservationAdd {
             System.err.println("Les champs de réservation ne doivent pas être vides ou invalides.");
             return false;
         }
+
+        // Vérification de la disponibilité de la chambre
+        ArrayList<ReservationDate> reservationDates = ReservationChecker.reservationCheck(idChambre);
+        if (reservationDates != null) {
+            for (int i = 0; i < reservationDates.size(); i++) {
+                if (reservationDates.get(i).dateDebut.before(dateFin) || reservationDates.get(i).dateFin.after(dateDebut)) {
+                    System.err.println("La chambre est déjà réservée pour cette période.");
+                    return false; // Indique que la réservation échoue
+                } else if (reservationDates.get(i).dateDebut.equals(dateDebut) || reservationDates.get(i).dateFin.equals(dateFin)) {
+                    System.err.println("La chambre est déjà réservée pour cette période.");
+                    return false; // Indique que la réservation échoue
+                }
+            }
+        }
+        
         Connection connection = null;
         CallableStatement stmt = null;
         try {
@@ -36,8 +53,8 @@ public class ReservationAdd {
                 System.err.println("Échec de la connexion à la base de données.");
                 return false; // Indique que la connexion a échoué
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
             return false; // Indique que la connexion a échoué
         } finally {
             // toujour executer le bloc finally
@@ -49,13 +66,13 @@ public class ReservationAdd {
                 if (connection != null) {
                     connection.close();
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
+            } catch (SQLException exception) {
+                exception.printStackTrace();
             }
         }
     }
 
     // public static void main(String[] args) {
-    //     System.out.println(reservationAdd(Date.valueOf("2025-01-20"), Date.valueOf("2025-01-21"), false, 3, 12345678, 1));
+    //     System.out.println(reservationAdd(Date.valueOf("2025-04-2"), Date.valueOf("2025-04-2"), false, 3, 12345678, 1));
     // }
 }

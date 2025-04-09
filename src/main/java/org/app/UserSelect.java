@@ -53,8 +53,8 @@ public class UserSelect {
                 System.err.println("Échec de la connexion à la base de données.");
                 return null;
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
             return null;
         } finally {
             // toujour executer le bloc finally
@@ -66,8 +66,8 @@ public class UserSelect {
                 if (connection != null) {
                     connection.close();
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
+            } catch (SQLException exception) {
+                exception.printStackTrace();
             }
         }
     }

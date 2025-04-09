@@ -49,7 +49,7 @@ public class RoomModify {
         }
     }
 
-    public static void main(String[] args) {
-        System.out.println(roomModify(2, 3, 100.9f, 0)); // Exemple d'utilisation
-    }
+    // public static void main(String[] args) {
+    //     System.out.println(roomModify(2, 3, 100.9f, 0)); // Exemple d'utilisation
+    // }
 }

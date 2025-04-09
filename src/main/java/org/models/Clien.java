@@ -1,4 +1,4 @@
-package org.app;
+package org.models;
 
 public class Clien {
     private int cin;

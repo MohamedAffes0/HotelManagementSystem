@@ -1,6 +1,6 @@
-package org.app;
+package org.models;
 
-public class Chambre {
+public class RoomModel {
     private int id_chambre;
     private String type_chambre;
     private int etage;
@@ -8,7 +8,7 @@ public class Chambre {
     private float prix;
     private int etat;
 
-    public Chambre(int id, String type, int etage, int nb_personne, float prix, int etat){
+    public RoomModel(int id, String type, int etage, int nb_personne, float prix, int etat){
         this.id_chambre = id;
         this.type_chambre = type;
         this.etage = etage;

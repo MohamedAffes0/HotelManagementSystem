@@ -66,7 +66,7 @@ public class LoginChecker {
         }
     }
 
-    public static void main(String[] args) {
-        System.err.println(loginCheck("maisa@gmail.com", "1234"));
-    }
+    // public static void main(String[] args) {
+    //     System.err.println(loginCheck("maisa@gmail.com", "1234"));
+    // }
 }

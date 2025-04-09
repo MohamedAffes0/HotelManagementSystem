@@ -15,7 +15,8 @@ create table client_hotel(
 cin int primary key,
 nom VARCHAR2(20),
 prenom VARCHAR2(20),
-mail VARCHAR2(30)
+mail VARCHAR2(30),
+CONSTRAINT check_email CHECK (mail IS NULL OR mail LIKE '%_@__%.__%') --le format de l'email--
 );
 
 CREATE table chambre(

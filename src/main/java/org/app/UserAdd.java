@@ -2,10 +2,26 @@ package org.app;
 
 import java.sql.*;
 import org.database.DBConnect;
+import org.app.LoginChecker.LoginStatus;
 
 public class UserAdd {
     public static boolean userAdd(String nomText, String prenomText, String emailText, String passwordText,
             boolean isAdmin, boolean isActive) {
+        if (emailText == null || emailText.isEmpty()) {
+            System.err.println("L'email ne doit pas être vide.");
+            return false;
+            
+        }
+        if (passwordText == null || passwordText.isEmpty()) {
+            System.err.println("Le mot de passe ne doit pas être vide.");
+            return false;
+        }
+        if (LoginChecker.loginCheck(emailText, passwordText) == LoginStatus.INACTIVE_USER || 
+            LoginChecker.loginCheck(emailText, passwordText) == LoginStatus.ADMIN_USER ||
+            LoginChecker.loginCheck(emailText, passwordText) == LoginStatus.NORMAL_USER) {
+            System.err.println("L'utilisateur existe déjà.");
+            return false;
+        }
         Connection connection = null;
         CallableStatement stmt = null;
         try {
@@ -13,7 +29,6 @@ public class UserAdd {
             if (connection != null) {
                 String sql = "{ call add_employe(?, ?, ?, ?, ?, ?) }";
                 stmt = connection.prepareCall(sql);
-                // stmt.setInt(1, cin);
                 stmt.setString(1, nomText);
                 stmt.setString(2, prenomText);
                 stmt.setString(3, emailText);

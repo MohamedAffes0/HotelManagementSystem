@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Label;
 import org.app.UserAdd;
+import org.app.UserAdd.CreationStatus;
 
 public class Signup {
 
@@ -49,9 +50,9 @@ public class Signup {
 	    return;
 	}
         // Appel de la méthode userAdd avec les valeurs des champs de texte
-        boolean result = UserAdd.userAdd(nomText, prenomText, emailText, passwordText, false, false);
+        CreationStatus result = UserAdd.userAdd(nomText, prenomText, emailText, passwordText, false, false);
 
-        if (result) {
+        if (result == CreationStatus.SUCCESS) {
             System.out.println("Utilisateur ajouté avec succès !");
 	    App main = new App();
 	    main.changeScene("/mainMenu.fxml");

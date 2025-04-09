@@ -1,0 +1,9 @@
+CREATE OR REPLACE PROCEDURE delete_client(
+    p_cin IN NUMBER
+) AS
+BEGIN
+    DELETE FROM CLIENT_HOTEL 
+    WHERE cin = p_cin;
+    COMMIT;
+END;
+/

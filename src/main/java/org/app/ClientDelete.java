@@ -6,10 +6,10 @@ import java.sql.SQLException;
 
 import org.database.DBConnect;
 
-public class UserDelete {
-    public static boolean userDelete(int id) {
-        if (id <= 0) {
-            System.err.println("Le ID doit être supérieur à 0.");
+public class ClientDelete {
+    public static boolean clientDelete(int cin) {
+        if (cin <= 0) {
+            System.err.println("Le CIN doit être supérieur à 0.");
             return false;
         }
         Connection connection = null;
@@ -17,9 +17,9 @@ public class UserDelete {
         try {
             connection = DBConnect.connect();
             if (connection != null) {
-                String sql = "{ call delete_user(?) }";
+                String sql = "{ call delete_client(?) }";
                 stmt = connection.prepareCall(sql);
-                stmt.setInt(1, id);
+                stmt.setInt(1, cin);
 
                 stmt.execute();
                 return true; // Indique que l'ajout a réussi
@@ -47,6 +47,6 @@ public class UserDelete {
     }
 
     // public static void main(String[] args) {
-    //     System.out.println(userDelete(1)); // Test de la méthode userDelete
+    //     System.out.println(clientDelete(11111111)); // Test de la méthode clientDelete
     // }
 }

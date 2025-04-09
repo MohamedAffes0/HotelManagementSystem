@@ -4,21 +4,22 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import oracle.jdbc.OracleTypes;
 import java.util.ArrayList;
 
 import org.database.DBConnect;
-import org.models.RoomModel;
+import org.models.PersonModel;
 
-public class RoomSelect {
-    public static ArrayList<RoomModel> roomSelect() {
+import oracle.jdbc.OracleTypes;
+
+public class ClientSelect {
+    public static ArrayList<PersonModel> userSelect() {
         Connection connection = null;
         CallableStatement stmt = null;
-        ArrayList<RoomModel> rooms = new ArrayList<>();
+        ArrayList<PersonModel> clients = new ArrayList<>();
         try {
             connection = DBConnect.connect();
             if (connection != null) {
-                String sql = "{ call get_all_rooms(?) }";
+                String sql = "{ call get_all_clients(?) }";
                 stmt = connection.prepareCall(sql);
                 stmt.registerOutParameter(1, OracleTypes.CURSOR);                
 
@@ -27,14 +28,12 @@ public class RoomSelect {
                 try {
                     result = (ResultSet) stmt.getObject(1);
                     while (result.next()) {
-                        int id = result.getInt("id_chambre");
-                        String type = result.getString("type_chambre");
-                        int etage = result.getInt("etage");
-                        int nb_personnes = result.getInt("nb_personnes");
-                        float prix = result.getFloat("prix");
-                        int etat = result.getInt("etat");
+                        int cin = result.getInt("cin");
+                        String nom = result.getString("nom");
+                        String prenom = result.getString("prenom");
+                        String mail = result.getString("mail");
 
-                        rooms.add(new RoomModel(id, type, etage, nb_personnes, prix, etat));
+                        clients.add(new PersonModel(cin, nom, prenom, mail));
                     }
                 } finally {
                     if (result != null) {
@@ -46,7 +45,7 @@ public class RoomSelect {
                     }
                 }
 
-                return rooms;
+                return clients;
             } else {
                 System.err.println("Échec de la connexion à la base de données.");
                 return null;
@@ -71,13 +70,13 @@ public class RoomSelect {
     }
 
     // public static void main(String[] args) {
-    //     if (roomSelect() != null) {
-    //         ArrayList<RoomModel> rooms = roomSelect();
-    //         for (int i = 0; i < rooms.size(); i++) {
-    //             System.out.println("ID: " + rooms.get(i).getIdChambre() + ", Type: " + rooms.get(i).getTypeChambre() +
-    //                     ", Etage: " + rooms.get(i).getEtage() + ", Nombre de personnes: " + rooms.get(i).getNbPersonnes() +
-    //                     ", Prix: " + rooms.get(i).getPrix() + ", Etat: " + rooms.get(i).getEtat());
+    //     ArrayList<PersonModel> clients = userSelect();
+    //     if (clients != null) {
+    //         for (PersonModel client : clients) {
+    //             System.out.println("Cin: " + client.getId() + ", Nom: " + client.getNom() + ", Prenom: " + client.getPrenom() + ", Mail: " + client.getMail());
     //         }
+    //     } else {
+    //         System.out.println("Aucun client trouvé.");
     //     }
     // }
 }

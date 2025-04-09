@@ -14,13 +14,14 @@ import javafx.stage.Stage;
  */
 public class App extends Application {
     private static Stage stage;
+    public static boolean isAdminUser = false;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
 	stage = primaryStage;
 	Parent root = FXMLLoader.load(getClass().getResource("/login.fxml"));
 
-        var scene = new Scene(root, 640, 400);
+        var scene = new Scene(root, 1280, 720);
 	
 	stage.setTitle("Hotel Management Dashboard");
         stage.setScene(scene);

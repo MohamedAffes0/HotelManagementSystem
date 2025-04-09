@@ -1,14 +1,20 @@
 package org.models;
 
 public class RoomModel {
+    public static enum RoomState{
+        LIBRE,
+        OCCUPEE,
+        MAINTENANCE
+    }
+
     private int id_chambre;
     private String type_chambre;
     private int etage;
     private int nb_personnes;
     private float prix;
-    private int etat; //-- 0 for libre, 1 for occupée --, 2 for maintenance --
+    private RoomState etat; //-- 0 for libre, 1 for occupée --, 2 for maintenance --
 
-    public RoomModel(int id, String type, int etage, int nb_personne, float prix, int etat){
+    public RoomModel(int id, String type, int etage, int nb_personne, float prix, RoomState etat){
         this.id_chambre = id;
         this.type_chambre = type;
         this.etage = etage;
@@ -37,11 +43,11 @@ public class RoomModel {
         return prix;
     }
 
-    public int getEtat() {
+    public RoomState getEtat() {
         return etat;
     }
     
-    public void setEtat(int etat) {
+    public void setEtat(RoomState etat) {
         this.etat = etat;
     }
 }

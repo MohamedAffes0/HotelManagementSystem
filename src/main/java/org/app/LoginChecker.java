@@ -9,11 +9,20 @@ public class LoginChecker {
         INACTIVE_USER,
         ADMIN_USER,
         NORMAL_USER,
-        CONNEXION_FAILED
+        CONNEXION_FAILED,
+        EMPTY_FIELD
     }
     public static LoginStatus loginCheck(String emailText, String passwordText) {
         Connection connection = null;
         CallableStatement stmt = null;
+        if (emailText == null || emailText.isEmpty()) {
+            System.out.println("L'email ne doit pas être vide.");
+            return LoginStatus.EMPTY_FIELD;
+        }
+        if (passwordText == null || passwordText.isEmpty()) {
+            System.out.println("Le mot de passe ne doit pas être vide.");
+            return LoginStatus.EMPTY_FIELD;
+        }
         try {
             connection = DBConnect.connect();
             if (connection != null) {

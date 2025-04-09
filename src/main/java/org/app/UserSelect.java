@@ -4,21 +4,22 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import oracle.jdbc.OracleTypes;
 import java.util.ArrayList;
 
 import org.database.DBConnect;
-import org.models.RoomModel;
+import org.models.EmployeeModel;
 
-public class RoomSelect {
-    public static ArrayList<RoomModel> roomSelect() {
+import oracle.jdbc.OracleTypes;
+
+public class UserSelect {
+    public static ArrayList<EmployeeModel> userSelect() {
         Connection connection = null;
         CallableStatement stmt = null;
-        ArrayList<RoomModel> rooms = new ArrayList<>();
+        ArrayList<EmployeeModel> users = new ArrayList<>();
         try {
             connection = DBConnect.connect();
             if (connection != null) {
-                String sql = "{ call get_all_rooms(?) }";
+                String sql = "{ call get_all_users(?) }";
                 stmt = connection.prepareCall(sql);
                 stmt.registerOutParameter(1, OracleTypes.CURSOR);                
 
@@ -27,14 +28,15 @@ public class RoomSelect {
                 try {
                     result = (ResultSet) stmt.getObject(1);
                     while (result.next()) {
-                        int id = result.getInt("id_chambre");
-                        String type = result.getString("type_chambre");
-                        int etage = result.getInt("etage");
-                        int nb_personnes = result.getInt("nb_personnes");
-                        float prix = result.getFloat("prix");
-                        int etat = result.getInt("etat");
+                        int id = result.getInt("id");
+                        String nom = result.getString("nom");
+                        String prenom = result.getString("prenom");
+                        String mail = result.getString("mail");
+                        String mdp = result.getString("mdp");
+                        boolean admin = result.getInt("is_admin") == 1 ?true: false;
+                        boolean active = result.getInt("is_active") == 1 ?true: false;
 
-                        rooms.add(new RoomModel(id, type, etage, nb_personnes, prix, etat));
+                        users.add(new EmployeeModel(id, nom, prenom, mail, mdp, admin, active));
                     }
                 } finally {
                     if (result != null) {
@@ -46,7 +48,7 @@ public class RoomSelect {
                     }
                 }
 
-                return rooms;
+                return users;
             } else {
                 System.err.println("Échec de la connexion à la base de données.");
                 return null;
@@ -71,13 +73,13 @@ public class RoomSelect {
     }
 
     // public static void main(String[] args) {
-    //     if (roomSelect() != null) {
-    //         ArrayList<RoomModel> rooms = roomSelect();
-    //         for (int i = 0; i < rooms.size(); i++) {
-    //             System.out.println("ID: " + rooms.get(i).getIdChambre() + ", Type: " + rooms.get(i).getTypeChambre() +
-    //                     ", Etage: " + rooms.get(i).getEtage() + ", Nombre de personnes: " + rooms.get(i).getNbPersonnes() +
-    //                     ", Prix: " + rooms.get(i).getPrix() + ", Etat: " + rooms.get(i).getEtat());
+    //     ArrayList<EmployeeModel> users = userSelect();
+    //     if (users != null) {
+    //         for (EmployeeModel user : users) {
+    //             System.out.println(user.getNom() + " " + user.getPrenom() + " " + user.getMail() + " " + user.getMdp() + " " + user.isAdmin() + " " + user.isActive());
     //         }
+    //     } else {
+    //         System.out.println("Aucun utilisateur trouvé.");
     //     }
     // }
 }

@@ -5,22 +5,27 @@ import org.database.DBConnect;
 import org.app.LoginChecker.LoginStatus;
 
 public class UserAdd {
-    public static boolean userAdd(String nomText, String prenomText, String emailText, String passwordText,
+    public static enum CreationStatus {
+        SUCCESS,
+        USER_EXISTS,
+        CONNEXION_FAILED,
+        EMPTY_FIELD
+    }
+    public static CreationStatus userAdd(String nomText, String prenomText, String emailText, String passwordText,
             boolean isAdmin, boolean isActive) {
         if (emailText == null || emailText.isEmpty()) {
             System.err.println("L'email ne doit pas être vide.");
-            return false;
-            
+            return CreationStatus.EMPTY_FIELD;
         }
         if (passwordText == null || passwordText.isEmpty()) {
             System.err.println("Le mot de passe ne doit pas être vide.");
-            return false;
+            return CreationStatus.EMPTY_FIELD;
         }
         if (LoginChecker.loginCheck(emailText, passwordText) == LoginStatus.INACTIVE_USER || 
             LoginChecker.loginCheck(emailText, passwordText) == LoginStatus.ADMIN_USER ||
             LoginChecker.loginCheck(emailText, passwordText) == LoginStatus.NORMAL_USER) {
             System.err.println("L'utilisateur existe déjà.");
-            return false;
+            return CreationStatus.USER_EXISTS;
         }
         Connection connection = null;
         CallableStatement stmt = null;
@@ -37,14 +42,14 @@ public class UserAdd {
                 stmt.setInt(6, isActive ? 1 : 0);
 
                 stmt.execute();
-                return true; // Indique que l'ajout a réussi
+                return CreationStatus.SUCCESS; // Indique que l'ajout a réussi
             } else {
                 System.err.println("Échec de la connexion à la base de données.");
-                return false;
+                return CreationStatus.CONNEXION_FAILED; // Indique que la connexion a échoué
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
+            return CreationStatus.CONNEXION_FAILED; // Indique que la connexion a échoué
         } finally {
             // toujour executer le bloc finally
             // Fermeture des ressources JDBC
@@ -61,7 +66,7 @@ public class UserAdd {
         }
     }
 
-    public static void main(String[] args) {
-        System.out.println(userAdd("maisa", "ben mouuurad", "maisa@gmail.com", "1234", false, false));
-    }
+    // public static void main(String[] args) {
+    //     System.out.println(userAdd("maisa", "ben mouuurad", "maisa@gmail.com", "1234", false, false));
+    // }
 }

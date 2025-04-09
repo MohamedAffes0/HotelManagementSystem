@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 import org.database.DBConnect;
 import org.models.RoomModel;
-import org.models.RoomModel.RoomState;
 
 public class RoomSelect {
     public static ArrayList<RoomModel> roomSelect() {
@@ -33,21 +32,8 @@ public class RoomSelect {
                         int etage = result.getInt("etage");
                         int nb_personnes = result.getInt("nb_personnes");
                         float prix = result.getFloat("prix");
-                        RoomState etat;
-                        switch (result.getInt("etat")) {
-                            case 0:
-                                etat = RoomState.LIBRE;
-                                break;
-                            case 1:
-                                etat = RoomState.OCCUPEE;
-                                break;
-                            case 2:
-                                etat = RoomState.MAINTENANCE;
-                                break;
-                            default:
-                                etat = RoomState.LIBRE; // Valeur par défaut si l'état n'est pas reconnu
-                                break;
-                        }
+                        int etat = result.getInt("etat");
+
                         rooms.add(new RoomModel(id, type, etage, nb_personnes, prix, etat));
                     }
                 } finally {

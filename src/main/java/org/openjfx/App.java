@@ -18,13 +18,19 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 	stage = primaryStage;
-	VBox root = FXMLLoader.load(getClass().getResource("/login.fxml"));
+	Parent root = FXMLLoader.load(getClass().getResource("/login.fxml"));
 
         var scene = new Scene(root, 640, 400);
 	
 	stage.setTitle("Hotel Management Dashboard");
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void changeScene(String file) throws Exception{
+	Parent root = FXMLLoader.load(getClass().getResource(file));
+        Scene scene = stage.getScene();
+	scene.setRoot(root);
     }
 
     public static void main(String[] args) {

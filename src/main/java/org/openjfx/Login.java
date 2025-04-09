@@ -6,8 +6,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 
 import org.app.LoginChecker;
+
 public class Login {
 
     @FXML
@@ -35,4 +37,9 @@ public class Login {
         }
     }
 
+    @FXML
+    void loadSignup(MouseEvent event) throws Exception {
+	App main = new App();
+	main.changeScene("/signup.fxml");
+    }
 }

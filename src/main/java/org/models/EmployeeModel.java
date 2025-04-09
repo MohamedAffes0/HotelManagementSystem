@@ -1,36 +1,31 @@
 package org.models;
 
-public class Employe {
-    private int cin;
-    private String nom;
-    private String prenom;
-    private String mail;
+final public class EmployeeModel extends PersonModel {
     private String mdp;
     private boolean is_admin;
+    private boolean is_active;
 
-    public Employe(int cin, String nom, String prenom, String mail, String mdp, boolean is_admin) {
-        this.cin = cin;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.mail = mail;
+    public EmployeeModel(int id, String nom, String prenom, String mail, String mdp, boolean is_admin, boolean is_active) {
+        super(id, nom, prenom, mail);
         this.mdp = mdp;
         this.is_admin = is_admin;
+        this.is_active = is_active;
     }
 
     public int getCin() {
-        return cin;
+        return super.getId();
     }
 
     public String getNom() {
-        return nom;
+        return super.getNom();
     }
 
     public String getPrenom() {
-        return prenom;
+        return super.getPrenom();
     }
 
     public String getMail() {
-        return mail;
+        return super.getMail();
     }
 
     public String getMdp() {
@@ -39,6 +34,10 @@ public class Employe {
 
     public boolean isAdmin() {
         return is_admin;
+    }
+
+    public boolean isActive() {
+        return is_active;
     }
 
     public void setAdmin(boolean is_admin) {

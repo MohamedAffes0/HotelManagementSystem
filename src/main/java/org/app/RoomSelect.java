@@ -59,14 +59,14 @@ public class RoomSelect {
         }
     }
 
-    public static void main(String[] args) {
-        if (roomSelect() != null) {
-            ArrayList<RoomModel> rooms = roomSelect();
-            for (int i = 0; i < rooms.size(); i++) {
-                System.out.println("ID: " + rooms.get(i).getIdChambre() + ", Type: " + rooms.get(i).getTypeChambre() +
-                        ", Etage: " + rooms.get(i).getEtage() + ", Nombre de personnes: " + rooms.get(i).getNbPersonnes() +
-                        ", Prix: " + rooms.get(i).getPrix() + ", Etat: " + rooms.get(i).getEtat());
-            }
-        }
-    }
+    // public static void main(String[] args) {
+    //     if (roomSelect() != null) {
+    //         ArrayList<RoomModel> rooms = roomSelect();
+    //         for (int i = 0; i < rooms.size(); i++) {
+    //             System.out.println("ID: " + rooms.get(i).getIdChambre() + ", Type: " + rooms.get(i).getTypeChambre() +
+    //                     ", Etage: " + rooms.get(i).getEtage() + ", Nombre de personnes: " + rooms.get(i).getNbPersonnes() +
+    //                     ", Prix: " + rooms.get(i).getPrix() + ", Etat: " + rooms.get(i).getEtat());
+    //         }
+    //     }
+    // }
 }

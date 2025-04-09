@@ -30,16 +30,16 @@ CREATE table chambre(
 );
 
 create table reservation(
-id_reservation int primary key,
-date_debut date,
-date_fin date,
-paid NUMBER(1), -- 0 for unpaid, 1 for paid --
-employe int,--l'employé qui a fait la réservation--
-client_hotel int,--le client qui a fait la réservation--
-chambre int,--la chambre réservée--
-CONSTRAINT fk_employe FOREIGN KEY (employe) REFERENCES employe(id) on delete cascade,
-CONSTRAINT fk_client_hotel FOREIGN KEY (client_hotel) REFERENCES client_hotel(cin) on delete cascade,
-CONSTRAINT fk_chambre FOREIGN KEY (chambre) REFERENCES chambre(id_chambre) on delete cascade,
-CONSTRAINT check_date CHECK (date_debut <= date_fin), --la date de début doit être inférieure à la date de fin--
-CONSTRAINT check_paid CHECK (paid IN (0, 1)) --le statut de la réservation--
+    id_reservation int primary key,
+    date_debut date,
+    date_fin date,
+    paid NUMBER(1), -- 0 for unpaid, 1 for paid --
+    employe int,--l'employé qui a fait la réservation--
+    client_hotel int,--le client qui a fait la réservation--
+    chambre int,--la chambre réservée--
+    CONSTRAINT fk_employe FOREIGN KEY (employe) REFERENCES employe(id) on delete cascade,
+    CONSTRAINT fk_client_hotel FOREIGN KEY (client_hotel) REFERENCES client_hotel(cin) on delete cascade,
+    CONSTRAINT fk_chambre FOREIGN KEY (chambre) REFERENCES chambre(id_chambre) on delete cascade,
+    CONSTRAINT check_date CHECK (date_debut <= date_fin), --la date de début doit être inférieure à la date de fin--
+    CONSTRAINT check_paid CHECK (paid IN (0, 1)) --le statut de la réservation--
 );

@@ -1,10 +1,10 @@
 CREATE OR REPLACE PROCEDURE add_employe (
-    p_nom VARCHAR2 DEFAULT NULL,
-    p_prenom VARCHAR2 DEFAULT NULL,
-    p_mail VARCHAR2,
-    p_mdp VARCHAR2,
-    p_is_admin NUMBER DEFAULT 0,
-    p_is_active NUMBER DEFAULT 0
+    p_nom IN VARCHAR2 DEFAULT NULL,
+    p_prenom IN VARCHAR2 DEFAULT NULL,
+    p_mail IN VARCHAR2,
+    p_mdp IN VARCHAR2,
+    p_is_admin IN NUMBER DEFAULT 0,
+    p_is_active IN NUMBER DEFAULT 0
 ) AS
 BEGIN
     -- Insère un employé avec l'ID généré par la séquence

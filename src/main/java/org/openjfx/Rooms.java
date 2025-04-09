@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import org.models.RoomModel;
 
 
-public class Chambres implements Initializable{
+public class Rooms implements Initializable{
     private ArrayList<RoomModel> rooms;
     @FXML
     private ComboBox<String> filter;

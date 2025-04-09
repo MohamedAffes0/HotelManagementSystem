@@ -1,6 +1,6 @@
 CREATE OR REPLACE PROCEDURE add_employe (
-    p_nom VARCHAR2,
-    p_prenom VARCHAR2,
+    p_nom VARCHAR2 DEFAULT NULL,
+    p_prenom VARCHAR2 DEFAULT NULL,
     p_mail VARCHAR2,
     p_mdp VARCHAR2,
     p_is_admin NUMBER DEFAULT 0,

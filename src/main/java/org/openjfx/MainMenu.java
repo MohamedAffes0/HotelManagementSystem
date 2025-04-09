@@ -8,7 +8,11 @@ import javafx.scene.Parent;
 import javafx.fxml.FXMLLoader;
 import javafx.collections.ObservableList;
 
-public class MainMenu {
+import javafx.fxml.Initializable;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class MainMenu implements Initializable {
     private App main;
 
     @FXML
@@ -45,8 +49,14 @@ public class MainMenu {
     void reservationsPressed(ActionEvent event) {
 
     }
-
-    void MainMenu() throws Exception{
+    
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+	try {
+		changeCurrentMenu("/chambres.fxml");
+	} catch (Exception e) {
+		System.out.println(e);
+	}
 	main = new App();
     }
     

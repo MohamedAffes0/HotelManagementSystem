@@ -6,8 +6,7 @@ import org.models.RoomModel;
 import org.models.RoomModel.RoomState;
 
 public class RoomFilter {
-    public static ArrayList<RoomModel> FilterByPrice(float price) {
-        ArrayList<RoomModel> rooms = RoomSelect.roomSelect();
+    public static ArrayList<RoomModel> FilterByPrice(ArrayList<RoomModel> rooms, float price) {
         ArrayList<RoomModel> filteredRooms = new ArrayList<>();
 
         if (rooms != null) {
@@ -24,8 +23,7 @@ public class RoomFilter {
         return filteredRooms;
     }
 
-    public static ArrayList<RoomModel> FilterByNumberOfPeople(int numberOfPeople) {
-        ArrayList<RoomModel> rooms = RoomSelect.roomSelect();
+    public static ArrayList<RoomModel> FilterByNumberOfPeople(ArrayList<RoomModel> rooms, int numberOfPeople) {
         ArrayList<RoomModel> filteredRooms = new ArrayList<>();
 
         if (rooms != null) {
@@ -42,8 +40,7 @@ public class RoomFilter {
         return filteredRooms;
     }
 
-    public static ArrayList<RoomModel> FilterById(int id) {
-        ArrayList<RoomModel> rooms = RoomSelect.roomSelect();
+    public static ArrayList<RoomModel> FilterById(ArrayList<RoomModel> rooms, int id) {
         ArrayList<RoomModel> filteredRooms = new ArrayList<>();
 
         if (rooms != null) {
@@ -60,8 +57,7 @@ public class RoomFilter {
         return filteredRooms;
     }
 
-    public static ArrayList<RoomModel> FilterByFloor(int floor) {
-        ArrayList<RoomModel> rooms = RoomSelect.roomSelect();
+    public static ArrayList<RoomModel> FilterByFloor(ArrayList<RoomModel> rooms, int floor) {
         ArrayList<RoomModel> filteredRooms = new ArrayList<>();
 
         if (rooms != null) {
@@ -78,9 +74,8 @@ public class RoomFilter {
         return filteredRooms;
     }
 
-    public static ArrayList<RoomModel> FilterByType(String roomType) {
+    public static ArrayList<RoomModel> FilterByType(ArrayList<RoomModel> rooms, String roomType) {
         //--simple, double, suite--
-        ArrayList<RoomModel> rooms = RoomSelect.roomSelect();
         ArrayList<RoomModel> filteredRooms = new ArrayList<>();
 
         if (rooms != null) {
@@ -97,9 +92,8 @@ public class RoomFilter {
         return filteredRooms;
     }
 
-    public static ArrayList<RoomModel> FilterByState(RoomState state) {
+    public static ArrayList<RoomModel> FilterByState(ArrayList<RoomModel> rooms, RoomState state) {
         //--LIBRE, OCCUPEE, MAINTENANCE--
-        ArrayList<RoomModel> rooms = RoomSelect.roomSelect();
         ArrayList<RoomModel> filteredRooms = new ArrayList<>();
 
         if (rooms != null) {

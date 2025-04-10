@@ -51,13 +51,13 @@ public class Signup {
         return;
 	}
         // Appel de la méthode userAdd avec les valeurs des champs de texte
-        EmployeeModel user = new EmployeeModel(0, nameText, lastNameText, emailText, passwordText, false, false);
+        EmployeeModel user = new EmployeeModel(1, nameText, lastNameText, emailText, passwordText, false, false);
         CreationStatus result = UserAdd.userAdd(user);
 
         if (result == CreationStatus.SUCCESS) {
             System.out.println("Utilisateur ajouté avec succès !");
             App main = new App();
-            main.changeScene("/mainMenu.fxml");
+            main.changeScene("/confirmationPending.fxml");
         } else {
             System.out.println("Échec de l'ajout de l'utilisateur.");
             error.setText("Verifier la connexion ou si vous avez deja un compte!");

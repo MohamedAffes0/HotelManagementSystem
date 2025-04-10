@@ -45,7 +45,7 @@ public class Rooms implements Initializable{
 
     @FXML
     private void updateList() throws Exception{
-		System.out.println(filter.getValue());
+		// System.out.println(filter.getValue());
 		
 		rooms = RoomSelect.roomSelect();
 		

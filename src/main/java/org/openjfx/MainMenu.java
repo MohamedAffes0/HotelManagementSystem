@@ -6,7 +6,6 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.Parent;
 import javafx.fxml.FXMLLoader;
-import javafx.collections.ObservableList;
 
 import javafx.fxml.Initializable;
 import java.net.URL;
@@ -32,7 +31,7 @@ public class MainMenu implements Initializable {
 
     @FXML
     void chambresPressed(ActionEvent event) throws Exception{
-	changeCurrentMenu("/chambres.fxml");
+	changeCurrentMenu("/rooms.fxml");
     }
 
     @FXML
@@ -52,24 +51,24 @@ public class MainMenu implements Initializable {
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-	try {
-		changeCurrentMenu("/chambres.fxml");
-	} catch (Exception e) {
-		System.out.println(e);
-	}
-	main = new App();
+        try {
+            changeCurrentMenu("/rooms.fxml");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        main = new App();
     }
     
     private void changeCurrentMenu(String menuPath) throws Exception{
-	Parent menu = FXMLLoader.load(getClass().getResource(menuPath));
+        Parent menu = FXMLLoader.load(getClass().getResource(menuPath));
 
-    	contentContainer.getChildren().clear();
-    	contentContainer.getChildren().add(menu);
+        contentContainer.getChildren().clear();
+        contentContainer.getChildren().add(menu);
 
-    	AnchorPane.setTopAnchor(menu, 0.0);
-    	AnchorPane.setBottomAnchor(menu, 0.0);
-    	AnchorPane.setLeftAnchor(menu, 0.0);
-    	AnchorPane.setRightAnchor(menu, 0.0);
+        AnchorPane.setTopAnchor(menu, 0.0);
+        AnchorPane.setBottomAnchor(menu, 0.0);
+        AnchorPane.setLeftAnchor(menu, 0.0);
+        AnchorPane.setRightAnchor(menu, 0.0);
     }
 }
 

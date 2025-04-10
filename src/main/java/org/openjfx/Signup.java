@@ -46,19 +46,19 @@ public class Signup {
 	
 	// Test if fields are empty
 	if (nomText.isEmpty() || prenomText.isEmpty() || emailText.isEmpty() || passwordText.isEmpty()) {
-	    error.setText("Veuillez remplir les champs!");
-	    return;
+        error.setText("Veuillez remplir les champs!");
+        return;
 	}
         // Appel de la méthode userAdd avec les valeurs des champs de texte
         CreationStatus result = UserAdd.userAdd(nomText, prenomText, emailText, passwordText, false, false);
 
         if (result == CreationStatus.SUCCESS) {
             System.out.println("Utilisateur ajouté avec succès !");
-	    App main = new App();
-	    main.changeScene("/mainMenu.fxml");
+            App main = new App();
+            main.changeScene("/mainMenu.fxml");
         } else {
             System.out.println("Échec de l'ajout de l'utilisateur.");
-	    error.setText("Verifier la connexion ou si vous avez deja un compte!");
+            error.setText("Verifier la connexion ou si vous avez deja un compte!");
         }
     }
 

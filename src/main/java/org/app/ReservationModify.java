@@ -5,10 +5,19 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
 
+import org.app.ReservationChecker.ReservationDate;
 import org.database.DBConnect;
 
 public class ReservationModify {
-        public static boolean reservationModify(int id, Date startDate, Date endDate, boolean isPaid) {
+        public static boolean reservationModify(int id,int roomId, Date startDate, Date endDate, boolean isPaid) {
+
+        //verification de la disponibilité de la chambre
+        ReservationDate reservationDate = new ReservationDate(startDate, endDate);
+        if (ReservationChecker.reservationCheck(roomId, id, reservationDate) == false) {
+            System.err.println("La chambre est déjà réservée pour cette période.");
+            return false; // Indique que la réservation échoue
+        }
+
         Connection connection = null;
         CallableStatement stmt = null;
         try {
@@ -47,6 +56,6 @@ public class ReservationModify {
     }
 
     // public static void main(String[] args) {
-    //     System.out.println(reservationModify(1, Date.valueOf("2025-02-20"), Date.valueOf("2025-02-21"), true));
+    //     System.out.println(reservationModify(2, 1,Date.valueOf("2025-02-20"), Date.valueOf("2025-02-21"), true));
     // }
 }

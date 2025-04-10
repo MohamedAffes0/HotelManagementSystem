@@ -55,7 +55,7 @@ public class ReservationChecker {
                         }
                     }
                 }
-                // affichage de la liste des réservations
+                // // affichage de la liste des réservations
                 // for (int i = 0; i < reservationDates.size(); i++) {
                 //     System.out.println("Date de début : " + reservationDates.get(i).startDate + ", Date de fin : " + reservationDates.get(i).endDate);
                 // }

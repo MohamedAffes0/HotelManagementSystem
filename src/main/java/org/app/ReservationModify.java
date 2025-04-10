@@ -2,34 +2,24 @@ package org.app;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.SQLException;
 
 import org.database.DBConnect;
-import org.models.RoomModel.RoomState;
 
-public class RoomModify {
-    public static boolean roomModify(int id, int numberOfPeople, float price, RoomState state) {
+public class ReservationModify {
+        public static boolean reservationModify(int id, Date startDate, Date endDate, boolean isPaid) {
         Connection connection = null;
         CallableStatement stmt = null;
         try {
             connection = DBConnect.connect();
             if (connection != null) {
-                String sql = "{ call modify_room(?, ?, ?, ?) }";
+                String sql = "{ call modify_reservation(?, ?, ?, ?) }";
                 stmt = connection.prepareCall(sql);
                 stmt.setInt(1, id);
-                stmt.setInt(2, numberOfPeople);
-                stmt.setFloat(3, price);
-                switch (state) {
-                    case LIBRE:
-                        stmt.setInt(4, 0); // 0 for LIBRE
-                        break;
-                    case OCCUPEE:
-                        stmt.setInt(4, 1); // 1 for OCCUPEE
-                        break;
-                    case MAINTENANCE:
-                        stmt.setInt(4, 2); // 2 for MAINTENANCE
-                        break;
-                }
+                stmt.setDate(2, new Date(startDate.getTime())); // convertir Date en java.sql.Date
+                stmt.setDate(3, new Date(endDate.getTime()));
+                stmt.setInt(4, isPaid ? 1 : 0);
 
                 stmt.execute();
                 return true; // Indique que l'ajout a réussi
@@ -57,6 +47,6 @@ public class RoomModify {
     }
 
     // public static void main(String[] args) {
-    //     System.out.println(roomModify(2, 3, 100.9f, 0)); // Exemple d'utilisation
+    //     System.out.println(reservationModify(1, Date.valueOf("2025-02-20"), Date.valueOf("2025-02-21"), true));
     // }
 }

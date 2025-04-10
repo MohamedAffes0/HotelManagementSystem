@@ -12,7 +12,7 @@ public class RoomFilter {
 
         if (rooms != null) {
             for (int i = 0; i < rooms.size(); i++) {
-                if (rooms.get(i).getPrix() <= price) {
+                if (rooms.get(i).getPrice() <= price) {
                     filteredRooms.add(rooms.get(i));
                 }
             }
@@ -24,13 +24,13 @@ public class RoomFilter {
         return filteredRooms;
     }
 
-    public static ArrayList<RoomModel> FilterByNumberOfPeople(int nb_people) {
+    public static ArrayList<RoomModel> FilterByNumberOfPeople(int numberOfPeople) {
         ArrayList<RoomModel> rooms = RoomSelect.roomSelect();
         ArrayList<RoomModel> filteredRooms = new ArrayList<>();
 
         if (rooms != null) {
             for (int i = 0; i < rooms.size(); i++) {
-                if (rooms.get(i).getNbPersonnes() <= nb_people) {
+                if (rooms.get(i).getNumberOfPeople() <= numberOfPeople) {
                     filteredRooms.add(rooms.get(i));
                 }
             }
@@ -48,7 +48,7 @@ public class RoomFilter {
 
         if (rooms != null) {
             for (int i = 0; i < rooms.size(); i++) {
-                if (rooms.get(i).getIdChambre() == id) {
+                if (rooms.get(i).getId() == id) {
                     filteredRooms.add(rooms.get(i));
                 }
             }
@@ -60,13 +60,13 @@ public class RoomFilter {
         return filteredRooms;
     }
 
-    public static ArrayList<RoomModel> FilterByFloor(int etage) {
+    public static ArrayList<RoomModel> FilterByFloor(int floor) {
         ArrayList<RoomModel> rooms = RoomSelect.roomSelect();
         ArrayList<RoomModel> filteredRooms = new ArrayList<>();
 
         if (rooms != null) {
             for (int i = 0; i < rooms.size(); i++) {
-                if (rooms.get(i).getEtage() == etage) {
+                if (rooms.get(i).getFloor() == floor) {
                     filteredRooms.add(rooms.get(i));
                 }
             }
@@ -78,14 +78,14 @@ public class RoomFilter {
         return filteredRooms;
     }
 
-    public static ArrayList<RoomModel> FilterByType(String type) {
+    public static ArrayList<RoomModel> FilterByType(String roomType) {
         //--simple, double, suite--
         ArrayList<RoomModel> rooms = RoomSelect.roomSelect();
         ArrayList<RoomModel> filteredRooms = new ArrayList<>();
 
         if (rooms != null) {
             for (int i = 0; i < rooms.size(); i++) {
-                if (rooms.get(i).getTypeChambre().equals(type)) {
+                if (rooms.get(i).getRoomType().equals(roomType)) {
                     filteredRooms.add(rooms.get(i));
                 }
             }
@@ -104,7 +104,7 @@ public class RoomFilter {
 
         if (rooms != null) {
             for (int i = 0; i < rooms.size(); i++) {
-                if (rooms.get(i).getEtat() == state) {
+                if (rooms.get(i).getState() == state) {
                     filteredRooms.add(rooms.get(i));
                 }
             }

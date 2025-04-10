@@ -2,15 +2,10 @@ package org.app;
 
 import java.sql.*;
 import org.database.DBConnect;
-import org.models.RoomModel.RoomState;
+import org.models.RoomModel;
 
 public class RoomAdd {
-    public static boolean roomAdd(int id, String typeText, int etage, int nbPersonnes, 
-        float prix, RoomState etat) {
-        if (id == 0) {
-            System.err.println("L'ID ne doit pas être vide.");
-            return false;
-        }
+    public static boolean roomAdd(RoomModel room) {
         Connection connection = null;
         CallableStatement stmt = null;
         try {
@@ -18,12 +13,12 @@ public class RoomAdd {
             if (connection != null) {
                 String sql = "{ call add_room(?, ?, ?, ?, ?, ?) }";
                 stmt = connection.prepareCall(sql);
-                stmt.setInt(1, id);
-                stmt.setString(2, typeText);
-                stmt.setInt(3, etage);
-                stmt.setInt(4, nbPersonnes);
-                stmt.setFloat(5, prix);
-                switch (etat) {
+                stmt.setInt(1, room.getId());
+                stmt.setString(2, room.getRoomType());
+                stmt.setInt(3, room.getFloor());
+                stmt.setInt(4, room.getNumberOfPeople());
+                stmt.setFloat(5, room.getPrice());
+                switch (room.getState()) {
                     case LIBRE:
                     stmt.setInt(6, 0); // 0 for LIBRE
                         break;

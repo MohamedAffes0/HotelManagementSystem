@@ -9,6 +9,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Label;
 import org.app.UserAdd;
 import org.app.UserAdd.CreationStatus;
+import org.models.EmployeeModel;
 
 public class Signup {
 
@@ -39,18 +40,19 @@ public class Signup {
 
     @FXML
     void submit(ActionEvent event) throws Exception{
-        String nomText = nom.getText();
-        String prenomText = prenom.getText();
+        String nameText = nom.getText();
+        String lastNameText = prenom.getText();
         String emailText = email.getText();
         String passwordText = password.getText();
 	
 	// Test if fields are empty
-	if (nomText.isEmpty() || prenomText.isEmpty() || emailText.isEmpty() || passwordText.isEmpty()) {
+    if (nameText.isEmpty() || lastNameText.isEmpty() || emailText.isEmpty() || passwordText.isEmpty()) {
         error.setText("Veuillez remplir les champs!");
         return;
 	}
         // Appel de la méthode userAdd avec les valeurs des champs de texte
-        CreationStatus result = UserAdd.userAdd(nomText, prenomText, emailText, passwordText, false, false);
+        EmployeeModel user = new EmployeeModel(0, nameText, lastNameText, emailText, passwordText, false, false);
+        CreationStatus result = UserAdd.userAdd(user);
 
         if (result == CreationStatus.SUCCESS) {
             System.out.println("Utilisateur ajouté avec succès !");

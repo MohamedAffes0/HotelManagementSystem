@@ -29,26 +29,26 @@ public class RoomSelect {
                     result = (ResultSet) stmt.getObject(1);
                     while (result.next()) {
                         int id = result.getInt("id_chambre");
-                        String type = result.getString("type_chambre");
-                        int etage = result.getInt("etage");
-                        int nb_personnes = result.getInt("nb_personnes");
-                        float prix = result.getFloat("prix");
-                        RoomState etat;
+                        String roomType = result.getString("type_chambre");
+                        int floor = result.getInt("etage");
+                        int numberOfPeople = result.getInt("nb_personnes");
+                        float price = result.getFloat("prix");
+                        RoomState state;
                         switch (result.getInt("etat")) {
                             case 0:
-                                etat = RoomState.LIBRE;
+                                state = RoomState.LIBRE;
                                 break;
                             case 1:
-                                etat = RoomState.OCCUPEE;
+                                state = RoomState.OCCUPEE;
                                 break;
                             case 2:
-                                etat = RoomState.MAINTENANCE;
+                                state = RoomState.MAINTENANCE;
                                 break;
                             default:
-                                etat = RoomState.LIBRE; // Valeur par défaut si l'état n'est pas reconnu
+                                state = RoomState.LIBRE; // Valeur par défaut si l'état n'est pas reconnu
                                 break;
                         }
-                        rooms.add(new RoomModel(id, type, etage, nb_personnes, prix, etat));
+                        rooms.add(new RoomModel(id, roomType, floor, numberOfPeople, price, state));
                     }
                 } finally {
                     if (result != null) {

@@ -8,7 +8,7 @@ import org.database.DBConnect;
 import org.models.RoomModel.RoomState;
 
 public class RoomModify {
-    public static boolean roomModify(int id, int nbPersonnes, float prix, RoomState etat) {
+    public static boolean roomModify(int id, int numberOfPeople, float price, RoomState state) {
         if (id == 0) {
             System.err.println("L'ID ne doit pas être vide.");
             return false;
@@ -21,9 +21,9 @@ public class RoomModify {
                 String sql = "{ call modify_room(?, ?, ?, ?) }";
                 stmt = connection.prepareCall(sql);
                 stmt.setInt(1, id);
-                stmt.setInt(2, nbPersonnes);
-                stmt.setFloat(3, prix);
-                switch (etat) {
+                stmt.setInt(2, numberOfPeople);
+                stmt.setFloat(3, price);
+                switch (state) {
                     case LIBRE:
                         stmt.setInt(4, 0); // 0 for LIBRE
                         break;

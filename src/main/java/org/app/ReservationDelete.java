@@ -8,10 +8,6 @@ import org.database.DBConnect;
 
 public class ReservationDelete {
     public static boolean reservationDelete(int id) {
-        if (id <= 0) {
-            System.err.println("Le ID doit être supérieur à 0.");
-            return false;
-        }
         Connection connection = null;
         CallableStatement stmt = null;
         try {

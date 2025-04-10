@@ -3,7 +3,6 @@ package org.app;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.sql.Date;
 
 import org.app.ReservationChecker.ReservationDate;
@@ -13,19 +12,26 @@ import org.models.ReservationModel;
 public class ReservationAdd {
     public static boolean reservationAdd(ReservationModel reservation) {
         // Vérification de la disponibilité de la chambre
-        ArrayList<ReservationDate> reservationDates = ReservationChecker.reservationCheck(reservation.getId());
-        if (reservationDates != null) {
-            for (int i = 0; i < reservationDates.size(); i++) {
-                if (reservationDates.get(i).startDate.before(reservation.getEndDate()) || 
-                    reservationDates.get(i).endDate.after(reservation.getStartDate())) {
-                        System.err.println("La chambre est déjà réservée pour cette période.");
-                        return false; // Indique que la réservation échoue
-                } else if (reservationDates.get(i).startDate.equals(reservation.getStartDate()) || 
-                    reservationDates.get(i).endDate.equals(reservation.getEndDate())) {
-                        System.err.println("La chambre est déjà réservée pour cette période.");
-                        return false; // Indique que la réservation échoue
-                }
-            }
+        // ArrayList<ReservationDate> reservationDates = ReservationChecker.reservationCheck(reservation.getId());
+        // if (reservationDates != null) {
+        //     for (int i = 0; i < reservationDates.size(); i++) {
+        //         if (reservationDates.get(i).startDate.before(reservation.getEndDate()) || 
+        //             reservationDates.get(i).endDate.after(reservation.getStartDate())) {
+        //                 System.err.println("La chambre est déjà réservée pour cette période.");
+        //                 return false; // Indique que la réservation échoue
+        //         } else if (reservationDates.get(i).startDate.equals(reservation.getStartDate()) || 
+        //             reservationDates.get(i).endDate.equals(reservation.getEndDate())) {
+        //                 System.err.println("La chambre est déjà réservée pour cette période.");
+        //                 return false; // Indique que la réservation échoue
+        //         }
+        //     }
+        // }
+
+        //verification de la disponibilité de la chambre
+        ReservationDate reservationDate = new ReservationDate(reservation.getStartDate(), reservation.getEndDate());
+        if (ReservationChecker.reservationCheck(reservation.getRoom(), 0, reservationDate) == false) {
+            System.err.println("La chambre est déjà réservée pour cette période.");
+            return false; // Indique que la réservation échoue
         }
         
         Connection connection = null;
@@ -69,6 +75,14 @@ public class ReservationAdd {
     }
 
     // public static void main(String[] args) {
-    //     System.out.println(reservationAdd(Date.valueOf("2025-04-2"), Date.valueOf("2025-04-2"), false, 3, 12345678, 1));
+    //     // Test de la méthode reservationAdd
+    //     ReservationModel reservation = new ReservationModel(1, Date.valueOf("2025-02-23"), Date.valueOf("2025-02-24"), false, 3, 12345678, 1);
+
+    //     boolean result = reservationAdd(reservation);
+    //     System.out.println("Résultat de l'ajout de réservation : " + result);
+    //     // Date startDate = Date.valueOf("2025-02-23");
+    //     // Date endDate = Date.valueOf("2025-02-24");
+    //     // ReservationDate reservationDate = new ReservationDate(startDate, endDate);
+    //     // System.out.println(ReservationChecker.reservationCheck(1, 0, reservationDate));
     // }
 }

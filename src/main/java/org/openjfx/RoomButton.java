@@ -29,23 +29,23 @@ public class RoomButton {
     private Label type;
 
     public void setData(RoomModel data) {
-	id.setText("Chambre " + Integer.toString(data.getIdChambre()));
-	floor.setText("Etage " + Integer.toString(data.getEtage()));
-	type.setText(data.getTypeChambre());
-	price.setText(Float.toString(data.getPrix()) + " Dt");
-	size.setText(Integer.toString(data.getNbPersonnes()) + " Personnes");
-	
-	switch (data.getEtat()) {
-		case LIBRE:
-			state.setText("Libre");
-			break;
-		case OCCUPEE:
-			state.setText("Occupée");
-			break;
-		case MAINTENANCE:
-			state.setText("Maintenance");
-			break;
-	}
+        id.setText("Chambre " + Integer.toString(data.getIdChambre()));
+        floor.setText("Etage " + Integer.toString(data.getEtage()));
+        type.setText(data.getTypeChambre());
+        price.setText(Float.toString(data.getPrix()) + " Dt");
+        size.setText(Integer.toString(data.getNbPersonnes()) + " Personnes");
+        
+        switch (data.getEtat()) {
+            case LIBRE:
+                state.setText("Libre");
+                break;
+            case OCCUPEE:
+                state.setText("Occupée");
+                break;
+            case MAINTENANCE:
+                state.setText("Maintenance");
+                break;
+        }
     }
 }
 

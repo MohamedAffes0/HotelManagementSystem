@@ -2,6 +2,7 @@ package org.app;
 
 import java.sql.*;
 import org.database.DBConnect;
+import org.models.EmployeeModel;
 import org.app.LoginChecker.LoginStatus;
 
 public class UserAdd {
@@ -11,19 +12,18 @@ public class UserAdd {
         CONNEXION_FAILED,
         EMPTY_FIELD
     }
-    public static CreationStatus userAdd(String nomText, String prenomText, String emailText, String passwordText,
-            boolean isAdmin, boolean isActive) {
-        if (emailText == null || emailText.isEmpty()) {
+    public static CreationStatus userAdd(EmployeeModel employee) {
+        if (employee.getMail() == null || employee.getMail().isEmpty()) {
             System.err.println("L'email ne doit pas être vide.");
             return CreationStatus.EMPTY_FIELD;
         }
-        if (passwordText == null || passwordText.isEmpty()) {
+        if (employee.getPassword() == null || employee.getPassword().isEmpty()) {
             System.err.println("Le mot de passe ne doit pas être vide.");
             return CreationStatus.EMPTY_FIELD;
         }
-        if (LoginChecker.loginCheck(emailText, passwordText) == LoginStatus.INACTIVE_USER || 
-            LoginChecker.loginCheck(emailText, passwordText) == LoginStatus.ADMIN_USER ||
-            LoginChecker.loginCheck(emailText, passwordText) == LoginStatus.NORMAL_USER) {
+        if (LoginChecker.loginCheck(employee.getMail(), employee.getPassword()) == LoginStatus.INACTIVE_USER || 
+            LoginChecker.loginCheck(employee.getMail(), employee.getPassword()) == LoginStatus.ADMIN_USER ||
+            LoginChecker.loginCheck(employee.getMail(), employee.getPassword()) == LoginStatus.NORMAL_USER) {
             System.err.println("L'utilisateur existe déjà.");
             return CreationStatus.USER_EXISTS;
         }
@@ -34,12 +34,12 @@ public class UserAdd {
             if (connection != null) {
                 String sql = "{ call add_employe(?, ?, ?, ?, ?, ?) }";
                 stmt = connection.prepareCall(sql);
-                stmt.setString(1, nomText);
-                stmt.setString(2, prenomText);
-                stmt.setString(3, emailText);
-                stmt.setString(4, passwordText);
-                stmt.setInt(5, isAdmin ? 1 : 0);
-                stmt.setInt(6, isActive ? 1 : 0);
+                stmt.setString(1, employee.getName());
+                stmt.setString(2, employee.getLastName());
+                stmt.setString(3, employee.getMail());
+                stmt.setString(4, employee.getPassword());
+                stmt.setInt(5, employee.isAdmin() ? 1 : 0);
+                stmt.setInt(6, employee.isActive() ? 1 : 0);
 
                 stmt.execute();
                 return CreationStatus.SUCCESS; // Indique que l'ajout a réussi

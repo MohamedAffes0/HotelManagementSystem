@@ -10,8 +10,8 @@ public class ClientChecker {
         CLIENT_FOUND,
         CONNEXION_FAILED
     }
-    public static ClientStatus clientCheck(int cinText) {
-        if (cinText == 0) {
+    public static ClientStatus clientCheck(int cin) {
+        if (cin == 0) {
             System.out.println("CIN non valide.");
             return ClientStatus.CLIENT_NOT_FOUND;
         }
@@ -22,7 +22,7 @@ public class ClientChecker {
             if (connection != null) {
                 String sql = "{ call check_client(?, ?) }";
                 stmt = connection.prepareCall(sql);
-                stmt.setInt(1, cinText);
+                stmt.setInt(1, cin);
                 stmt.registerOutParameter(2, Types.INTEGER);
 
                 stmt.execute();

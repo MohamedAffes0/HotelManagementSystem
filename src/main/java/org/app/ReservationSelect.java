@@ -30,14 +30,14 @@ public class ReservationSelect {
                     result = (ResultSet) stmt.getObject(1);
                     while (result.next()) {
                         int id = result.getInt("id_reservation");
-                        Date dateDebut = result.getDate("date_debut");
-                        Date DateFin = result.getDate("date_fin");
+                        Date startDate = result.getDate("date_debut");
+                        Date endDate = result.getDate("date_fin");
                         boolean isPaid = result.getInt("paid") == 1? true : false;
                         int employee = result.getInt("employe");
-                        int client = result.getInt("client_hotel");
-                        int chambre = result.getInt("chambre");
+                        int hotelClient = result.getInt("client_hotel");
+                        int room = result.getInt("chambre");
 
-                        reservations.add(new ReservationModel(id, dateDebut, DateFin, isPaid, employee, client, chambre));
+                        reservations.add(new ReservationModel(id, startDate, endDate, isPaid, employee, hotelClient, room));
                     }
                 } finally {
                     if (result != null) {

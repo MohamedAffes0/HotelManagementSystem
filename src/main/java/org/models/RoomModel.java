@@ -7,47 +7,52 @@ public class RoomModel {
         MAINTENANCE
     }
 
-    private int id_chambre;
-    private String type_chambre;
-    private int etage;
-    private int nb_personnes;
-    private float prix;
-    private RoomState etat; //-- 0 for libre, 1 for occupée --, 2 for maintenance --
+    private int id;
+    private String roomType;
+    private int floor;
+    private int numberOfPeople;
+    private float price;
+    private RoomState state; //-- 0 for libre, 1 for occupée --, 2 for maintenance --
 
-    public RoomModel(int id, String type, int etage, int nb_personne, float prix, RoomState etat){
-        this.id_chambre = id;
-        this.type_chambre = type;
-        this.etage = etage;
-        this.nb_personnes = nb_personne;
-        this.prix = prix;
-        this.etat = etat;
+    public RoomModel(int id, String roomType, int floor, int numberOfPeople, float price, RoomState state){
+        
+        if (id <= 0) {
+            throw new IllegalArgumentException("L'ID ne doit pas être vide.");
+        }
+
+        this.id = id;
+        this.roomType = roomType;
+        this.floor = floor;
+        this.numberOfPeople = numberOfPeople;
+        this.price = price;
+        this.state = state;
     }
 
-    public int getIdChambre() {
-        return id_chambre;
+    public int getId() {
+        return id;
     }
 
-    public String getTypeChambre() {
-        return type_chambre;
+    public String getRoomType() {
+        return roomType;
     }
 
-    public int getEtage() {
-        return etage;
+    public int getFloor() {
+        return floor;
     }
 
-    public int getNbPersonnes() {
-        return nb_personnes;
+    public int getNumberOfPeople() {
+        return numberOfPeople;
     }
 
-    public float getPrix() {
-        return prix;
+    public float getPrice() {
+        return price;
     }
 
-    public RoomState getEtat() {
-        return etat;
+    public RoomState getState() {
+        return state;
     }
     
-    public void setEtat(RoomState etat) {
-        this.etat = etat;
+    public void setState(RoomState state) {
+        this.state = state;
     }
 }

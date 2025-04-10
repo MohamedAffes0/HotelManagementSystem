@@ -29,11 +29,11 @@ public class ClientSelect {
                     result = (ResultSet) stmt.getObject(1);
                     while (result.next()) {
                         int cin = result.getInt("cin");
-                        String nom = result.getString("nom");
-                        String prenom = result.getString("prenom");
+                        String name = result.getString("nom");
+                        String lastName = result.getString("prenom");
                         String mail = result.getString("mail");
 
-                        clients.add(new PersonModel(cin, nom, prenom, mail));
+                        clients.add(new PersonModel(cin, name, lastName, mail));
                     }
                 } finally {
                     if (result != null) {

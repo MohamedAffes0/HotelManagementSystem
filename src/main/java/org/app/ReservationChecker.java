@@ -13,15 +13,15 @@ import oracle.jdbc.OracleTypes;
 
 public class ReservationChecker {
     public static class ReservationDate {
-        public Date dateDebut;
-        public Date dateFin;
+        public Date startDate;
+        public Date endDate;
 
-        public ReservationDate(Date dateDebut, Date dateFin) {
-            this.dateDebut = dateDebut;
-            this.dateFin = dateFin;
+        public ReservationDate(Date startDate, Date endDate) {
+            this.startDate = startDate;
+            this.endDate = endDate;
         }
     }
-    public static ArrayList<ReservationDate> reservationCheck(int id_chambre) {
+    public static ArrayList<ReservationDate> reservationCheck(int id) {
         Connection connection = null;
         CallableStatement stmt = null;
         ArrayList<ReservationDate> reservationDates = new ArrayList<>();
@@ -30,7 +30,7 @@ public class ReservationChecker {
             if (connection != null) {
                 String sql = "{ call check_reservation(?, ?) }";
                 stmt = connection.prepareCall(sql);
-                stmt.setInt(1, id_chambre);
+                stmt.setInt(1, id);
                 stmt.registerOutParameter(2, OracleTypes.CURSOR);                
 
                 stmt.execute();
@@ -38,10 +38,10 @@ public class ReservationChecker {
                 try {
                     result = (ResultSet) stmt.getObject(2);
                     while (result.next()) {
-                        Date dateDebut = result.getDate("date_debut");
-                        Date DateFin = result.getDate("date_fin");
+                        Date startDate = result.getDate("date_debut");
+                        Date endDate = result.getDate("date_fin");
 
-                        reservationDates.add(new ReservationDate(dateDebut, DateFin));
+                        reservationDates.add(new ReservationDate(startDate, endDate));
                     }
                 } finally {
                     if (result != null) {
@@ -77,16 +77,16 @@ public class ReservationChecker {
         }
     }
 
-    public static void main(String[] args) {
-        // Exemple d'utilisation de la méthode reservationCheck
-        int id = 1; // Remplacez par l'ID de la réservation que vous souhaitez vérifier
-        ArrayList<ReservationDate> reservations = reservationCheck(id);
-        if (reservations != null) {
-            for (ReservationDate reservation : reservations) {
-                System.out.println("Date de début : " + reservation.dateDebut + ", Date de fin : " + reservation.dateFin);
-            }
-        } else {
-            System.out.println("Aucune réservation trouvée.");
-        }
-    }
+    // public static void main(String[] args) {
+    //     // Exemple d'utilisation de la méthode reservationCheck
+    //     int id = 1; // Remplacez par l'ID de la réservation que vous souhaitez vérifier
+    //     ArrayList<ReservationDate> reservations = reservationCheck(id);
+    //     if (reservations != null) {
+    //         for (ReservationDate reservation : reservations) {
+    //             System.out.println("Date de début : " + reservation.startDate + ", Date de fin : " + reservation.endDate);
+    //         }
+    //     } else {
+    //         System.out.println("Aucune réservation trouvée.");
+    //     }
+    // }
 }

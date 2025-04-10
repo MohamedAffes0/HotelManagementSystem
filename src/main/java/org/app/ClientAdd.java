@@ -2,18 +2,15 @@ package org.app;
 
 import java.sql.*;
 import org.database.DBConnect;
+import org.models.PersonModel;
 
 public class ClientAdd {
-    public static boolean clientAdd(int cinText, String nomText, String prenomText, String mailText) {
-        if (cinText == 0) {
-            System.err.println("Le CIN ne doit pas être vide.");
-            return false;
-        }
-        if (mailText == null || mailText.isEmpty()) {
+    public static boolean clientAdd(PersonModel client) {
+        if (client.getMail() == null || client.getMail().isEmpty()) {
             System.err.println("L'email ne doit pas être vide.");
             return false;
         }
-        if (ClientChecker.clientCheck(cinText) == ClientChecker.ClientStatus.CLIENT_FOUND) {
+        if (ClientChecker.clientCheck(client.getId()) == ClientChecker.ClientStatus.CLIENT_FOUND) {
             System.err.println("Le client existe déjà.");
             return false;
             
@@ -25,10 +22,10 @@ public class ClientAdd {
             if (connection != null) {
                 String sql = "{ call add_client_hotel(?, ?, ?, ?) }";
                 stmt = connection.prepareCall(sql);
-                stmt.setInt(1, cinText);
-                stmt.setString(2, nomText);
-                stmt.setString(3, prenomText);
-                stmt.setString(4, mailText);
+                stmt.setInt(1, client.getId());
+                stmt.setString(2, client.getName());
+                stmt.setString(3, client.getLastName());
+                stmt.setString(4, client.getMail());
 
                 stmt.execute();
                 return true; // Indique que l'ajout a réussi

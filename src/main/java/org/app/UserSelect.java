@@ -29,14 +29,14 @@ public class UserSelect {
                     result = (ResultSet) stmt.getObject(1);
                     while (result.next()) {
                         int id = result.getInt("id");
-                        String nom = result.getString("nom");
-                        String prenom = result.getString("prenom");
+                        String name = result.getString("nom");
+                        String lastName = result.getString("prenom");
                         String mail = result.getString("mail");
-                        String mdp = result.getString("mdp");
-                        boolean admin = result.getInt("is_admin") == 1 ?true: false;
-                        boolean active = result.getInt("is_active") == 1 ?true: false;
+                        String password = result.getString("mdp");
+                        boolean isAdmin = result.getInt("is_admin") == 1 ?true: false;
+                        boolean isActive = result.getInt("is_active") == 1 ?true: false;
 
-                        users.add(new EmployeeModel(id, nom, prenom, mail, mdp, admin, active));
+                        users.add(new EmployeeModel(id, name, lastName, mail, password, isAdmin, isActive));
                     }
                 } finally {
                     if (result != null) {

@@ -13,12 +13,14 @@ import javafx.fxml.Initializable;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+//import org.openjfx.RoomButton;
+
 import org.app.RoomSelect;
 import java.util.ArrayList;
 import org.models.RoomModel;
 
 
-public class Chambres implements Initializable{
+public class Rooms implements Initializable{
     private ArrayList<RoomModel> rooms;
     @FXML
     private ComboBox<String> filter;
@@ -34,23 +36,27 @@ public class Chambres implements Initializable{
 	filter.setItems(FXCollections.observableArrayList("Etage", "Type", "Nombre Personnes", "Prix", "Etat"));
 	
 	list.getChildren().clear();
-
-	try {
-	    rooms = RoomSelect.roomSelect();
 	
-	    for (RoomModel room : rooms) {
-	         System.out.println(room.getIdChambre());
-	    }
+	try {
+	    updateList();
 	} catch (Exception e) {
 	    System.out.println("Erreur de connection a la base de donnée");
 	}
     }
+
     @FXML
     private void updateList() throws Exception{
 	System.out.println(filter.getValue());
-	Parent chambre = FXMLLoader.load(getClass().getResource("/chambreButton.fxml"));
+	
+	rooms = RoomSelect.roomSelect();
+	
 	list.getChildren().clear();
-	list.getChildren().add(chambre);
+	for (RoomModel data: rooms) {
+	    FXMLLoader loader = new FXMLLoader(getClass().getResource("/chambreButton.fxml"));
+	    list.getChildren().add(loader.load());
+	    RoomButton controller = loader.getController();
+	    controller.setData(data);
+	}
     }
 
 }

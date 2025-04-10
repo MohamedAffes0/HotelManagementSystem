@@ -5,16 +5,17 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<Button fx:id="button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.RoomButton">
    <graphic>
       <HBox alignment="CENTER" fillHeight="false" prefHeight="36.0" spacing="16.0">
          <children>
-            <Label text="Chambre 1, Etage 1" />
+            <Label fx:id="id" text="Chambre 1" />
             <AnchorPane maxWidth="1.7976931348623157E308" minWidth="1.0" HBox.hgrow="ALWAYS" />
-            <Label alignment="CENTER" layoutX="10.0" layoutY="19.0" text="Type" />
-            <Label alignment="CENTER" prefWidth="100.0" text="2 Personnes" />
-            <Label alignment="CENTER" prefWidth="70.0" text="1000 Dt" textAlignment="CENTER" HBox.hgrow="NEVER" />
-            <Label alignment="CENTER" layoutX="497.0" layoutY="19.0" prefWidth="60.0" text="Libre" textAlignment="CENTER" />
+            <Label fx:id="floor" alignment="CENTER" layoutX="174.0" layoutY="20.0" text="Etage 1" />
+            <Label fx:id="type" alignment="CENTER" text="Type" />
+            <Label fx:id="size" alignment="CENTER" prefWidth="100.0" text="2 Personnes" />
+            <Label fx:id="price" alignment="CENTER" prefWidth="70.0" text="1000 Dt" textAlignment="CENTER" />
+            <Label fx:id="state" alignment="CENTER" prefWidth="60.0" text="Libre" textAlignment="CENTER" />
          </children>
       </HBox>
    </graphic>

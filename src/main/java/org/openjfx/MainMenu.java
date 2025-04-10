@@ -32,7 +32,7 @@ public class MainMenu implements Initializable {
 
     @FXML
     void chambresPressed(ActionEvent event) throws Exception{
-	changeCurrentMenu("/chambres.fxml");
+	changeCurrentMenu("/rooms.fxml");
     }
 
     @FXML
@@ -53,7 +53,7 @@ public class MainMenu implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 	try {
-		changeCurrentMenu("/chambres.fxml");
+		changeCurrentMenu("/rooms.fxml");
 	} catch (Exception e) {
 		System.out.println(e);
 	}

@@ -52,7 +52,7 @@ public class Rooms implements Initializable{
 	
 	list.getChildren().clear();
 	for (RoomModel data: rooms) {
-	    FXMLLoader loader = new FXMLLoader(getClass().getResource("/chambreButton.fxml"));
+	    FXMLLoader loader = new FXMLLoader(getClass().getResource("/roomButton.fxml"));
 	    list.getChildren().add(loader.load());
 	    RoomButton controller = loader.getController();
 	    controller.setData(data);

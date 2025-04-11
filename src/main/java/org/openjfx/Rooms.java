@@ -11,11 +11,9 @@ import javafx.collections.FXCollections;
 import javafx.fxml.Initializable;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-//import org.openjfx.RoomButton;
-
-import org.app.RoomSelect;
 import java.util.ArrayList;
+
+import org.app.room.RoomSelect;
 import org.models.RoomModel;
 
 

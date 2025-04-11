@@ -1,15 +1,14 @@
-package org.app;
+package org.app.user;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.SQLException;
+import java.sql.*;
 
 import org.database.DBConnect;
 
-public class ClientDelete {
-    public static boolean clientDelete(int cin) {
+public class UserModify {
+    public static boolean userModify(int id, boolean isAdmin, boolean isActive) {
 
-        if (cin <= 0) {
+        // Vérification de la validité de l'ID
+        if (id <= 0) {
             System.err.println("Le CIN doit être supérieur à 0.");
             return false;
         }
@@ -25,9 +24,11 @@ public class ClientDelete {
                 return false; // Indique que la connexion a échoué
             }
 
-            String sql = "{ call delete_client(?) }";
+            String sql = "{ call modify_user(?, ?, ?) }";
             stmt = connection.prepareCall(sql);
-            stmt.setInt(1, cin);
+            stmt.setInt(1, id);
+            stmt.setInt(2, isAdmin ? 1 : 0);
+            stmt.setInt(3, isActive ? 1 : 0);
 
             stmt.execute();
             return true; // Indique que l'ajout a réussi
@@ -52,6 +53,6 @@ public class ClientDelete {
     }
 
     // public static void main(String[] args) {
-    //     System.out.println(clientDelete(11111111)); // Test de la méthode clientDelete
+    //     System.out.println(userModify(2, true, true));
     // }
 }

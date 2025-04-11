@@ -1,5 +1,7 @@
 package org.openjfx;
 
+import org.app.auth.LoginChecker;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -7,8 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-
-import org.app.LoginChecker;
 
 public class Login {
 

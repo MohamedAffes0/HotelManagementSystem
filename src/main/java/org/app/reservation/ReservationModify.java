@@ -1,20 +1,23 @@
-package org.app;
+package org.app.reservation;
 
-import java.sql.*;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.SQLException;
+
+import org.app.reservation.ReservationChecker.ReservationDate;
 import org.database.DBConnect;
-import org.models.PersonModel;
 
-public class ClientAdd {
-    public static boolean clientAdd(PersonModel client) {
-        if (client.getMail() == null || client.getMail().isEmpty()) {
-            System.err.println("L'email ne doit pas être vide.");
-            return false;
+public class ReservationModify {
+        public static boolean reservationModify(int id,int roomId, Date startDate, Date endDate, boolean isPaid) {
+        
+        //verification de la disponibilité de la chambre
+        ReservationDate reservationDate = new ReservationDate(startDate, endDate);
+        if (ReservationChecker.reservationCheck(roomId, id, reservationDate) == false) {
+            System.err.println("La chambre est déjà réservée pour cette période.");
+            return false; // Indique que la réservation échoue
         }
-        if (ClientChecker.clientCheck(client.getId()) == ClientChecker.ClientStatus.CLIENT_FOUND) {
-            System.err.println("Le client existe déjà.");
-            return false;
-            
-        }
+
         Connection connection = null;
         CallableStatement stmt = null;
         try {
@@ -26,15 +29,16 @@ public class ClientAdd {
                 return false; // Indique que la connexion a échoué
             }
 
-            String sql = "{ call add_client_hotel(?, ?, ?, ?) }";
+            String sql = "{ call modify_reservation(?, ?, ?, ?) }";
             stmt = connection.prepareCall(sql);
-            stmt.setInt(1, client.getId());
-            stmt.setString(2, client.getName());
-            stmt.setString(3, client.getLastName());
-            stmt.setString(4, client.getMail());
+            stmt.setInt(1, id);
+            stmt.setDate(2, new Date(startDate.getTime())); // convertir Date en java.sql.Date
+            stmt.setDate(3, new Date(endDate.getTime()));
+            stmt.setInt(4, isPaid ? 1 : 0);
 
             stmt.execute();
             return true; // Indique que l'ajout a réussi
+
         } catch (SQLException exception) {
             exception.printStackTrace();
             return false;
@@ -55,6 +59,6 @@ public class ClientAdd {
     }
 
     // public static void main(String[] args) {
-    //     System.out.println(clientAdd(12345678, "med", "aa", "med@gmail.com"));
+    //     System.out.println(reservationModify(13, 1,Date.valueOf("2025-01-01"), Date.valueOf("2025-01-02"), true));
     // }
 }

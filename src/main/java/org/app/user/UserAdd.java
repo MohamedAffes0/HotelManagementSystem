@@ -1,9 +1,11 @@
-package org.app;
+package org.app.user;
 
 import java.sql.*;
+
+import org.app.auth.LoginChecker;
+import org.app.auth.LoginChecker.LoginStatus;
 import org.database.DBConnect;
 import org.models.EmployeeModel;
-import org.app.LoginChecker.LoginStatus;
 
 public class UserAdd {
     public static enum CreationStatus {

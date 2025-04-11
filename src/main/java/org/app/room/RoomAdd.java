@@ -1,14 +1,11 @@
-package org.app;
+package org.app.room;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.SQLException;
-
+import java.sql.*;
 import org.database.DBConnect;
-import org.models.RoomModel.RoomState;
+import org.models.RoomModel;
 
-public class RoomModify {
-    public static boolean roomModify(int id, int numberOfPeople, float price, RoomState state) {
+public class RoomAdd {
+    public static boolean roomAdd(RoomModel room) {
         Connection connection = null;
         CallableStatement stmt = null;
         try {
@@ -20,20 +17,22 @@ public class RoomModify {
                 return false; // Indique que la connexion a échoué
             }
 
-            String sql = "{ call modify_room(?, ?, ?, ?) }";
+            String sql = "{ call add_room(?, ?, ?, ?, ?, ?) }";
             stmt = connection.prepareCall(sql);
-            stmt.setInt(1, id);
-            stmt.setInt(2, numberOfPeople);
-            stmt.setFloat(3, price);
-            switch (state) {
+            stmt.setInt(1, room.getId());
+            stmt.setString(2, room.getRoomType());
+            stmt.setInt(3, room.getFloor());
+            stmt.setInt(4, room.getNumberOfPeople());
+            stmt.setFloat(5, room.getPrice());
+            switch (room.getState()) {
                 case LIBRE:
-                    stmt.setInt(4, 0); // 0 for LIBRE
+                stmt.setInt(6, 0); // 0 for LIBRE
                     break;
                 case OCCUPEE:
-                    stmt.setInt(4, 1); // 1 for OCCUPEE
+                stmt.setInt(6, 1); // 1 for OCCUPEE
                     break;
                 case MAINTENANCE:
-                    stmt.setInt(4, 2); // 2 for MAINTENANCE
+                stmt.setInt(6, 2); // 2 for MAINTENANCE
                     break;
             }
 
@@ -60,6 +59,6 @@ public class RoomModify {
     }
 
     // public static void main(String[] args) {
-    //     System.out.println(roomModify(2, 3, 100.9f, 0)); // Exemple d'utilisation
+    //     System.out.println(roomAdd(11, "simple", 1, 2, 100.0f, RoomState.LIBRE)); // Exemple d'utilisation
     // }
 }

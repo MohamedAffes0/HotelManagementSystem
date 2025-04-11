@@ -13,30 +13,33 @@ public class RoomModify {
         CallableStatement stmt = null;
         try {
             connection = DBConnect.connect();
-            if (connection != null) {
-                String sql = "{ call modify_room(?, ?, ?, ?) }";
-                stmt = connection.prepareCall(sql);
-                stmt.setInt(1, id);
-                stmt.setInt(2, numberOfPeople);
-                stmt.setFloat(3, price);
-                switch (state) {
-                    case LIBRE:
-                        stmt.setInt(4, 0); // 0 for LIBRE
-                        break;
-                    case OCCUPEE:
-                        stmt.setInt(4, 1); // 1 for OCCUPEE
-                        break;
-                    case MAINTENANCE:
-                        stmt.setInt(4, 2); // 2 for MAINTENANCE
-                        break;
-                }
 
-                stmt.execute();
-                return true; // Indique que l'ajout a réussi
-            } else {
+            // Vérification de la connexion
+            if (connection == null) {
                 System.err.println("Échec de la connexion à la base de données.");
-                return false;
+                return false; // Indique que la connexion a échoué
             }
+
+            String sql = "{ call modify_room(?, ?, ?, ?) }";
+            stmt = connection.prepareCall(sql);
+            stmt.setInt(1, id);
+            stmt.setInt(2, numberOfPeople);
+            stmt.setFloat(3, price);
+            switch (state) {
+                case LIBRE:
+                    stmt.setInt(4, 0); // 0 for LIBRE
+                    break;
+                case OCCUPEE:
+                    stmt.setInt(4, 1); // 1 for OCCUPEE
+                    break;
+                case MAINTENANCE:
+                    stmt.setInt(4, 2); // 2 for MAINTENANCE
+                    break;
+            }
+
+            stmt.execute();
+            return true; // Indique que l'ajout a réussi
+
         } catch (SQLException exception) {
             exception.printStackTrace();
             return false;

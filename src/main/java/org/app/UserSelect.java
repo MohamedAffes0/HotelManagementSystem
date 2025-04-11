@@ -18,41 +18,44 @@ public class UserSelect {
         ArrayList<EmployeeModel> users = new ArrayList<>();
         try {
             connection = DBConnect.connect();
-            if (connection != null) {
-                String sql = "{ call get_all_users(?) }";
-                stmt = connection.prepareCall(sql);
-                stmt.registerOutParameter(1, OracleTypes.CURSOR);                
 
-                stmt.execute();
-                ResultSet result = null;
-                try {
-                    result = (ResultSet) stmt.getObject(1);
-                    while (result.next()) {
-                        int id = result.getInt("id");
-                        String name = result.getString("nom");
-                        String lastName = result.getString("prenom");
-                        String mail = result.getString("mail");
-                        String password = result.getString("mdp");
-                        boolean isAdmin = result.getInt("is_admin") == 1 ?true: false;
-                        boolean isActive = result.getInt("is_active") == 1 ?true: false;
+            // Vérification de la connexion
+            if (connection == null) {
+                System.err.println("Échec de la connexion à la base de données.");
+                return null; // Indique que la connexion a échoué
+            }
 
-                        users.add(new EmployeeModel(id, name, lastName, mail, password, isAdmin, isActive));
-                    }
-                } finally {
-                    if (result != null) {
-                        try {
-                            result.close();
-                        } catch (SQLException e) {
-                            e.printStackTrace();
-                        }
+            String sql = "{ call get_all_users(?) }";
+            stmt = connection.prepareCall(sql);
+            stmt.registerOutParameter(1, OracleTypes.CURSOR);                
+
+            stmt.execute();
+            ResultSet result = null;
+            try {
+                result = (ResultSet) stmt.getObject(1);
+                while (result.next()) {
+                    int id = result.getInt("id");
+                    String name = result.getString("nom");
+                    String lastName = result.getString("prenom");
+                    String mail = result.getString("mail");
+                    String password = result.getString("mdp");
+                    boolean isAdmin = result.getInt("is_admin") == 1 ?true: false;
+                    boolean isActive = result.getInt("is_active") == 1 ?true: false;
+
+                    users.add(new EmployeeModel(id, name, lastName, mail, password, isAdmin, isActive));
+                }
+            } finally {
+                if (result != null) {
+                    try {
+                        result.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
                     }
                 }
-
-                return users;
-            } else {
-                System.err.println("Échec de la connexion à la base de données.");
-                return null;
             }
+
+            return users;
+
         } catch (SQLException exception) {
             exception.printStackTrace();
             return null;

@@ -10,7 +10,7 @@ import org.database.DBConnect;
 
 public class ReservationModify {
         public static boolean reservationModify(int id,int roomId, Date startDate, Date endDate, boolean isPaid) {
-
+        
         //verification de la disponibilité de la chambre
         ReservationDate reservationDate = new ReservationDate(startDate, endDate);
         if (ReservationChecker.reservationCheck(roomId, id, reservationDate) == false) {
@@ -22,20 +22,23 @@ public class ReservationModify {
         CallableStatement stmt = null;
         try {
             connection = DBConnect.connect();
-            if (connection != null) {
-                String sql = "{ call modify_reservation(?, ?, ?, ?) }";
-                stmt = connection.prepareCall(sql);
-                stmt.setInt(1, id);
-                stmt.setDate(2, new Date(startDate.getTime())); // convertir Date en java.sql.Date
-                stmt.setDate(3, new Date(endDate.getTime()));
-                stmt.setInt(4, isPaid ? 1 : 0);
 
-                stmt.execute();
-                return true; // Indique que l'ajout a réussi
-            } else {
+            // Vérification de la connexion
+            if (connection == null) {
                 System.err.println("Échec de la connexion à la base de données.");
-                return false;
+                return false; // Indique que la connexion a échoué
             }
+
+            String sql = "{ call modify_reservation(?, ?, ?, ?) }";
+            stmt = connection.prepareCall(sql);
+            stmt.setInt(1, id);
+            stmt.setDate(2, new Date(startDate.getTime())); // convertir Date en java.sql.Date
+            stmt.setDate(3, new Date(endDate.getTime()));
+            stmt.setInt(4, isPaid ? 1 : 0);
+
+            stmt.execute();
+            return true; // Indique que l'ajout a réussi
+
         } catch (SQLException exception) {
             exception.printStackTrace();
             return false;
@@ -56,6 +59,6 @@ public class ReservationModify {
     }
 
     // public static void main(String[] args) {
-    //     System.out.println(reservationModify(11, 10,Date.valueOf("2025-01-04"), Date.valueOf("2025-01-05"), true));
+    //     System.out.println(reservationModify(13, 1,Date.valueOf("2025-01-01"), Date.valueOf("2025-01-02"), true));
     // }
 }

@@ -10,32 +10,35 @@ public class RoomAdd {
         CallableStatement stmt = null;
         try {
             connection = DBConnect.connect();
-            if (connection != null) {
-                String sql = "{ call add_room(?, ?, ?, ?, ?, ?) }";
-                stmt = connection.prepareCall(sql);
-                stmt.setInt(1, room.getId());
-                stmt.setString(2, room.getRoomType());
-                stmt.setInt(3, room.getFloor());
-                stmt.setInt(4, room.getNumberOfPeople());
-                stmt.setFloat(5, room.getPrice());
-                switch (room.getState()) {
-                    case LIBRE:
-                    stmt.setInt(6, 0); // 0 for LIBRE
-                        break;
-                    case OCCUPEE:
-                    stmt.setInt(6, 1); // 1 for OCCUPEE
-                        break;
-                    case MAINTENANCE:
-                    stmt.setInt(6, 2); // 2 for MAINTENANCE
-                        break;
-                }
 
-                stmt.execute();
-                return true; // Indique que l'ajout a réussi
-            } else {
+            // Vérification de la connexion
+            if (connection == null) {
                 System.err.println("Échec de la connexion à la base de données.");
-                return false;
+                return false; // Indique que la connexion a échoué
             }
+
+            String sql = "{ call add_room(?, ?, ?, ?, ?, ?) }";
+            stmt = connection.prepareCall(sql);
+            stmt.setInt(1, room.getId());
+            stmt.setString(2, room.getRoomType());
+            stmt.setInt(3, room.getFloor());
+            stmt.setInt(4, room.getNumberOfPeople());
+            stmt.setFloat(5, room.getPrice());
+            switch (room.getState()) {
+                case LIBRE:
+                stmt.setInt(6, 0); // 0 for LIBRE
+                    break;
+                case OCCUPEE:
+                stmt.setInt(6, 1); // 1 for OCCUPEE
+                    break;
+                case MAINTENANCE:
+                stmt.setInt(6, 2); // 2 for MAINTENANCE
+                    break;
+            }
+
+            stmt.execute();
+            return true; // Indique que l'ajout a réussi
+
         } catch (SQLException exception) {
             exception.printStackTrace();
             return false;

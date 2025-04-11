@@ -1,11 +1,11 @@
-package org.app;
+package org.app.reservation;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Date;
 
-import org.app.ReservationChecker.ReservationDate;
+import org.app.reservation.ReservationChecker.ReservationDate;
 import org.database.DBConnect;
 import org.models.ReservationModel;
 

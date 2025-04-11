@@ -1,21 +1,22 @@
-package org.app;
+package org.app.reservation;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.sql.Date;
 
 import org.database.DBConnect;
-import org.models.EmployeeModel;
+import org.models.ReservationModel;
 
 import oracle.jdbc.OracleTypes;
 
-public class UserSelect {
-    public static ArrayList<EmployeeModel> userSelect() {
+public class ReservationSelect {
+    public static ArrayList<ReservationModel> reservationSelect() {
         Connection connection = null;
         CallableStatement stmt = null;
-        ArrayList<EmployeeModel> users = new ArrayList<>();
+        ArrayList<ReservationModel> reservations = new ArrayList<>();
         try {
             connection = DBConnect.connect();
 
@@ -25,7 +26,7 @@ public class UserSelect {
                 return null; // Indique que la connexion a échoué
             }
 
-            String sql = "{ call get_all_users(?) }";
+            String sql = "{ call get_all_reservation(?) }";
             stmt = connection.prepareCall(sql);
             stmt.registerOutParameter(1, OracleTypes.CURSOR);                
 
@@ -34,15 +35,15 @@ public class UserSelect {
             try {
                 result = (ResultSet) stmt.getObject(1);
                 while (result.next()) {
-                    int id = result.getInt("id");
-                    String name = result.getString("nom");
-                    String lastName = result.getString("prenom");
-                    String mail = result.getString("mail");
-                    String password = result.getString("mdp");
-                    boolean isAdmin = result.getInt("is_admin") == 1 ?true: false;
-                    boolean isActive = result.getInt("is_active") == 1 ?true: false;
+                    int id = result.getInt("id_reservation");
+                    Date startDate = result.getDate("date_debut");
+                    Date endDate = result.getDate("date_fin");
+                    boolean isPaid = result.getInt("paid") == 1? true : false;
+                    int employee = result.getInt("employe");
+                    int hotelClient = result.getInt("client_hotel");
+                    int room = result.getInt("chambre");
 
-                    users.add(new EmployeeModel(id, name, lastName, mail, password, isAdmin, isActive));
+                    reservations.add(new ReservationModel(id, startDate, endDate, isPaid, employee, hotelClient, room));
                 }
             } finally {
                 if (result != null) {
@@ -54,7 +55,7 @@ public class UserSelect {
                 }
             }
 
-            return users;
+            return reservations;
 
         } catch (SQLException exception) {
             exception.printStackTrace();
@@ -76,13 +77,12 @@ public class UserSelect {
     }
 
     // public static void main(String[] args) {
-    //     ArrayList<EmployeeModel> users = userSelect();
-    //     if (users != null) {
-    //         for (EmployeeModel user : users) {
-    //             System.out.println(user.getNom() + " " + user.getPrenom() + " " + user.getMail() + " " + user.getMdp() + " " + user.isAdmin() + " " + user.isActive());
-    //         }
-    //     } else {
-    //         System.out.println("Aucun utilisateur trouvé.");
+    //     ArrayList<ReservationModel> reservations = userSelect();
+    //     for (int i = 0; i < reservations.size(); i++) {
+    //         System.out.println(reservations.get(i).getIdReservation() + " " + 
+    //         reservations.get(i).getDateDebut() + " " + reservations.get(i).getDateFin() 
+    //         + " " + reservations.get(i).isPaid() + " " + reservations.get(i).getEmploye() 
+    //         + " " + reservations.get(i).getClientHotel() + " " + reservations.get(i).getChambre());
     //     }
     // }
 }

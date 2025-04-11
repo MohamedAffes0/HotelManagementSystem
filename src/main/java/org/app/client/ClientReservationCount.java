@@ -1,4 +1,4 @@
-package org.app;
+package org.app.client;
 
 import java.util.ArrayList;
 import java.util.HashMap;

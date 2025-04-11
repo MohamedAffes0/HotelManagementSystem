@@ -13,7 +13,7 @@ import org.models.ReservationModel;
 import oracle.jdbc.OracleTypes;
 
 public class ReservationSelect {
-    public static ArrayList<ReservationModel> userSelect() {
+    public static ArrayList<ReservationModel> reservationSelect() {
         Connection connection = null;
         CallableStatement stmt = null;
         ArrayList<ReservationModel> reservations = new ArrayList<>();

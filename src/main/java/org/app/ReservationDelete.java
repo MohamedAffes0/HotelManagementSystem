@@ -12,17 +12,20 @@ public class ReservationDelete {
         CallableStatement stmt = null;
         try {
             connection = DBConnect.connect();
-            if (connection != null) {
-                String sql = "{ call delete_reservation(?) }";
-                stmt = connection.prepareCall(sql);
-                stmt.setInt(1, id);
 
-                stmt.execute();
-                return true; // Indique que l'ajout a réussi
-            } else {
+            // Vérification de la connexion
+            if (connection == null) {
                 System.err.println("Échec de la connexion à la base de données.");
-                return false;
+                return false; // Indique que la connexion a échoué
             }
+
+            String sql = "{ call delete_reservation(?) }";
+            stmt = connection.prepareCall(sql);
+            stmt.setInt(1, id);
+
+            stmt.execute();
+            return true; // Indique que l'ajout a réussi
+
         } catch (SQLException exception) {
             exception.printStackTrace();
             return false;
@@ -43,6 +46,6 @@ public class ReservationDelete {
     }
 
     // public static void main(String[] args) {
-    //     System.out.println(reservationDelete(10));
+    //     System.out.println(reservationDelete(12));
     // }
 }

@@ -21,46 +21,70 @@ public class ReservationChecker {
             this.endDate = endDate;
         }
     }
-    public static ArrayList<ReservationDate> reservationCheck(int id) {
+    public static boolean reservationCheck(int roomId, int reservationId, ReservationDate actualReservation) {
         Connection connection = null;
         CallableStatement stmt = null;
         ArrayList<ReservationDate> reservationDates = new ArrayList<>();
         try {
             connection = DBConnect.connect();
-            if (connection != null) {
-                String sql = "{ call check_reservation(?, ?) }";
-                stmt = connection.prepareCall(sql);
-                stmt.setInt(1, id);
-                stmt.registerOutParameter(2, OracleTypes.CURSOR);                
+            if (connection == null) {
+                System.err.println("Échec de la connexion à la base de données.");
+                return false;
+            }
 
-                stmt.execute();
-                ResultSet result = null;
-                try {
-                    result = (ResultSet) stmt.getObject(2);
-                    while (result.next()) {
-                        Date startDate = result.getDate("date_debut");
-                        Date endDate = result.getDate("date_fin");
+            String sql = "{ call check_reservation(?, ?, ?) }";
+            stmt = connection.prepareCall(sql);
+            stmt.setInt(1, roomId);
+            stmt.setInt(2, reservationId);
+            stmt.registerOutParameter(3, OracleTypes.CURSOR);                
 
-                        reservationDates.add(new ReservationDate(startDate, endDate));
-                    }
-                } finally {
-                    if (result != null) {
-                        try {
-                            result.close();
-                        } catch (SQLException e) {
-                            e.printStackTrace();
-                        }
+            stmt.execute();
+            ResultSet result = null;
+            try {
+                result = (ResultSet) stmt.getObject(3);
+                while (result.next()) {
+                    // Date startDate = result.getDate("date_debut");
+                    // Date endDate = result.getDate("date_fin");
+                    Date startDate = result.getDate(1); // colonne 1 = date_debut
+                    Date endDate = result.getDate(2);   // colonne 2 = date_fin
+
+                    reservationDates.add(new ReservationDate(startDate, endDate));
+                }
+            } finally {
+                if (result != null) {
+                    try {
+                        result.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
                     }
                 }
-
-                return reservationDates;
-            } else {
-                System.err.println("Échec de la connexion à la base de données.");
-                return null;
             }
+
+            // // affichage de la liste des réservations
+            // for (int i = 0; i < reservationDates.size(); i++) {
+            //     System.out.println("Date de début : " + reservationDates.get(i).startDate + ", Date de fin : " + reservationDates.get(i).endDate);
+            // }
+
+            if (reservationDates != null) {
+                for (int i = 0; i < reservationDates.size(); i++) {
+                    Date existingStart = reservationDates.get(i).startDate;
+                    Date existingEnd = reservationDates.get(i).endDate;
+
+                    // Vérification de la disponibilité de la chambre
+                    if ( !actualReservation.endDate.before(existingStart) &&
+                        !actualReservation.startDate.after(existingEnd)) {
+                        System.out.println("La chambre est déjà réservée pour cette période.");
+                        System.out.println("Date de début : " + existingStart + ", Date de fin : " + existingEnd);
+                        return false; // Indique que la réservation échoue
+                    }
+                }
+            }
+
+            return true;
+
         } catch (SQLException exception) {
             exception.printStackTrace();
-            return null;
+            return false;
         } finally {
             // toujour executer le bloc finally
             // Fermeture des ressources JDBC

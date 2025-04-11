@@ -18,53 +18,56 @@ public class RoomSelect {
         ArrayList<RoomModel> rooms = new ArrayList<>();
         try {
             connection = DBConnect.connect();
-            if (connection != null) {
-                String sql = "{ call get_all_rooms(?) }";
-                stmt = connection.prepareCall(sql);
-                stmt.registerOutParameter(1, OracleTypes.CURSOR);                
 
-                stmt.execute();
-                ResultSet result = null;
-                try {
-                    result = (ResultSet) stmt.getObject(1);
-                    while (result.next()) {
-                        int id = result.getInt("id_chambre");
-                        String roomType = result.getString("type_chambre");
-                        int floor = result.getInt("etage");
-                        int numberOfPeople = result.getInt("nb_personnes");
-                        float price = result.getFloat("prix");
-                        RoomState state;
-                        switch (result.getInt("etat")) {
-                            case 0:
-                                state = RoomState.LIBRE;
-                                break;
-                            case 1:
-                                state = RoomState.OCCUPEE;
-                                break;
-                            case 2:
-                                state = RoomState.MAINTENANCE;
-                                break;
-                            default:
-                                state = RoomState.LIBRE; // Valeur par défaut si l'état n'est pas reconnu
-                                break;
-                        }
-                        rooms.add(new RoomModel(id, roomType, floor, numberOfPeople, price, state));
+            // Vérification de la connexion
+            if (connection == null) {
+                System.err.println("Échec de la connexion à la base de données.");
+                return null; // Indique que la connexion a échoué
+            }
+
+            String sql = "{ call get_all_rooms(?) }";
+            stmt = connection.prepareCall(sql);
+            stmt.registerOutParameter(1, OracleTypes.CURSOR);                
+
+            stmt.execute();
+            ResultSet result = null;
+            try {
+                result = (ResultSet) stmt.getObject(1);
+                while (result.next()) {
+                    int id = result.getInt("id_chambre");
+                    String roomType = result.getString("type_chambre");
+                    int floor = result.getInt("etage");
+                    int numberOfPeople = result.getInt("nb_personnes");
+                    float price = result.getFloat("prix");
+                    RoomState state;
+                    switch (result.getInt("etat")) {
+                        case 0:
+                            state = RoomState.LIBRE;
+                            break;
+                        case 1:
+                            state = RoomState.OCCUPEE;
+                            break;
+                        case 2:
+                            state = RoomState.MAINTENANCE;
+                            break;
+                        default:
+                            state = RoomState.LIBRE; // Valeur par défaut si l'état n'est pas reconnu
+                            break;
                     }
-                } finally {
-                    if (result != null) {
-                        try {
-                            result.close();
-                        } catch (SQLException e) {
-                            e.printStackTrace();
-                        }
+                    rooms.add(new RoomModel(id, roomType, floor, numberOfPeople, price, state));
+                }
+            } finally {
+                if (result != null) {
+                    try {
+                        result.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
                     }
                 }
-
-                return rooms;
-            } else {
-                System.err.println("Échec de la connexion à la base de données.");
-                return null;
             }
+
+            return rooms;
+
         } catch (SQLException exception) {
             exception.printStackTrace();
             return null;

@@ -1,3 +1,8 @@
+-- Supprime de toutes les contraintes de clés primaires et étrangères dans la base de données Oracle.
+-- Supprime toutes les séquences de l'utilisateur actuel dans Oracle.
+-- Supprime toutes les tables de l'utilisateur actuel dans la base de données Oracle.
+@tables_script/drop_all_tables.sql
+
 -- Création des tables
 @tables_script/create_tables.sql
 

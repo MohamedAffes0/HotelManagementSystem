@@ -8,25 +8,30 @@ import org.database.DBConnect;
 
 public class ClientDelete {
     public static boolean clientDelete(int cin) {
+
         if (cin <= 0) {
             System.err.println("Le CIN doit être supérieur à 0.");
             return false;
         }
+
         Connection connection = null;
         CallableStatement stmt = null;
         try {
             connection = DBConnect.connect();
-            if (connection != null) {
-                String sql = "{ call delete_client(?) }";
-                stmt = connection.prepareCall(sql);
-                stmt.setInt(1, cin);
 
-                stmt.execute();
-                return true; // Indique que l'ajout a réussi
-            } else {
+            // Vérification de la connexion
+            if (connection == null) {
                 System.err.println("Échec de la connexion à la base de données.");
-                return false;
+                return false; // Indique que la connexion a échoué
             }
+
+            String sql = "{ call delete_client(?) }";
+            stmt = connection.prepareCall(sql);
+            stmt.setInt(1, cin);
+
+            stmt.execute();
+            return true; // Indique que l'ajout a réussi
+
         } catch (SQLException exception) {
             exception.printStackTrace();
             return false;

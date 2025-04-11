@@ -19,20 +19,22 @@ public class ClientAdd {
         CallableStatement stmt = null;
         try {
             connection = DBConnect.connect();
-            if (connection != null) {
-                String sql = "{ call add_client_hotel(?, ?, ?, ?) }";
-                stmt = connection.prepareCall(sql);
-                stmt.setInt(1, client.getId());
-                stmt.setString(2, client.getName());
-                stmt.setString(3, client.getLastName());
-                stmt.setString(4, client.getMail());
 
-                stmt.execute();
-                return true; // Indique que l'ajout a réussi
-            } else {
+            // Vérification de la connexion
+            if (connection == null) {
                 System.err.println("Échec de la connexion à la base de données.");
-                return false;
+                return false; // Indique que la connexion a échoué
             }
+
+            String sql = "{ call add_client_hotel(?, ?, ?, ?) }";
+            stmt = connection.prepareCall(sql);
+            stmt.setInt(1, client.getId());
+            stmt.setString(2, client.getName());
+            stmt.setString(3, client.getLastName());
+            stmt.setString(4, client.getMail());
+
+            stmt.execute();
+            return true; // Indique que l'ajout a réussi
         } catch (SQLException exception) {
             exception.printStackTrace();
             return false;

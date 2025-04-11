@@ -18,38 +18,41 @@ public class ClientSelect {
         ArrayList<PersonModel> clients = new ArrayList<>();
         try {
             connection = DBConnect.connect();
-            if (connection != null) {
-                String sql = "{ call get_all_clients(?) }";
-                stmt = connection.prepareCall(sql);
-                stmt.registerOutParameter(1, OracleTypes.CURSOR);                
 
-                stmt.execute();
-                ResultSet result = null;
-                try {
-                    result = (ResultSet) stmt.getObject(1);
-                    while (result.next()) {
-                        int cin = result.getInt("cin");
-                        String name = result.getString("nom");
-                        String lastName = result.getString("prenom");
-                        String mail = result.getString("mail");
+            // Vérification de la connexion
+            if (connection == null) {
+                System.err.println("Échec de la connexion à la base de données.");
+                return null; // Indique que la connexion a échoué
+            }
 
-                        clients.add(new PersonModel(cin, name, lastName, mail));
-                    }
-                } finally {
-                    if (result != null) {
-                        try {
-                            result.close();
-                        } catch (SQLException e) {
-                            e.printStackTrace();
-                        }
+            String sql = "{ call get_all_clients(?) }";
+            stmt = connection.prepareCall(sql);
+            stmt.registerOutParameter(1, OracleTypes.CURSOR);                
+
+            stmt.execute();
+            ResultSet result = null;
+            try {
+                result = (ResultSet) stmt.getObject(1);
+                while (result.next()) {
+                    int cin = result.getInt("cin");
+                    String name = result.getString("nom");
+                    String lastName = result.getString("prenom");
+                    String mail = result.getString("mail");
+
+                    clients.add(new PersonModel(cin, name, lastName, mail));
+                }
+            } finally {
+                if (result != null) {
+                    try {
+                        result.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
                     }
                 }
-
-                return clients;
-            } else {
-                System.err.println("Échec de la connexion à la base de données.");
-                return null;
             }
+
+            return clients;
+
         } catch (SQLException exception) {
             exception.printStackTrace();
             return null;

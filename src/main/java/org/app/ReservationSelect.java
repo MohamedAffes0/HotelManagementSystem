@@ -19,41 +19,44 @@ public class ReservationSelect {
         ArrayList<ReservationModel> reservations = new ArrayList<>();
         try {
             connection = DBConnect.connect();
-            if (connection != null) {
-                String sql = "{ call get_all_reservation(?) }";
-                stmt = connection.prepareCall(sql);
-                stmt.registerOutParameter(1, OracleTypes.CURSOR);                
 
-                stmt.execute();
-                ResultSet result = null;
-                try {
-                    result = (ResultSet) stmt.getObject(1);
-                    while (result.next()) {
-                        int id = result.getInt("id_reservation");
-                        Date startDate = result.getDate("date_debut");
-                        Date endDate = result.getDate("date_fin");
-                        boolean isPaid = result.getInt("paid") == 1? true : false;
-                        int employee = result.getInt("employe");
-                        int hotelClient = result.getInt("client_hotel");
-                        int room = result.getInt("chambre");
+            // Vérification de la connexion
+            if (connection == null) {
+                System.err.println("Échec de la connexion à la base de données.");
+                return null; // Indique que la connexion a échoué
+            }
 
-                        reservations.add(new ReservationModel(id, startDate, endDate, isPaid, employee, hotelClient, room));
-                    }
-                } finally {
-                    if (result != null) {
-                        try {
-                            result.close();
-                        } catch (SQLException e) {
-                            e.printStackTrace();
-                        }
+            String sql = "{ call get_all_reservation(?) }";
+            stmt = connection.prepareCall(sql);
+            stmt.registerOutParameter(1, OracleTypes.CURSOR);                
+
+            stmt.execute();
+            ResultSet result = null;
+            try {
+                result = (ResultSet) stmt.getObject(1);
+                while (result.next()) {
+                    int id = result.getInt("id_reservation");
+                    Date startDate = result.getDate("date_debut");
+                    Date endDate = result.getDate("date_fin");
+                    boolean isPaid = result.getInt("paid") == 1? true : false;
+                    int employee = result.getInt("employe");
+                    int hotelClient = result.getInt("client_hotel");
+                    int room = result.getInt("chambre");
+
+                    reservations.add(new ReservationModel(id, startDate, endDate, isPaid, employee, hotelClient, room));
+                }
+            } finally {
+                if (result != null) {
+                    try {
+                        result.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
                     }
                 }
-
-                return reservations;
-            } else {
-                System.err.println("Échec de la connexion à la base de données.");
-                return null;
             }
+
+            return reservations;
+
         } catch (SQLException exception) {
             exception.printStackTrace();
             return null;

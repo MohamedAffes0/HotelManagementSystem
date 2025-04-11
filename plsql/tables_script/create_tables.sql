@@ -8,7 +8,7 @@ is_admin NUMBER(1) DEFAULT 0, -- 0 for false, 1 for true
 is_active NUMBER(1) DEFAULT 0, -- 0 for inactive, 1 for active
 CONSTRAINT check_active check (is_active IN (0, 1)), --le statut de l'employé--
 CONSTRAINT check_is_admin check (is_admin IN (0, 1)), --le statut de l'employé--
-CONSTRAINT check_email CHECK (mail LIKE '%_@__%.__%')  --le format de l'email--
+CONSTRAINT check_email_employe CHECK (mail LIKE '%_@__%.__%')  --le format de l'email--
 );
 
 create table client_hotel(
@@ -16,7 +16,7 @@ cin int primary key,
 nom VARCHAR2(20),
 prenom VARCHAR2(20),
 mail VARCHAR2(30),
-CONSTRAINT check_email CHECK (mail IS NULL OR mail LIKE '%_@__%.__%') --le format de l'email--
+CONSTRAINT check_email_client CHECK (mail IS NULL OR mail LIKE '%_@__%.__%') --le format de l'email--
 );
 
 CREATE table chambre(
@@ -37,9 +37,12 @@ create table reservation(
     employe int,--l'employé qui a fait la réservation--
     client_hotel int,--le client qui a fait la réservation--
     chambre int,--la chambre réservée--
-    CONSTRAINT fk_employe FOREIGN KEY (employe) REFERENCES employe(id) on delete cascade,
-    CONSTRAINT fk_client_hotel FOREIGN KEY (client_hotel) REFERENCES client_hotel(cin) on delete cascade,
+    CONSTRAINT fk_employe FOREIGN KEY (employe) REFERENCES employe(id) ON DELETE SET NULL,
+    CONSTRAINT fk_client_hotel FOREIGN KEY (client_hotel) REFERENCES client_hotel(cin) ON DELETE SET NULL,
     CONSTRAINT fk_chambre FOREIGN KEY (chambre) REFERENCES chambre(id_chambre) on delete cascade,
     CONSTRAINT check_date CHECK (date_debut <= date_fin), --la date de début doit être inférieure à la date de fin--
     CONSTRAINT check_paid CHECK (paid IN (0, 1)) --le statut de la réservation--
 );
+
+-- cration de l'utilisateur root
+INSERT INTO employe VALUES(1, 'root', 'root', 'root@gmail.com', '1234', 1, 1);

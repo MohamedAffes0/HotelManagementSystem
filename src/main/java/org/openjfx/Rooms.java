@@ -11,6 +11,10 @@ import javafx.collections.FXCollections;
 import javafx.fxml.Initializable;
 import java.net.URL;
 import java.util.ResourceBundle;
+<<<<<<< HEAD
+=======
+
+import org.app.RoomFilter;
 
 import org.app.RoomFilter;
 
@@ -19,7 +23,13 @@ import org.app.RoomFilter;
 import org.app.RoomSelect;
 import org.app.StringNumberExtract;
 
+<<<<<<< HEAD
+=======
+>>>>>>> 850ec6d (feat(rooms): add filtering for rooms ui)
+>>>>>>> main
 import java.util.ArrayList;
+
+import org.app.room.RoomSelect;
 import org.models.RoomModel;
 import org.models.RoomModel.RoomState;
 

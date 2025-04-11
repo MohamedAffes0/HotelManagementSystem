@@ -1,4 +1,4 @@
-package org.app;
+package org.app.user;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;

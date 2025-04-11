@@ -7,8 +7,9 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Label;
-import org.app.UserAdd;
-import org.app.UserAdd.CreationStatus;
+
+import org.app.user.UserAdd;
+import org.app.user.UserAdd.CreationStatus;
 import org.models.EmployeeModel;
 
 public class Signup {

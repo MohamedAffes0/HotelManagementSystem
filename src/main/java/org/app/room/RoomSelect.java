@@ -1,4 +1,4 @@
-package org.app;
+package org.app.room;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;

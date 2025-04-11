@@ -1,4 +1,4 @@
-package org.app;
+package org.app.auth;
 
 import java.sql.*;
 import org.database.DBConnect;

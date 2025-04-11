@@ -1,4 +1,4 @@
-package org.app;
+package org.app.room;
 
 import java.util.ArrayList;
 

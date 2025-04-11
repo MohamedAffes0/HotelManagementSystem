@@ -1,11 +1,13 @@
-package org.app;
+package org.app.reservation;
 
-import java.sql.*;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.SQLException;
+
 import org.database.DBConnect;
-import org.models.RoomModel;
 
-public class RoomAdd {
-    public static boolean roomAdd(RoomModel room) {
+public class ReservationDelete {
+    public static boolean reservationDelete(int id) {
         Connection connection = null;
         CallableStatement stmt = null;
         try {
@@ -17,24 +19,9 @@ public class RoomAdd {
                 return false; // Indique que la connexion a échoué
             }
 
-            String sql = "{ call add_room(?, ?, ?, ?, ?, ?) }";
+            String sql = "{ call delete_reservation(?) }";
             stmt = connection.prepareCall(sql);
-            stmt.setInt(1, room.getId());
-            stmt.setString(2, room.getRoomType());
-            stmt.setInt(3, room.getFloor());
-            stmt.setInt(4, room.getNumberOfPeople());
-            stmt.setFloat(5, room.getPrice());
-            switch (room.getState()) {
-                case LIBRE:
-                stmt.setInt(6, 0); // 0 for LIBRE
-                    break;
-                case OCCUPEE:
-                stmt.setInt(6, 1); // 1 for OCCUPEE
-                    break;
-                case MAINTENANCE:
-                stmt.setInt(6, 2); // 2 for MAINTENANCE
-                    break;
-            }
+            stmt.setInt(1, id);
 
             stmt.execute();
             return true; // Indique que l'ajout a réussi
@@ -59,6 +46,6 @@ public class RoomAdd {
     }
 
     // public static void main(String[] args) {
-    //     System.out.println(roomAdd(11, "simple", 1, 2, 100.0f, RoomState.LIBRE)); // Exemple d'utilisation
+    //     System.out.println(reservationDelete(12));
     // }
 }

@@ -1,4 +1,4 @@
-package org.app;
+package org.app.reservation;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;

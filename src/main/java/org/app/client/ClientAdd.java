@@ -1,13 +1,21 @@
-package org.app;
+package org.app.client;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.SQLException;
+import java.sql.*;
 
 import org.database.DBConnect;
+import org.models.PersonModel;
 
-public class ReservationDelete {
-    public static boolean reservationDelete(int id) {
+public class ClientAdd {
+    public static boolean clientAdd(PersonModel client) {
+        if (client.getMail() == null || client.getMail().isEmpty()) {
+            System.err.println("L'email ne doit pas être vide.");
+            return false;
+        }
+        if (ClientChecker.clientCheck(client.getId()) == ClientChecker.ClientStatus.CLIENT_FOUND) {
+            System.err.println("Le client existe déjà.");
+            return false;
+            
+        }
         Connection connection = null;
         CallableStatement stmt = null;
         try {
@@ -19,13 +27,15 @@ public class ReservationDelete {
                 return false; // Indique que la connexion a échoué
             }
 
-            String sql = "{ call delete_reservation(?) }";
+            String sql = "{ call add_client_hotel(?, ?, ?, ?) }";
             stmt = connection.prepareCall(sql);
-            stmt.setInt(1, id);
+            stmt.setInt(1, client.getId());
+            stmt.setString(2, client.getName());
+            stmt.setString(3, client.getLastName());
+            stmt.setString(4, client.getMail());
 
             stmt.execute();
             return true; // Indique que l'ajout a réussi
-
         } catch (SQLException exception) {
             exception.printStackTrace();
             return false;
@@ -46,6 +56,6 @@ public class ReservationDelete {
     }
 
     // public static void main(String[] args) {
-    //     System.out.println(reservationDelete(12));
+    //     System.out.println(clientAdd(12345678, "med", "aa", "med@gmail.com"));
     // }
 }

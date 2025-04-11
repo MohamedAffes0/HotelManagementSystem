@@ -8,7 +8,7 @@ is_admin NUMBER(1) DEFAULT 0, -- 0 for false, 1 for true
 is_active NUMBER(1) DEFAULT 0, -- 0 for inactive, 1 for active
 CONSTRAINT check_active check (is_active IN (0, 1)), --le statut de l'employé--
 CONSTRAINT check_is_admin check (is_admin IN (0, 1)), --le statut de l'employé--
-CONSTRAINT check_email CHECK (mail LIKE '%_@__%.__%')  --le format de l'email--
+CONSTRAINT check_email_employe CHECK (mail LIKE '%_@__%.__%')  --le format de l'email--
 );
 
 create table client_hotel(
@@ -16,7 +16,7 @@ cin int primary key,
 nom VARCHAR2(20),
 prenom VARCHAR2(20),
 mail VARCHAR2(30),
-CONSTRAINT check_email CHECK (mail IS NULL OR mail LIKE '%_@__%.__%') --le format de l'email--
+CONSTRAINT check_email_client CHECK (mail IS NULL OR mail LIKE '%_@__%.__%') --le format de l'email--
 );
 
 CREATE table chambre(

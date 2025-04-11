@@ -12,6 +12,8 @@ public class UserAdd {
         CONNEXION_FAILED,
         EMPTY_FIELD
     }
+
+    // id a ignorer
     public static CreationStatus userAdd(EmployeeModel employee) {
         // Vérification des champs vides
         if (employee.getMail() == null || employee.getMail().isEmpty()) {

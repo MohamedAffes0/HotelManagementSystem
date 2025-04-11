@@ -12,7 +12,7 @@ import org.models.PersonModel;
 import oracle.jdbc.OracleTypes;
 
 public class ClientSelect {
-    public static ArrayList<PersonModel> userSelect() {
+    public static ArrayList<PersonModel> clientSelect() {
         Connection connection = null;
         CallableStatement stmt = null;
         ArrayList<PersonModel> clients = new ArrayList<>();

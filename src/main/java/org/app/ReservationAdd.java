@@ -10,15 +10,16 @@ import org.database.DBConnect;
 import org.models.ReservationModel;
 
 public class ReservationAdd {
+    // id a ignorer
     public static boolean reservationAdd(ReservationModel reservation) {
 
-        //verification de la disponibilité de la chambre
+        // verification de la disponibilité de la chambre
         ReservationDate reservationDate = new ReservationDate(reservation.getStartDate(), reservation.getEndDate());
         if (ReservationChecker.reservationCheck(reservation.getRoom(), 0, reservationDate) == false) {
             System.err.println("La chambre est déjà réservée pour cette période.");
             return false; // Indique que la réservation échoue
         }
-        
+
         Connection connection = null;
         CallableStatement stmt = null;
         try {
@@ -62,15 +63,11 @@ public class ReservationAdd {
         }
     }
 
-    public static void main(String[] args) {
-        // Test de la méthode reservationAdd
-        // ReservationModel reservation = new ReservationModel(1, Date.valueOf("2025-01-01"), Date.valueOf("2025-01-01"), false, 3, 12345678, 1);
-
-        // boolean result = reservationAdd(reservation);
-        // System.out.println("Résultat de l'ajout de réservation : " + result);
-        // Date startDate = Date.valueOf("2025-02-23");
-        // Date endDate = Date.valueOf("2025-02-24");
-        // ReservationDate reservationDate = new ReservationDate(startDate, endDate);
-        // System.out.println(ReservationChecker.reservationCheck(1, 0, reservationDate));
-    }
+    // public static void main(String[] args) {
+    //     // Test de la méthode reservationAdd
+    //     ReservationModel reservation = new ReservationModel(1, Date.valueOf("2005-12-23"), Date.valueOf("2005-12-24"),
+    //             false, 3, 12345678, 10);
+    //     boolean result = reservationAdd(reservation);
+    //     System.out.println("Reservation added: " + result);
+    // }
 }

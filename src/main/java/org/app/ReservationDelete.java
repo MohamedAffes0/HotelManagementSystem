@@ -46,6 +46,6 @@ public class ReservationDelete {
     }
 
     // public static void main(String[] args) {
-    //     System.out.println(reservationDelete(10));
+    //     System.out.println(reservationDelete(12));
     // }
 }

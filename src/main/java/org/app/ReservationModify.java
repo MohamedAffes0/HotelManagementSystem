@@ -5,7 +5,8 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
 
-import org.app.ReservationChecker.ReservationDate;
+import org.app.reservation.ReservationChecker;
+import org.app.reservation.ReservationChecker.ReservationDate;
 import org.database.DBConnect;
 
 public class ReservationModify {

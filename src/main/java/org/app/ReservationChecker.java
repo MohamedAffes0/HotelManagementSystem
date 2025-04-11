@@ -55,6 +55,7 @@ public class ReservationChecker {
                         }
                     }
                 }
+                
                 // // affichage de la liste des réservations
                 // for (int i = 0; i < reservationDates.size(); i++) {
                 //     System.out.println("Date de début : " + reservationDates.get(i).startDate + ", Date de fin : " + reservationDates.get(i).endDate);
@@ -64,15 +65,13 @@ public class ReservationChecker {
                     for (int i = 0; i < reservationDates.size(); i++) {
                         Date existingStart = reservationDates.get(i).startDate;
                         Date existingEnd = reservationDates.get(i).endDate;
-                        if (actualReservation.startDate.before(existingEnd) && actualReservation.endDate.after(existingStart)) {
-                                System.err.println("La chambre est déjà réservée pour cette période.");
-                                System.out.println("Date de début : " + existingStart + ", Date de fin : " + existingEnd);
-                                return false; // Indique que la réservation échoue
-                        } else if (existingStart.equals(actualReservation.startDate) || 
-                            existingEnd.equals(actualReservation.endDate)) {
-                                System.err.println("La chambre est déjà réservée pour cette période.");
-                                System.out.println("Date de début : " + existingStart + ", Date de fin : " + existingEnd);
-                                return false; // Indique que la réservation échoue
+
+                        // Vérification de la disponibilité de la chambre
+                        if ( !actualReservation.endDate.before(existingStart) &&
+                            !actualReservation.startDate.after(existingEnd)) {
+                            System.out.println("La chambre est déjà réservée pour cette période.");
+                            System.out.println("Date de début : " + existingStart + ", Date de fin : " + existingEnd);
+                            return false; // Indique que la réservation échoue
                         }
                     }
                 }

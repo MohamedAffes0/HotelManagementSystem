@@ -37,9 +37,12 @@ create table reservation(
     employe int,--l'employé qui a fait la réservation--
     client_hotel int,--le client qui a fait la réservation--
     chambre int,--la chambre réservée--
-    CONSTRAINT fk_employe FOREIGN KEY (employe) REFERENCES employe(id) on delete cascade,
-    CONSTRAINT fk_client_hotel FOREIGN KEY (client_hotel) REFERENCES client_hotel(cin) on delete cascade,
+    CONSTRAINT fk_employe FOREIGN KEY (employe) REFERENCES employe(id) ON DELETE SET NULL,
+    CONSTRAINT fk_client_hotel FOREIGN KEY (client_hotel) REFERENCES client_hotel(cin) ON DELETE SET NULL,
     CONSTRAINT fk_chambre FOREIGN KEY (chambre) REFERENCES chambre(id_chambre) on delete cascade,
     CONSTRAINT check_date CHECK (date_debut <= date_fin), --la date de début doit être inférieure à la date de fin--
     CONSTRAINT check_paid CHECK (paid IN (0, 1)) --le statut de la réservation--
 );
+
+-- cration de l'utilisateur root
+INSERT INTO employe VALUES(1, 'root', 'root', 'root@gmail.com', '1234', 1, 1);

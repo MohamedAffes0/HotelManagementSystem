@@ -48,12 +48,12 @@ public class Login {
             case NORMAL_USER:
                 System.out.println("Login successful! normal user");
                 main.changeScene("/mainMenu.fxml");
-                main.isAdminUser = false;
+                App.isAdminUser = false;
                 break;
             case ADMIN_USER:
                 System.out.println("Login successful! admin user");
                 main.changeScene("/mainMenu.fxml");
-                main.isAdminUser = true;
+                App.isAdminUser = true;
                 break;
             case USER_NOT_FOUND:
                 System.out.println("Login failed. User not found.");
@@ -94,6 +94,7 @@ public class Login {
         
         return true;
     }
+
     @FXML
     void loadSignup(MouseEvent event) throws Exception {
         App main = new App();

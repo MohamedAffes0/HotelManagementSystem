@@ -1,128 +1,69 @@
 package org.app.room;
 
-import java.util.ArrayList;
-
 import org.models.RoomModel;
 import org.models.RoomModel.RoomState;
 
 public class RoomFilter {
-    public static ArrayList<RoomModel> FilterByPrice(ArrayList<RoomModel> rooms, float price) {
-        ArrayList<RoomModel> filteredRooms = new ArrayList<>();
+    
+    public static boolean FilterByPrice(RoomModel room, float price) {
 
-        if (rooms != null) {
-            for (int i = 0; i < rooms.size(); i++) {
-                if (rooms.get(i).getPrice() <= price) {
-                    filteredRooms.add(rooms.get(i));
-                }
-            }
-        } else {
-            System.err.println("Erreur lors de la récupération des chambres.");
-            return null; // Indique que la récupération des chambres a échoué
+        if (room == null) {
+            System.err.println("Erreur lors de la récupération de la chambre.");
+            return false;
         }
 
-        return filteredRooms;
+        return room.getPrice() <= price;
     }
 
-    public static ArrayList<RoomModel> FilterByNumberOfPeople(ArrayList<RoomModel> rooms, int numberOfPeople) {
-        ArrayList<RoomModel> filteredRooms = new ArrayList<>();
+    public static boolean FilterByNumberOfPeople(RoomModel room, int numberOfPeople) {
 
-        if (rooms != null) {
-            for (int i = 0; i < rooms.size(); i++) {
-                if (rooms.get(i).getNumberOfPeople() <= numberOfPeople) {
-                    filteredRooms.add(rooms.get(i));
-                }
-            }
-        } else {
-            System.err.println("Erreur lors de la récupération des chambres.");
-            return null; // Indique que la récupération des chambres a échoué
+        if (room == null) {
+            System.err.println("Erreur lors de la récupération de la chambre.");
+            return false;
         }
 
-        return filteredRooms;
+        return room.getNumberOfPeople() >= numberOfPeople;
     }
 
-    public static ArrayList<RoomModel> FilterById(ArrayList<RoomModel> rooms, int id) {
-        ArrayList<RoomModel> filteredRooms = new ArrayList<>();
+    public static boolean FilterById(RoomModel room, int id) {
 
-        if (rooms != null) {
-            for (int i = 0; i < rooms.size(); i++) {
-                if (rooms.get(i).getId() == id) {
-                    filteredRooms.add(rooms.get(i));
-                }
-            }
-        } else {
-            System.err.println("Erreur lors de la récupération des chambres.");
-            return null; // Indique que la récupération des chambres a échoué
+        if (room == null) {
+            System.err.println("Erreur lors de la récupération de la chambre.");
+            return false;
         }
 
-        return filteredRooms;
+        return room.getId() == id;
     }
 
-    public static ArrayList<RoomModel> FilterByFloor(ArrayList<RoomModel> rooms, int floor) {
-        ArrayList<RoomModel> filteredRooms = new ArrayList<>();
+    public static boolean FilterByFloor(RoomModel room, int floor) {
 
-        if (rooms != null) {
-            for (int i = 0; i < rooms.size(); i++) {
-                if (rooms.get(i).getFloor() == floor) {
-                    filteredRooms.add(rooms.get(i));
-                }
-            }
-        } else {
-            System.err.println("Erreur lors de la récupération des chambres.");
-            return null; // Indique que la récupération des chambres a échoué
+        if (room == null) {
+            System.err.println("Erreur lors de la récupération de la chambre.");
+            return false;
         }
 
-        return filteredRooms;
+        return room.getFloor() == floor;
     }
 
-    public static ArrayList<RoomModel> FilterByType(ArrayList<RoomModel> rooms, String roomType) {
+    public static boolean FilterByType(RoomModel room, String roomType) {
         //--simple, double, suite--
-        ArrayList<RoomModel> filteredRooms = new ArrayList<>();
 
-        if (rooms != null) {
-            for (int i = 0; i < rooms.size(); i++) {
-                if (rooms.get(i).getRoomType().equals(roomType)) {
-                    filteredRooms.add(rooms.get(i));
-                }
-            }
-        } else {
-            System.err.println("Erreur lors de la récupération des chambres.");
-            return null; // Indique que la récupération des chambres a échoué
+        if (room == null) {
+            System.err.println("Erreur lors de la récupération de la chambre.");
+            return false;
         }
 
-        return filteredRooms;
+        return room.getRoomType().equals(roomType);
     }
 
-    public static ArrayList<RoomModel> FilterByState(ArrayList<RoomModel> rooms, RoomState state) {
+    public static boolean FilterByState(RoomModel room, RoomState state) {
         //--LIBRE, OCCUPEE, MAINTENANCE--
-        ArrayList<RoomModel> filteredRooms = new ArrayList<>();
 
-        if (rooms != null) {
-            for (int i = 0; i < rooms.size(); i++) {
-                if (rooms.get(i).getState() == state) {
-                    filteredRooms.add(rooms.get(i));
-                }
-            }
-        } else {
-            System.err.println("Erreur lors de la récupération des chambres.");
-            return null; // Indique que la récupération des chambres a échoué
+        if (room == null) {
+            System.err.println("Erreur lors de la récupération de la chambre.");
+            return false;
         }
 
-        return filteredRooms;
+        return room.getState() == state;
     }
-
-    // public static void main(String[] args) {
-        // ArrayList<RoomModel> filteredRooms = FilterByPrice(901);
-        // ArrayList<RoomModel> filteredRooms = FilterByNumberOfPeople(10);
-        // ArrayList<RoomModel> filteredRooms = FilterById(10);
-        // ArrayList<RoomModel> filteredRooms = FilterByFloor(1);
-        // ArrayList<RoomModel> filteredRooms = FilterByType("simple");
-        // ArrayList<RoomModel> filteredRooms = FilterByState(RoomState.OCCUPEE);
-        // if (filteredRooms != null && filteredRooms.size() > 0) {
-        //     for (RoomModel room : filteredRooms) {
-        //         System.out.println("Chambre ID: " + room.getIdChambre() + ", Prix: " + room.getPrix());
-        //     }
-        // } else {
-        //     System.out.println("Aucune chambre trouvée dans la plage de prix spécifiée.");
-        // }
-    // }
 }

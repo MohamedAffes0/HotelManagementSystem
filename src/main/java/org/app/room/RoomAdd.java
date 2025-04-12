@@ -3,6 +3,7 @@ package org.app.room;
 import java.sql.*;
 import org.database.DBConnect;
 import org.models.RoomModel;
+import org.models.RoomModel.RoomState;
 
 public class RoomAdd {
     public static boolean roomAdd(RoomModel room) {
@@ -59,6 +60,7 @@ public class RoomAdd {
     }
 
     // public static void main(String[] args) {
-    //     System.out.println(roomAdd(11, "simple", 1, 2, 100.0f, RoomState.LIBRE)); // Exemple d'utilisation
+    //     RoomModel room = new RoomModel(5, "double", 5, 14, 500, RoomState.OCCUPEE);
+    //     System.out.println(roomAdd(room));
     // }
 }

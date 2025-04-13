@@ -22,6 +22,7 @@ import java.util.ArrayList;
 
 import org.models.RoomModel;
 import org.models.RoomModel.RoomState;
+import org.models.RoomModel.RoomType;
 
 public class Rooms implements Initializable {
 	private ArrayList<RoomModel> rooms;
@@ -96,7 +97,13 @@ public class Rooms implements Initializable {
 				search.positionCaret(search.getText().length());
 				return RoomFilter.filterByPrice(room, Integer.parseInt(search.getText()));
 			case "Type":
-				return RoomFilter.filterByType(room, search.getText());
+				RoomType type = typeFromSearch();
+
+				if (type == null) {
+					return true;
+				} else {
+					return RoomFilter.filterByType(room, type);
+				}
 			case "Etat":
 				RoomState state = stateFromSearch();
 
@@ -150,6 +157,43 @@ public class Rooms implements Initializable {
 
 		if (searchText.toLowerCase().contains("maintenance")) {
 			return RoomState.MAINTENANCE;
+		}
+		return null;
+	}
+
+
+	private RoomType typeFromSearch() {
+		String searchText = search.getText();
+
+		if (searchText.isEmpty()) {
+			return null;
+		}
+
+		// Simple
+		if ("simple".contains(searchText.toLowerCase())) {
+			return RoomType.SIMPLE;
+		}
+
+		if (searchText.toLowerCase().contains("simple")) {
+			return RoomType.SIMPLE;
+		}
+
+		// Suite
+		if (searchText.toLowerCase().contains("suite")) {
+			return RoomType.SUITE;
+		}
+
+		if ("libre".contains(searchText.toLowerCase())) {
+			return RoomType.SUITE;
+		}
+
+		// Double
+		if ("double".contains(searchText.toLowerCase())) {
+			return RoomType.DOUBLE;
+		}
+
+		if (searchText.toLowerCase().contains("double")) {
+			return RoomType.DOUBLE;
 		}
 		return null;
 	}

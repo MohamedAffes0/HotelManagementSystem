@@ -25,7 +25,7 @@ public class ClientAdd {
         // verification de l'existence du cin dans la base de données
         boolean clientExists = false;
         for (int i = 0; i < clients.size(); i++) {
-            if (clients.get(i).getId() == client.getId()) {
+            if (clients.get(i).getCin() == client.getCin()) {
                 clientExists = true;
                 break;
             }
@@ -47,7 +47,7 @@ public class ClientAdd {
 
             String sql = "{ call add_client_hotel(?, ?, ?, ?) }";
             stmt = connection.prepareCall(sql);
-            stmt.setInt(1, client.getId());
+            stmt.setInt(1, client.getCin());
             stmt.setString(2, client.getName());
             stmt.setString(3, client.getLastName());
             stmt.setString(4, client.getMail());

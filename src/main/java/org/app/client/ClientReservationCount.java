@@ -27,13 +27,13 @@ public class ClientReservationCount {
         ArrayList<PersonModel> faithfulClients = new ArrayList<>();
         int totalReservations = 0;
         for (int i = 0; i < clients.size(); i++) {
-            totalReservations += reservationCount.get(clients.get(i).getId());
+            totalReservations += reservationCount.get(clients.get(i).getCin());
         }
 
         double threshold = totalReservations * 0.1; // 10% of total reservations 
 
         for (int i = 0; i < clients.size(); i++) {
-            int clientId = clients.get(i).getId();
+            int clientId = clients.get(i).getCin();
             if (reservationCount.containsKey(clientId) && reservationCount.get(clientId) >= threshold) {
                 faithfulClients.add(clients.get(i));
             }

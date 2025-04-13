@@ -9,6 +9,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.collections.FXCollections;
 
 import javafx.fxml.Initializable;
+
+import java.awt.event.ActionEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -47,6 +49,10 @@ public class Rooms implements Initializable {
 		} catch (Exception e) {
 			System.out.println("Erreur de connection a la base de donnée");
 		}
+	}
+
+	@FXML
+	private void addRoom(ActionEvent event) {
 	}
 
 	@FXML

@@ -34,4 +34,12 @@ public class ReservationFilter {
         return reservation.getRoom() == roomId;
     }
 
+    // public static void main(String[] args) {
+    //     // Test de la classe ReservationFilter
+    //     ReservationModel reservation = new ReservationModel(1, Date.valueOf("2023-10-01"), Date.valueOf("2023-10-05"), true, 1, 1, 500);
+        
+    //     System.out.println("Test de la méthode isPaid: " + isPaid(reservation, true));
+    //     System.out.println("Test de la méthode filterByClient: " + filterByClient(reservation, 1));
+    //     System.out.println("Test de la méthode filterByRoom: " + filterByRoom(reservation, 500));
+    // }
 }

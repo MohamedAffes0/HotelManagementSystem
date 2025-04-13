@@ -1,16 +1,21 @@
 package org.openjfx;
 
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 
 import javafx.collections.FXCollections;
 
 import javafx.fxml.Initializable;
 
-import java.awt.event.ActionEvent;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.stage.WindowEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -53,7 +58,30 @@ public class Rooms implements Initializable {
 	}
 
 	@FXML
-	private void addRoom(ActionEvent event) {
+	void addRoom(ActionEvent event) {
+		try {
+			Parent content = FXMLLoader.load(getClass().getResource("/addRoom.fxml"));
+			Stage stage = new Stage();
+			Scene scene = new Scene(content);
+			stage.setResizable(false);
+
+			stage.setTitle("Ajouter une chambre");
+			stage.setScene(scene);
+			stage.setOnHidden(new EventHandler<WindowEvent>() {
+				@Override
+				public void handle(WindowEvent event) {
+					try {
+						rooms = RoomSelect.roomSelect();
+						updateList();
+					} catch (Exception exception) {
+						System.out.println("Erreur de connection a la base de donnée");
+					}
+				}
+			});
+			stage.show();
+		} catch (Exception e) {
+			System.out.println("Error opening add room popup");
+		}
 	}
 
 	@FXML
@@ -161,7 +189,6 @@ public class Rooms implements Initializable {
 		return null;
 	}
 
-
 	private RoomType typeFromSearch() {
 		String searchText = search.getText();
 
@@ -183,7 +210,7 @@ public class Rooms implements Initializable {
 			return RoomType.SUITE;
 		}
 
-		if ("libre".contains(searchText.toLowerCase())) {
+		if ("suite".contains(searchText.toLowerCase())) {
 			return RoomType.SUITE;
 		}
 

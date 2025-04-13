@@ -1,6 +1,8 @@
 package org.app.room;
 
 import java.sql.*;
+import java.util.ArrayList;
+
 import org.database.DBConnect;
 import org.models.RoomModel;
 // import org.models.RoomModel.RoomState;
@@ -14,7 +16,7 @@ public class RoomAdd {
         ID_EXISTS,
     }
 
-    public static AddResult roomAdd(RoomModel room) {
+    public static AddResult roomAdd(RoomModel room, ArrayList<RoomModel> rooms) {
         Connection connection = null;
         CallableStatement stmt = null;
         try {
@@ -26,15 +28,27 @@ public class RoomAdd {
                 return AddResult.DB_PROBLEM; // Indique que la connexion a échoué
             }
 
+            // // Vérification de l'existence de l'ID dans la base de données
+            // String checkSql = "{ call check_room(?, ?) }";
+            // stmt = connection.prepareCall(checkSql);
+            // stmt.setInt(1, room.getId()); 
+            // stmt.registerOutParameter(2, Types.INTEGER); // Enregistrement du paramètre de sortie
+            // stmt.execute();
+            // int exists = stmt.getInt(2); // Récupération de la valeur du paramètre de sortie
+            // if (exists == 1) {
+            //     return AddResult.ID_EXISTS; // Indique que l'ID existe déjà
+            // }
+
             // Vérification de l'existence de l'ID dans la base de données
-            String checkSql = "{ call check_room(?, ?) }";
-            stmt = connection.prepareCall(checkSql);
-            stmt.setInt(1, room.getId()); 
-            stmt.registerOutParameter(2, Types.INTEGER); // Enregistrement du paramètre de sortie
-            stmt.execute();
-            int exists = stmt.getInt(2); // Récupération de la valeur du paramètre de sortie
-            if (exists == 1) {
-                return AddResult.ID_EXISTS; // Indique que l'ID existe déjà
+            boolean roomExists = false;
+            for (int i = 0; i < rooms.size(); i++) {
+                if (rooms.get(i).getId() == room.getId()) {
+                    roomExists = true;
+                    break;
+                }
+            }
+            if (roomExists) {
+                return AddResult.ID_EXISTS;
             }
 
             // Préparation de la requête d'insertion

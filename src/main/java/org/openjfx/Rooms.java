@@ -27,9 +27,7 @@ public class Rooms implements Initializable {
 	@FXML
 	private ComboBox<String> filter;
 
-	@FXML
-	private VBox list;
-
+	@FXML private VBox list;
 	@FXML
 	private TextField search;
 
@@ -77,12 +75,15 @@ public class Rooms implements Initializable {
 			case "Etage":
 				// Replace all nume
 				search.setText(StringNumberExtract.extract(searchText));
+				search.positionCaret(search.getText().length());
 				return RoomFilter.FilterByFloor(rooms, Integer.parseInt(search.getText()));
 			case "Nombre De Personnes":
 				search.setText(StringNumberExtract.extract(searchText));
+				search.positionCaret(search.getText().length());
 				return RoomFilter.FilterByNumberOfPeople(rooms, Integer.parseInt(search.getText()));
 			case "Prix":
 				search.setText(StringNumberExtract.extract(searchText));
+				search.positionCaret(search.getText().length());
 				return RoomFilter.FilterByPrice(rooms, Integer.parseInt(search.getText()));
 			case "Type":
 				return RoomFilter.FilterByType(rooms, search.getText());
@@ -132,6 +133,14 @@ public class Rooms implements Initializable {
 			return RoomState.OCCUPEE;
 		}
 
+		// Maintenance
+		if ("maintenance".contains(searchText.toLowerCase())) {
+			return RoomState.MAINTENANCE;
+		}
+
+		if (searchText.toLowerCase().contains("maintenance")) {
+			return RoomState.MAINTENANCE;
+		}
 		return null;
 	}
 }

@@ -3,7 +3,6 @@ package org.app.room;
 import java.sql.*;
 import org.database.DBConnect;
 import org.models.RoomModel;
-import org.models.RoomModel.RoomState;
 
 public class RoomAdd {
     public static boolean roomAdd(RoomModel room) {
@@ -21,7 +20,17 @@ public class RoomAdd {
             String sql = "{ call add_room(?, ?, ?, ?, ?, ?) }";
             stmt = connection.prepareCall(sql);
             stmt.setInt(1, room.getId());
-            stmt.setString(2, room.getRoomType());
+            switch (room.getRoomType()) {
+                case SIMPLE:
+                    stmt.setString(2, "simple");
+                    break;
+                case DOUBLE:
+                    stmt.setString(2, "double");
+                    break;
+                case SUITE:
+                    stmt.setString(2, "suite");
+                    break;
+            }
             stmt.setInt(3, room.getFloor());
             stmt.setInt(4, room.getNumberOfPeople());
             stmt.setFloat(5, room.getPrice());

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import org.database.DBConnect;
 import org.models.RoomModel;
 import org.models.RoomModel.RoomState;
+import org.models.RoomModel.RoomType;
 
 public class RoomSelect {
     public static ArrayList<RoomModel> roomSelect() {
@@ -35,7 +36,21 @@ public class RoomSelect {
                 result = (ResultSet) stmt.getObject(1);
                 while (result.next()) {
                     int id = result.getInt("id_chambre");
-                    String roomType = result.getString("type_chambre");
+                    RoomType roomType;
+                    switch (result.getString("type_chambre")) {
+                        case "simple":
+                            roomType = RoomType.SIMPLE;
+                            break;
+                        case "double":
+                            roomType = RoomType.DOUBLE;
+                            break;
+                        case "suite":
+                            roomType = RoomType.SUITE;
+                            break;
+                        default:
+                            roomType = RoomType.SIMPLE; // Valeur par défaut si le type n'est pas reconnu
+                            break;
+                    }
                     int floor = result.getInt("etage");
                     int numberOfPeople = result.getInt("nb_personnes");
                     float price = result.getFloat("prix");

@@ -58,7 +58,7 @@ public class Login {
                 break;
             case USER_NOT_FOUND:
                 System.out.println("Login failed. User not found.");
-                error.setText("Email incorrecte.");
+                error.setText("Email ou mot de passe incorrecte.");
                 break;
             case INACTIVE_USER:
                 System.out.println("Login failed. User is inactive.");

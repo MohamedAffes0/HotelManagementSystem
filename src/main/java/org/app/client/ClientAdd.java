@@ -8,13 +8,13 @@ import org.models.PersonModel;
 
 public class ClientAdd {
 
-    public static enum AddResult {
+    public static enum CreationStatus {
         SUCCESS,
         DB_PROBLEM,
         CIN_EXISTS,
     }
 
-    public static AddResult clientAdd(PersonModel client, ArrayList<PersonModel> clients) {
+    public static CreationStatus clientAdd(PersonModel client, ArrayList<PersonModel> clients) {
 
         // if (ClientChecker.clientCheck(client.getId()) == ClientChecker.ClientStatus.CLIENT_FOUND) {
         //     System.err.println("Le client existe déjà.");
@@ -31,7 +31,7 @@ public class ClientAdd {
             }
         }
         if (clientExists) {
-            return AddResult.CIN_EXISTS;
+            return CreationStatus.CIN_EXISTS;
         }
 
         Connection connection = null;
@@ -42,7 +42,7 @@ public class ClientAdd {
             // Vérification de la connexion
             if (connection == null) {
                 System.err.println("Échec de la connexion à la base de données.");
-                return AddResult.DB_PROBLEM; // Indique que la connexion a échoué
+                return CreationStatus.DB_PROBLEM; // Indique que la connexion a échoué
             }
 
             String sql = "{ call add_client_hotel(?, ?, ?, ?) }";
@@ -53,10 +53,10 @@ public class ClientAdd {
             stmt.setString(4, client.getMail());
 
             stmt.execute();
-            return AddResult.SUCCESS; // Indique que l'ajout a réussi
+            return CreationStatus.SUCCESS; // Indique que l'ajout a réussi
         } catch (SQLException exception) {
             exception.printStackTrace();
-            return AddResult.DB_PROBLEM;
+            return CreationStatus.DB_PROBLEM;
         } finally {
             // toujour executer le bloc finally
             // Fermeture des ressources JDBC

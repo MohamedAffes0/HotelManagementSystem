@@ -13,7 +13,7 @@ import org.models.RoomModel;
 
 public class ReservationAdd {
 
-    public static enum AddResult {
+    public static enum CreationStatus {
         SUCCESS,
         DB_PROBLEM,
         ROOM_NON_EXISTENT,
@@ -22,16 +22,16 @@ public class ReservationAdd {
     }
 
     // id a ignorer
-    public static AddResult reservationAdd(ReservationModel reservation, ArrayList<RoomModel> rooms) {
+    public static CreationStatus reservationAdd(ReservationModel reservation, ArrayList<RoomModel> rooms) {
 
         // verification de la date de debut et de fin
         if (reservation.getStartDate().after(reservation.getEndDate())) {
             System.err.println("La date de début est après la date de fin.");
-            return AddResult.DATE_NOT_AVAILABLE; // Indique que la date n'est pas disponible
+            return CreationStatus.DATE_NOT_AVAILABLE; // Indique que la date n'est pas disponible
         }
         if (reservation.getStartDate().before(new java.util.Date(System.currentTimeMillis()))) {
             System.err.println("La date de début est dans le passé.");
-            return AddResult.DATE_NOT_AVAILABLE; // Indique que la date n'est pas disponible
+            return CreationStatus.DATE_NOT_AVAILABLE; // Indique que la date n'est pas disponible
         }
 
         // verification de l'existence de la chambre
@@ -44,14 +44,14 @@ public class ReservationAdd {
         }
         if (!roomExists) {
             System.err.println("La chambre n'existe pas.");
-            return AddResult.ROOM_NON_EXISTENT; // Indique que la chambre n'existe pas
+            return CreationStatus.ROOM_NON_EXISTENT; // Indique que la chambre n'existe pas
         }
 
         // verification de la disponibilité de la chambre
         ReservationDate reservationDate = new ReservationDate(reservation.getStartDate(), reservation.getEndDate());
         if (ReservationChecker.reservationCheck(reservation.getRoom(), 0, reservationDate) == false) {
             System.err.println("La chambre est déjà réservée pour cette période.");
-            return AddResult.ROOM_NOT_AVAILABLE; // Indique que la réservation échoue
+            return CreationStatus.ROOM_NOT_AVAILABLE; // Indique que la réservation échoue
         }
 
         Connection connection = null;
@@ -62,7 +62,7 @@ public class ReservationAdd {
             // Vérification de la connexion
             if (connection == null) {
                 System.err.println("Échec de la connexion à la base de données.");
-                return AddResult.DB_PROBLEM; // Indique que la connexion a échoué
+                return CreationStatus.DB_PROBLEM; // Indique que la connexion a échoué
             }
 
             String sql = "{ call add_reservation(?, ?, ?, ?, ?, ?) }";
@@ -76,11 +76,11 @@ public class ReservationAdd {
             stmt.setInt(6, reservation.getRoom());
 
             stmt.execute();
-            return AddResult.SUCCESS; // Indique que l'ajout a réussi
+            return CreationStatus.SUCCESS; // Indique que l'ajout a réussi
 
         } catch (SQLException exception) {
             exception.printStackTrace();
-            return AddResult.DB_PROBLEM; // Indique que la connexion a échoué
+            return CreationStatus.DB_PROBLEM; // Indique que la connexion a échoué
         } finally {
             // toujour executer le bloc finally
             // Fermeture des ressources JDBC

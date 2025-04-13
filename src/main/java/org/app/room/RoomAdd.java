@@ -10,13 +10,13 @@ import org.models.RoomModel;
 
 public class RoomAdd {
     
-    public static enum AddResult{
+    public static enum CreationStatus{
         SUCCESS,
         DB_PROBLEM,
         ID_EXISTS,
     }
 
-    public static AddResult roomAdd(RoomModel room, ArrayList<RoomModel> rooms) {
+    public static CreationStatus roomAdd(RoomModel room, ArrayList<RoomModel> rooms) {
         Connection connection = null;
         CallableStatement stmt = null;
         try {
@@ -25,7 +25,7 @@ public class RoomAdd {
             // Vérification de la connexion
             if (connection == null) {
                 System.err.println("Échec de la connexion à la base de données.");
-                return AddResult.DB_PROBLEM; // Indique que la connexion a échoué
+                return CreationStatus.DB_PROBLEM; // Indique que la connexion a échoué
             }
 
             // // Vérification de l'existence de l'ID dans la base de données
@@ -48,7 +48,7 @@ public class RoomAdd {
                 }
             }
             if (roomExists) {
-                return AddResult.ID_EXISTS;
+                return CreationStatus.ID_EXISTS;
             }
 
             // Préparation de la requête d'insertion
@@ -82,11 +82,11 @@ public class RoomAdd {
             }
 
             stmt.execute();
-            return AddResult.SUCCESS; // Indique que l'ajout a réussi
+            return CreationStatus.SUCCESS; // Indique que l'ajout a réussi
 
         } catch (SQLException exception) {
             exception.printStackTrace();
-            return AddResult.DB_PROBLEM; // Indique qu'il y a eu un problème avec la base de données
+            return CreationStatus.DB_PROBLEM; // Indique qu'il y a eu un problème avec la base de données
         } finally {
             // toujour executer le bloc finally
             // Fermeture des ressources JDBC

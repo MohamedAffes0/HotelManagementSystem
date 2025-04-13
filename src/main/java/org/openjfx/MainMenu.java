@@ -35,8 +35,8 @@ public class MainMenu implements Initializable {
     }
 
     @FXML
-    void clientsPressed(ActionEvent event) {
-
+    void clientsPressed(ActionEvent event) throws Exception {
+	changeCurrentMenu("/clients.fxml");
     }
 
     @FXML

@@ -27,7 +27,8 @@ public class Rooms implements Initializable {
 	@FXML
 	private ComboBox<String> filter;
 
-	@FXML private VBox list;
+	@FXML
+	private VBox list;
 	@FXML
 	private TextField search;
 
@@ -52,22 +53,25 @@ public class Rooms implements Initializable {
 	private void updateList() throws Exception {
 		// System.out.println(filter.getValue());
 
-		ArrayList<RoomModel> roomsTodisplay = getRoomsArray();
-
 		list.getChildren().clear();
-		for (RoomModel data : roomsTodisplay) {
+		for (RoomModel room : rooms) {
+			if (!filterRoom(room)) {
+				continue;
+			}
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/roomButton.fxml"));
 			list.getChildren().add(loader.load());
 			RoomButton controller = loader.getController();
-			controller.setData(data);
+			controller.setData(room);
 		}
 	}
 
-	private ArrayList<RoomModel> getRoomsArray() {
+	// Returns true if the rooom should be displayed according to the current
+	// settings.
+	private boolean filterRoom(RoomModel room) {
 		String searchText = search.getText();
 
 		if (searchText.isEmpty()) {
-			return rooms;
+			return true;
 		}
 
 		// String is not empty so check filter type
@@ -76,27 +80,27 @@ public class Rooms implements Initializable {
 				// Replace all nume
 				search.setText(StringNumberExtract.extract(searchText));
 				search.positionCaret(search.getText().length());
-				return RoomFilter.FilterByFloor(rooms, Integer.parseInt(search.getText()));
+				return RoomFilter.filterByFloor(room, Integer.parseInt(search.getText()));
 			case "Nombre De Personnes":
 				search.setText(StringNumberExtract.extract(searchText));
 				search.positionCaret(search.getText().length());
-				return RoomFilter.FilterByNumberOfPeople(rooms, Integer.parseInt(search.getText()));
+				return RoomFilter.filterByNumberOfPeople(room, Integer.parseInt(search.getText()));
 			case "Prix":
 				search.setText(StringNumberExtract.extract(searchText));
 				search.positionCaret(search.getText().length());
-				return RoomFilter.FilterByPrice(rooms, Integer.parseInt(search.getText()));
+				return RoomFilter.filterByPrice(room, Integer.parseInt(search.getText()));
 			case "Type":
-				return RoomFilter.FilterByType(rooms, search.getText());
+				return RoomFilter.filterByType(room, search.getText());
 			case "Etat":
 				RoomState state = stateFromSearch();
 
 				if (state == null) {
-					return RoomSelect.roomSelect();
+					return true;
 				} else {
-					return RoomFilter.FilterByState(rooms, state);
+					return RoomFilter.filterByState(room, state);
 				}
 			default:
-				return RoomSelect.roomSelect();
+				return true;
 		}
 	}
 

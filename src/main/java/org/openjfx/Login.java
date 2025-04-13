@@ -1,5 +1,6 @@
 package org.openjfx;
 
+import org.app.EmailChecker;
 import org.app.auth.LoginChecker;
 
 import javafx.event.ActionEvent;
@@ -39,7 +40,7 @@ public class Login {
             return;
         }
 	
-        if (!isEmailValid(emailText)) {
+        if (!EmailChecker.isValid(emailText)) {
                 error.setText("Email invalide.");
                 return;
         }
@@ -74,26 +75,6 @@ public class Login {
         }
     }
 
-    boolean isEmailValid(String emailText) {
-        int altIndex = emailText.indexOf("@");
-        
-        if (altIndex == -1) {
-            return false;
-        }
-        
-        int dotIndex = emailText.lastIndexOf(".");
-
-        if (dotIndex == -1) {
-            return false;
-        }
-        
-        // Si il n'y a pas de . apres le @
-        if (altIndex > dotIndex) {
-            return false;
-        }
-        
-        return true;
-    }
 
     @FXML
     void loadSignup(MouseEvent event) throws Exception {

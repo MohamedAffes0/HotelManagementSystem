@@ -3,9 +3,18 @@ package org.app.room;
 import java.sql.*;
 import org.database.DBConnect;
 import org.models.RoomModel;
+// import org.models.RoomModel.RoomState;
+// import org.models.RoomModel.RoomType;
 
 public class RoomAdd {
-    public static boolean roomAdd(RoomModel room) {
+    
+    public static enum AddResult{
+        SUCCESS,
+        DB_PROBLEM,
+        ID_EXISTS,
+    }
+
+    public static AddResult roomAdd(RoomModel room) {
         Connection connection = null;
         CallableStatement stmt = null;
         try {
@@ -14,9 +23,21 @@ public class RoomAdd {
             // Vérification de la connexion
             if (connection == null) {
                 System.err.println("Échec de la connexion à la base de données.");
-                return false; // Indique que la connexion a échoué
+                return AddResult.DB_PROBLEM; // Indique que la connexion a échoué
             }
 
+            // Vérification de l'existence de l'ID dans la base de données
+            String checkSql = "{ call check_room(?, ?) }";
+            stmt = connection.prepareCall(checkSql);
+            stmt.setInt(1, room.getId()); 
+            stmt.registerOutParameter(2, Types.INTEGER); // Enregistrement du paramètre de sortie
+            stmt.execute();
+            int exists = stmt.getInt(2); // Récupération de la valeur du paramètre de sortie
+            if (exists == 1) {
+                return AddResult.ID_EXISTS; // Indique que l'ID existe déjà
+            }
+
+            // Préparation de la requête d'insertion
             String sql = "{ call add_room(?, ?, ?, ?, ?, ?) }";
             stmt = connection.prepareCall(sql);
             stmt.setInt(1, room.getId());
@@ -47,11 +68,11 @@ public class RoomAdd {
             }
 
             stmt.execute();
-            return true; // Indique que l'ajout a réussi
+            return AddResult.SUCCESS; // Indique que l'ajout a réussi
 
         } catch (SQLException exception) {
             exception.printStackTrace();
-            return false;
+            return AddResult.DB_PROBLEM; // Indique qu'il y a eu un problème avec la base de données
         } finally {
             // toujour executer le bloc finally
             // Fermeture des ressources JDBC
@@ -69,7 +90,7 @@ public class RoomAdd {
     }
 
     // public static void main(String[] args) {
-    //     RoomModel room = new RoomModel(5, "double", 5, 14, 500, RoomState.OCCUPEE);
+    //     RoomModel room = new RoomModel(5, RoomType.SIMPLE, 5, 14, 500, RoomState.OCCUPEE);
     //     System.out.println(roomAdd(room));
     // }
 }

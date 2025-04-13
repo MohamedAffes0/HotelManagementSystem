@@ -20,6 +20,7 @@
 @client_script/check_client.sql
 @user_script/check_login.sql
 @reservation_script/check_reservation.sql
+@room_script/check_room.sql
 
 -- Sélections
 @client_script/get_all_clients.sql

@@ -2,7 +2,6 @@ package org.app.room;
 
 import org.models.RoomModel;
 import org.models.RoomModel.RoomState;
-import org.models.RoomModel.RoomType;
 
 public class RoomFilter {
 
@@ -46,7 +45,7 @@ public class RoomFilter {
         return room.getFloor() == floor;
     }
 
-    public static boolean filterByType(RoomModel room, RoomType roomType) {
+    public static boolean filterByType(RoomModel room, String roomType) {
         //--simple, double, suite--
 
         if (room == null) {
@@ -54,7 +53,7 @@ public class RoomFilter {
             return false;
         }
 
-        return room.getRoomType() == roomType;
+        return room.getRoomType().equals(roomType);
     }
 
     public static boolean filterByState(RoomModel room, RoomState state) {

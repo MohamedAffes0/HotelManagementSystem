@@ -31,7 +31,18 @@ public class RoomButton {
     public void setData(RoomModel data) {
         id.setText("Chambre " + Integer.toString(data.getId()));
         floor.setText("Etage " + Integer.toString(data.getFloor()));
-        type.setText(data.getRoomType());
+
+        switch (data.getRoomType()) {
+            case SIMPLE:
+                type.setText("Simple");
+                break;
+            case SUITE:
+                type.setText("Suite");
+                break;
+            case DOUBLE:
+                type.setText("Double");
+                break;
+        }
         price.setText(Float.toString(data.getPrice()) + " Dt");
         size.setText(Integer.toString(data.getNumberOfPeople()) + " Personnes");
         

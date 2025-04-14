@@ -12,8 +12,8 @@ final public class EmployeeModel extends PersonModel {
         this.isActive = isActive;
     }
 
-    public int getCin() {
-        return super.getId();
+    public int getId() {
+        return super.getCin();
     }
 
     public String getName() {

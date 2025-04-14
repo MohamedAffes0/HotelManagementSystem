@@ -1,9 +1,8 @@
 package org.app.user;
 
 import java.sql.*;
+import java.util.ArrayList;
 
-import org.app.auth.LoginChecker;
-import org.app.auth.LoginChecker.LoginStatus;
 import org.database.DBConnect;
 import org.models.EmployeeModel;
 
@@ -16,7 +15,7 @@ public class UserAdd {
     }
 
     // id a ignorer
-    public static CreationStatus userAdd(EmployeeModel employee) {
+    public static CreationStatus userAdd(EmployeeModel employee, ArrayList<EmployeeModel> employees) {
         // Vérification des champs vides
         if (employee.getMail() == null || employee.getMail().isEmpty()) {
             System.err.println("L'email ne doit pas être vide.");
@@ -28,11 +27,22 @@ public class UserAdd {
             return CreationStatus.EMPTY_FIELD;
         }
 
+        // // Vérification de l'existence de l'utilisateur
+        // if (LoginChecker.loginCheck(employee.getMail(), employee.getPassword()) == LoginStatus.INACTIVE_USER || 
+        //     LoginChecker.loginCheck(employee.getMail(), employee.getPassword()) == LoginStatus.ADMIN_USER ||
+        //     LoginChecker.loginCheck(employee.getMail(), employee.getPassword()) == LoginStatus.NORMAL_USER) {
+        //     System.err.println("L'utilisateur existe déjà.");
+        //     return CreationStatus.USER_EXISTS;
+        // }
+
         // Vérification de l'existence de l'utilisateur
-        if (LoginChecker.loginCheck(employee.getMail(), employee.getPassword()) == LoginStatus.INACTIVE_USER || 
-            LoginChecker.loginCheck(employee.getMail(), employee.getPassword()) == LoginStatus.ADMIN_USER ||
-            LoginChecker.loginCheck(employee.getMail(), employee.getPassword()) == LoginStatus.NORMAL_USER) {
-            System.err.println("L'utilisateur existe déjà.");
+        boolean userExists = false;
+        for (int i = 0; i < employees.size(); i++) {
+            if (employees.get(i).getCin() == employee.getCin()) {
+                userExists = true;
+            }
+        }
+        if (userExists) {
             return CreationStatus.USER_EXISTS;
         }
 

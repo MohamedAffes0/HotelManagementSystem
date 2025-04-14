@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 
 import org.app.EmailChecker;
 import org.app.user.UserAdd;
+import org.app.user.UserSelect;
 import org.app.user.UserAdd.CreationStatus;
 import org.models.EmployeeModel;
 
@@ -59,7 +60,7 @@ public class Signup {
 		// Appel de la méthode userAdd avec les valeurs des champs de texte
 		EmployeeModel user = new EmployeeModel(1, nameText, lastNameText, emailText, passwordText, false,
 				false);
-		CreationStatus result = UserAdd.userAdd(user);
+		CreationStatus result = UserAdd.userAdd(user, UserSelect.userSelect());
 
 		if (result == CreationStatus.SUCCESS) {
 			System.out.println("Utilisateur ajouté avec succès !");

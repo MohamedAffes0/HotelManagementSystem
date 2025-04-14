@@ -30,7 +30,7 @@ import org.models.RoomModel.RoomState;
 import org.models.RoomModel.RoomType;
 
 public class Rooms implements Initializable {
-	private ArrayList<RoomModel> rooms;
+	public static ArrayList<RoomModel> rooms;
 
 	@FXML
 	private ComboBox<String> filter;

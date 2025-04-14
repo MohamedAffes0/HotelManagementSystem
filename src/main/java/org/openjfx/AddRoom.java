@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 
 import org.app.room.RoomAdd;
 import org.app.room.RoomSelect;
+import org.app.room.RoomAdd.CreationStatus;
 import org.models.RoomModel;
 import org.models.RoomModel.RoomState;
 import org.models.RoomModel.RoomType;
@@ -68,12 +69,21 @@ public class AddRoom implements Initializable {
 		RoomModel room = new RoomModel(id.getValue().intValue(), roomType, floor.getValue().intValue(),
 				numberOfPeople.getValue().intValue(), price.getValue().floatValue(), roomState);
 
-		RoomAdd.roomAdd(room);
-		
-		// Close the window after adding the room
-		Stage stage = (Stage) floor.getScene().getWindow();
-		stage.close();
-	}	
+		CreationStatus result = RoomAdd.roomAdd(room, Rooms.rooms);
+
+		switch (result) {
+			case SUCCESS:
+				Rooms.rooms.add(room);
+				// Close the window after adding the room
+				Stage stage = (Stage) floor.getScene().getWindow();
+				stage.close();
+				break;
+			case DB_PROBLEM:
+				break;
+			case ID_EXISTS:
+				break;
+		}
+	}
 
 	@FXML
 	void cancel(ActionEvent event) {

@@ -1,5 +1,6 @@
 package org.openjfx;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javafx.collections.ObservableList;
@@ -19,6 +20,7 @@ import javafx.stage.WindowEvent;
 
 public class ListScreen<T> {
 	private ArrayList<T> content;
+	private String listButtonPath;
 	private String addPopupPath;
 
 	@FXML
@@ -65,8 +67,16 @@ public class ListScreen<T> {
 	}
 
 	@FXML
-	protected void updateList() {
+	protected void updateList() throws IOException {
+		list.getChildren().clear();
+		for (T item : content) {
+			// TODO add filter condition
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(listButtonPath));
 
+			list.getChildren().add(loader.load());
+			ListButton controller = loader.getController();
+			controller.setData(item);
+		}
 	}
 
 	public ListScreen() {

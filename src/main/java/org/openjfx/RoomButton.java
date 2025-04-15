@@ -5,7 +5,7 @@ import javafx.scene.control.Label;
 import org.models.RoomModel;
 import javafx.scene.control.Button;
 
-public class RoomButton {
+public class RoomButton extends ListButton{
 
     @FXML
     public Button button;
@@ -28,7 +28,8 @@ public class RoomButton {
     @FXML
     private Label type;
 
-    public void setData(RoomModel data) {
+    public void setData(Object content) {
+	RoomModel data = (RoomModel)content;
         id.setText("Chambre " + Integer.toString(data.getId()));
         floor.setText("Etage " + Integer.toString(data.getFloor()));
 

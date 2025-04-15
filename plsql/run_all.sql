@@ -37,3 +37,4 @@
 @client_script/delete_client.sql
 @user_script/delete_user.sql
 @reservation_script/delete_reservation.sql
+@room_script/delete_room.sql

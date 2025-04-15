@@ -56,42 +56,42 @@
       <Separator prefWidth="200.0" />
       <HBox spacing="8.0">
          <children>
-            <Label text="ID" />
+            <Label maxHeight="1.7976931348623157E308" text="ID" />
             <AnchorPane HBox.hgrow="ALWAYS" />
             <Spinner fx:id="id" prefWidth="200.0" />
          </children>
       </HBox>
       <HBox layoutX="28.0" layoutY="92.0" spacing="8.0">
          <children>
-            <Label text="Etage" />
+            <Label maxHeight="1.7976931348623157E308" text="Etage" />
             <AnchorPane HBox.hgrow="ALWAYS" />
             <Spinner fx:id="floor" prefWidth="200.0" />
          </children>
       </HBox>
       <HBox layoutX="28.0" layoutY="134.0" spacing="8.0">
          <children>
-            <Label text="Capacité" />
+            <Label maxHeight="1.7976931348623157E308" text="Capacité" />
             <AnchorPane HBox.hgrow="ALWAYS" />
             <Spinner fx:id="numberOfPeople" prefWidth="200.0" />
          </children>
       </HBox>
       <HBox layoutX="28.0" layoutY="176.0" spacing="8.0">
          <children>
-            <Label text="Prix" />
+            <Label maxHeight="1.7976931348623157E308" text="Prix" />
             <AnchorPane HBox.hgrow="ALWAYS" />
             <Spinner fx:id="price" editable="true" prefWidth="200.0" />
          </children>
       </HBox>
       <HBox layoutX="28.0" layoutY="188.0" spacing="8.0">
          <children>
-            <Label text="Type" />
+            <Label maxHeight="1.7976931348623157E308" maxWidth="-Infinity" text="Type" />
             <AnchorPane HBox.hgrow="ALWAYS" />
             <ComboBox fx:id="type" prefWidth="200.0" promptText="Simple" />
          </children>
       </HBox>
       <HBox layoutX="28.0" layoutY="224.0" spacing="8.0">
          <children>
-            <Label text="Etat" />
+            <Label maxHeight="1.7976931348623157E308" text="Etat" />
             <AnchorPane HBox.hgrow="ALWAYS" />
             <ComboBox fx:id="state" prefWidth="200.0" promptText="Occupé" />
          </children>

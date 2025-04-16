@@ -15,9 +15,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import org.app.reservation.ReservationFilter;
-import org.models.ReservationModel;
-import org.models.RoomModel;
+import org.models.Reservation;
+import org.models.Room;
 
 public class MainMenu implements Initializable {
 	private App main;
@@ -39,7 +38,7 @@ public class MainMenu implements Initializable {
 
 	@FXML
 	void chambresPressed(ActionEvent event) throws Exception {
-		ListScreen<RoomModel> controller = new ListScreen<RoomModel>();
+		ListScreen<Room> controller = new ListScreen<Room>();
 		changeCurrentMenu(controller,
 				"Chambres",
 				FXCollections.observableArrayList("Type", "test2"),
@@ -57,7 +56,7 @@ public class MainMenu implements Initializable {
 
 	@FXML
 	void reservationsPressed(ActionEvent event) {
-		ListScreen<ReservationModel> controller = new ListScreen<ReservationModel>();
+		ListScreen<Reservation> controller = new ListScreen<Reservation>();
 		changeCurrentMenu(controller,
 				"Reservations",
 				FXCollections.observableArrayList("test1", "test2"),

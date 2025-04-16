@@ -2,7 +2,7 @@ package org.openjfx;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import org.models.RoomModel;
+import org.models.Room;
 import javafx.scene.control.Button;
 
 public class RoomButton extends ListButton{
@@ -29,7 +29,7 @@ public class RoomButton extends ListButton{
     private Label type;
 
     public void setData(Object content) {
-	RoomModel data = (RoomModel)content;
+	Room data = (Room)content;
         id.setText("Chambre " + Integer.toString(data.getId()));
         floor.setText("Etage " + Integer.toString(data.getFloor()));
 
@@ -45,7 +45,7 @@ public class RoomButton extends ListButton{
                 break;
         }
         price.setText(Float.toString(data.getPrice()) + " Dt");
-        size.setText(Integer.toString(data.getNumberOfPeople()) + " Personnes");
+        size.setText(Integer.toString(data.getCapacity()) + " Personnes");
         
         switch (data.getState()) {
             case LIBRE:

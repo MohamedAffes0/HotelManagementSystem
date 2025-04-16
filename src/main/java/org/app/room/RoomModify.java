@@ -5,7 +5,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import org.database.DBConnect;
-import org.models.RoomModel.RoomState;
+import org.models.Room.RoomState;
 
 public class RoomModify {
     public static boolean roomModify(int id, int numberOfPeople, float price, RoomState state) {

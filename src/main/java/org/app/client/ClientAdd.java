@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 import org.database.DBConnect;
-import org.models.PersonModel;
+import org.models.Person;
 
 public class ClientAdd {
 
@@ -14,7 +14,7 @@ public class ClientAdd {
         CIN_EXISTS,
     }
 
-    public static CreationStatus clientAdd(PersonModel client, ArrayList<PersonModel> clients) {
+    public static CreationStatus clientAdd(Person client, ArrayList<Person> clients) {
 
         // if (ClientChecker.clientCheck(client.getId()) == ClientChecker.ClientStatus.CLIENT_FOUND) {
         //     System.err.println("Le client existe déjà.");

@@ -3,12 +3,12 @@ package org.app.client;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.models.PersonModel;
-import org.models.ReservationModel;
+import org.models.Person;
+import org.models.Reservation;
 
 public class ClientReservationCount {
 
-    public static HashMap<Integer, Integer> clientReservationCount(ArrayList<ReservationModel> reservations) {
+    public static HashMap<Integer, Integer> clientReservationCount(ArrayList<Reservation> reservations) {
         HashMap<Integer, Integer> reservationCount = new HashMap<>();
         for (int i = 0; i < reservations.size(); i++) {
             int currentClient = reservations.get(i).getHotelClient();
@@ -22,9 +22,9 @@ public class ClientReservationCount {
         return reservationCount;
     }
 
-    public static ArrayList<PersonModel> getFaithfulClients(ArrayList<PersonModel> clients, 
+    public static ArrayList<Person> getFaithfulClients(ArrayList<Person> clients, 
             HashMap<Integer, Integer> reservationCount) {
-        ArrayList<PersonModel> faithfulClients = new ArrayList<>();
+        ArrayList<Person> faithfulClients = new ArrayList<>();
         int totalReservations = 0;
         for (int i = 0; i < clients.size(); i++) {
             totalReservations += reservationCount.get(clients.get(i).getCin());

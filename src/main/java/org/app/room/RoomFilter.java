@@ -1,12 +1,12 @@
 package org.app.room;
 
-import org.models.RoomModel;
-import org.models.RoomModel.RoomState;
-import org.models.RoomModel.RoomType;
+import org.models.Room;
+import org.models.Room.RoomState;
+import org.models.Room.RoomType;
 
 public class RoomFilter {
 
-    public static boolean filterByPrice(RoomModel room, float price) {
+    public static boolean filterByPrice(Room room, float price) {
 
         if (room == null) {
             System.err.println("Erreur lors de la récupération de la chambre.");
@@ -16,17 +16,17 @@ public class RoomFilter {
         return room.getPrice() <= price;
     }
 
-    public static boolean filterByNumberOfPeople(RoomModel room, int numberOfPeople) {
+    public static boolean filterByNumberOfPeople(Room room, int numberOfPeople) {
 
         if (room == null) {
             System.err.println("Erreur lors de la récupération de la chambre.");
             return false;
         }
 
-        return room.getNumberOfPeople() >= numberOfPeople;
+        return room.getCapacity() >= numberOfPeople;
     }
 
-    public static boolean filterById(RoomModel room, int id) {
+    public static boolean filterById(Room room, int id) {
 
         if (room == null) {
             System.err.println("Erreur lors de la récupération de la chambre.");
@@ -36,7 +36,7 @@ public class RoomFilter {
         return room.getId() == id;
     }
 
-    public static boolean filterByFloor(RoomModel room, int floor) {
+    public static boolean filterByFloor(Room room, int floor) {
 
         if (room == null) {
             System.err.println("Erreur lors de la récupération de la chambre.");
@@ -46,7 +46,7 @@ public class RoomFilter {
         return room.getFloor() == floor;
     }
 
-    public static boolean filterByType(RoomModel room, RoomType roomType) {
+    public static boolean filterByType(Room room, RoomType roomType) {
         //--simple, double, suite--
 
         if (room == null) {
@@ -57,7 +57,7 @@ public class RoomFilter {
         return room.getRoomType().equals(roomType);
     }
 
-    public static boolean filterByState(RoomModel room, RoomState state) {
+    public static boolean filterByState(Room room, RoomState state) {
         //--LIBRE, OCCUPEE, MAINTENANCE--
 
         if (room == null) {

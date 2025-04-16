@@ -2,7 +2,7 @@ package org.models;
 
 import java.sql.Date;
 
-public class ReservationModel {
+public class Reservation {
     private int id;
     private Date startDate;
     private Date endDate;
@@ -11,7 +11,7 @@ public class ReservationModel {
     private int hotelClient;
     private int room;
 
-    public ReservationModel(int id, Date startDate, Date endDate, boolean paid, int employee, int hotelClient, int room) {
+    public Reservation(int id, Date startDate, Date endDate, boolean paid, int employee, int hotelClient, int room) {
         
         if (id <= 0) {
             throw new IllegalArgumentException("ID must be greater than 0.");

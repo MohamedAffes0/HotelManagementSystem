@@ -1,12 +1,12 @@
 package org.models;
 
-public class PersonModel {
+public class Person {
     private int cin;
     private String name;
     private String lastName;
     private String mail;
 
-    public PersonModel(int cin, String name, String lastName, String mail) {
+    public Person(int cin, String name, String lastName, String mail) {
 
         if (cin <= 0) {
             throw new IllegalArgumentException("L'ID doit être supérieur à 0.");

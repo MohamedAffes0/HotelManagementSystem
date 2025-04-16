@@ -8,15 +8,15 @@ import oracle.jdbc.OracleTypes;
 import java.util.ArrayList;
 
 import org.database.DBConnect;
-import org.models.RoomModel;
-import org.models.RoomModel.RoomState;
-import org.models.RoomModel.RoomType;
+import org.models.Room;
+import org.models.Room.RoomState;
+import org.models.Room.RoomType;
 
 public class RoomSelect {
-    public static ArrayList<RoomModel> roomSelect() {
+    public static ArrayList<Room> roomSelect() {
         Connection connection = null;
         CallableStatement stmt = null;
-        ArrayList<RoomModel> rooms = new ArrayList<>();
+        ArrayList<Room> rooms = new ArrayList<>();
         try {
             connection = DBConnect.connect();
 
@@ -69,7 +69,7 @@ public class RoomSelect {
                             state = RoomState.LIBRE; // Valeur par défaut si l'état n'est pas reconnu
                             break;
                     }
-                    rooms.add(new RoomModel(id, roomType, floor, numberOfPeople, price, state));
+                    rooms.add(new Room(id, roomType, floor, numberOfPeople, price, state));
                 }
             } finally {
                 if (result != null) {

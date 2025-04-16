@@ -7,15 +7,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.database.DBConnect;
-import org.models.PersonModel;
+import org.models.Person;
 
 import oracle.jdbc.OracleTypes;
 
 public class ClientSelect {
-    public static ArrayList<PersonModel> clientSelect() {
+    public static ArrayList<Person> clientSelect() {
         Connection connection = null;
         CallableStatement stmt = null;
-        ArrayList<PersonModel> clients = new ArrayList<>();
+        ArrayList<Person> clients = new ArrayList<>();
         try {
             connection = DBConnect.connect();
 
@@ -39,7 +39,7 @@ public class ClientSelect {
                     String lastName = result.getString("prenom");
                     String mail = result.getString("mail");
 
-                    clients.add(new PersonModel(cin, name, lastName, mail));
+                    clients.add(new Person(cin, name, lastName, mail));
                 }
             } finally {
                 if (result != null) {

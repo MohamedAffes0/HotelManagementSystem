@@ -47,8 +47,6 @@ public class Rooms implements Initializable {
 
 		filter.setValue("Etage");
 
-		list.getChildren().clear();
-
 		try {
 			rooms = RoomSelect.roomSelect();
 			updateList();

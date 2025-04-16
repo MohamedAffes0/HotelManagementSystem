@@ -34,38 +34,54 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.MainMenu">
-  <children>
-      <HBox VBox.vgrow="ALWAYS">
+<VBox maxHeight="280.0" maxWidth="360.0" minHeight="280.0" minWidth="360.0" prefHeight="280.0" prefWidth="360.0" spacing="12.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.UpdateRoom">
+   <padding>
+      <Insets bottom="18.0" left="18.0" right="18.0" top="18.0" />
+   </padding>
+   <children>
+      <Label fx:id="title" maxWidth="1.7976931348623157E308" text="Chambre ID, Etage I">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Separator prefWidth="200.0" />
+      <HBox layoutX="28.0" layoutY="134.0" spacing="8.0">
          <children>
-            <VBox minWidth="200.0" prefWidth="200.0" spacing="6.0">
-               <children>
-                  <Button fx:id="reservations" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#reservationsPressed" style="-fx-alignment: left;" styleClass="flat" text="Reservations" />
-                  <Button fx:id="chambres" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#chambresPressed" style="-fx-alignment: left;" styleClass="flat" text="Chambres" />
-                  <Button fx:id="clients" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#clientsPressed" style="-fx-alignment: left;" styleClass="flat" text="Clients" />
-                  <Button fx:id="comptes" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#comptesPressed" style="-fx-alignment: left;" styleClass="flat" text="Comptes" />
-               </children>
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-               <padding>
-                  <Insets bottom="24.0" left="18.0" top="24.0" />
-               </padding>
-            </VBox>
-            <AnchorPane fx:id="contentContainer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
-               <children>
-                  <Label alignment="CENTER" text="Selectionnez une option du menu..." AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-               </children>
-            </AnchorPane>
+            <Label text="Capacité" />
+            <AnchorPane HBox.hgrow="ALWAYS" />
+            <Spinner fx:id="numberOfPeople" prefWidth="200.0" />
          </children>
-         <VBox.margin>
-            <Insets />
-         </VBox.margin>
       </HBox>
-  </children>
+      <HBox layoutX="28.0" layoutY="176.0" spacing="8.0">
+         <children>
+            <Label text="Prix" />
+            <AnchorPane HBox.hgrow="ALWAYS" />
+            <Spinner fx:id="price" editable="true" prefWidth="200.0" />
+         </children>
+      </HBox>
+      <HBox layoutX="28.0" layoutY="224.0" spacing="8.0">
+         <children>
+            <Label text="Etat" />
+            <AnchorPane HBox.hgrow="ALWAYS" />
+            <ComboBox fx:id="state" prefWidth="200.0" promptText="Occupé" />
+         </children>
+      </HBox>
+      <HBox layoutX="28.0" layoutY="332.0" spacing="8.0">
+         <children>
+            <Button minWidth="150.0" mnemonicParsing="false" onAction="#delete" text="Supprimer" />
+            <AnchorPane HBox.hgrow="ALWAYS" />
+            <Button defaultButton="true" minWidth="150.0" mnemonicParsing="false" onAction="#confirm" text="Modifier" />
+         </children>
+      </HBox>
+      <Button cancelButton="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#cancel" text="Annuler" />
+   </children>
 </VBox>

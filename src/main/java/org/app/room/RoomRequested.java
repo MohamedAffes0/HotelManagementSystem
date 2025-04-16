@@ -6,15 +6,15 @@ import java.sql.SQLException;
 import java.sql.Types;
 
 import org.database.DBConnect;
-import org.models.RoomModel;
-import org.models.RoomModel.RoomState;
-import org.models.RoomModel.RoomType;
+import org.models.Room;
+import org.models.Room.RoomState;
+import org.models.Room.RoomType;
 
 public class RoomRequested {
-    public static RoomModel roomRequested() {
+    public static Room roomRequested() {
         Connection connection = null;
         CallableStatement stmt = null;
-        RoomModel room = null;
+        Room room = null;
         int id;
         RoomType roomType;
         int floor;
@@ -77,7 +77,7 @@ public class RoomRequested {
             }
             
             if (id != 0) {
-                room = new RoomModel(id, roomType, floor, capacity, price, state);
+                room = new Room(id, roomType, floor, capacity, price, state);
             } else {
                 System.out.println("Aucune chambre disponible.");
             }
@@ -100,6 +100,20 @@ public class RoomRequested {
             } catch (SQLException exception) {
                 exception.printStackTrace();
             }
+        }
+    }
+
+    public static void main(String[] args) {
+        Room room = roomRequested();
+        if (room != null) {
+            System.out.println("Room ID: " + room.getId());
+            System.out.println("Room Type: " + room.getRoomType());
+            System.out.println("Floor: " + room.getFloor());
+            System.out.println("Capacity: " + room.getCapacity());
+            System.out.println("Price: " + room.getPrice());
+            System.out.println("State: " + room.getState());
+        } else {
+            System.out.println("Aucune chambre disponible.");
         }
     }
 }

@@ -1,6 +1,6 @@
 package org.models;
 
-public class RoomModel {
+public class Room {
     public static enum RoomState{
         LIBRE,
         OCCUPEE,
@@ -16,11 +16,11 @@ public class RoomModel {
     private int id;
     private RoomType roomType;
     private int floor;
-    private int numberOfPeople;
+    private int capacity;
     private float price;
     private RoomState state; //-- 0 for libre, 1 for occupée --, 2 for maintenance --
 
-    public RoomModel(int id, RoomType roomType, int floor, int numberOfPeople, float price, RoomState state){
+    public Room(int id, RoomType roomType, int floor, int capacity, float price, RoomState state){
         
         if (id <= 0) {
             throw new IllegalArgumentException("L'ID ne doit pas être vide.");
@@ -29,7 +29,7 @@ public class RoomModel {
         this.id = id;
         this.roomType = roomType;
         this.floor = floor;
-        this.numberOfPeople = numberOfPeople;
+        this.capacity = capacity;
         this.price = price;
         this.state = state;
     }
@@ -46,8 +46,8 @@ public class RoomModel {
         return floor;
     }
 
-    public int getNumberOfPeople() {
-        return numberOfPeople;
+    public int getCapacity() {
+        return capacity;
     }
 
     public float getPrice() {

@@ -8,8 +8,8 @@ import java.sql.Date;
 
 import org.app.reservation.ReservationChecker.ReservationDate;
 import org.database.DBConnect;
-import org.models.ReservationModel;
-import org.models.RoomModel;
+import org.models.Reservation;
+import org.models.Room;
 
 public class ReservationAdd {
 
@@ -22,7 +22,7 @@ public class ReservationAdd {
     }
 
     // id a ignorer
-    public static CreationStatus reservationAdd(ReservationModel reservation, ArrayList<RoomModel> rooms) {
+    public static CreationStatus reservationAdd(Reservation reservation, ArrayList<Room> rooms) {
 
         // verification de la date de debut et de fin
         if (reservation.getStartDate().after(reservation.getEndDate())) {
@@ -36,7 +36,7 @@ public class ReservationAdd {
 
         // verification de l'existence de la chambre
         boolean roomExists = false;
-        for (RoomModel room : rooms) {
+        for (Room room : rooms) {
             if (room.getId() == reservation.getRoom()) {
                 roomExists = true;
                 break;

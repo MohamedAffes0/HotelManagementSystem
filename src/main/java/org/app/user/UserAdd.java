@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 import org.database.DBConnect;
-import org.models.EmployeeModel;
+import org.models.Employee;
 
 public class UserAdd {
     public static enum CreationStatus {
@@ -15,7 +15,7 @@ public class UserAdd {
     }
 
     // id a ignorer
-    public static CreationStatus userAdd(EmployeeModel employee, ArrayList<EmployeeModel> employees) {
+    public static CreationStatus userAdd(Employee employee, ArrayList<Employee> employees) {
         // Vérification des champs vides
         if (employee.getMail() == null || employee.getMail().isEmpty()) {
             System.err.println("L'email ne doit pas être vide.");

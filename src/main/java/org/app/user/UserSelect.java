@@ -7,15 +7,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.database.DBConnect;
-import org.models.EmployeeModel;
+import org.models.Employee;
 
 import oracle.jdbc.OracleTypes;
 
 public class UserSelect {
-    public static ArrayList<EmployeeModel> userSelect() {
+    public static ArrayList<Employee> userSelect() {
         Connection connection = null;
         CallableStatement stmt = null;
-        ArrayList<EmployeeModel> users = new ArrayList<>();
+        ArrayList<Employee> users = new ArrayList<>();
         try {
             connection = DBConnect.connect();
 
@@ -42,7 +42,7 @@ public class UserSelect {
                     boolean isAdmin = result.getInt("is_admin") == 1 ?true: false;
                     boolean isActive = result.getInt("is_active") == 1 ?true: false;
 
-                    users.add(new EmployeeModel(id, name, lastName, mail, password, isAdmin, isActive));
+                    users.add(new Employee(id, name, lastName, mail, password, isAdmin, isActive));
                 }
             } finally {
                 if (result != null) {

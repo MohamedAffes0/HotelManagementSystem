@@ -1,11 +1,11 @@
 package org.models;
 
-final public class EmployeeModel extends PersonModel {
+final public class Employee extends Person {
     private String password;
     private boolean isAdmin;
     private boolean isActive;
 
-    public EmployeeModel(int id, String name, String lastName, String mail, String password, boolean isAdmin, boolean isActive) {
+    public Employee(int id, String name, String lastName, String mail, String password, boolean isAdmin, boolean isActive) {
         super(id, name, lastName, mail);
         this.password = password;
         this.isAdmin = isAdmin;

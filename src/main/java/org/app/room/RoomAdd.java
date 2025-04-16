@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 import org.database.DBConnect;
-import org.models.RoomModel;
+import org.models.Room;
 // import org.models.RoomModel.RoomState;
 // import org.models.RoomModel.RoomType;
 
@@ -16,7 +16,7 @@ public class RoomAdd {
         ID_EXISTS,
     }
 
-    public static CreationStatus roomAdd(RoomModel room, ArrayList<RoomModel> rooms) {
+    public static CreationStatus roomAdd(Room room, ArrayList<Room> rooms) {
         Connection connection = null;
         CallableStatement stmt = null;
         try {
@@ -67,7 +67,7 @@ public class RoomAdd {
                     break;
             }
             stmt.setInt(3, room.getFloor());
-            stmt.setInt(4, room.getNumberOfPeople());
+            stmt.setInt(4, room.getCapacity());
             stmt.setFloat(5, room.getPrice());
             switch (room.getState()) {
                 case LIBRE:

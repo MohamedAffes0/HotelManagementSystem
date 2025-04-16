@@ -8,15 +8,15 @@ import java.util.ArrayList;
 import java.sql.Date;
 
 import org.database.DBConnect;
-import org.models.ReservationModel;
+import org.models.Reservation;
 
 import oracle.jdbc.OracleTypes;
 
 public class ReservationSelect {
-    public static ArrayList<ReservationModel> reservationSelect() {
+    public static ArrayList<Reservation> reservationSelect() {
         Connection connection = null;
         CallableStatement stmt = null;
-        ArrayList<ReservationModel> reservations = new ArrayList<>();
+        ArrayList<Reservation> reservations = new ArrayList<>();
         try {
             connection = DBConnect.connect();
 
@@ -43,7 +43,7 @@ public class ReservationSelect {
                     int hotelClient = result.getInt("client_hotel");
                     int room = result.getInt("chambre");
 
-                    reservations.add(new ReservationModel(id, startDate, endDate, isPaid, employee, hotelClient, room));
+                    reservations.add(new Reservation(id, startDate, endDate, isPaid, employee, hotelClient, room));
                 }
             } finally {
                 if (result != null) {

@@ -12,7 +12,7 @@ import org.app.EmailChecker;
 import org.app.user.UserAdd;
 import org.app.user.UserSelect;
 import org.app.user.UserAdd.CreationStatus;
-import org.models.EmployeeModel;
+import org.models.Employee;
 
 public class Signup {
 
@@ -58,7 +58,7 @@ public class Signup {
 			error.setText("Email Invalide");
 		}
 		// Appel de la méthode userAdd avec les valeurs des champs de texte
-		EmployeeModel user = new EmployeeModel(1, nameText, lastNameText, emailText, passwordText, false,
+		Employee user = new Employee(1, nameText, lastNameText, emailText, passwordText, false,
 				false);
 		CreationStatus result = UserAdd.userAdd(user, UserSelect.userSelect());
 

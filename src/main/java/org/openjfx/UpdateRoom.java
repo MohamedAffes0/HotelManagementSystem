@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 
 import org.app.room.RoomModify;
 import org.app.room.RoomSelect;
-import org.models.RoomModel.RoomState;
+import org.models.Room.RoomState;
 
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;

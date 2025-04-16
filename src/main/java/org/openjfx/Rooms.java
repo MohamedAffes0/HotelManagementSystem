@@ -25,12 +25,12 @@ import org.app.StringNumberExtract;
 
 import java.util.ArrayList;
 
-import org.models.RoomModel;
-import org.models.RoomModel.RoomState;
-import org.models.RoomModel.RoomType;
+import org.models.Room;
+import org.models.Room.RoomState;
+import org.models.Room.RoomType;
 
 public class Rooms implements Initializable {
-	public static ArrayList<RoomModel> rooms;
+	public static ArrayList<Room> rooms;
 
 	@FXML
 	private ComboBox<String> filter;
@@ -87,7 +87,7 @@ public class Rooms implements Initializable {
 		// System.out.println(filter.getValue());
 
 		list.getChildren().clear();
-		for (RoomModel room : rooms) {
+		for (Room room : rooms) {
 			if (!filterRoom(room)) {
 				continue;
 			}
@@ -100,7 +100,7 @@ public class Rooms implements Initializable {
 
 	// Returns true if the rooom should be displayed according to the current
 	// settings.
-	private boolean filterRoom(RoomModel room) {
+	private boolean filterRoom(Room room) {
 		String searchText = search.getText();
 
 		if (searchText.isEmpty()) {

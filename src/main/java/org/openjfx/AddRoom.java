@@ -11,9 +11,9 @@ import java.util.ResourceBundle;
 
 import org.app.room.RoomAdd;
 import org.app.room.RoomAdd.CreationStatus;
-import org.models.RoomModel;
-import org.models.RoomModel.RoomState;
-import org.models.RoomModel.RoomType;
+import org.models.Room;
+import org.models.Room.RoomState;
+import org.models.Room.RoomType;
 
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
@@ -65,7 +65,7 @@ public class AddRoom implements Initializable {
 				break;
 		}
 
-		RoomModel room = new RoomModel(id.getValue().intValue(), roomType, floor.getValue().intValue(),
+		Room room = new Room(id.getValue().intValue(), roomType, floor.getValue().intValue(),
 				numberOfPeople.getValue().intValue(), price.getValue().floatValue(), roomState);
 
 		CreationStatus result = RoomAdd.roomAdd(room, Rooms.rooms);

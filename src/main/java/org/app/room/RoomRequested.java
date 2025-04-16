@@ -103,17 +103,17 @@ public class RoomRequested {
         }
     }
 
-    public static void main(String[] args) {
-        Room room = roomRequested();
-        if (room != null) {
-            System.out.println("Room ID: " + room.getId());
-            System.out.println("Room Type: " + room.getRoomType());
-            System.out.println("Floor: " + room.getFloor());
-            System.out.println("Capacity: " + room.getCapacity());
-            System.out.println("Price: " + room.getPrice());
-            System.out.println("State: " + room.getState());
-        } else {
-            System.out.println("Aucune chambre disponible.");
-        }
-    }
+    // public static void main(String[] args) {
+    //     Room room = roomRequested();
+    //     if (room != null) {
+    //         System.out.println("Room ID: " + room.getId());
+    //         System.out.println("Room Type: " + room.getRoomType());
+    //         System.out.println("Floor: " + room.getFloor());
+    //         System.out.println("Capacity: " + room.getCapacity());
+    //         System.out.println("Price: " + room.getPrice());
+    //         System.out.println("State: " + room.getState());
+    //     } else {
+    //         System.out.println("Aucune chambre disponible.");
+    //     }
+    // }
 }

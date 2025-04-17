@@ -1,64 +1,221 @@
 package org.models;
 
-public class Room {
-    public static enum RoomState{
-        LIBRE,
-        OCCUPEE,
-        MAINTENANCE
-    }
+import javafx.scene.control.TextField;
+import java.util.ArrayList;
 
-    public static enum RoomType{
-        SIMPLE,
-        DOUBLE,
-        SUITE
-    }
+import org.app.StringNumberExtract;
+import org.app.room.RoomFilter;
+import org.app.room.RoomSelect;
 
-    private int id;
-    private RoomType roomType;
-    private int floor;
-    private int capacity;
-    private float price;
-    private RoomState state; //-- 0 for libre, 1 for occupée --, 2 for maintenance --
+public class Room extends Model {
+	public static enum RoomState {
+		LIBRE,
+		OCCUPEE,
+		MAINTENANCE
+	}
 
-    public Room(int id, RoomType roomType, int floor, int capacity, float price, RoomState state){
-        
-        if (id <= 0) {
-            throw new IllegalArgumentException("L'ID ne doit pas être vide.");
-        }
+	public static enum RoomType {
+		SIMPLE,
+		DOUBLE,
+		SUITE
+	}
 
-        this.id = id;
-        this.roomType = roomType;
-        this.floor = floor;
-        this.capacity = capacity;
-        this.price = price;
-        this.state = state;
-    }
+	private int id;
+	private RoomType roomType;
+	private int floor;
+	private int capacity;
+	private float price;
+	private RoomState state; // -- 0 for libre, 1 for occupée --, 2 for maintenance --
 
-    public int getId() {
-        return id;
-    }
+	public Room(int id, RoomType roomType, int floor, int capacity, float price, RoomState state) {
 
-    public RoomType getRoomType() {
-        return roomType;
-    }
+		if (id <= 0) {
+			throw new IllegalArgumentException("L'ID ne doit pas être vide.");
+		}
 
-    public int getFloor() {
-        return floor;
-    }
+		this.id = id;
+		this.roomType = roomType;
+		this.floor = floor;
+		this.capacity = capacity;
+		this.price = price;
+		this.state = state;
+	}
 
-    public int getCapacity() {
-        return capacity;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public float getPrice() {
-        return price;
-    }
+	public RoomType getRoomType() {
+		return roomType;
+	}
 
-    public RoomState getState() {
-        return state;
-    }
-    
-    public void setState(RoomState state) {
-        this.state = state;
-    }
+	public int getFloor() {
+		return floor;
+	}
+
+	public int getCapacity() {
+		return capacity;
+	}
+
+	public float getPrice() {
+		return price;
+	}
+
+	public RoomState getState() {
+		return state;
+	}
+
+	public void setState(RoomState state) {
+		this.state = state;
+	}
+
+	public String getTypeString() {
+		switch (roomType) {
+			case SIMPLE:
+				return "Simple";
+			case SUITE:
+				return "Suite";
+			case DOUBLE:
+				return "Double";
+			default:
+				return "Simple";
+		}
+	}
+
+	public String getStateString() {
+		switch (state) {
+			case LIBRE:
+				return "Libre";
+			case OCCUPEE:
+				return "Occupée";
+			case MAINTENANCE:
+				return "Maintenance";
+			default:
+				return "libre";
+		}
+	}
+
+	public static ArrayList<Room> select() {
+		return RoomSelect.roomSelect();
+	}
+
+	@Override
+	public boolean filter(TextField search, String filterType) {
+		String searchText = search.getText();
+
+		if (searchText.isEmpty()) {
+			return true;
+		}
+
+		// String is not empty so check filter type
+		switch (filterType) {
+			case "Etage":
+				// Replace all nume
+				search.setText(StringNumberExtract.extract(searchText));
+				search.positionCaret(search.getText().length());
+				return RoomFilter.filterByFloor(this, Integer.parseInt(search.getText()));
+			case "Nombre De Personnes":
+				search.setText(StringNumberExtract.extract(searchText));
+				search.positionCaret(search.getText().length());
+				return RoomFilter.filterByNumberOfPeople(this, Integer.parseInt(search.getText()));
+			case "Prix":
+				search.setText(StringNumberExtract.extract(searchText));
+				search.positionCaret(search.getText().length());
+				return RoomFilter.filterByPrice(this, Integer.parseInt(search.getText()));
+			case "Type":
+				RoomType type = typeFromSearch(searchText);
+
+				if (type == null) {
+					return true;
+				} else {
+					return RoomFilter.filterByType(this, type);
+				}
+			case "Etat":
+				RoomState state = stateFromSearch(searchText);
+
+				if (state == null) {
+					return true;
+				} else {
+					return RoomFilter.filterByState(this, state);
+				}
+			default:
+				return true;
+		}
+	}
+
+	private RoomState stateFromSearch(String searchText) {
+		if (searchText.isEmpty()) {
+			return null;
+		}
+
+		// Occupée
+		if ("occupée".contains(searchText.toLowerCase())) {
+			return RoomState.OCCUPEE;
+		}
+
+		if ("occupee".contains(searchText.toLowerCase())) {
+			return RoomState.OCCUPEE;
+		}
+
+		if (searchText.toLowerCase().contains("occupée")) {
+			return RoomState.OCCUPEE;
+		}
+
+		if (searchText.toLowerCase().contains("occupee")) {
+			return RoomState.OCCUPEE;
+		}
+
+		// Libre
+		if ("libre".contains(searchText.toLowerCase())) {
+			return RoomState.LIBRE;
+		}
+
+		if (searchText.toLowerCase().contains("libre")) {
+			return RoomState.OCCUPEE;
+		}
+
+		// Maintenance
+		if ("maintenance".contains(searchText.toLowerCase())) {
+			return RoomState.MAINTENANCE;
+		}
+
+		if (searchText.toLowerCase().contains("maintenance")) {
+			return RoomState.MAINTENANCE;
+		}
+		return null;
+	}
+
+	private RoomType typeFromSearch(String searchText) {
+		if (searchText.isEmpty()) {
+			return null;
+		}
+
+		// Simple
+		if ("simple".contains(searchText.toLowerCase())) {
+			return RoomType.SIMPLE;
+		}
+
+		if (searchText.toLowerCase().contains("simple")) {
+			return RoomType.SIMPLE;
+		}
+
+		// Suite
+		if (searchText.toLowerCase().contains("suite")) {
+			return RoomType.SUITE;
+		}
+
+		if ("suite".contains(searchText.toLowerCase())) {
+			return RoomType.SUITE;
+		}
+
+		// Double
+		if ("double".contains(searchText.toLowerCase())) {
+			return RoomType.DOUBLE;
+		}
+
+		if (searchText.toLowerCase().contains("double")) {
+			return RoomType.DOUBLE;
+		}
+		return null;
+	}
 }

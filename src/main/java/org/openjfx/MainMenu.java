@@ -106,6 +106,7 @@ public class MainMenu implements Initializable {
 			controller.setAddPopupPath(addPopupPath);
 			controller.setUpdatePopupPath(updatePopupPath);
 			controller.setListButtonPath(listButtonPath);
+			controller.loadFromDB();
 
 		} catch (IOException e) {
 			System.out.println("Error loading screen");

@@ -23,7 +23,7 @@ public class ListScreen<T extends Model> {
 	private ArrayList<?> content;
 	private String addPopupPath;
 	private String updatePopupPath;
-	private FXMLLoader listButtonLoader;
+	private String listButtonPath;
 
 	@FXML
 	protected Button addButton;
@@ -86,6 +86,7 @@ public class ListScreen<T extends Model> {
 			}
 
 			try {
+				FXMLLoader listButtonLoader = new FXMLLoader(getClass().getResource(listButtonPath));
 				list.getChildren().add(listButtonLoader.load());
 				ListButton controller = listButtonLoader.getController();
 				controller.setData(item);
@@ -116,7 +117,7 @@ public class ListScreen<T extends Model> {
 	}
 
 	public void setListButtonPath(String path) {
-		listButtonLoader = new FXMLLoader(getClass().getResource(path));
+		listButtonPath = path;
 	}
 
 	public void setAddPopupPath(String path) {

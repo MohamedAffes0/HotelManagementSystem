@@ -1,5 +1,5 @@
 CREATE OR REPLACE PROCEDURE get_all_users(
-    p_cursor OUT SYS_REFCURSOR
+    p_cursor OUT SYS_REFCURSOR --cursor that will dynamically return the data regarding the users--
 ) AS
 BEGIN
     OPEN p_cursor FOR

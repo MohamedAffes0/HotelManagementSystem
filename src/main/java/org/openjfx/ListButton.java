@@ -1,8 +1,11 @@
 package org.openjfx;
 
+import org.models.Model;
+
 /**
- * ListButton
+ * ListButton: Abstract class for buttons that appear in the ListScreen.
  */
 public abstract class ListButton {
-	public abstract void setData(Object content);
+	// Used to display the data from a model.
+	public abstract void setData(Model content);
 }

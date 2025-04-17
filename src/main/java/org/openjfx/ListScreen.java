@@ -1,7 +1,8 @@
 package org.openjfx;
 
-import java.io.IOException;
 import java.util.ArrayList;
+
+import org.models.Model;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,10 +19,11 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-public class ListScreen<T> {
-	private ArrayList<T> content;
-	private String listButtonPath;
+public class ListScreen<T extends Model> {
+	private ArrayList<?> content;
 	private String addPopupPath;
+	private String updatePopupPath;
+	private FXMLLoader listButtonLoader;
 
 	@FXML
 	protected Button addButton;
@@ -38,6 +40,9 @@ public class ListScreen<T> {
 	@FXML
 	protected Label title;
 
+	public ListScreen() {
+	}
+
 	@FXML
 	protected void addPressed(ActionEvent event) {
 		try {
@@ -48,12 +53,13 @@ public class ListScreen<T> {
 
 			stage.setTitle("Ajout " + title.getText());
 			stage.setScene(scene);
+			// Reload list after closing the popup.
 			stage.setOnHidden(new EventHandler<WindowEvent>() {
 				@Override
 				public void handle(WindowEvent event) {
 					try {
 						// TODO add select base class
-						//rooms = RoomSelect.roomSelect();
+						// rooms = RoomSelect.roomSelect();
 						updateList();
 					} catch (Exception exception) {
 						System.out.println("Erreur de connection a la base de donnée");
@@ -67,19 +73,30 @@ public class ListScreen<T> {
 	}
 
 	@FXML
-	protected void updateList() throws IOException {
-		list.getChildren().clear();
-		for (T item : content) {
-			// TODO add filter condition
-			FXMLLoader loader = new FXMLLoader(getClass().getResource(listButtonPath));
+	protected void updateList() {
+		if (content == null) {
+			throw new RuntimeException("Content not initialized");
+		}
 
-			list.getChildren().add(loader.load());
-			ListButton controller = loader.getController();
-			controller.setData(item);
+		list.getChildren().clear();
+		for (Object o : content) {
+			T item = (T)o;
+			if (!item.filter(search, filter.getValue())) {
+				continue;
+			}
+
+			try {
+				list.getChildren().add(listButtonLoader.load());
+				ListButton controller = listButtonLoader.getController();
+				controller.setData(item);
+			} catch (Exception exception) {
+				throw new RuntimeException("Failed to load list button");
+			}
 		}
 	}
 
-	public ListScreen() {
+	public void loadFromDB() {
+		content = T.select();
 	}
 
 	public void setTitle(String title) {
@@ -96,5 +113,17 @@ public class ListScreen<T> {
 
 	public void setAddButtonText(String text) {
 		addButton.setText(text);
+	}
+
+	public void setListButtonPath(String path) {
+		listButtonLoader = new FXMLLoader(getClass().getResource(path));
+	}
+
+	public void setAddPopupPath(String path) {
+		addPopupPath = path;
+	}
+
+	public void setUpdatePopupPath(String path) {
+		updatePopupPath = path;
 	}
 }

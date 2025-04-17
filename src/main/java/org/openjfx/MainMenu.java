@@ -41,8 +41,11 @@ public class MainMenu implements Initializable {
 		ListScreen<Room> controller = new ListScreen<Room>();
 		changeCurrentMenu(controller,
 				"Chambres",
-				FXCollections.observableArrayList("Type", "test2"),
-				"Ajouter Chambre");
+				FXCollections.observableArrayList("Etage", "Type", "Capacité", "Prix", "Etat"),
+				"Ajouter Chambre",
+				"/roomButton.fxml",
+				"/addRoom.fxml",
+				"/updateRoom.fxml");
 	}
 
 	@FXML
@@ -56,11 +59,12 @@ public class MainMenu implements Initializable {
 
 	@FXML
 	void reservationsPressed(ActionEvent event) {
+		/*
 		ListScreen<Reservation> controller = new ListScreen<Reservation>();
 		changeCurrentMenu(controller,
 				"Reservations",
 				FXCollections.observableArrayList("test1", "test2"),
-				"Ajouter Reservation");
+				"Ajouter Reservation");*/
 
 	}
 
@@ -75,7 +79,7 @@ public class MainMenu implements Initializable {
 	}
 
 	private void changeCurrentMenu(ListScreen<?> controller, String title, ObservableList<String> filterItems,
-			String addButtonText) {
+			String addButtonText, String listButtonPath, String addPopupPath, String updatePopupPath) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/listScreen.fxml"));
 
 		try {
@@ -99,6 +103,9 @@ public class MainMenu implements Initializable {
 			controller.setTitle(title);
 			controller.setFilterItems(filterItems);
 			controller.setAddButtonText(addButtonText);
+			controller.setAddPopupPath(addPopupPath);
+			controller.setUpdatePopupPath(updatePopupPath);
+			controller.setListButtonPath(listButtonPath);
 
 		} catch (IOException e) {
 			System.out.println("Error loading screen");

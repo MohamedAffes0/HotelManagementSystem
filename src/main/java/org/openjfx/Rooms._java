@@ -48,7 +48,7 @@ public class Rooms implements Initializable {
 		filter.setValue("Etage");
 
 		try {
-			rooms = RoomSelect.roomSelect();
+			rooms = RoomSelect.load();
 			updateList();
 		} catch (Exception e) {
 			System.out.println("Erreur de connection a la base de donnée");
@@ -69,7 +69,7 @@ public class Rooms implements Initializable {
 				@Override
 				public void handle(WindowEvent event) {
 					try {
-						rooms = RoomSelect.roomSelect();
+						rooms = RoomSelect.load();
 						updateList();
 					} catch (Exception exception) {
 						System.out.println("Erreur de connection a la base de donnée");

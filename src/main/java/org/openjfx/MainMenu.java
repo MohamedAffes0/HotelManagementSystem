@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import org.app.room.RoomSelect;
 import org.models.Reservation;
 import org.models.Room;
 
@@ -38,7 +39,7 @@ public class MainMenu implements Initializable {
 
 	@FXML
 	void chambresPressed(ActionEvent event) throws Exception {
-		ListScreen<Room> controller = new ListScreen<Room>();
+		ListScreen<Room, RoomSelect> controller = new ListScreen<Room, RoomSelect>(new RoomSelect());
 		changeCurrentMenu(controller,
 				"Chambres",
 				FXCollections.observableArrayList("Etage", "Type", "Capacité", "Prix", "Etat"),
@@ -78,7 +79,7 @@ public class MainMenu implements Initializable {
 		main = new App();
 	}
 
-	private void changeCurrentMenu(ListScreen<?> controller, String title, ObservableList<String> filterItems,
+	private void changeCurrentMenu(ListScreen<?, ?> controller, String title, ObservableList<String> filterItems,
 			String addButtonText, String listButtonPath, String addPopupPath, String updatePopupPath) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/listScreen.fxml"));
 
@@ -106,7 +107,7 @@ public class MainMenu implements Initializable {
 			controller.setAddPopupPath(addPopupPath);
 			controller.setUpdatePopupPath(updatePopupPath);
 			controller.setListButtonPath(listButtonPath);
-			controller.loadFromDB();
+			controller.updateList();
 
 		} catch (IOException e) {
 			System.out.println("Error loading screen");

@@ -67,7 +67,7 @@ public class AddRoom implements Initializable {
 
 		Room room = new Room(id.getValue().intValue(), roomType, floor.getValue().intValue(),
 				numberOfPeople.getValue().intValue(), price.getValue().floatValue(), roomState);
-
+		/*
 		CreationStatus result = RoomAdd.roomAdd(room, Rooms.rooms);
 
 		switch (result) {
@@ -82,6 +82,7 @@ public class AddRoom implements Initializable {
 			case ID_EXISTS:
 				break;
 		}
+		*/
 	}
 
 	@FXML

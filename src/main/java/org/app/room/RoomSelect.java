@@ -22,7 +22,6 @@ public class RoomSelect extends DBLoader {
 	}
 	
 	public ArrayList<Room> getData() {
-		data.add(new Room(2, RoomType.SIMPLE, 1, 2, 20.5f, RoomState.LIBRE));
 		return data;
 	}
 

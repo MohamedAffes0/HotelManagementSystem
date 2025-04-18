@@ -2,6 +2,7 @@ package org.openjfx;
 
 import java.util.ArrayList;
 
+import org.app.DBLoader;
 import org.models.Model;
 
 import javafx.collections.ObservableList;
@@ -19,11 +20,11 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-public class ListScreen<T extends Model> {
-	private ArrayList<?> content;
+public class ListScreen<T extends Model, L extends DBLoader> {
 	private String addPopupPath;
 	private String updatePopupPath;
 	private String listButtonPath;
+	private L loader;
 
 	@FXML
 	protected Button addButton;
@@ -40,7 +41,8 @@ public class ListScreen<T extends Model> {
 	@FXML
 	protected Label title;
 
-	public ListScreen() {
+	public ListScreen(L loader) {
+		this.loader = loader;
 	}
 
 	@FXML
@@ -74,12 +76,13 @@ public class ListScreen<T extends Model> {
 
 	@FXML
 	protected void updateList() {
-		if (content == null) {
+		System.out.println("aaaaaaaaaaaaaaaaaa");
+		if (loader.getData() == null) {
 			throw new RuntimeException("Content not initialized");
 		}
-
+		System.out.println(loader.getData().size());
 		list.getChildren().clear();
-		for (Object o : content) {
+		for (Object o : loader.getData()) {
 			T item = (T)o;
 			if (!item.filter(search, filter.getValue())) {
 				continue;
@@ -97,7 +100,7 @@ public class ListScreen<T extends Model> {
 	}
 
 	public void loadFromDB() {
-		content = T.select();
+		loader.load();
 	}
 
 	public void setTitle(String title) {

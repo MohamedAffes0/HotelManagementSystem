@@ -67,7 +67,7 @@ public class UpdateRoom implements Initializable {
 				roomState)) {
 			Stage stage = (Stage) title.getScene().getWindow();
 			stage.close();
-			Rooms.rooms = RoomSelect.roomSelect();
+			//Rooms.rooms = (new RoomSelect()).getData();
 		}
 	}
 

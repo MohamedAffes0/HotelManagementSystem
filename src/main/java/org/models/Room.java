@@ -40,6 +40,8 @@ public class Room extends Model {
 		this.price = price;
 		this.state = state;
 	}
+	
+	public Room() {}
 
 	public int getId() {
 		return id;
@@ -94,11 +96,7 @@ public class Room extends Model {
 				return "libre";
 		}
 	}
-
-	public static ArrayList<Room> select() {
-		return RoomSelect.roomSelect();
-	}
-
+	
 	@Override
 	public boolean filter(TextField search, String filterType) {
 		String searchText = search.getText();

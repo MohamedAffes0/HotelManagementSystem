@@ -1,20 +1,12 @@
 package org.models;
 
-import java.util.ArrayList;
-
 import javafx.scene.control.TextField;
 
 /**
  * Model: base class for all models files.
- * Contains a getContent abstract method that returns 
+ * Contains a getContent abstract method that returns
  */
-public class Model {
-	// Selects all objects of this type from the data base.
-	public static ArrayList<?> select() {
-		return new ArrayList();
-	}
+public abstract class Model {
 	// Returns true if this object fits the filter criterea.
-	public boolean filter(TextField search, String filterType) {
-		return true;
-	}
+	public abstract boolean filter(TextField search, String filterType);
 }

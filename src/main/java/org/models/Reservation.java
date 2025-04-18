@@ -2,7 +2,7 @@ package org.models;
 
 import java.sql.Date;
 
-public class Reservation extends Model {
+public class Reservation  {
 	private int id;
 	private Date startDate;
 	private Date endDate;

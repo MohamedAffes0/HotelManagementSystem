@@ -6,13 +6,29 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.app.DBLoader;
 import org.database.DBConnect;
 import org.models.Person;
 
 import oracle.jdbc.OracleTypes;
 
-public class ClientSelect {
-    public static ArrayList<Person> clientSelect() {
+public class ClientSelect extends DBLoader{
+    private ArrayList<Person> data;
+
+	public ClientSelect() {
+		data = new ArrayList<>();
+		load();
+	}
+	
+	public ArrayList<Person> getData() {
+		return data;
+	}
+
+	public void load() {
+		data = dataFromDB();
+	}
+
+    public static ArrayList<Person> dataFromDB() {
         Connection connection = null;
         CallableStatement stmt = null;
         ArrayList<Person> clients = new ArrayList<>();

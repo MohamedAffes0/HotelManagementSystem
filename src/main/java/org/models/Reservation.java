@@ -2,7 +2,12 @@ package org.models;
 
 import java.sql.Date;
 
-public class Reservation  {
+import org.app.StringNumberExtract;
+import org.app.reservation.ReservationFilter;
+
+import javafx.scene.control.TextField;
+
+public class Reservation extends Model {
 	private int id;
 	private Date startDate;
 	private Date endDate;
@@ -65,6 +70,56 @@ public class Reservation  {
 
 	public void setPaid(boolean paid) {
 		this.paid = paid;
+	}
+
+	@Override
+	public boolean filter(TextField search, String filterType) {
+		String searchText = search.getText();
+
+		if (searchText.isEmpty()) {
+			return true;
+		}
+
+		// String is not empty so check filter type
+		switch (filterType) {
+			case "Est Payé":
+				return ReservationFilter.isPaid(this, paidFromSearch(search.getText()));
+			case "Client":
+				search.setText(StringNumberExtract.extract(searchText));
+				search.positionCaret(search.getText().length());
+				return ReservationFilter.filterByClient(this, Integer.parseInt(search.getText()));
+			case "Room":
+				search.setText(StringNumberExtract.extract(searchText));
+				search.positionCaret(search.getText().length());
+				return ReservationFilter.filterByRoom(this, Integer.parseInt(search.getText()));
+			default:
+				return true;
+		}
+	}
+
+	private boolean paidFromSearch(String searchText){
+
+		if (searchText.isEmpty()) {
+			return true;
+		}
+
+		if ("payé".contains(searchText.toLowerCase())) {
+			return true;
+		}
+
+		if ("paye".contains(searchText.toLowerCase())) {
+			return true;
+		}
+
+		if ("impayé".contains(searchText.toLowerCase())) {
+			return false;
+		}
+
+		if ("impaye".contains(searchText.toLowerCase())) {
+			return false;
+		}
+
+		return true;
 	}
 
 }

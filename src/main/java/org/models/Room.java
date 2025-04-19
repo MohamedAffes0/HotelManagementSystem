@@ -1,13 +1,12 @@
 package org.models;
 
 import javafx.scene.control.TextField;
-import java.util.ArrayList;
 
 import org.app.StringNumberExtract;
 import org.app.room.RoomFilter;
-import org.app.room.RoomSelect;
 
 public class Room extends Model {
+	
 	public static enum RoomState {
 		LIBRE,
 		OCCUPEE,

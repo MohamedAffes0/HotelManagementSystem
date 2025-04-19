@@ -7,13 +7,29 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.sql.Date;
 
+import org.app.DBLoader;
 import org.database.DBConnect;
 import org.models.Reservation;
 
 import oracle.jdbc.OracleTypes;
 
-public class ReservationSelect {
-    public static ArrayList<Reservation> reservationSelect() {
+public class ReservationSelect extends DBLoader{
+    private ArrayList<Reservation> data;
+
+	public ReservationSelect() {
+		data = new ArrayList<>();
+		load();
+	}
+	
+	public ArrayList<Reservation> getData() {
+		return data;
+	}
+
+	public void load() {
+		data = dataFromDB();
+	}
+
+    public static ArrayList<Reservation> dataFromDB() {
         Connection connection = null;
         CallableStatement stmt = null;
         ArrayList<Reservation> reservations = new ArrayList<>();

@@ -1,5 +1,7 @@
 package org.models;
 
+import javafx.scene.control.TextField;
+
 final public class Employee extends Person {
     private String password;
     private boolean isAdmin;
@@ -46,5 +48,10 @@ final public class Employee extends Person {
 
     public void setActive(boolean isActive) {
         this.isActive = isActive;
+    }
+
+    @Override
+    public boolean filter(TextField search, String filterType) {
+        return true;
     }
 }

@@ -1,4 +1,4 @@
-package org.openjfx.listbutton;
+package org.openjfx;
 
 
 import javafx.event.ActionEvent;
@@ -6,10 +6,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 import org.models.Model;
-import org.models.Room;
 import javafx.scene.control.Button;
 
-public class RoomButton extends ListButton {
+public class ListButton {
 	
 	@FXML
 	public Button button;
@@ -33,6 +32,7 @@ public class RoomButton extends ListButton {
 	private Label type;
 
 	public void setData(Model data) {
+		data.getData();
 		if (!(data instanceof Room)) {
 			throw new RuntimeException("Incorrect data passed to RoomButton");
 		}

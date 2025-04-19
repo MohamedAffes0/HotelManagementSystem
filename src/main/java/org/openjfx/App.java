@@ -17,11 +17,11 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         stage = primaryStage;
-        Parent root = FXMLLoader.load(getClass().getResource("/login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/mainMenu.fxml"));
 
         var scene = new Scene(root, 1280, 720);
         
-        stage.setTitle("Hotel Management Dashboard");
+        stage.setTitle("Emerald Coast Dashboard");
         stage.setScene(scene);
         stage.show();
     }

@@ -1,6 +1,12 @@
 package org.models;
 
-public class Person {
+import org.app.StringNumberExtract;
+import org.app.client.ClientFilter;
+import org.app.reservation.ReservationFilter;
+
+import javafx.scene.control.TextField;
+
+public class Person extends Model{
     private int cin;
     private String name;
     private String lastName;
@@ -49,4 +55,23 @@ public class Person {
     public void setMail(String mail) {
         this.mail = mail;
     }
+
+    @Override
+	public boolean filter(TextField search, String filterType) {
+		String searchText = search.getText();
+
+		if (searchText.isEmpty()) {
+			return true;
+		}
+
+		// String is not empty so check filter type
+		switch (filterType) {
+			case "Cin":
+				search.setText(StringNumberExtract.extract(searchText));
+				search.positionCaret(search.getText().length());
+                return ClientFilter.filterByCin(this, search.getText());
+			default:
+				return true;
+		}
+	}
 }

@@ -10,5 +10,4 @@ import org.models.Model;
 public abstract class DBLoader {
 	public abstract void load();
 	public abstract ArrayList<? extends Model> getData();
-	
 }

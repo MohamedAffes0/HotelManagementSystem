@@ -43,12 +43,12 @@
   <children>
       <HBox VBox.vgrow="ALWAYS">
          <children>
-            <VBox minWidth="200.0" prefWidth="200.0" spacing="6.0">
+            <VBox alignment="TOP_CENTER" minWidth="200.0" prefWidth="200.0" spacing="6.0" styleClass="menu">
                <children>
-                  <Button fx:id="reservations" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#reservationsPressed" style="-fx-alignment: left;" styleClass="flat" text="Reservations" />
-                  <Button fx:id="chambres" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#chambresPressed" style="-fx-alignment: left;" styleClass="flat" text="Chambres" />
-                  <Button fx:id="clients" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#clientsPressed" style="-fx-alignment: left;" styleClass="flat" text="Clients" />
-                  <Button fx:id="comptes" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#comptesPressed" style="-fx-alignment: left;" styleClass="flat" text="Comptes" />
+                  <Button fx:id="reservations" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#reservationsPressed" style="-fx-alignment: left;" styleClass="menu-button" text="Reservations" />
+                  <Button fx:id="chambres" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#chambresPressed" style="-fx-alignment: left;" styleClass="menu-button" text="Chambres" />
+                  <Button fx:id="clients" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#clientsPressed" style="-fx-alignment: left;" styleClass="menu-button" text="Clients" />
+                  <Button fx:id="comptes" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#comptesPressed" style="-fx-alignment: left;" styleClass="menu-button" text="Comptes" />
                </children>
                <HBox.margin>
                   <Insets />

@@ -56,51 +56,51 @@
       <Separator prefWidth="200.0" />
       <HBox spacing="8.0">
          <children>
-            <Label maxHeight="1.7976931348623157E308" text="ID" />
+            <Label text="ID" />
             <AnchorPane HBox.hgrow="ALWAYS" />
             <Spinner fx:id="id" prefWidth="200.0" />
          </children>
       </HBox>
       <HBox layoutX="28.0" layoutY="92.0" spacing="8.0">
          <children>
-            <Label maxHeight="1.7976931348623157E308" text="Etage" />
+            <Label text="Etage" />
             <AnchorPane HBox.hgrow="ALWAYS" />
             <Spinner fx:id="floor" prefWidth="200.0" />
          </children>
       </HBox>
       <HBox layoutX="28.0" layoutY="134.0" spacing="8.0">
          <children>
-            <Label maxHeight="1.7976931348623157E308" text="Capacité" />
+            <Label text="Capacité" />
             <AnchorPane HBox.hgrow="ALWAYS" />
             <Spinner fx:id="numberOfPeople" prefWidth="200.0" />
          </children>
       </HBox>
       <HBox layoutX="28.0" layoutY="176.0" spacing="8.0">
          <children>
-            <Label maxHeight="1.7976931348623157E308" text="Prix" />
+            <Label text="Prix" />
             <AnchorPane HBox.hgrow="ALWAYS" />
             <Spinner fx:id="price" editable="true" prefWidth="200.0" />
          </children>
       </HBox>
       <HBox layoutX="28.0" layoutY="188.0" spacing="8.0">
          <children>
-            <Label maxHeight="1.7976931348623157E308" maxWidth="-Infinity" text="Type" />
+            <Label text="Type" />
             <AnchorPane HBox.hgrow="ALWAYS" />
             <ComboBox fx:id="type" prefWidth="200.0" promptText="Simple" />
          </children>
       </HBox>
       <HBox layoutX="28.0" layoutY="224.0" spacing="8.0">
          <children>
-            <Label maxHeight="1.7976931348623157E308" text="Etat" />
+            <Label text="Etat" />
             <AnchorPane HBox.hgrow="ALWAYS" />
             <ComboBox fx:id="state" prefWidth="200.0" promptText="Occupé" />
          </children>
       </HBox>
       <HBox layoutX="28.0" layoutY="332.0" spacing="8.0">
          <children>
-            <Button cancelButton="true" minWidth="150.0" mnemonicParsing="false" onAction="#cancel" text="Annuler" />
+            <Button cancelButton="true" minWidth="150.0" mnemonicParsing="false" onAction="#cancel" text="Annuler" styleClass="delete-button"/>
             <AnchorPane HBox.hgrow="ALWAYS" />
-            <Button defaultButton="true" minWidth="150.0" mnemonicParsing="false" onAction="#addRoom" text="Ajouter" />
+            <Button defaultButton="true" minWidth="150.0" mnemonicParsing="false" onAction="#addRoom" text="Ajouter" styleClass="add-button"/>
          </children>
       </HBox>
    </children>

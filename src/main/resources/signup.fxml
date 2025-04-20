@@ -46,9 +46,9 @@
    <children>
       <HBox alignment="CENTER" prefHeight="400.0" prefWidth="640.0">
          <children>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="400.0" spacing="18.0">
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="300.0" spacing="18.0">
                <children>
-                  <Label text="Créer un compte">
+                  <Label text="Créer un compte" style="-fx-font-weight: bold;">
                      <font>
                         <Font size="20.0" />
                      </font>

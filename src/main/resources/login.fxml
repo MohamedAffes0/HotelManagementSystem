@@ -16,7 +16,7 @@
          <children>
             <VBox alignment="CENTER" minWidth="-Infinity" prefWidth="400.0" spacing="18.0" HBox.hgrow="NEVER">
                <children>
-                  <Label text="Bienvenue">
+                  <Label text="Bienvenue" style="-fx-font-weight: bold;">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -24,15 +24,15 @@
                         <Insets />
                      </VBox.margin>
                   </Label>
-                  <Label fx:id="error" maxWidth="1.7976931348623157E308" textFill="#bf616a">
+                  <Label fx:id="error" maxWidth="300" textFill="#bf616a">
                      <padding>
                         <Insets bottom="-13.0" />
                      </padding>
                   </Label>
-                  <TextField fx:id="email" promptText="e-mail" />
-                  <PasswordField fx:id="password" promptText="mot de passe" />
-                  <Button fx:id="submit" defaultButton="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#loginPressed" text="Login" />
-                  <HBox fillHeight="false" prefHeight="1.0" prefWidth="1.0">
+                  <TextField fx:id="email" promptText="e-mail" maxWidth="300" maxHeight="70" style="-fx-padding: 12 15; -fx-font-size: 14px;"/>
+                  <PasswordField fx:id="password" promptText="mot de passe" maxWidth="300" maxHeight="70" style="-fx-padding: 12 15; -fx-font-size: 14px;"/>
+                  <Button fx:id="submit" defaultButton="true" mnemonicParsing="false" onAction="#loginPressed" text="Login" styleClass="submit-button"/>
+                  <HBox fillHeight="false" prefHeight="1.0" prefWidth="1.0" maxWidth="300">
                      <children>
                         <Label text="Pas de compte? Cliquez " />
                         <Label fx:id="signup" layoutX="10.0" layoutY="10.0" onMouseClicked="#loadSignup" text="ici" textFill="#88c0d0" underline="true">

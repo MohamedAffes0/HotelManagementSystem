@@ -79,7 +79,13 @@ public class Person extends Model{
 
 	@Override
 	public ArrayList<String> getStringData() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'getStringData'");
+		ArrayList<String> data = new ArrayList<String>();
+
+		data.add("Cin " + getCin());
+		data.add("Nom " + getName());
+		data.add("Prenom " + getLastName());
+		data.add("Mail " + getMail());
+
+		return data;
 	}
 }

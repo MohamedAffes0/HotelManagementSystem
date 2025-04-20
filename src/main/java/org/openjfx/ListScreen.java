@@ -96,6 +96,15 @@ public class ListScreen<T extends Model, L extends DBLoader> {
 				throw new RuntimeException(exception);
 			}
 		}
+
+		// Set the style for the first and last buttons
+		Button firstButton = (Button) list.getChildren().get(0);
+		firstButton.setStyle("-fx-background-radius: 12 12 0 0;");
+		Button lastButton = (Button) list.getChildren().get(list.getChildren().size() - 1);
+		lastButton.setStyle("-fx-background-radius: 0 0 12 12;");
+		if (list.getChildren().size() == 1) {
+			firstButton.setStyle("-fx-background-radius: 12;");
+		}
 	}
 
 	public void loadFromDB() {

@@ -34,14 +34,20 @@ public class Login {
         String passwordText = password.getText();
         App main = new App();
 
+        email.getStyleClass().remove("text-field-error");
+        password.getStyleClass().remove("text-field-error");
         if (emailText.isEmpty() || passwordText.isEmpty()) {
             System.out.println("Please fill in all fields.");
             error.setText("Veuillez saisir votre email et votre mot de passe.");
+            email.getStyleClass().add("text-field-error");
+            password.getStyleClass().add("text-field-error");
             return;
         }
 	
         if (!EmailChecker.isValid(emailText)) {
                 error.setText("Email invalide.");
+                email.getStyleClass().add("text-field-error");
+                // password.getStyleClass().add("text-field");
                 return;
         }
 
@@ -59,6 +65,8 @@ public class Login {
             case USER_NOT_FOUND:
                 System.out.println("Login failed. User not found.");
                 error.setText("Email ou mot de passe incorrecte.");
+                email.getStyleClass().add("text-field-error");
+                password.getStyleClass().add("text-field-error");
                 break;
             case INACTIVE_USER:
                 System.out.println("Login failed. User is inactive.");

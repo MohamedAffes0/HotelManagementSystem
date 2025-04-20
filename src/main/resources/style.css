@@ -67,8 +67,8 @@ Text{
     -fx-background-radius: 10;
     -fx-padding: 8;
     -fx-font-size: 16px;
-    -fx-scale-x: 1.05;
-    -fx-scale-y: 1.05;
+    /* -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05; */
 }
 
 .text-field:focused {

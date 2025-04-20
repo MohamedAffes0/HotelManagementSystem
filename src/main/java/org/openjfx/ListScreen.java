@@ -56,8 +56,7 @@ public class ListScreen<T extends Model, L extends DBLoader> {
 				@Override
 				public void handle(WindowEvent event) {
 					try {
-						// TODO add select base class
-						// rooms = RoomSelect.roomSelect();
+						loadFromDB();
 						updateList();
 					} catch (Exception exception) {
 						System.out.println("Erreur de connection a la base de donnée");

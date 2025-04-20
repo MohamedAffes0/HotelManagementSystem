@@ -114,7 +114,7 @@ public class Room extends Model {
 				search.setText(StringNumberExtract.extract(searchText));
 				search.positionCaret(search.getText().length());
 				return RoomFilter.filterByFloor(this, Integer.parseInt(search.getText()));
-			case "Nombre De Personnes":
+			case "Capacité":
 				search.setText(StringNumberExtract.extract(searchText));
 				search.positionCaret(search.getText().length());
 				return RoomFilter.filterByNumberOfPeople(this, Integer.parseInt(search.getText()));

@@ -12,7 +12,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label; import javafx.scene.control.TextField; import javafx.scene.layout.VBox;
+import javafx.scene.control.Label; import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -29,6 +31,9 @@ public class ListScreen<T extends Model, L extends DBLoader> {
 
 	@FXML
 	protected VBox list;
+
+	@FXML
+	private HBox searchContainer;
 
 	@FXML
 	protected TextField search;
@@ -72,7 +77,7 @@ public class ListScreen<T extends Model, L extends DBLoader> {
 	@FXML
 	protected void updateList() {
 		if (loader.getData() == null) {
-			throw new RuntimeException("Content not initialized");
+			throw new RuntimeException("Content not loaded from db");
 		}
 
 		list.getChildren().clear();
@@ -103,7 +108,9 @@ public class ListScreen<T extends Model, L extends DBLoader> {
 
 	public void setFilterItems(ObservableList<String> items) {
 		if (items.isEmpty()) {
-			throw new RuntimeException("Items list for filter must not be empty.");
+			VBox mainContainer = (VBox)searchContainer.getParent();
+			mainContainer.getChildren().remove(1);
+			return;
 		}
 		filter.setItems(items);
 		filter.setValue(items.get(0));

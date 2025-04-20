@@ -44,9 +44,7 @@ public class MainMenu implements Initializable {
 				"Chambres",
 				FXCollections.observableArrayList("Etage", "Type", "Capacité", "Prix", "Etat"),
 				"Ajouter Chambre",
-				"/roomButton.fxml",
-				"/addRoom.fxml",
-				"/updateRoom.fxml");
+				"/addRoom.fxml");
 	}
 
 	@FXML
@@ -61,11 +59,12 @@ public class MainMenu implements Initializable {
 	@FXML
 	void reservationsPressed(ActionEvent event) {
 		/*
-		ListScreen<Reservation> controller = new ListScreen<Reservation>();
-		changeCurrentMenu(controller,
-				"Reservations",
-				FXCollections.observableArrayList("test1", "test2"),
-				"Ajouter Reservation");*/
+		 * ListScreen<Reservation> controller = new ListScreen<Reservation>();
+		 * changeCurrentMenu(controller,
+		 * "Reservations",
+		 * FXCollections.observableArrayList("test1", "test2"),
+		 * "Ajouter Reservation");
+		 */
 
 	}
 
@@ -80,7 +79,7 @@ public class MainMenu implements Initializable {
 	}
 
 	private void changeCurrentMenu(ListScreen<?, ?> controller, String title, ObservableList<String> filterItems,
-			String addButtonText, String listButtonPath, String addPopupPath, String updatePopupPath) {
+			String addButtonText, String addPopupPath) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/listScreen.fxml"));
 
 		try {
@@ -105,8 +104,6 @@ public class MainMenu implements Initializable {
 			controller.setFilterItems(filterItems);
 			controller.setAddButtonText(addButtonText);
 			controller.setAddPopupPath(addPopupPath);
-			controller.setUpdatePopupPath(updatePopupPath);
-			controller.setListButtonPath(listButtonPath);
 			controller.updateList();
 
 		} catch (IOException e) {

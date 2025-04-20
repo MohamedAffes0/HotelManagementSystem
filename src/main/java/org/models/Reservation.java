@@ -1,6 +1,7 @@
 package org.models;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 import org.app.StringNumberExtract;
 import org.app.reservation.ReservationFilter;
@@ -120,6 +121,12 @@ public class Reservation extends Model {
 		}
 
 		return true;
+	}
+
+	@Override
+	public ArrayList<String> getStringData() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'getStringData'");
 	}
 
 }

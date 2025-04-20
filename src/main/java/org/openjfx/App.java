@@ -21,7 +21,7 @@ public class App extends Application {
 
         var scene = new Scene(root, 1280, 720);
         
-        stage.setTitle("Hotel Management Dashboard");
+        stage.setTitle("Emerald Coast Dashboard");
         stage.setScene(scene);
         stage.show();
     }

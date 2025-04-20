@@ -10,6 +10,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import org.app.room.RoomAdd;
+import org.app.room.RoomSelect;
 import org.app.room.RoomAdd.CreationStatus;
 import org.models.Room;
 import org.models.Room.RoomState;
@@ -67,12 +68,11 @@ public class AddRoom implements Initializable {
 
 		Room room = new Room(id.getValue().intValue(), roomType, floor.getValue().intValue(),
 				numberOfPeople.getValue().intValue(), price.getValue().floatValue(), roomState);
-		/*
-		CreationStatus result = RoomAdd.roomAdd(room, Rooms.rooms);
+
+		CreationStatus result = RoomAdd.roomAdd(room, RoomSelect.dataFromDB());
 
 		switch (result) {
 			case SUCCESS:
-				Rooms.rooms.add(room);
 				// Close the window after adding the room
 				Stage stage = (Stage) floor.getScene().getWindow();
 				stage.close();
@@ -80,9 +80,10 @@ public class AddRoom implements Initializable {
 			case DB_PROBLEM:
 				break;
 			case ID_EXISTS:
+				System.out.println("Exists");
 				break;
+				
 		}
-		*/
 	}
 
 	@FXML

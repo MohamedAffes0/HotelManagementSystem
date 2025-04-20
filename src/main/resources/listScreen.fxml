@@ -24,7 +24,7 @@
             <Button fx:id="addButton" defaultButton="true" mnemonicParsing="false" onAction="#addPressed" prefWidth="200.0" text="Add" />
          </children>
       </HBox>
-      <HBox spacing="18.0">
+      <HBox fx:id="searchContainer" spacing="18.0">
          <children>
             <TextField fx:id="search" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" onKeyTyped="#updateList" promptText="Recherche..." HBox.hgrow="ALWAYS" />
             <ComboBox fx:id="filter" onAction="#updateList" prefWidth="200.0" promptText="Filter" />

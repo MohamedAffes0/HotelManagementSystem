@@ -1,5 +1,7 @@
 package org.models;
 
+import java.util.ArrayList;
+
 import javafx.scene.control.TextField;
 
 final public class Employee extends Person {
@@ -54,4 +56,20 @@ final public class Employee extends Person {
     public boolean filter(TextField search, String filterType) {
         return true;
     }
+
+    
+	@Override
+	public ArrayList<String> getStringData() {
+		ArrayList<String> data = new ArrayList<String>();
+
+		data.add("Id " + getId());
+		data.add("Nom " + getName());
+		data.add("Prenom " + getLastName());
+		data.add("Mail " + getMail());
+        data.add("Mot de passe " + getPassword());
+        data.add(isAdmin() ? "Admin" : "Receptionnel");
+        data.add(isActive() ? "Actif" : "Inactif");
+
+		return data;
+	}
 }

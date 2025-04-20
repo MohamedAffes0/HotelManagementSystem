@@ -125,8 +125,17 @@ public class Reservation extends Model {
 
 	@Override
 	public ArrayList<String> getStringData() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'getStringData'");
+		ArrayList<String> data = new ArrayList<String>();
+
+		data.add("Id " + getId());
+		data.add("Start " + getStartDate().toString());
+		data.add("End " + getEndDate().toString());
+		data.add(isPaid() ? "Payé" : "Impayé");
+		data.add("Employée " + getEmployee());
+		data.add("Client " + getHotelClient());
+		data.add("Chambre " + getRoom());
+
+		return data;
 	}
 
 }

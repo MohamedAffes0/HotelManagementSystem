@@ -81,10 +81,11 @@ public class Person extends Model{
 	public ArrayList<String> getStringData() {
 		ArrayList<String> data = new ArrayList<String>();
 
-		data.add("Cin " + getCin());
+		data.add("Cin: " + getCin());
 		data.add("Nom " + getName());
 		data.add("Prenom " + getLastName());
-		data.add("Mail " + getMail());
+		// data.add("Mail " + getMail());
+		data.add(getMail());
 
 		return data;
 	}

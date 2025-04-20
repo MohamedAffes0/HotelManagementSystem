@@ -21,7 +21,8 @@
                </font>
             </Label>
             <AnchorPane HBox.hgrow="SOMETIMES" />
-            <Button fx:id="addButton" defaultButton="true" mnemonicParsing="false" onAction="#addPressed" prefWidth="200.0" text="Add" styleClass="add-button"/>
+            <!-- <Button fx:id="addButton" defaultButton="true" mnemonicParsing="false" onAction="#addPressed" prefWidth="200.0" text="Add" styleClass="add-button"/> -->
+            <Button fx:id="addButton" defaultButton="true" mnemonicParsing="false" onAction="#addPressed" prefWidth="200.0" text="Add"/>
          </children>
       </HBox>
       <HBox fx:id="searchContainer" spacing="18.0">

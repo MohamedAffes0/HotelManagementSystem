@@ -62,11 +62,15 @@ final public class Employee extends Person {
 	public ArrayList<String> getStringData() {
 		ArrayList<String> data = new ArrayList<String>();
 
-		data.add("Id " + getId());
-		data.add("Nom " + getName());
-		data.add("Prenom " + getLastName());
-		data.add("Mail " + getMail());
-        data.add("Mot de passe " + getPassword());
+		// data.add("Id " + getId());
+        data.add(String.valueOf(getId()));
+		// data.add("Nom " + getName());
+		data.add(getName());
+		// data.add("Prenom " + getLastName());
+		data.add(getLastName());
+		// data.add("Mail " + getMail());
+		data.add(getMail());
+        data.add("Mot de passe: " + getPassword());
         data.add(isAdmin() ? "Admin" : "Receptionnel");
         data.add(isActive() ? "Actif" : "Inactif");
 

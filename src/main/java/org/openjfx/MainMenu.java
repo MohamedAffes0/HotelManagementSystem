@@ -15,7 +15,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import org.app.client.ClientSelect;
+import org.app.reservation.ReservationSelect;
 import org.app.room.RoomSelect;
+import org.app.user.UserSelect;
+import org.models.Employee;
+import org.models.Person;
 import org.models.Reservation;
 import org.models.Room;
 
@@ -49,23 +54,32 @@ public class MainMenu implements Initializable {
 
 	@FXML
 	void clientsPressed(ActionEvent event) throws Exception {
+		ListScreen<Person, ClientSelect> controller = new ListScreen<Person, ClientSelect>(new ClientSelect());
+		changeCurrentMenu(controller,
+				"Clients",
+				FXCollections.observableArrayList("Cin"),
+				"Ajouter Client",
+				"/addRoom.fxml");
 	}
 
 	@FXML
 	void comptesPressed(ActionEvent event) {
-
+		ListScreen<Employee, UserSelect> controller = new ListScreen<Employee, UserSelect>(new UserSelect());
+		changeCurrentMenu(controller,
+				"Comptes",
+				FXCollections.observableArrayList(),
+				"Ajouter Compte",
+				"/addRoom.fxml");
 	}
 
 	@FXML
 	void reservationsPressed(ActionEvent event) {
-		/*
-		 * ListScreen<Reservation> controller = new ListScreen<Reservation>();
-		 * changeCurrentMenu(controller,
-		 * "Reservations",
-		 * FXCollections.observableArrayList("test1", "test2"),
-		 * "Ajouter Reservation");
-		 */
-
+		ListScreen<Reservation, ReservationSelect> controller = new ListScreen<Reservation, ReservationSelect>(new ReservationSelect());
+		changeCurrentMenu(controller,
+				"Réservations",
+				FXCollections.observableArrayList("isPaid", "Client", "Chambre"),
+				"Ajouter Réservation",
+				"/addRoom.fxml");
 	}
 
 	@Override

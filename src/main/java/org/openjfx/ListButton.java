@@ -2,6 +2,7 @@ package org.openjfx;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
@@ -32,6 +33,8 @@ public class ListButton {
 
 		for (int i = 1; i < list.size(); i++) {
 			Label label = new Label(list.get(i));
+			label.minWidth(100);
+			label.setAlignment(Pos.CENTER);
 			content.getChildren().add(label);
 		}
 	}

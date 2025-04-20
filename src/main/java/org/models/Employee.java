@@ -70,8 +70,7 @@ final public class Employee extends Person {
 		data.add(getLastName());
 		// data.add("Mail " + getMail());
 		data.add(getMail());
-        data.add("Mot de passe: " + getPassword());
-        data.add(isAdmin() ? "Admin" : "Receptionnel");
+        data.add(isAdmin() ? "Admin" : "Réceptionniste");
         data.add(isActive() ? "Actif" : "Inactif");
 
 		return data;

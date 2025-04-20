@@ -2,11 +2,13 @@ package org.models;
 
 import javafx.scene.control.TextField;
 
+import java.util.ArrayList;
+
 import org.app.StringNumberExtract;
 import org.app.room.RoomFilter;
 
 public class Room extends Model {
-	
+
 	public static enum RoomState {
 		LIBRE,
 		OCCUPEE,
@@ -24,7 +26,7 @@ public class Room extends Model {
 	private int floor;
 	private int capacity;
 	private float price;
-	private RoomState state; // -- 0 for libre, 1 for occupée --, 2 for maintenance --
+	private RoomState state;
 
 	public Room(int id, RoomType roomType, int floor, int capacity, float price, RoomState state) {
 
@@ -39,8 +41,9 @@ public class Room extends Model {
 		this.price = price;
 		this.state = state;
 	}
-	
-	public Room() {}
+
+	public Room() {
+	}
 
 	public int getId() {
 		return id;
@@ -95,7 +98,7 @@ public class Room extends Model {
 				return "libre";
 		}
 	}
-	
+
 	@Override
 	public boolean filter(TextField search, String filterType) {
 		String searchText = search.getText();
@@ -118,7 +121,7 @@ public class Room extends Model {
 			case "Prix":
 				search.setText(StringNumberExtract.extract(searchText));
 				search.positionCaret(search.getText().length());
-				return RoomFilter.filterByPrice(this, Integer.parseInt(search.getText()));
+				return RoomFilter.filterByPrice(this, Integer.parseInt(search.getText()) + 0.999f);
 			case "Type":
 				RoomType type = typeFromSearch(searchText);
 
@@ -187,32 +190,53 @@ public class Room extends Model {
 			return null;
 		}
 
+		searchText = searchText.toLowerCase();
+
+		// Return null if searchText = "s" because "sinple" and "suite" both start with "s"
+		if (searchText.equals("s")) {
+			return null;
+		}
+
 		// Simple
-		if ("simple".contains(searchText.toLowerCase())) {
+		if ("simple".contains(searchText)) {
 			return RoomType.SIMPLE;
 		}
 
-		if (searchText.toLowerCase().contains("simple")) {
+		if (searchText.contains("simple")) {
 			return RoomType.SIMPLE;
 		}
 
 		// Suite
-		if (searchText.toLowerCase().contains("suite")) {
+		if (searchText.contains("suite")) {
 			return RoomType.SUITE;
 		}
 
-		if ("suite".contains(searchText.toLowerCase())) {
+		if ("suite".contains(searchText)) {
 			return RoomType.SUITE;
 		}
 
 		// Double
-		if ("double".contains(searchText.toLowerCase())) {
+		if ("double".contains(searchText)) {
 			return RoomType.DOUBLE;
 		}
 
-		if (searchText.toLowerCase().contains("double")) {
+		if (searchText.contains("double")) {
 			return RoomType.DOUBLE;
 		}
 		return null;
+	}
+
+	@Override
+	public ArrayList<String> getStringData() {
+		ArrayList<String> data = new ArrayList<String>();
+
+		data.add("Chambre " + getId());
+		data.add("Etage " + getFloor());
+		data.add(getTypeString());
+		data.add(getPrice() + " Dt");
+		data.add(getCapacity() + " Personnes");
+		data.add(getStateString());
+
+		return data;
 	}
 }

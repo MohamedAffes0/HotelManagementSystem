@@ -88,8 +88,8 @@ public class Reservation extends Model {
 			case "Client":
 				search.setText(StringNumberExtract.extract(searchText));
 				search.positionCaret(search.getText().length());
-				return ReservationFilter.filterByClient(this, Integer.parseInt(search.getText()));
-			case "Room":
+				return ReservationFilter.filterByClient(this, search.getText());
+			case "Chambre":
 				search.setText(StringNumberExtract.extract(searchText));
 				search.positionCaret(search.getText().length());
 				return ReservationFilter.filterByRoom(this, Integer.parseInt(search.getText()));

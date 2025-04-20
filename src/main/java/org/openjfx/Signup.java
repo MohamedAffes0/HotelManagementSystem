@@ -60,7 +60,7 @@ public class Signup {
 		// Appel de la méthode userAdd avec les valeurs des champs de texte
 		Employee user = new Employee(1, nameText, lastNameText, emailText, passwordText, false,
 				false);
-		CreationStatus result = UserAdd.userAdd(user, UserSelect.userSelect());
+		CreationStatus result = UserAdd.userAdd(user, UserSelect.dataFromDB());
 
 		if (result == CreationStatus.SUCCESS) {
 			System.out.println("Utilisateur ajouté avec succès !");

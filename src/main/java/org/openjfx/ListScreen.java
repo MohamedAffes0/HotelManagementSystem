@@ -2,7 +2,6 @@ package org.openjfx;
 
 import org.app.DBLoader;
 import org.models.Model;
-import org.openjfx.listbutton.ListButton;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,17 +12,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.Label; import javafx.scene.control.TextField; import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 public class ListScreen<T extends Model, L extends DBLoader> {
 	private String addPopupPath;
-	private String updatePopupPath;
-	private String listButtonPath;
 	private L loader;
+	private	final String listButtonPath;
 
 	@FXML
 	protected Button addButton;
@@ -41,6 +37,7 @@ public class ListScreen<T extends Model, L extends DBLoader> {
 	protected Label title;
 
 	public ListScreen(L loader) {
+		listButtonPath = "/listButton.fxml";
 		this.loader = loader;
 	}
 
@@ -75,11 +72,10 @@ public class ListScreen<T extends Model, L extends DBLoader> {
 
 	@FXML
 	protected void updateList() {
-		System.out.println("aaaaaaaaaaaaaaaaaa");
 		if (loader.getData() == null) {
 			throw new RuntimeException("Content not initialized");
 		}
-		System.out.println(loader.getData().size());
+
 		list.getChildren().clear();
 		for (Object o : loader.getData()) {
 			T item = (T)o;
@@ -93,7 +89,7 @@ public class ListScreen<T extends Model, L extends DBLoader> {
 				ListButton controller = listButtonLoader.getController();
 				controller.setData(item);
 			} catch (Exception exception) {
-				throw new RuntimeException("Failed to load list button");
+				throw new RuntimeException(exception);
 			}
 		}
 	}
@@ -118,15 +114,7 @@ public class ListScreen<T extends Model, L extends DBLoader> {
 		addButton.setText(text);
 	}
 
-	public void setListButtonPath(String path) {
-		listButtonPath = path;
-	}
-
 	public void setAddPopupPath(String path) {
 		addPopupPath = path;
-	}
-
-	public void setUpdatePopupPath(String path) {
-		updatePopupPath = path;
 	}
 }

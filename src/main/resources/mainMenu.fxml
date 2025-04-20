@@ -39,7 +39,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.MainMenu">
+<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.MainMenu">
   <children>
       <HBox VBox.vgrow="ALWAYS">
          <children>
@@ -49,12 +49,14 @@
                   <Button fx:id="chambres" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#chambresPressed" style="-fx-alignment: left;" styleClass="menu-button" text="Chambres" />
                   <Button fx:id="clients" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#clientsPressed" style="-fx-alignment: left;" styleClass="menu-button" text="Clients" />
                   <Button fx:id="comptes" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#comptesPressed" style="-fx-alignment: left;" styleClass="menu-button" text="Comptes" />
+                  <AnchorPane VBox.vgrow="ALWAYS" />
+                  <Button mnemonicParsing="false" onAction="#logOutPressed" text="LogOut" />
                </children>
                <HBox.margin>
                   <Insets />
                </HBox.margin>
                <padding>
-                  <Insets bottom="24.0" left="18.0" top="24.0" />
+                  <Insets bottom="24.0" left="9.0" right="9.0" top="24.0" />
                </padding>
             </VBox>
             <AnchorPane fx:id="contentContainer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">

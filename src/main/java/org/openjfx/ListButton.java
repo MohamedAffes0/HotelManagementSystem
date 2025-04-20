@@ -33,7 +33,7 @@ public class ListButton {
 
 		for (int i = 1; i < list.size(); i++) {
 			Label label = new Label(list.get(i));
-			label.minWidth(100);
+			label.setMinWidth(100);
 			label.setAlignment(Pos.CENTER);
 			content.getChildren().add(label);
 		}

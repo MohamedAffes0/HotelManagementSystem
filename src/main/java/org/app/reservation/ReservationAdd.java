@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.sql.Date;
 
+import org.app.client.ClientChecker;
+import org.app.client.ClientChecker.ClientStatus;
 import org.app.reservation.ReservationChecker.ReservationDate;
 import org.database.DBConnect;
 import org.models.Reservation;
@@ -18,11 +20,17 @@ public class ReservationAdd {
         DB_PROBLEM,
         ROOM_NON_EXISTENT,
         ROOM_NOT_AVAILABLE,
-        DATE_NOT_AVAILABLE
+        DATE_NOT_AVAILABLE,
+        CLIENT_NON_EXISTENT,
     }
 
     // id a ignorer
     public static CreationStatus reservationAdd(Reservation reservation, ArrayList<Room> rooms) {
+
+        if (ClientChecker.clientCheck(reservation.getHotelClient()) == ClientStatus.CLIENT_NOT_FOUND) {
+            System.err.println("Le client n'existe pas.");
+            return CreationStatus.CLIENT_NON_EXISTENT; // Indique que le client n'existe pas
+        }
 
         // verification de la date de debut et de fin
         if (reservation.getStartDate().after(reservation.getEndDate())) {

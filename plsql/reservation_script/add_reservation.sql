@@ -13,6 +13,8 @@ BEGIN
 EXCEPTION
     WHEN DUP_VAL_ON_INDEX THEN
         DBMS_OUTPUT.PUT_LINE('Erreur : ID reservation déjà existant.');
+    WHEN VALUE_ERROR THEN
+        DBMS_OUTPUT.PUT_LINE('Erreur : Valeur invalide pour l''un des paramètres.');
     WHEN OTHERS THEN
         DBMS_OUTPUT.PUT_LINE('Erreur inconnue : ' || SQLERRM);
 END;

@@ -47,7 +47,7 @@
       <Insets bottom="18.0" left="18.0" right="18.0" top="18.0" />
    </padding>
    <children>
-      <Label fx:id="title" text="Ajouter une chambre">
+      <Label fx:id="title" text="Ajouter une chambre" style="-fx-font-weight: bold;">
          <font>
             <Font size="20.0" />
          </font>

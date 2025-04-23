@@ -77,7 +77,7 @@ public class MainMenu implements Initializable {
 		ListScreen<Reservation, ReservationSelect> controller = new ListScreen<Reservation, ReservationSelect>(new ReservationSelect());
 		changeCurrentMenu(controller,
 				"Réservations",
-				FXCollections.observableArrayList("isPaid", "Client", "Chambre"),
+				FXCollections.observableArrayList("Est Payé", "Client", "Chambre"),
 				"Ajouter Réservation",
 				"/addRoom.fxml");
 	}

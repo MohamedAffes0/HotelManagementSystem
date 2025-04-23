@@ -14,14 +14,19 @@ public class ReservationFilter {
         return reservation.isPaid() == isPaid;
     }
 
-    public static boolean filterByClient(Reservation reservation, int clientId) {
+    public static boolean filterByClient(Reservation reservation, String clientId) {
 
         if (reservation == null) {
             System.err.println("Erreur lors de la récupération de la reservation.");
             return false;
         }
 
-        return reservation.getHotelClient() == clientId;
+        if (clientId.isEmpty()) {
+            return true;
+        }
+
+        String reservationClientId = String.valueOf(reservation.getHotelClient());
+        return reservationClientId.contains(clientId);
     }
 
     public static boolean filterByRoom(Reservation reservation, int roomId) {

@@ -4,6 +4,7 @@ import javafx.scene.control.TextField;
 
 import java.util.ArrayList;
 
+import org.app.StringFloatExtract;
 import org.app.StringNumberExtract;
 import org.app.room.RoomFilter;
 
@@ -119,9 +120,10 @@ public class Room extends Model {
 				search.positionCaret(search.getText().length());
 				return RoomFilter.filterByNumberOfPeople(this, Integer.parseInt(search.getText()));
 			case "Prix":
-				search.setText(StringNumberExtract.extract(searchText));
+				search.setText(StringFloatExtract.extract(searchText));
 				search.positionCaret(search.getText().length());
-				return RoomFilter.filterByPrice(this, Integer.parseInt(search.getText()) + 0.999f);
+				// return RoomFilter.filterByPrice(this, Integer.parseInt(search.getText()) + 0.999f);
+				return RoomFilter.filterByPrice(this, Float.parseFloat(search.getText()));
 			case "Type":
 				RoomType type = typeFromSearch(searchText);
 

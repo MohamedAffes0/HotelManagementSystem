@@ -15,7 +15,7 @@
    <children>
       <HBox>
          <children>
-            <Label fx:id="title" text="Title">
+            <Label fx:id="title" text="Title" style="-fx-font-weight: bold;">
                <font>
                   <Font size="20.0" />
                </font>

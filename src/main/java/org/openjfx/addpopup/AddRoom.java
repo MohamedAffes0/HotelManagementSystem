@@ -1,7 +1,5 @@
 package org.openjfx.addpopup;
 
-import java.util.ArrayList;
-
 import org.models.Room;
 import org.app.room.RoomAdd;
 import org.app.room.RoomAdd.CreationStatus;
@@ -10,6 +8,7 @@ import org.models.Room.RoomState;
 import org.models.Room.RoomType;
 import org.openjfx.popupfield.ComboBoxPopupField;
 import org.openjfx.popupfield.NumberPopupField;
+import org.openjfx.popupfield.FloatPopupField;
 
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -34,7 +33,7 @@ public class AddRoom extends AddPopup {
 				new NumberPopupField("Numéro"),
 				new NumberPopupField("Etage"),
 				new NumberPopupField("Capacité"),
-				new NumberPopupField("Prix"),
+				new FloatPopupField("Prix"),
 				new ComboBoxPopupField("Etat",
 						FXCollections.observableArrayList("Libre", "Occupée", "Maintenance")),
 				new ComboBoxPopupField("Type",
@@ -70,7 +69,7 @@ public class AddRoom extends AddPopup {
 		}
 
 		Room room = new Room((int)getField(ID).getValue(), roomType, (int)getField(FLOOR).getValue(),
-				(int)getField(CAPACITY).getValue(), ((Integer)getField(PRICE).getValue()).floatValue(), roomState);
+				(int)getField(CAPACITY).getValue(), (float)getField(PRICE).getValue(), roomState);
 
 		CreationStatus result = RoomAdd.roomAdd(room, RoomSelect.dataFromDB());
 

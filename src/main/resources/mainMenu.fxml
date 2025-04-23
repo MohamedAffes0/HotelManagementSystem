@@ -40,7 +40,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.MainMenu">
-  <children>
+   <children>
       <HBox VBox.vgrow="ALWAYS">
          <children>
             <VBox alignment="TOP_CENTER" minWidth="200.0" prefWidth="200.0" spacing="6.0" styleClass="menu">
@@ -50,7 +50,7 @@
                   <Button fx:id="clients" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#clientsPressed" style="-fx-alignment: left;" styleClass="menu-button" text="Clients" />
                   <Button fx:id="comptes" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#comptesPressed" style="-fx-alignment: left;" styleClass="menu-button" text="Comptes" />
                   <AnchorPane VBox.vgrow="ALWAYS" />
-                  <Button mnemonicParsing="false" onAction="#logOutPressed" text="LogOut" />
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#logOutPressed" text="Logout" styleClass="log-out-button"/>
                </children>
                <HBox.margin>
                   <Insets />
@@ -69,5 +69,5 @@
             <Insets />
          </VBox.margin>
       </HBox>
-  </children>
+   </children>
 </VBox>

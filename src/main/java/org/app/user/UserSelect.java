@@ -91,14 +91,14 @@ public class UserSelect extends DBLoader{
         }
     }
 
-    // public static void main(String[] args) {
-    //     ArrayList<EmployeeModel> users = userSelect();
-    //     if (users != null) {
-    //         for (EmployeeModel user : users) {
-    //             System.out.println(user.getNom() + " " + user.getPrenom() + " " + user.getMail() + " " + user.getMdp() + " " + user.isAdmin() + " " + user.isActive());
-    //         }
-    //     } else {
-    //         System.out.println("Aucun utilisateur trouvé.");
-    //     }
-    // }
+    public static void main(String[] args) {
+        ArrayList<Employee> users = dataFromDB();
+        if (users != null) {
+            for (Employee user : users) {
+                System.out.println(user.getName() + " " + user.getLastName() + " " + user.getMail() + " " + user.getPassword() + " " + user.isAdmin() + " " + user.isActive());
+            }
+        } else {
+            System.out.println("Aucun utilisateur trouvé.");
+        }
+    }
 }

@@ -2,6 +2,8 @@ package org.openjfx;
 
 import org.app.DBLoader;
 import org.models.Model;
+import org.openjfx.addpopup.AddPopup;
+import org.openjfx.addpopup.AddRoom;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,9 +21,9 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 public class ListScreen<T extends Model, L extends DBLoader> {
-	private String addPopupPath;
+	private AddPopup addPopup;
 	private L loader;
-	private	final String listButtonPath;
+	private	final String LIST_BUTTON_PATH = "/listButton.fxml";
 
 	@FXML
 	protected Button addButton;
@@ -41,19 +43,22 @@ public class ListScreen<T extends Model, L extends DBLoader> {
 	@FXML
 	protected Label title;
 
-	public ListScreen(L loader) {
-		listButtonPath = "/listButton.fxml";
+	public ListScreen(L loader, AddPopup addPopup) {
 		this.loader = loader;
+		this.addPopup = addPopup;
 	}
 
 	@FXML
 	protected void addPressed(ActionEvent event) {
 		try {
-			Parent content = FXMLLoader.load(getClass().getResource(addPopupPath));
+			// Load the Popup
+			//addPopup addRoom = new AddRoom();
+			Parent content = addPopup.load();
+			
+			// Create the stage and configure it
 			Stage stage = new Stage();
 			Scene scene = new Scene(content);
 			stage.setResizable(false);
-
 			stage.setTitle("Ajout " + title.getText());
 			stage.setScene(scene);
 			// Reload list after closing the popup.
@@ -70,7 +75,8 @@ public class ListScreen<T extends Model, L extends DBLoader> {
 			});
 			stage.show();
 		} catch (Exception e) {
-			System.out.println("Error opening add room popup");
+			System.out.println(e);
+			System.out.println("Error opening add popup");
 		}
 	}
 
@@ -88,7 +94,7 @@ public class ListScreen<T extends Model, L extends DBLoader> {
 			}
 
 			try {
-				FXMLLoader listButtonLoader = new FXMLLoader(getClass().getResource(listButtonPath));
+				FXMLLoader listButtonLoader = new FXMLLoader(getClass().getResource(LIST_BUTTON_PATH));
 				list.getChildren().add(listButtonLoader.load());
 				ListButton controller = listButtonLoader.getController();
 				controller.setData(item);
@@ -129,7 +135,7 @@ public class ListScreen<T extends Model, L extends DBLoader> {
 		addButton.setText(text);
 	}
 
-	public void setAddPopupPath(String path) {
-		addPopupPath = path;
+	public void setAddPopup(AddPopup addPopup) {
+		this.addPopup = addPopup;
 	}
 }

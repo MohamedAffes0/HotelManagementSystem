@@ -9,9 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.Parent;
 import javafx.fxml.FXMLLoader;
 
-import javafx.fxml.Initializable;
-
-import java.io.IOException;
+import javafx.fxml.Initializable; import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -23,12 +21,12 @@ import org.models.Employee;
 import org.models.Person;
 import org.models.Reservation;
 import org.models.Room;
+import org.openjfx.addpopup.AddRoom;
 
 public class MainMenu implements Initializable {
 	private App main;
 
-	@FXML
-	private Button chambres;
+	@FXML private Button chambres;
 
 	@FXML
 	private Button clients;
@@ -44,7 +42,7 @@ public class MainMenu implements Initializable {
 
 	@FXML
 	void chambresPressed(ActionEvent event) throws Exception {
-		ListScreen<Room, RoomSelect> controller = new ListScreen<Room, RoomSelect>(new RoomSelect());
+		ListScreen<Room, RoomSelect> controller = new ListScreen<Room, RoomSelect>(new RoomSelect(), new AddRoom());
 		changeCurrentMenu(controller,
 				"Chambres",
 				FXCollections.observableArrayList("Etage", "Type", "Capacité", "Prix", "Etat"),
@@ -54,7 +52,7 @@ public class MainMenu implements Initializable {
 
 	@FXML
 	void clientsPressed(ActionEvent event) throws Exception {
-		ListScreen<Person, ClientSelect> controller = new ListScreen<Person, ClientSelect>(new ClientSelect());
+		ListScreen<Person, ClientSelect> controller = new ListScreen<Person, ClientSelect>(new ClientSelect(), new AddRoom());
 		changeCurrentMenu(controller,
 				"Clients",
 				FXCollections.observableArrayList("Cin"),
@@ -64,7 +62,7 @@ public class MainMenu implements Initializable {
 
 	@FXML
 	void comptesPressed(ActionEvent event) {
-		ListScreen<Employee, UserSelect> controller = new ListScreen<Employee, UserSelect>(new UserSelect());
+		ListScreen<Employee, UserSelect> controller = new ListScreen<Employee, UserSelect>(new UserSelect(), new AddRoom());
 		changeCurrentMenu(controller,
 				"Comptes",
 				FXCollections.observableArrayList(),
@@ -74,12 +72,18 @@ public class MainMenu implements Initializable {
 
 	@FXML
 	void reservationsPressed(ActionEvent event) {
-		ListScreen<Reservation, ReservationSelect> controller = new ListScreen<Reservation, ReservationSelect>(new ReservationSelect());
+		ListScreen<Reservation, ReservationSelect> controller = new ListScreen<Reservation, ReservationSelect>(new ReservationSelect(), new AddRoom());
 		changeCurrentMenu(controller,
 				"Réservations",
 				FXCollections.observableArrayList("Est Payé", "Client", "Chambre"),
 				"Ajouter Réservation",
 				"/addRoom.fxml");
+	}
+	
+	@FXML
+	void logOutPressed(ActionEvent event) throws Exception {
+		App main = new App();
+		main.changeScene("/login.fxml");
 	}
 
 	@Override
@@ -117,7 +121,6 @@ public class MainMenu implements Initializable {
 			controller.setTitle(title);
 			controller.setFilterItems(filterItems);
 			controller.setAddButtonText(addButtonText);
-			controller.setAddPopupPath(addPopupPath);
 			controller.updateList();
 
 		} catch (IOException e) {

@@ -82,8 +82,13 @@ public class MainMenu implements Initializable {
 	
 	@FXML
 	void logOutPressed(ActionEvent event) throws Exception {
-		App main = new App();
-		main.changeScene("/login.fxml");
+		try {
+			App main = new App();
+			main.changeScene("/login.fxml");
+			System.out.println("Logged out successfully!");
+		} catch (IOException exception) {
+			exception.printStackTrace();
+		}
 	}
 
 	@Override

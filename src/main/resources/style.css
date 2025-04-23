@@ -152,6 +152,14 @@ Text{
     -fx-background-radius: 50px;
 }
 
+.log-out-button{
+    -fx-background-color: -delete-button-color;
+}
+
+.log-out-button:hover{
+    -fx-background-color: -delete-button-color-hover;
+}
+
 /* === CARD === */
 .card {
     -fx-background-color: transparent;

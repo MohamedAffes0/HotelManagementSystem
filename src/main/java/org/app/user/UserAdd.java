@@ -38,7 +38,8 @@ public class UserAdd {
         // Vérification de l'existence de l'utilisateur
         boolean userExists = false;
         for (int i = 0; i < employees.size(); i++) {
-            if (employees.get(i).getCin() == employee.getCin()) {
+            String employeesMail = employees.get(i).getMail();
+            if (employeesMail.equals(employee.getMail())) {
                 userExists = true;
             }
         }
@@ -89,6 +90,8 @@ public class UserAdd {
     }
 
     // public static void main(String[] args) {
-    //     System.out.println(userAdd("maisa", "ben mouuurad", "maisa@gmail.com", "1234", false, false));
+    //     Employee user = new Employee(1, "aa", "bb", "ab@gmail.com", "1234", false,
+	// 			false);
+    //     System.out.println(userAdd(user, UserSelect.dataFromDB()));
     // }
 }

@@ -70,7 +70,7 @@ public class AddRoom extends AddPopup {
 		}
 
 		Room room = new Room((int)getField(ID).getValue(), roomType, (int)getField(FLOOR).getValue(),
-				(int)getField(CAPACITY).getValue(), (float)getField(PRICE).getValue(), roomState);
+				(int)getField(CAPACITY).getValue(), ((Integer)getField(PRICE).getValue()).floatValue(), roomState);
 
 		CreationStatus result = RoomAdd.roomAdd(room, RoomSelect.dataFromDB());
 

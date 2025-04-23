@@ -79,6 +79,12 @@ public class MainMenu implements Initializable {
 				"Ajouter Réservation",
 				"/addRoom.fxml");
 	}
+	
+	@FXML
+	void logOutPressed(ActionEvent event) throws Exception {
+		App main = new App();
+		main.changeScene("/login.fxml");
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

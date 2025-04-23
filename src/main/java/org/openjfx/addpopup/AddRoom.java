@@ -84,7 +84,9 @@ public class AddRoom extends AddPopup {
 			case ID_EXISTS:
 				System.out.println("Exists");
 				break;
-
+			case EMPTY_FIELD:
+				System.out.println("Empty field");
+				break;
 		}
 	}
 

@@ -21,6 +21,7 @@ import org.models.Employee;
 import org.models.Person;
 import org.models.Reservation;
 import org.models.Room;
+import org.openjfx.addpopup.AddClient;
 import org.openjfx.addpopup.AddRoom;
 import org.openjfx.addpopup.AddUser;
 
@@ -53,7 +54,7 @@ public class MainMenu implements Initializable {
 
 	@FXML
 	void clientsPressed(ActionEvent event) throws Exception {
-		ListScreen<Person, ClientSelect> controller = new ListScreen<Person, ClientSelect>(new ClientSelect(), new AddRoom());
+		ListScreen<Person, ClientSelect> controller = new ListScreen<Person, ClientSelect>(new ClientSelect(), new AddClient());
 		changeCurrentMenu(controller,
 				"Clients",
 				FXCollections.observableArrayList("Cin"),

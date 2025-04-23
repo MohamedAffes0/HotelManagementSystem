@@ -14,9 +14,30 @@ public class RoomAdd {
         SUCCESS,
         DB_PROBLEM,
         ID_EXISTS,
+        EMPTY_FIELD
     }
 
     public static CreationStatus roomAdd(Room room, ArrayList<Room> rooms) {
+        if (room.getId() <= 0) {
+            System.err.println("L'ID ne doit pas être vide.");
+            return CreationStatus.EMPTY_FIELD; // Indique que l'ID est vide
+        }
+
+        if (room.getFloor() == 0) {
+            System.err.println("L'étage ne doit pas être vide.");
+            return CreationStatus.EMPTY_FIELD; // Indique que l'étage est vide
+        }
+
+        if (room.getCapacity() == 0) {
+            System.err.println("La capacité ne doit pas être vide.");
+            return CreationStatus.EMPTY_FIELD; // Indique que la capacité est vide
+        }
+
+        if (room.getPrice() == 0) {
+            System.err.println("Le prix ne doit pas être vide.");
+            return CreationStatus.EMPTY_FIELD; // Indique que le prix est vide
+        }
+
         Connection connection = null;
         CallableStatement stmt = null;
         try {

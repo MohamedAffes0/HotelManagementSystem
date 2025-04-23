@@ -5,42 +5,49 @@ import java.time.LocalDate;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 
 public class DatePopupField extends PopupField {
 
-	private DatePicker datePicker;
-	private Button calendarButton;
+    private DatePicker datePicker;
+    private Button calendarButton;
 
-	public DatePopupField(String name) {
-		super(name);
+    public DatePopupField(String name) {
+        super(name);
 
-		// Crée et configure le DatePicker
-		datePicker = new DatePicker();
-		// datePicker.setStyle("-fx-background-color: transparent; -fx-text-fill: white;");
-		// datePicker.setPrefWidth(100);
+        // Crée et configure le DatePicker
+        datePicker = new DatePicker();
+        datePicker.setStyle("-fx-background-color: transparent; -fx-text-fill: white;");
+        datePicker.setPrefWidth(200);  // Fixe la largeur du DatePicker
 
-		// Crée le bouton calendrier
-		calendarButton = new Button("📅");
-		calendarButton.setStyle(
-			"-fx-background-color: transparent; " +
-			"-fx-text-fill: white; " +
-			"-fx-font-size: 10px; " +
-			"-fx-background-radius: 2; " +
-			"-fx-cursor: hand;" +
-			"-fx-padding: 5; "
-		);
-		calendarButton.setOnAction(e -> datePicker.show());
+        // Crée le bouton calendrier
+        calendarButton = new Button("📅");
+        calendarButton.setStyle(
+            "-fx-background-color: transparent; " +
+            "-fx-text-fill: white; " +
+            "-fx-font-size: 14px; " +
+            "-fx-background-radius: 8; " +
+            "-fx-cursor: hand; " +
+            "-fx-padding: 5px; "
+        );
+        calendarButton.setMaxWidth(30);  // Fixe la largeur du bouton à 30px
 
-		// Assemble les deux dans un HBox avec le bouton à droite
-		HBox fieldWithButton = new HBox(1, calendarButton, datePicker);
-		fieldWithButton.setStyle("-fx-alignment: center-left;");
+        // Action du bouton
+        calendarButton.setOnAction(e -> datePicker.show());
 
-		// Ajoute dans le container parent
-		container.getChildren().add(fieldWithButton);
+        // Crée un HBox principal avec le DatePicker à gauche et le bouton à droite
+        HBox fieldWithButton = new HBox(5, datePicker, calendarButton);
+        fieldWithButton.setStyle("-fx-alignment: center-left;");
 
-		// Important : pour que getField() retourne bien le DatePicker
-		setField(datePicker);
-	}
+        // On contrôle que le DatePicker prenne toute la place restante
+        HBox.setHgrow(datePicker, Priority.ALWAYS);  // Le DatePicker prend tout l'espace restant
+
+        // Ajoute dans le container parent
+        container.getChildren().add(fieldWithButton);
+
+        // Important : pour que getField() retourne bien le DatePicker
+        setField(datePicker);
+    }
 
     @Override
     public LocalDate getValue() {
@@ -52,4 +59,6 @@ public class DatePopupField extends PopupField {
         return getValue() == null;
     }
 }
+
+
 

@@ -60,9 +60,9 @@
       </ScrollPane>
       <HBox spacing="8.0">
          <children>
-            <Button fx:id="cancelButton" cancelButton="true" minWidth="150.0" mnemonicParsing="false" onAction="#cancel" text="Annuler" />
+            <Button fx:id="cancelButton" cancelButton="true" minWidth="150.0" mnemonicParsing="false" onAction="#cancel" text="Annuler" styleClass="delete-button"/>
             <AnchorPane HBox.hgrow="ALWAYS" />
-            <Button fx:id="addButton" defaultButton="true" minWidth="150.0" mnemonicParsing="false" onAction="#addPressed" text="Ajouter" />
+            <Button fx:id="addButton" defaultButton="true" minWidth="150.0" mnemonicParsing="false" onAction="#addPressed" text="Ajouter" styleClass="add-button"/>
          </children>
       </HBox>
    </children>

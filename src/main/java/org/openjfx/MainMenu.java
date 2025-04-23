@@ -22,6 +22,7 @@ import org.models.Person;
 import org.models.Reservation;
 import org.models.Room;
 import org.openjfx.addpopup.AddRoom;
+import org.openjfx.addpopup.AddUser;
 
 public class MainMenu implements Initializable {
 	private App main;
@@ -62,7 +63,7 @@ public class MainMenu implements Initializable {
 
 	@FXML
 	void comptesPressed(ActionEvent event) {
-		ListScreen<Employee, UserSelect> controller = new ListScreen<Employee, UserSelect>(new UserSelect(), new AddRoom());
+		ListScreen<Employee, UserSelect> controller = new ListScreen<Employee, UserSelect>(new UserSelect(), new AddUser());
 		changeCurrentMenu(controller,
 				"Comptes",
 				FXCollections.observableArrayList(),

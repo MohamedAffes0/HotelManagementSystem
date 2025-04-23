@@ -45,8 +45,8 @@ public class Signup {
 	void submit(ActionEvent event) throws Exception {
 		String nameText = nom.getText();
 		String lastNameText = prenom.getText();
-		String emailText = email.getText();
-		String passwordText = password.getText();
+		String emailText = email.getText().trim();
+		String passwordText = password.getText().trim();
 
 		// Test if fields are empty
 		if (nameText.isEmpty() || lastNameText.isEmpty() || emailText.isEmpty() || passwordText.isEmpty()) {

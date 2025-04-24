@@ -1,5 +1,7 @@
 package org.openjfx;
 
+import java.util.Locale;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,6 +18,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        Locale.setDefault(Locale.FRANCE);
         stage = primaryStage;
         Parent root = FXMLLoader.load(getClass().getResource("/login.fxml"));
 

@@ -2,6 +2,8 @@ package org.openjfx.popupfield;
 
 import java.time.LocalDate;
 
+import javafx.geometry.NodeOrientation;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.layout.HBox;
@@ -30,19 +32,21 @@ public class DatePopupField extends PopupField {
             "-fx-cursor: hand; " +
             "-fx-padding: 5px; "
         );
-        calendarButton.setMaxWidth(30);  // Fixe la largeur du bouton à 30px
+        calendarButton.setMaxWidth(30);  // Limite la largeur du bouton à 30px
 
         // Action du bouton
         calendarButton.setOnAction(e -> datePicker.show());
 
-        // Crée un HBox principal avec le DatePicker à gauche et le bouton à droite
+        // Crée un HBox avec le DatePicker à gauche et le bouton à droite
         HBox fieldWithButton = new HBox(5, datePicker, calendarButton);
         fieldWithButton.setStyle("-fx-alignment: center-left;");
+		fieldWithButton.setAlignment(Pos.CENTER_LEFT);
+		// fieldWithButton.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
 
-        // On contrôle que le DatePicker prenne toute la place restante
-        HBox.setHgrow(datePicker, Priority.ALWAYS);  // Le DatePicker prend tout l'espace restant
+        // Utilisation de HBox.setHgrow pour que le DatePicker prenne l'espace restant
+        HBox.setHgrow(datePicker, Priority.ALWAYS);  // Le DatePicker prend toute la place disponible
 
-        // Ajoute dans le container parent
+        // Ajoute le conteneur dans le parent
         container.getChildren().add(fieldWithButton);
 
         // Important : pour que getField() retourne bien le DatePicker
@@ -59,6 +63,3 @@ public class DatePopupField extends PopupField {
         return getValue() == null;
     }
 }
-
-
-

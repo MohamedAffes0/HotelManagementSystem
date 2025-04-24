@@ -60,7 +60,7 @@ public class AddReservation extends AddPopup {
             Date.valueOf(startDate),
             Date.valueOf(endDate),
             status,
-            12345678,
+            3,
             (int)getField(CLIENT).getValue(),
             (int)getField(ROOM).getValue()
         );

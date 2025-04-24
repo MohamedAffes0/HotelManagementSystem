@@ -6,13 +6,13 @@
 
 .root {
     -background-color: #222226;
-    -background-color-text-field: #2E2D32;
-    -background-color-menu: #2E2D32;
+    -background-color-text-field: #2e2d32;
+    -background-color-menu: #2e2d32;
     -background-color-list-view: #2b2b2b;
-    -border-color: #89B4FA;
-    -button-color: #89B4FA;
+    -border-color: #89b4fa;
+    -button-color: #89b4fa;
     -button-color-hover: #6b8ec5;
-    -button-color-dark: #2E2D32; 
+    -button-color-dark: #2e2d32;
     -button-color-dark-hover: #434347;
     -font-color-white-dusky: #aaaaaa;
     -font-color-white: #ffffff;
@@ -33,14 +33,14 @@
 }
 
 /* === LABELS === */
-.label{
+.label {
     -fx-text-fill: -font-color-white;
     -fx-font-size: 1.25em;
     /* -fx-font-weight: bold; */
 }
 
 /* === TEXT === */
-Text{
+Text {
     -fx-fill: -font-color-white;
     -fx-font-size: 1.25em;
     -fx-font-weight: bold;
@@ -58,7 +58,7 @@ Text{
     -fx-font-size: 16px;
 }
 
-.text-field-error{
+.text-field-error {
     -fx-background-color: -background-color-error;
     -fx-text-fill: -background-color;
     -fx-prompt-text-fill: -background-color;
@@ -95,11 +95,11 @@ Text{
     -fx-padding: 4;
 }
 
-.combo-box-menu{
+.combo-box-menu {
     -fx-pref-width: 120;
 }
 
-.combo-box-menu .list-view{
+.combo-box-menu .list-view {
     -fx-width: 120;
 }
 
@@ -127,36 +127,36 @@ Text{
     -fx-background-color: -button-color-hover;
 }
 
-.add-button{
+.add-button {
     -fx-background-color: -add-button-color;
     -fx-text-fill: -font-color-black;
 }
 
-.add-button:hover{
+.add-button:hover {
     -fx-background-color: -add-button-color-hover;
 }
 
-.delete-button{
+.delete-button {
     -fx-background-color: -delete-button-color;
     -fx-text-fill: -font-color-black;
 }
 
-.delete-button:hover{
+.delete-button:hover {
     -fx-background-color: -delete-button-color-hover;
 }
 
-.submit-button{
+.submit-button {
     -fx-text-fill: -font-color-black;
     -fx-pref-width: 80px;
     -fx-border-radius: 50px;
     -fx-background-radius: 50px;
 }
 
-.log-out-button{
+.log-out-button {
     -fx-background-color: -delete-button-color;
 }
 
-.log-out-button:hover{
+.log-out-button:hover {
     -fx-background-color: -delete-button-color-hover;
 }
 
@@ -182,7 +182,7 @@ Text{
 .card-button:hover {
     -fx-background-color: -button-color-dark-hover;
 }
-.card-button Label{
+.card-button Label {
     -fx-font-weight: small;
     -fx-font-size: 12px;
 }
@@ -199,7 +199,7 @@ Text{
 }
 
 /* === MAIN MENU === */
-.menu{
+.menu {
     -fx-background-color: -background-color-menu;
 }
 
@@ -231,3 +231,104 @@ Text{
     -fx-background-radius: 10;
     /* -fx-font-weight: bold; */
 }
+
+/* === DATE PICKER === */
+
+
+/* Bouton flèche */
+.date-picker .arrow-button {
+    -fx-background-color: transparent;
+    -fx-border-radius: 0;
+}
+
+.date-picker .arrow-button .arrow {
+    -fx-shape: "M0,0 L4,4 L8,0 Z";
+    -fx-mark-color: #89b4fa;
+}
+
+/* Popup */
+.date-picker .date-picker-popup {
+    -fx-background-color: #2e2d32;
+    -fx-background-insets: 0, 1;
+    -fx-background-radius: 16px;
+    -fx-border-radius: 16px;
+    -fx-alignment: CENTER;
+    -fx-spacing: 0;
+    -fx-padding: 1px;
+}
+
+/* En-tête mois/année */
+.date-picker .month-year-pane {
+    -fx-padding: 8px;
+    -fx-background-color: #2e2d32;
+    -fx-background-radius: 4px 4px 0 0;
+}
+
+.date-picker .spinner {
+    -fx-spacing: 4px;
+    -fx-alignment: CENTER;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-font-size: 1.1em;
+}
+
+.date-picker .spinner .button {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}
+
+.date-picker .spinner .button .left-arrow {
+    -fx-shape: "M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z";
+    -fx-scale-shape: false;
+    -fx-background-color: #89b4fa;
+}
+
+.date-picker .spinner .button .right-arrow {
+    -fx-shape: "M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z";
+    -fx-scale-shape: false;
+    -fx-background-color: #89b4fa;
+}
+
+.date-picker .spinner .label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: white;
+}
+
+.date-picker .calendar-grid {
+    -fx-background-color: #2e2d32;
+    -fx-padding: 8px;
+    -fx-hgap: 5px;
+    -fx-vgap: 0;
+    -fx-background-radius: 4px;
+}
+
+.date-picker .date-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-alignment: BASELINE_CENTER;
+    -fx-text-fill: #dddddd;
+    -fx-font-size: 1em;
+}
+
+.date-picker .day-cell {
+    -fx-padding: 8px 4px;
+    -fx-background-color: #2e2d32;
+}
+
+.date-picker .today {
+    -fx-background-color: #38373d;
+    -fx-text-fill: #89b4fa;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5;
+}
+
+.date-picker .selected {
+    -fx-background-color: #89b4fa;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+
+
+
+

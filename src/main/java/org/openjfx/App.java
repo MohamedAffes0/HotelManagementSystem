@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 
@@ -19,6 +20,13 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Locale.setDefault(Locale.FRANCE);
+        // Font font = Font.loadFont(getClass().getResourceAsStream("/fonts/JetBrainsMonoNLNerdFontMono-Regular.ttf"), 14);
+        // if (font == null) {
+        //     System.out.println("Font non chargée !");
+        // } else {
+        //     System.out.println("Font chargée : " + font.getName());
+        // }
+
         stage = primaryStage;
         Parent root = FXMLLoader.load(getClass().getResource("/login.fxml"));
 

@@ -1,4 +1,4 @@
-package org.openjfx.addpopup;
+package org.openjfx.popup;
 
 import org.app.client.ClientAdd.CreationStatus;
 import org.models.Person;
@@ -11,7 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 
 public class AddClient extends AddPopup {
-    final int CIN = 0;
+	final int CIN = 0;
 	final int NAME = 1;
 	final int LASTNAME = 2;
 	final int EMAIL = 3;
@@ -23,8 +23,7 @@ public class AddClient extends AddPopup {
 				new NumberPopupField("CIN"),
 				new TextPopupField("Nom"),
 				new TextPopupField("Prénom"),
-				new TextPopupField("Email")
-		);
+				new TextPopupField("Email"));
 
 		setTitle("Ajouter un client");
 	}
@@ -33,13 +32,12 @@ public class AddClient extends AddPopup {
 	public void addPressed(ActionEvent event) {
 
 		Person client = new Person(
-				(int)getField(CIN).getValue(),
-				(String)getField(NAME).getValue(),
-				(String)getField(LASTNAME).getValue(),
-				(String)getField(EMAIL).getValue()
-		);
+				(int) getField(CIN).getValue(),
+				(String) getField(NAME).getValue(),
+				(String) getField(LASTNAME).getValue(),
+				(String) getField(EMAIL).getValue());
 
-        // CreationStatus result = UserAdd.userAdd(employee, UserSelect.dataFromDB());
+		// CreationStatus result = UserAdd.userAdd(employee, UserSelect.dataFromDB());
 		CreationStatus result = ClientAdd.clientAdd(client, ClientSelect.dataFromDB());
 
 		switch (result) {

@@ -1,4 +1,4 @@
-package org.openjfx.addpopup;
+package org.openjfx.popup;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

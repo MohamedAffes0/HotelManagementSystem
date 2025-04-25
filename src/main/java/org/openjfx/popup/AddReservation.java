@@ -1,4 +1,4 @@
-package org.openjfx.addpopup;
+package org.openjfx.popup;
 
 import java.time.LocalDate;
 import java.sql.Date;

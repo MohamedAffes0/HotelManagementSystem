@@ -55,6 +55,7 @@ public abstract class UpdatePopup extends Popup {
 	// Called when the delete button is pressed.
 	public void destructivePressed(ActionEvent event) {
 		data = null;
+		delete();
 		close();
 	}
 }

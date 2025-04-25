@@ -54,8 +54,8 @@ public abstract class UpdatePopup extends Popup {
 	@Override
 	// Called when the delete button is pressed.
 	public void destructivePressed(ActionEvent event) {
-		data = null;
 		delete();
+		data = null;
 		close();
 	}
 }

@@ -30,7 +30,7 @@ public class UpdateRoom extends UpdatePopup {
 	}
 
 	@Override
-	public Room getData() {
+	public void dataFromFields() {
 		RoomState roomState = RoomState.LIBRE;
 		switch ((String) getField(STATE).getValue()) {
 			case "Libre":
@@ -43,9 +43,12 @@ public class UpdateRoom extends UpdatePopup {
 				roomState = RoomState.MAINTENANCE;
 				break;
 		}
+		
+		Room room = (Room)getData();
+		room.setCapacity((int)getField(CAPACITY).getValue());
+		room.setPrice((float)getField(PRICE).getValue());
+		room.setState(roomState);
 
-		return new Room(getData().getId(), getData().getRoomType(), getData().getFloor(),
-				(int) getField(CAPACITY).getValue(), (float) getField(PRICE).getValue(), roomState);
 	}
 
 	@Override

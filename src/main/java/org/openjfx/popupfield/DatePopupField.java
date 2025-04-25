@@ -1,6 +1,7 @@
 package org.openjfx.popupfield;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -54,7 +55,18 @@ public class DatePopupField extends PopupField {
 
 	@Override
 	public void setValue(Object value) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'setValue'");
+		if (value instanceof LocalDate) {
+			datePicker.setValue((LocalDate) value);
+		} else if (value instanceof String) {
+			datePicker.setValue(LocalDate.parse((String) value));
+		} else if (value instanceof java.sql.Date) {
+			datePicker.setValue(((java.sql.Date) value).toLocalDate());
+		} else
+		if (value instanceof java.util.Date) {
+			java.util.Date utilDate = (java.util.Date) value;
+			datePicker.setValue(utilDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+		} else {
+			throw new IllegalArgumentException("Invalid value type. Expected LocalDate or String.");
+		}
 	}
 }

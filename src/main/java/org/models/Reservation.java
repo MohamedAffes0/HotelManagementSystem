@@ -73,6 +73,23 @@ public class Reservation extends Model {
 		this.paid = paid;
 	}
 
+	public void setStartDate(Date startDate) {
+		if (startDate == null) {
+			throw new IllegalArgumentException("Start date cannot be null.");
+		}
+		this.startDate = startDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		if (endDate == null) {
+			throw new IllegalArgumentException("End date cannot be null.");
+		}
+		if (startDate != null && startDate.after(endDate)) {
+			throw new IllegalArgumentException("Start date cannot be after end date.");
+		}
+		this.endDate = endDate;
+	}
+
 	@Override
 	public boolean filter(TextField search, String filterType) {
 		String searchText = search.getText();

@@ -37,4 +37,8 @@ public class FloatPopupField extends PopupField {
 		return ((TextField)getField()).getText().isEmpty();
 	}
 
+	@Override
+	public void setValue(Object value) {
+		((TextField)getField()).setText(((Integer)value).toString());
+	}
 }

@@ -147,4 +147,9 @@ public abstract class Popup implements Initializable {
 
 		return title.getScene().getWindow();
 	}
+
+	public void close() {
+		Stage stage = (Stage) title.getScene().getWindow();
+		stage.close();
+	}
 }

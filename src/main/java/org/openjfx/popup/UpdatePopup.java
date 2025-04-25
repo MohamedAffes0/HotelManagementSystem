@@ -2,7 +2,8 @@ package org.openjfx.popup;
 
 import org.models.Model;
 import org.openjfx.popupfield.PopupField;
-
+import java.util.ResourceBundle;
+import java.net.URL;
 import javafx.event.ActionEvent;
 
 /**
@@ -22,6 +23,10 @@ public abstract class UpdatePopup extends Popup {
 
 	public abstract void update(Model newData);
 
+	public abstract void delete();
+
+	public abstract void fieldsFromData();
+
 	protected abstract void dataFromFields();
 
 	public void setData(Model data) {
@@ -33,15 +38,23 @@ public abstract class UpdatePopup extends Popup {
 	}
 
 	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		super.initialize(location, resources);
+		dataFromFields();
+	}
+
+	@Override
 	// Called when the update button is pressed.
 	public void suggestedPressed(ActionEvent event) {
 		dataFromFields();
 		update(getData());
+		close();
 	}
 
 	@Override
 	// Called when the delete button is pressed.
 	public void destructivePressed(ActionEvent event) {
-
+		data = null;
+		close();
 	}
 }

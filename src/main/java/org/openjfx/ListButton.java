@@ -44,6 +44,7 @@ public class ListButton {
 
 		id.setText(list.get(0));
 
+		content.getChildren().clear();;
 		for (int i = 1; i < list.size(); i++) {
 			Label label = new Label(list.get(i));
 			label.setMinWidth(120);

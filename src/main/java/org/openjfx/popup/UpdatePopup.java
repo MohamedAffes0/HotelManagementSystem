@@ -21,8 +21,8 @@ public abstract class UpdatePopup extends Popup {
 	}
 
 	public abstract void update(Model newData);
-	public abstract void dataFromFields();
-	
+
+	protected abstract void dataFromFields();
 
 	public void setData(Model data) {
 		this.data = data;

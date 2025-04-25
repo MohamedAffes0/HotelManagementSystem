@@ -42,7 +42,9 @@
     -add-button-color-hover: #80ac67;
     -delete-button-color: #73424F;
     -font-color-delete-button: #F38BA8;
-    -delete-button-color-hover: #bc606e;
+    -delete-button-color-hover: #A65F73;
+    -logout-button-color: #ED8795;
+    -logout-button-color-hover: #bc606e;
     -background-color-date-picker-today: #38373d;
     -font-color-date-cell: #dddddd;
 
@@ -177,11 +179,20 @@ Text {
 }
 
 .log-out-button {
-    -fx-background-color: -delete-button-color;
+    -fx-background-color: -logout-button-color;
 }
 
 .log-out-button:hover {
-    -fx-background-color: -delete-button-color-hover;
+    -fx-background-color: -logout-button-color-hover;
+}
+
+.cancel-button {
+    -fx-background-color: -button-color-dark;
+    -fx-text-fill: -font-color-white;
+}
+
+.cancel-button:hover {
+    -fx-background-color: -button-color-dark-hover;
 }
 
 /* === CARD === */

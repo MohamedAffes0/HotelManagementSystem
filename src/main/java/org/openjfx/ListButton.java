@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -44,7 +45,7 @@ public class ListButton {
 
 		id.setText(list.get(0));
 
-		content.getChildren().clear();;
+		content.getChildren().clear();
 		for (int i = 1; i < list.size(); i++) {
 			Label label = new Label(list.get(i));
 			label.setMinWidth(120);
@@ -74,6 +75,10 @@ public class ListButton {
 			stage.setOnHidden(new EventHandler<WindowEvent>() {
 				@Override
 				public void handle(WindowEvent event) {
+					if (popup.getData() == null) {
+						VBox parent = (VBox) button.getParent();
+						parent.getChildren().remove(parent.getChildren().indexOf(button));
+					}
 					setData(popup.getData());
 				}
 			});

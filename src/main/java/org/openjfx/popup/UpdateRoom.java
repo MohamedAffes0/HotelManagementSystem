@@ -1,5 +1,6 @@
 package org.openjfx.popup;
 
+import org.app.room.RoomDelete;
 import org.app.room.RoomModify;
 import org.models.Model;
 import org.models.Room;
@@ -9,6 +10,7 @@ import org.openjfx.popupfield.FloatPopupField;
 import org.openjfx.popupfield.NumberPopupField;
 
 import javafx.collections.FXCollections;
+import javafx.scene.control.ComboBox;
 
 /**
  * UpdateRoom
@@ -56,6 +58,32 @@ public class UpdateRoom extends UpdatePopup {
 		Room room = (Room) newData;
 
 		RoomModify.roomModify(room.getId(), room.getCapacity(), room.getPrice(), room.getState());
+	}
+
+	@Override
+	public void delete() {
+		RoomDelete.roomDelete(((Room)getData()).getId());
+	}
+
+	@Override
+	public void fieldsFromData() {
+		Room room = (Room)getData();
+		switch (room.getState()) {
+			case LIBRE:
+				((ComboBoxPopupField)getField(STATE)).setValue("Libre");
+				break;
+			case MAINTENANCE:
+				((ComboBoxPopupField)getField(STATE)).setValue("Maintenance");
+				break;
+			case OCCUPEE:
+				((ComboBoxPopupField)getField(STATE)).setValue("Occupée");
+				break;
+			default:
+				break;
+		}
+
+		((NumberPopupField)getField(CAPACITY)).setValue(room.getCapacity());
+		((FloatPopupField)getField(PRICE)).setValue(room.getPrice());
 	}
 
 }

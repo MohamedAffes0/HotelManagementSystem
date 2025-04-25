@@ -3,6 +3,7 @@ package org.openjfx;
 import org.app.DBLoader;
 import org.models.Model;
 import org.openjfx.popup.AddPopup;
+import org.openjfx.popup.UpdatePopup;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,6 +23,7 @@ import javafx.stage.WindowEvent;
 
 public class ListScreen<T extends Model, L extends DBLoader> {
 	private AddPopup addPopup;
+	private UpdatePopup updatePopup;
 	private L loader;
 	private final String LIST_BUTTON_PATH = "/listButton.fxml";
 
@@ -43,16 +45,16 @@ public class ListScreen<T extends Model, L extends DBLoader> {
 	@FXML
 	protected Label title;
 
-	public ListScreen(L loader, AddPopup addPopup) {
+	public ListScreen(L loader, AddPopup addPopup, UpdatePopup updatePopup) {
 		this.loader = loader;
 		this.addPopup = addPopup;
+		this.updatePopup = updatePopup;
 	}
 
 	@FXML
 	protected void addPressed(ActionEvent event) {
 		try {
 			// Load the Popup
-			// addPopup addRoom = new AddRoom();
 			Parent content = addPopup.load();
 
 			// Create the stage and configure it
@@ -98,6 +100,7 @@ public class ListScreen<T extends Model, L extends DBLoader> {
 				list.getChildren().add(listButtonLoader.load());
 				ListButton controller = listButtonLoader.getController();
 				controller.setData(item);
+				controller.setPopup(updatePopup);
 			} catch (Exception exception) {
 				throw new RuntimeException(exception);
 			}
@@ -138,5 +141,9 @@ public class ListScreen<T extends Model, L extends DBLoader> {
 
 	public void setAddPopup(AddPopup addPopup) {
 		this.addPopup = addPopup;
+	}
+
+	public void setUpdatePopup(UpdatePopup updatePopup) {
+		this.updatePopup = updatePopup;
 	}
 }

@@ -50,7 +50,7 @@
                   <Button fx:id="clients" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#clientsPressed" style="-fx-alignment: left;" styleClass="menu-button" text="Clients" />
                   <Button fx:id="comptes" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#comptesPressed" style="-fx-alignment: left;" styleClass="menu-button" text="Comptes" />
                   <AnchorPane VBox.vgrow="ALWAYS" />
-                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#logOutPressed" text="Logout" styleClass="log-out-button"/>
+                  <Button fx:id="logout" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#logOutPressed" text="Logout" styleClass="log-out-button"/>
                </children>
                <HBox.margin>
                   <Insets />

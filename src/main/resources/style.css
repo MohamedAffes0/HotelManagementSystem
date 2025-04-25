@@ -9,6 +9,17 @@
     src: url("fonts/JetBrainsMonoNLNerdFontMono-Regular.ttf");
 }
 
+@font-face {
+    font-family: "Segoe UI This";
+    src: url("fonts/segoeuithis.ttf");
+}
+
+@font-face {
+    font-family: "Segoe UI This Bold";
+    src: url("fonts/segoeuithisbd.ttf");
+}
+
+
 .root {
     -background-color: #222226;
     -background-color-text-field: #2e2d32;
@@ -33,10 +44,12 @@
     -delete-button-color-hover: #bc606e;
 
     -fx-background-color: -background-color;
-    -fx-font-family: "Adwaita Mono Bold";
-    -fx-font-weight: bold;
+    /* -fx-font-family: "Adwaita Mono Bold";
+    -fx-font-weight: bold; */
     /* -fx-font-family: "JetBrainsMonoNL NFM Regular"; */
     /* -fx-font-weight: bold; */
+    -fx-font-family: "Segoe UI This Bold";
+    -fx-font-weight: small;
     -fx-text-fill: -font-color-white;
 }
 

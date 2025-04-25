@@ -20,12 +20,13 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Locale.setDefault(Locale.FRANCE);
-        // Font font = Font.loadFont(getClass().getResourceAsStream("/fonts/JetBrainsMonoNLNerdFontMono-Regular.ttf"), 14);
+        // Font font = Font.loadFont(getClass().getResourceAsStream("/fonts/segoeuithis.ttf"), 14);
         // if (font == null) {
         //     System.out.println("Font non chargée !");
         // } else {
         //     System.out.println("Font chargée : " + font.getName());
         // }
+        // System.out.println(Font.getDefault().getName());
 
         stage = primaryStage;
         Parent root = FXMLLoader.load(getClass().getResource("/login.fxml"));

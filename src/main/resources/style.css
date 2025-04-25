@@ -42,6 +42,8 @@
     -add-button-color-hover: #80ac67;
     -delete-button-color: #ed8796;
     -delete-button-color-hover: #bc606e;
+    -background-color-date-picker-today: #38373d;
+    -font-color-date-cell: #dddddd;
 
     -fx-background-color: -background-color;
     /* -fx-font-family: "Adwaita Mono Bold";
@@ -227,19 +229,19 @@ Text {
 /* === ÉTIQUETTES D'ÉTAT === */
 .label-libre {
     -fx-background-color: -green-label;
-    -fx-text-fill: #2f2f2f;
+    -fx-text-fill: -font-color-black;
     -fx-padding: 4 10;
     -fx-background-radius: 10;
 }
 .label-occupee {
     -fx-background-color: -blue-label;
-    -fx-text-fill: #2f2f2f;
+    -fx-text-fill: -font-color-black;
     -fx-padding: 4 10;
     -fx-background-radius: 10;
 }
 .label-maintenance {
     -fx-background-color: -red-label;
-    -fx-text-fill: #2f2f2f;
+    -fx-text-fill: -font-color-black;
     -fx-padding: 4 10;
     -fx-background-radius: 10;
 }
@@ -264,12 +266,12 @@ Text {
 
 .date-picker .arrow-button .arrow {
     -fx-shape: "M0,0 L4,4 L8,0 Z";
-    -fx-mark-color: #89b4fa;
+    -fx-mark-color: -button-color;
 }
 
 /* Popup */
 .date-picker .date-picker-popup {
-    -fx-background-color: #2e2d32;
+    -fx-background-color: -button-color-dark;
     -fx-background-insets: 0, 1;
     -fx-background-radius: 16px;
     -fx-border-radius: 16px;
@@ -281,7 +283,7 @@ Text {
 /* En-tête mois/année */
 .date-picker .month-year-pane {
     -fx-padding: 8px;
-    -fx-background-color: #2e2d32;
+    -fx-background-color: -button-color-dark;
     -fx-background-radius: 4px 4px 0 0;
 }
 
@@ -301,22 +303,22 @@ Text {
 .date-picker .spinner .button .left-arrow {
     -fx-shape: "M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z";
     -fx-scale-shape: false;
-    -fx-background-color: #89b4fa;
+    -fx-background-color: -button-color;
 }
 
 .date-picker .spinner .button .right-arrow {
     -fx-shape: "M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z";
     -fx-scale-shape: false;
-    -fx-background-color: #89b4fa;
+    -fx-background-color: -button-color;
 }
 
 .date-picker .spinner .label {
     -fx-alignment: CENTER;
-    -fx-text-fill: white;
+    -fx-text-fill: -font-color-white;
 }
 
 .date-picker .calendar-grid {
-    -fx-background-color: #2e2d32;
+    -fx-background-color: -button-color-dark;
     -fx-padding: 8px;
     -fx-hgap: 5px;
     -fx-vgap: 0;
@@ -327,34 +329,34 @@ Text {
     -fx-background-color: transparent;
     -fx-padding: 0;
     -fx-alignment: BASELINE_CENTER;
-    -fx-text-fill: #dddddd;
+    -fx-text-fill: -font-color-date-cell;
     -fx-font-size: 1em;
 }
 
 .date-picker .day-cell {
     -fx-padding: 8px 4px;
-    -fx-background-color: #2e2d32;
+    -fx-background-color: -button-color-dark;
 }
 
 .date-picker .today {
-    -fx-background-color: #38373d;
-    -fx-text-fill: #89b4fa;
+    -fx-background-color: -background-color-date-picker-today;
+    -fx-text-fill: -button-color;
     -fx-font-weight: bold;
     -fx-background-radius: 5;
 }
 
 .date-picker .selected {
-    -fx-background-color: #89b4fa;
-    -fx-text-fill: white;
+    -fx-background-color: -button-color;
+    -fx-text-fill: -font-color-white;
     -fx-background-radius: 5;
     -fx-border-radius: 5;
 }
 
 .calendar-button{
     -fx-shape: "M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z";
-    -fx-background-color: #ffffff;
+    -fx-background-color: -font-color-white;
     -fx-scale-shape: false;
-    -fx-text-fill: white;
+    -fx-text-fill: -font-color-white;
     -fx-font-size: 14px;
     -fx-background-radius: 8;
     -fx-cursor: hand;

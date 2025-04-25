@@ -15,9 +15,9 @@ import javafx.collections.FXCollections;
  * UpdateRoom
  */
 public class UpdateRoom extends UpdatePopup {
-	final int CAPACITY = 3;
-	final int PRICE = 3;
-	final int STATE = 3;
+	final int CAPACITY = 0;
+	final int PRICE = 1;
+	final int STATE = 2;
 
 	public UpdateRoom() {
 		super(

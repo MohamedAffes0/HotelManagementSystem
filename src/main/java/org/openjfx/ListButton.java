@@ -79,7 +79,9 @@ public class ListButton {
 						VBox parent = (VBox) button.getParent();
 						parent.getChildren().remove(parent.getChildren().indexOf(button));
 					}
-					setData(popup.getData());
+					else {
+						setData(popup.getData());
+					}
 				}
 			});
 			stage.show();

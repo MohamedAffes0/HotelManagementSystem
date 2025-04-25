@@ -40,7 +40,7 @@ public abstract class UpdatePopup extends Popup {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		super.initialize(location, resources);
-		dataFromFields();
+		fieldsFromData();
 	}
 
 	@Override

@@ -28,7 +28,7 @@ public abstract class Popup implements Initializable {
 	private String suggestedText = "Suggested";
 	private String destuctiveText = "Destructive";
 	private String cancelText = "Cancel";
-	final String filePath = "/addPopup.fxml";
+	final String filePath = "/popup.fxml";
 
 	@FXML
 	private Label title;

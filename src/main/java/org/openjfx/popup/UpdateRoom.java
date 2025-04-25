@@ -19,8 +19,8 @@ public class UpdateRoom extends UpdatePopup {
 	final int PRICE = 3;
 	final int STATE = 3;
 
-	public UpdateRoom(int id) {
-		super(id,
+	public UpdateRoom() {
+		super(
 				new NumberPopupField("Capacité"),
 				new FloatPopupField("Prix"),
 				new ComboBoxPopupField("Etat",
@@ -44,8 +44,8 @@ public class UpdateRoom extends UpdatePopup {
 				break;
 		}
 
-		return new Room(getId(), RoomType.SIMPLE, 1, (int) getField(CAPACITY).getValue(),
-				(float) getField(PRICE).getValue(), roomState);
+		return new Room(getData().getId(), getData().getRoomType(), getData().getFloor(),
+				(int) getField(CAPACITY).getValue(), (float) getField(PRICE).getValue(), roomState);
 	}
 
 	@Override
@@ -54,7 +54,7 @@ public class UpdateRoom extends UpdatePopup {
 			throw new RuntimeException("Invalid data received");
 		Room room = (Room) newData;
 
-		RoomModify.roomModify(getId(), room.getCapacity(), room.getPrice(), room.getState());
+		RoomModify.roomModify(room.getId(), room.getCapacity(), room.getPrice(), room.getState());
 	}
 
 }

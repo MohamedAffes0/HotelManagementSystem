@@ -8,14 +8,13 @@ import javafx.event.ActionEvent;
 /**
  * UpdatePopup
  */
-abstract class UpdatePopup extends Popup {
-	private int id = 0;
+public abstract class UpdatePopup extends Popup {
+	private Model data;
 
-	public UpdatePopup(int id, PopupField... fields) {
+	public UpdatePopup(PopupField... fields) {
 		super();
 		setFields(fields);
 
-		this.id = id;
 		setSuggestedText("Modifier");
 		setDestructiveText("Supprimer");
 		setCancelText("Annuler");
@@ -24,8 +23,9 @@ abstract class UpdatePopup extends Popup {
 	public abstract Model getData();
 	public abstract void update(Model newData);
 	
-	public int getId() {
-		return id;
+
+	public void setData(Model data) {
+		this.data = data;
 	}
 
 	@Override

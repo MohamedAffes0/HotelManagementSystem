@@ -1,4 +1,4 @@
-package org.openjfx.addpopup;
+package org.openjfx.popup;
 
 import org.app.user.UserAdd.CreationStatus;
 import org.app.user.UserSelect;

@@ -12,7 +12,7 @@ import javafx.scene.shape.SVGPath;
 import javafx.scene.Parent;
 import javafx.fxml.FXMLLoader;
 
-import javafx.fxml.Initializable; 
+import javafx.fxml.Initializable;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -25,15 +25,15 @@ import org.models.Employee;
 import org.models.Person;
 import org.models.Reservation;
 import org.models.Room;
-import org.openjfx.addpopup.AddClient;
-import org.openjfx.addpopup.AddReservation;
-import org.openjfx.addpopup.AddRoom;
-import org.openjfx.addpopup.AddUser;
+import org.openjfx.popup.AddClient;
+import org.openjfx.popup.AddReservation;
+import org.openjfx.popup.AddRoom;
+import org.openjfx.popup.AddUser;
 
 public class MainMenu implements Initializable {
 	private App main;
 
-	@FXML 
+	@FXML
 	private Button chambres;
 
 	@FXML
@@ -53,7 +53,8 @@ public class MainMenu implements Initializable {
 
 	@FXML
 	void chambresPressed(ActionEvent event) throws Exception {
-		ListScreen<Room, RoomSelect> controller = new ListScreen<Room, RoomSelect>(new RoomSelect(), new AddRoom());
+		ListScreen<Room, RoomSelect> controller = new ListScreen<Room, RoomSelect>(new RoomSelect(),
+				new AddRoom());
 		changeCurrentMenu(controller,
 				"Chambres",
 				FXCollections.observableArrayList("Etage", "Type", "Capacité", "Prix", "Etat"),
@@ -63,7 +64,8 @@ public class MainMenu implements Initializable {
 
 	@FXML
 	void clientsPressed(ActionEvent event) throws Exception {
-		ListScreen<Person, ClientSelect> controller = new ListScreen<Person, ClientSelect>(new ClientSelect(), new AddClient());
+		ListScreen<Person, ClientSelect> controller = new ListScreen<Person, ClientSelect>(new ClientSelect(),
+				new AddClient());
 		changeCurrentMenu(controller,
 				"Clients",
 				FXCollections.observableArrayList("Cin"),
@@ -73,7 +75,8 @@ public class MainMenu implements Initializable {
 
 	@FXML
 	void comptesPressed(ActionEvent event) {
-		ListScreen<Employee, UserSelect> controller = new ListScreen<Employee, UserSelect>(new UserSelect(), new AddUser());
+		ListScreen<Employee, UserSelect> controller = new ListScreen<Employee, UserSelect>(new UserSelect(),
+				new AddUser());
 		changeCurrentMenu(controller,
 				"Comptes",
 				FXCollections.observableArrayList(),
@@ -83,18 +86,18 @@ public class MainMenu implements Initializable {
 
 	@FXML
 	void reservationsPressed(ActionEvent event) {
-		ListScreen<Reservation, ReservationSelect> controller = new ListScreen<Reservation, ReservationSelect>(new ReservationSelect(), new AddReservation());
+		ListScreen<Reservation, ReservationSelect> controller = new ListScreen<Reservation, ReservationSelect>(
+				new ReservationSelect(), new AddReservation());
 		changeCurrentMenu(controller,
 				"Réservations",
 				FXCollections.observableArrayList("Est Payé", "Client", "Chambre"),
 				"Ajouter Réservation",
 				"/addRoom.fxml");
 	}
-	
+
 	@FXML
 	void logOutPressed(ActionEvent event) throws Exception {
 		try {
-			App main = new App();
 			main.changeScene("/login.fxml");
 			System.out.println("Logged out successfully!");
 		} catch (IOException exception) {

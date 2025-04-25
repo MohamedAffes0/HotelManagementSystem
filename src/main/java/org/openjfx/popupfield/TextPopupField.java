@@ -6,8 +6,7 @@ import javafx.scene.control.TextField;
  * TextPopupField
  */
 public class TextPopupField extends PopupField {
-	//private TextField field = new TextField();
-
+	// private TextField field = new TextField();
 
 	public TextPopupField(String name) {
 		super(name);
@@ -16,11 +15,16 @@ public class TextPopupField extends PopupField {
 
 	@Override
 	public String getValue() {
-		return ((TextField)getField()).getText();
+		return ((TextField) getField()).getText();
 	}
 
 	@Override
 	public boolean isEmpty() {
 		return getValue().isEmpty();
+	}
+
+	@Override
+	public void setValue(Object value) {
+		((TextField) getField()).setText((String) value);
 	}
 }

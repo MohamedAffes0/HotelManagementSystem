@@ -51,4 +51,10 @@ public class DatePopupField extends PopupField {
 	public boolean isEmpty() {
 		return getValue() == null;
 	}
+
+	@Override
+	public void setValue(Object value) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'setValue'");
+	}
 }

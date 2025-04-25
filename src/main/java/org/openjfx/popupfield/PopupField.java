@@ -52,6 +52,7 @@ public abstract class PopupField {
 
 	public abstract Object getValue();
 
+	public abstract void setValue(Object value);
 
 	public abstract boolean isEmpty();
 }

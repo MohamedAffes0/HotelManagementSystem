@@ -1,4 +1,4 @@
-package org.openjfx.addpopup;
+package org.openjfx.popup;
 
 import org.models.Room;
 import org.app.room.RoomAdd;

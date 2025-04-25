@@ -4,7 +4,6 @@ import org.app.room.RoomModify;
 import org.models.Model;
 import org.models.Room;
 import org.models.Room.RoomState;
-import org.models.Room.RoomType;
 import org.openjfx.popupfield.ComboBoxPopupField;
 import org.openjfx.popupfield.FloatPopupField;
 import org.openjfx.popupfield.NumberPopupField;
@@ -30,7 +29,7 @@ public class UpdateRoom extends UpdatePopup {
 	}
 
 	@Override
-	public Room getData() {
+	protected void dataFromFields() {
 		RoomState roomState = RoomState.LIBRE;
 		switch ((String) getField(STATE).getValue()) {
 			case "Libre":
@@ -44,8 +43,10 @@ public class UpdateRoom extends UpdatePopup {
 				break;
 		}
 
-		return new Room(getData().getId(), getData().getRoomType(), getData().getFloor(),
-				(int) getField(CAPACITY).getValue(), (float) getField(PRICE).getValue(), roomState);
+		Room room = (Room) getData();
+		room.setCapacity((int) getField(CAPACITY).getValue());
+		room.setPrice((float) getField(PRICE).getValue());
+		room.setState(roomState);
 	}
 
 	@Override

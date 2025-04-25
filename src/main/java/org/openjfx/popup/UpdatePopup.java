@@ -20,17 +20,22 @@ public abstract class UpdatePopup extends Popup {
 		setCancelText("Annuler");
 	}
 
-	public abstract Model getData();
 	public abstract void update(Model newData);
-	
+
+	protected abstract void dataFromFields();
 
 	public void setData(Model data) {
 		this.data = data;
 	}
 
+	public Model getData() {
+		return data;
+	}
+
 	@Override
 	// Called when the update button is pressed.
 	public void suggestedPressed(ActionEvent event) {
+		dataFromFields();
 		update(getData());
 	}
 

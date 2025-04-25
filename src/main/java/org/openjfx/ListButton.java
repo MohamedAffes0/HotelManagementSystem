@@ -61,9 +61,9 @@ public class ListButton {
 	@FXML
 	void pressed(ActionEvent event) {
 		try {
+			popup.setData(data);
 			// Load the Popup
 			Parent content = popup.load();
-			popup.setData(data);
 
 			// Create the stage and configure it
 			Stage stage = new Stage();

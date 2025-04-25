@@ -39,6 +39,6 @@ public class FloatPopupField extends PopupField {
 
 	@Override
 	public void setValue(Object value) {
-		((TextField)getField()).setText(((Integer)value).toString());
+		((TextField)getField()).setText(((Float)value).toString());
 	}
 }

@@ -70,6 +70,14 @@ public class Room extends Model {
 		return state;
 	}
 
+	public void setPrice(float price) {
+		this.price = price;
+	}
+
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
+	}
+
 	public void setState(RoomState state) {
 		this.state = state;
 	}

@@ -12,7 +12,7 @@ import javafx.scene.shape.SVGPath;
 import javafx.scene.Parent;
 import javafx.fxml.FXMLLoader;
 
-import javafx.fxml.Initializable; 
+import javafx.fxml.Initializable;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -25,15 +25,16 @@ import org.models.Employee;
 import org.models.Person;
 import org.models.Reservation;
 import org.models.Room;
-import org.openjfx.addpopup.AddClient;
-import org.openjfx.addpopup.AddReservation;
-import org.openjfx.addpopup.AddRoom;
-import org.openjfx.addpopup.AddUser;
+import org.openjfx.popup.AddClient;
+import org.openjfx.popup.AddReservation;
+import org.openjfx.popup.AddRoom;
+import org.openjfx.popup.AddUser;
+import org.openjfx.popup.UpdateRoom;
 
 public class MainMenu implements Initializable {
 	private App main;
 
-	@FXML 
+	@FXML
 	private Button chambres;
 
 	@FXML
@@ -53,7 +54,8 @@ public class MainMenu implements Initializable {
 
 	@FXML
 	void chambresPressed(ActionEvent event) throws Exception {
-		ListScreen<Room, RoomSelect> controller = new ListScreen<Room, RoomSelect>(new RoomSelect(), new AddRoom());
+		ListScreen<Room, RoomSelect> controller = new ListScreen<Room, RoomSelect>(new RoomSelect(),
+				new AddRoom(), new UpdateRoom());
 		changeCurrentMenu(controller,
 				"Chambres",
 				FXCollections.observableArrayList("Etage", "Type", "Capacité", "Prix", "Etat"),
@@ -63,7 +65,8 @@ public class MainMenu implements Initializable {
 
 	@FXML
 	void clientsPressed(ActionEvent event) throws Exception {
-		ListScreen<Person, ClientSelect> controller = new ListScreen<Person, ClientSelect>(new ClientSelect(), new AddClient());
+		ListScreen<Person, ClientSelect> controller = new ListScreen<Person, ClientSelect>(new ClientSelect(),
+				new AddClient(), new UpdateRoom());
 		changeCurrentMenu(controller,
 				"Clients",
 				FXCollections.observableArrayList("Cin"),
@@ -73,7 +76,8 @@ public class MainMenu implements Initializable {
 
 	@FXML
 	void comptesPressed(ActionEvent event) {
-		ListScreen<Employee, UserSelect> controller = new ListScreen<Employee, UserSelect>(new UserSelect(), new AddUser());
+		ListScreen<Employee, UserSelect> controller = new ListScreen<Employee, UserSelect>(new UserSelect(),
+				new AddUser(), new UpdateRoom());
 		changeCurrentMenu(controller,
 				"Comptes",
 				FXCollections.observableArrayList(),
@@ -83,18 +87,18 @@ public class MainMenu implements Initializable {
 
 	@FXML
 	void reservationsPressed(ActionEvent event) {
-		ListScreen<Reservation, ReservationSelect> controller = new ListScreen<Reservation, ReservationSelect>(new ReservationSelect(), new AddReservation());
+		ListScreen<Reservation, ReservationSelect> controller = new ListScreen<Reservation, ReservationSelect>(
+				new ReservationSelect(), new AddReservation(), new UpdateRoom());
 		changeCurrentMenu(controller,
 				"Réservations",
 				FXCollections.observableArrayList("Est Payé", "Client", "Chambre"),
 				"Ajouter Réservation",
 				"/addRoom.fxml");
 	}
-	
+
 	@FXML
 	void logOutPressed(ActionEvent event) throws Exception {
 		try {
-			App main = new App();
 			main.changeScene("/login.fxml");
 			System.out.println("Logged out successfully!");
 		} catch (IOException exception) {
@@ -120,7 +124,7 @@ public class MainMenu implements Initializable {
 		setIconToButton(clients, svgPath, 0.8, "#ffffff");
 
 		// Set the icon for the "chambres" button
-		svgPath = "M7 14c1.66 0 3-1.34 3-3S8.66 8 7 8s-3 1.34-3 3s1.34 3 3 3m0-4c.55 0 1 .45 1 1s-.45 1-1 1s-1-.45-1-1s.45-1 1-1m12-3h-8v8H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4m2 8h-8V9h6c1.1 0 2 .9 2 2Z";
+		svgPath = "M2.6803 18.3257H3.14529C3.55161 18.3257 3.81701 18.0681 3.81701 17.6618V16.4836C3.90822 16.5087 4.17397 16.5251 4.36461 16.5251H19.6733C19.8643 16.5251 20.1218 16.5083 20.213 16.4836V17.6618C20.213 18.0685 20.4784 18.3257 20.8851 18.3257H21.3579C21.7646 18.3257 22.03 18.0681 22.03 17.6618V12.2519C22.03 10.833 21.3082 10.0365 19.9723 9.93668V7.2151C19.9723 5.74648 19.1925 5 17.7654 5H6.26496C4.84605 5 4.05808 5.74648 4.05808 7.2151V9.93704C2.72144 10.0361 2 10.8327 2 12.2516V17.6615C2 18.0681 2.2654 18.3257 2.6803 18.3257ZM6.14049 8.45947C6.14049 7.72945 6.54681 7.32276 7.29364 7.32276H10.0735C10.8118 7.32276 11.2267 7.72945 11.2267 8.45947V9.9281H6.14049V8.45947ZM12.8116 8.45947C12.8116 7.72945 13.2182 7.32276 13.9651 7.32276H16.7364C17.4828 7.32276 17.8981 7.72945 17.8981 8.45947V9.9281H12.8119L12.8116 8.45947ZM3.65963 15.3137C3.49367 15.3137 3.38565 15.1974 3.38565 15.0064V12.1271C3.38565 11.5216 3.7841 11.1399 4.39788 11.1399H19.6407C20.2463 11.1399 20.6447 11.5216 20.6447 12.1271V15.0064C20.6447 15.1974 20.5367 15.3137 20.3793 15.3137H3.65963Z";
 		setIconToButton(chambres, svgPath, 0.7, "#ffffff");
 
 		// Set the icon for the "reservations" button

@@ -2,8 +2,8 @@ package org.openjfx;
 
 import org.app.DBLoader;
 import org.models.Model;
-import org.openjfx.addpopup.AddPopup;
-import org.openjfx.addpopup.AddRoom;
+import org.openjfx.popup.AddPopup;
+import org.openjfx.popup.UpdatePopup;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,7 +14,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label; import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -22,8 +23,9 @@ import javafx.stage.WindowEvent;
 
 public class ListScreen<T extends Model, L extends DBLoader> {
 	private AddPopup addPopup;
+	private UpdatePopup updatePopup;
 	private L loader;
-	private	final String LIST_BUTTON_PATH = "/listButton.fxml";
+	private final String LIST_BUTTON_PATH = "/listButton.fxml";
 
 	@FXML
 	protected Button addButton;
@@ -43,18 +45,18 @@ public class ListScreen<T extends Model, L extends DBLoader> {
 	@FXML
 	protected Label title;
 
-	public ListScreen(L loader, AddPopup addPopup) {
+	public ListScreen(L loader, AddPopup addPopup, UpdatePopup updatePopup) {
 		this.loader = loader;
 		this.addPopup = addPopup;
+		this.updatePopup = updatePopup;
 	}
 
 	@FXML
 	protected void addPressed(ActionEvent event) {
 		try {
 			// Load the Popup
-			//addPopup addRoom = new AddRoom();
 			Parent content = addPopup.load();
-			
+
 			// Create the stage and configure it
 			Stage stage = new Stage();
 			Scene scene = new Scene(content);
@@ -88,7 +90,7 @@ public class ListScreen<T extends Model, L extends DBLoader> {
 
 		list.getChildren().clear();
 		for (Object o : loader.getData()) {
-			T item = (T)o;
+			T item = (T) o;
 			if (!item.filter(search, filter.getValue())) {
 				continue;
 			}
@@ -98,6 +100,7 @@ public class ListScreen<T extends Model, L extends DBLoader> {
 				list.getChildren().add(listButtonLoader.load());
 				ListButton controller = listButtonLoader.getController();
 				controller.setData(item);
+				controller.setPopup(updatePopup);
 			} catch (Exception exception) {
 				throw new RuntimeException(exception);
 			}
@@ -122,8 +125,9 @@ public class ListScreen<T extends Model, L extends DBLoader> {
 	}
 
 	public void setFilterItems(ObservableList<String> items) {
+		// Delete the search if no filter are provided.
 		if (items.isEmpty()) {
-			VBox mainContainer = (VBox)searchContainer.getParent();
+			VBox mainContainer = (VBox) searchContainer.getParent();
 			mainContainer.getChildren().remove(1);
 			return;
 		}
@@ -137,5 +141,9 @@ public class ListScreen<T extends Model, L extends DBLoader> {
 
 	public void setAddPopup(AddPopup addPopup) {
 		this.addPopup = addPopup;
+	}
+
+	public void setUpdatePopup(UpdatePopup updatePopup) {
+		this.updatePopup = updatePopup;
 	}
 }

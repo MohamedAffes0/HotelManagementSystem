@@ -1,6 +1,5 @@
 package org.openjfx.popupfield;
 
-
 import org.app.StringNumberExtract;
 
 import javafx.event.EventHandler;
@@ -29,12 +28,17 @@ public class NumberPopupField extends PopupField {
 	}
 
 	public Integer getValue() {
-		return Integer.parseInt(((TextField)getField()).getText());
+		return Integer.parseInt(((TextField) getField()).getText());
 	}
 
 	@Override
 	public boolean isEmpty() {
-		return ((TextField)getField()).getText().isEmpty();
+		return ((TextField) getField()).getText().isEmpty();
+	}
+
+	@Override
+	public void setValue(Object value) {
+		((TextField) getField()).setText(((Integer) value).toString());
 	}
 
 }

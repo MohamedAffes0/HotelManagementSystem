@@ -91,53 +91,65 @@ public class ListButton {
 			stage.setOnHidden(new EventHandler<WindowEvent>() {
 				@Override
 				public void handle(WindowEvent event) {
-					if (popup.getData() == null) {
-                        VBox parent = (VBox) button.getParent();
-                        int index = getIndex();
-
-						if (parent.getChildren().size() == 1) {
-							parent.getChildren().remove(parent.getChildren().indexOf(button));
-							return;
-						}
-                        if (isFirst()) {
-                            parent.getChildren().get(index +1).setStyle("-fx-background-radius: 12 12 0 0;");
-                        }
-                        if (isLast()) {
-                            parent.getChildren().get(index -1).setStyle("-fx-background-radius: 0 0 12 12;") ;
-                        }
-						if (parent.getChildren().size() == 2) {
-							if (isFirst()) {
-								parent.getChildren().get(index +1).setStyle("-fx-background-radius: 12;") ;
-							} else {
-								parent.getChildren().get(index -1).setStyle("-fx-background-radius: 12;") ;
-							}
-						}
-						parent.getChildren().remove(parent.getChildren().indexOf(button));
-                    } else {
-                        setData(popup.getData());
-                    }
+					if (popup.getData() != null) {
+						setData(popup.getData());
+						return;
+					}
+					VBox parent = (VBox) button.getParent();
+					int index = getIndex();
+					
+					// Delete the button
+					parent.getChildren().remove(index);
+					
+					// Do nothing if the there are no buttons
+					if (parent.getChildren().size() == 0) {
+						return;
+					}
+					
+					// Change the preceeding button if not first
+					if (index > 0) {
+						updateStyle((Button)parent.getChildren().get(index - 1));
+					}
+					
+					// Change the following button if not last
+					if (index < parent.getChildren().size()) {
+						parent.getChildren().get(index)
+								.setStyle("-fx-background-radius: 0 0 12 12;");
+					}
 				}
 			});
 			stage.show();
-		}catch(Exception e)
-		{
+		} catch (Exception e) {
 			System.out.println(e);
 			System.out.println("Error opening add popup");
 		}
 	}
 
-	public void setStyle() {
-		if (this.isFirst()) {
-			button.setStyle("-fx-background-radius: 12 12 0 0;");
-		}
-		if (this.isLast()) {
-			button.setStyle("-fx-background-radius: 0 0 12 12;");
-		}
-		if (this.isFirst() && this.isLast()) {
+	// Changes the border radius of the button if it's at the top or bottom of the list.
+	public static void updateStyle(Button button) {
+		VBox parent = (VBox) button.getParent();
+		int index = parent.getChildren().indexOf(button);
+		int listSize = parent.getChildren().size();
+
+		// There is only 1 button
+		if (listSize == 1) {
 			button.setStyle("-fx-background-radius: 12;");
+			return;
 		}
-		if (!this.isFirst() && !this.isLast()) {
-			button.setStyle("-fx-background-radius: 0;");
+
+		// The button is at the top
+		if (index == 0) {
+			button.setStyle("-fx-background-radius: 12 12 0 0;");
+			return;
 		}
+
+		// The button is at the bottom
+		if (index == (listSize - 1)) {
+			button.setStyle("-fx-background-radius: 0 0 12 12;");
+			return;
+		}
+
+		// The button is in the middle (neither top nor bottom)
+		button.setStyle("-fx-background-radius: 0;");
 	}
 }

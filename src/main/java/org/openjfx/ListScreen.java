@@ -94,7 +94,9 @@ public class ListScreen<T extends Model, L extends DBLoader> {
 
 		list.getChildren().clear();
 
-		ArrayList<ListButton> buttons = new ArrayList<>();
+		if (loader.getData().size() == 0) {
+			return;
+		}
 
 		for (Object o : loader.getData()) {
 			T item = (T) o;
@@ -108,16 +110,14 @@ public class ListScreen<T extends Model, L extends DBLoader> {
 				ListButton controller = listButtonLoader.getController();
 				controller.setData(item);
 				controller.setPopup(updatePopup);
-				buttons.add(controller);
 			} catch (Exception exception) {
 				throw new RuntimeException(exception);
 			}
 		}
-
-
+		
 		// Set the style for the first and last buttons
-		buttons.get(0).setStyle();
-		buttons.get(buttons.size() -1).setStyle();
+		ListButton.updateStyle((Button)list.getChildren().get(0));
+		ListButton.updateStyle((Button)list.getChildren().get(list.getChildren().size()));
 	}
 
 	public void loadFromDB() {

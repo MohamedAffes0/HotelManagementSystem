@@ -77,6 +77,16 @@ public class ListButton {
 				public void handle(WindowEvent event) {
 					if (popup.getData() == null) {
 						VBox parent = (VBox) button.getParent();
+						int index = parent.getChildren().indexOf(button);
+						
+						if (index == 0 && parent.getChildren().size() >= 2) {
+							//parent.getChildren().get(index + 1) ;
+							System.out.println("change");
+						}
+						else if (index == parent.getChildren().size() - 1 && parent.getChildren().size() >= 2) {
+							//parent.getChildren().get(index - 1) ;
+							System.out.println("change");
+						}
 						parent.getChildren().remove(parent.getChildren().indexOf(button));
 					}
 					else {

@@ -19,6 +19,7 @@ import org.openjfx.popup.UpdatePopup;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
 
 public class ListButton {
 	Model data;
@@ -45,8 +46,13 @@ public class ListButton {
 			throw new RuntimeException("No data in model");
 
 		id.setText(fields.get(0).getContent());
+		if (fields.get(0).getIcon() != null) {
+			id.setGraphic(fields.get(0).getIcon());
+			id.setContentDisplay(ContentDisplay.RIGHT);
+		}
 
 		content.getChildren().clear();
+
 		for (ModelField field : fields) {
 			Label label = new Label(field.getContent());
 
@@ -54,6 +60,12 @@ public class ListButton {
 				label.getStyleClass().add(field.getStyleClass());
 
 			label.setAlignment(Pos.CENTER);
+
+			if (field.getIcon() != null) {
+				label.setGraphic(field.getIcon());
+				label.setContentDisplay(ContentDisplay.RIGHT);
+			}
+
 			content.getChildren().add(label);
 		}
 	}

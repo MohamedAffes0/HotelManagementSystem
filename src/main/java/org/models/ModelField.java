@@ -1,5 +1,6 @@
 package org.models;
 
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.shape.SVGPath;
 
 /**
@@ -11,11 +12,13 @@ public class ModelField {
 	private String content = "";
 	private String styleClass;
 	private SVGPath icon;
+	private ContentDisplay iconPosition;
 
-	public ModelField(String content, String styleClass, SVGPath icon) {
+	public ModelField(String content, String styleClass, SVGPath icon, ContentDisplay iconPosition) {
 		this.content = content;
 		this.styleClass = styleClass;
 		this.icon = icon;
+		this.iconPosition = iconPosition;
 	}
 
 	public ModelField(String content, String styleClass) {
@@ -40,5 +43,9 @@ public class ModelField {
 
 	public SVGPath getIcon() {
 		return icon;
+	}
+
+	public ContentDisplay getIconPosition() {
+		return iconPosition;
 	}
 }

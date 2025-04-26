@@ -48,7 +48,7 @@ public class ListButton {
 		id.setText(fields.get(0).getContent());
 		if (fields.get(0).getIcon() != null) {
 			id.setGraphic(fields.get(0).getIcon());
-			id.setContentDisplay(ContentDisplay.RIGHT);
+			id.setContentDisplay(fields.get(0).getIconPosition());
 		}
 
 		content.getChildren().clear();
@@ -64,7 +64,7 @@ public class ListButton {
 
 			if (field.getIcon() != null) {
 				label.setGraphic(field.getIcon());
-				label.setContentDisplay(ContentDisplay.RIGHT);
+				label.setContentDisplay(field.getIconPosition());
 			}
 
 			content.getChildren().add(label);

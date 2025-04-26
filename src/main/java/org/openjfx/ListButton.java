@@ -58,6 +58,22 @@ public class ListButton {
 		this.popup = popup;
 	}
 
+	public int getIndex() {
+		VBox parent = (VBox) button.getParent();
+		return parent.getChildren().indexOf(button);
+	}
+
+	// Returns true if the button is the first in the list.
+	public boolean isFirst() {
+		return getIndex() == 0;
+
+	}
+
+	public boolean isLast() {
+		VBox parent = (VBox) button.getParent();
+		return getIndex() == (parent.getChildren().size() - 1);
+	}
+
 	@FXML
 	void pressed(ActionEvent event) {
 		try {
@@ -77,27 +93,31 @@ public class ListButton {
 				public void handle(WindowEvent event) {
 					if (popup.getData() == null) {
 						VBox parent = (VBox) button.getParent();
-						int index = parent.getChildren().indexOf(button);
-						
-						if (index == 0 && parent.getChildren().size() >= 2) {
-							//parent.getChildren().get(index + 1) ;
+						int index = getIndex();
+
+						if (isFirst()) {
+							// Changer le top border radius
+							// parent.getChildren().get(index + 1) ;
 							System.out.println("change");
 						}
-						else if (index == parent.getChildren().size() - 1 && parent.getChildren().size() >= 2) {
-							//parent.getChildren().get(index - 1) ;
+						if (index == parent.getChildren().size() - 1 {
+							// Changer le bottom border radius
+							// parent.getChildren().get(index - 1) ;
 							System.out.println("change");
 						}
 						parent.getChildren().remove(parent.getChildren().indexOf(button));
-					}
-					else {
+					} else {
 						setData(popup.getData());
 					}
 				}
 			});
 			stage.show();
-		} catch (Exception e) {
-			System.out.println(e);
-			System.out.println("Error opening add popup");
-		}
+		}catch(
+
+	Exception e)
+	{
+		System.out.println(e);
+		System.out.println("Error opening add popup");
 	}
+}
 }

@@ -1,13 +1,13 @@
 package org.openjfx.popup;
 
 import org.app.client.ClientAdd.CreationStatus;
+import org.models.Model;
 import org.models.Person;
 import org.openjfx.popupfield.NumberPopupField;
 import org.openjfx.popupfield.TextPopupField;
 import org.app.client.ClientAdd;
 import org.app.client.ClientSelect;
 
-import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 
 public class AddClient extends AddPopup {
@@ -17,9 +17,7 @@ public class AddClient extends AddPopup {
 	final int EMAIL = 3;
 
 	public AddClient() {
-		super();
-		// Fill the fields for the room
-		setFields(
+		super(
 				new NumberPopupField("CIN"),
 				new TextPopupField("Nom"),
 				new TextPopupField("Prénom"),
@@ -29,16 +27,18 @@ public class AddClient extends AddPopup {
 	}
 
 	@Override
-	public void addPressed(ActionEvent event) {
-
-		Person client = new Person(
+	public Person dataFromFields() {
+		return new Person(
 				(int) getField(CIN).getValue(),
 				(String) getField(NAME).getValue(),
 				(String) getField(LASTNAME).getValue(),
 				(String) getField(EMAIL).getValue());
 
-		// CreationStatus result = UserAdd.userAdd(employee, UserSelect.dataFromDB());
-		CreationStatus result = ClientAdd.clientAdd(client, ClientSelect.dataFromDB());
+	}
+
+	@Override
+	protected void addData(Model newData) {
+		CreationStatus result = ClientAdd.clientAdd((Person) newData, ClientSelect.dataFromDB());
 
 		switch (result) {
 			case SUCCESS:
@@ -54,4 +54,5 @@ public class AddClient extends AddPopup {
 				break;
 		}
 	}
+
 }

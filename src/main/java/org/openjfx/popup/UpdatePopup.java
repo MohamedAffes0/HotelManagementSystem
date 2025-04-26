@@ -29,7 +29,7 @@ public abstract class UpdatePopup extends Popup {
 
 	public abstract void fieldsFromData();
 
-	protected abstract void dataFromFields();
+	protected abstract Model dataFromFields();
 
 	public void setData(Model data) {
 		this.data = data;
@@ -48,9 +48,16 @@ public abstract class UpdatePopup extends Popup {
 	@Override
 	// Called when the update button is pressed.
 	public void suggestedPressed(ActionEvent event) {
-		dataFromFields();
 		try {
-			update(getData());
+			Model data = dataFromFields();
+			
+			// Update can throw an exception
+			update(data);
+
+			// If update is successful then we set the data
+			setData(data);
+			
+			// Close the window only if we succeded
 			close();
 		} catch (Exception exception) {
 			// TODO: change this exception to a new more relevent class like

@@ -9,21 +9,23 @@ import org.openjfx.popupfield.ComboBoxPopupField;
 import javafx.collections.FXCollections;
 
 public class UpdateUser extends UpdatePopup {
-    final int TYPE = 0;
+	final int TYPE = 0;
 	final int STATUS = 1;
 
 	public UpdateUser() {
 		super(
 				new ComboBoxPopupField("Type",
 						FXCollections.observableArrayList("Admin", "Employé")),
-                new ComboBoxPopupField("Statut",
-                        FXCollections.observableArrayList("Actif", "Inactif")));
+				new ComboBoxPopupField("Statut",
+						FXCollections.observableArrayList("Actif", "Inactif")));
 
 		setTitle("Modifier un utilisateur");
 	}
 
 	@Override
-	protected void dataFromFields() {
+	protected Employee dataFromFields() {
+		Employee employee = (Employee) getData();
+
 		boolean isAdmin = false;
 		switch ((String) getField(TYPE).getValue()) {
 			case "Admin":
@@ -34,19 +36,18 @@ public class UpdateUser extends UpdatePopup {
 				break;
 		}
 
-        boolean isActive = false;
-        switch ((String) getField(STATUS).getValue()) {
-            case "Actif":
-                isActive = true;
-                break;
-            case "Inactif":
-                isActive = false;
-                break;
-        }
+		boolean isActive = false;
+		switch ((String) getField(STATUS).getValue()) {
+			case "Actif":
+				isActive = true;
+				break;
+			case "Inactif":
+				isActive = false;
+				break;
+		}
 
-        Employee employee = (Employee) getData();
-        employee.setAdmin(isAdmin);
-        employee.setActive(isActive);
+		return new Employee(employee.getId(), employee.getName(), employee.getName(), employee.getMail(),
+				employee.getPassword(), isAdmin, isActive);
 	}
 
 	@Override
@@ -55,27 +56,27 @@ public class UpdateUser extends UpdatePopup {
 			throw new RuntimeException("Invalid data received");
 		Employee employee = (Employee) newData;
 
-        UserModify.userModify(employee.getId(), employee.isAdmin(), employee.isActive());
+		UserModify.userModify(employee.getId(), employee.isAdmin(), employee.isActive());
 	}
 
 	@Override
 	public void delete() {
-        UserDelete.userDelete(((Employee)getData()).getId());
+		UserDelete.userDelete(((Employee) getData()).getId());
 	}
 
 	@Override
 	public void fieldsFromData() {
-        Employee employee = (Employee) getData();
-        if (employee.isAdmin()) {
-            ((ComboBoxPopupField) getField(TYPE)).setValue("Admin");
-        } else {
-            ((ComboBoxPopupField) getField(TYPE)).setValue("Employé");
-        }
+		Employee employee = (Employee) getData();
+		if (employee.isAdmin()) {
+			((ComboBoxPopupField) getField(TYPE)).setValue("Admin");
+		} else {
+			((ComboBoxPopupField) getField(TYPE)).setValue("Employé");
+		}
 
-        if (employee.isActive()) {
-            ((ComboBoxPopupField) getField(STATUS)).setValue("Actif");
-        } else {
-            ((ComboBoxPopupField) getField(STATUS)).setValue("Inactif");
-        }
+		if (employee.isActive()) {
+			((ComboBoxPopupField) getField(STATUS)).setValue("Actif");
+		} else {
+			((ComboBoxPopupField) getField(STATUS)).setValue("Inactif");
+		}
 	}
 }

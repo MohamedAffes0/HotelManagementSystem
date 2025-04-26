@@ -13,7 +13,7 @@ import org.openjfx.popupfield.DatePopupField;
 import javafx.collections.FXCollections;
 
 public class UpdateReservation extends UpdatePopup {
-    final int START_DATE = 0;
+	final int START_DATE = 0;
 	final int END_DATE = 1;
 	final int STATUS = 2;
 
@@ -28,7 +28,8 @@ public class UpdateReservation extends UpdatePopup {
 	}
 
 	@Override
-	protected void dataFromFields() {
+	protected Reservation dataFromFields() {
+		Reservation currentData = (Reservation) getData();
 		boolean reservationStatus = false;
 		switch ((String) getField(STATUS).getValue()) {
 			case "Payé":
@@ -38,11 +39,11 @@ public class UpdateReservation extends UpdatePopup {
 				reservationStatus = false;
 				break;
 		}
+		java.sql.Date startDate = java.sql.Date.valueOf((LocalDate) getField(START_DATE).getValue());
+		java.sql.Date endDate = java.sql.Date.valueOf((LocalDate) getField(END_DATE).getValue());
 
-		Reservation reservation = (Reservation) getData();
-        reservation.setPaid(reservationStatus);
-        reservation.setStartDate(java.sql.Date.valueOf((LocalDate) getField(START_DATE).getValue()));
-        reservation.setEndDate(java.sql.Date.valueOf((LocalDate) getField(END_DATE).getValue()));
+		return new Reservation(currentData.getId(), startDate, endDate, reservationStatus,
+				currentData.getEmployee(), currentData.getHotelClient(), currentData.getRoom());
 	}
 
 	@Override
@@ -51,24 +52,25 @@ public class UpdateReservation extends UpdatePopup {
 			throw new RuntimeException("Invalid data received");
 		Reservation reservation = (Reservation) newData;
 
-        ReservationModify.reservationModify(reservation.getId(), reservation.getRoom(), reservation.getStartDate(), reservation.getEndDate(), reservation.isPaid());
+		ReservationModify.reservationModify(reservation.getId(), reservation.getRoom(),
+				reservation.getStartDate(), reservation.getEndDate(), reservation.isPaid());
 	}
 
 	@Override
 	public void delete() {
-        ReservationDelete.reservationDelete(((Reservation)getData()).getId());
+		ReservationDelete.reservationDelete(((Reservation) getData()).getId());
 	}
 
 	@Override
 	public void fieldsFromData() {
-		Reservation reservation = (Reservation)getData();
-        if (reservation.isPaid()) {
-            ((ComboBoxPopupField)getField(STATUS)).setValue("Payé");
-        } else {
-            ((ComboBoxPopupField)getField(STATUS)).setValue("Non payé");
-        }
+		Reservation reservation = (Reservation) getData();
+		if (reservation.isPaid()) {
+			((ComboBoxPopupField) getField(STATUS)).setValue("Payé");
+		} else {
+			((ComboBoxPopupField) getField(STATUS)).setValue("Non payé");
+		}
 
-        ((DatePopupField)getField(START_DATE)).setValue(reservation.getStartDate());
-        ((DatePopupField)getField(END_DATE)).setValue(reservation.getEndDate());
+		((DatePopupField) getField(START_DATE)).setValue(reservation.getStartDate());
+		((DatePopupField) getField(END_DATE)).setValue(reservation.getEndDate());
 	}
 }

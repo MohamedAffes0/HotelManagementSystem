@@ -53,7 +53,6 @@ public class ListButton {
 			if (field.getStyleClass() != null)
 				label.getStyleClass().add(field.getStyleClass());
 
-			label.setMinWidth(120);
 			label.setAlignment(Pos.CENTER);
 			content.getChildren().add(label);
 		}
@@ -114,12 +113,12 @@ public class ListButton {
 					// Change the preceeding button if not first
 					if (index > 0) {
 						updateStyle((Button) parent.getChildren().get(index - 1));
+						return;
 					}
 
 					// Change the following button if not last
 					if (index < parent.getChildren().size()) {
-						parent.getChildren().get(index)
-								.setStyle("-fx-background-radius: 0 0 12 12;");
+						updateStyle((Button) parent.getChildren().get(index));
 					}
 				}
 			});

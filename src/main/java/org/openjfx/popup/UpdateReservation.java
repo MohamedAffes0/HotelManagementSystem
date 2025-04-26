@@ -5,6 +5,7 @@ import java.util.Date;
 
 import org.app.reservation.ReservationDelete;
 import org.app.reservation.ReservationModify;
+import org.app.user.ControllerException;
 import org.models.Model;
 import org.models.Reservation;
 import org.openjfx.popupfield.ComboBoxPopupField;
@@ -47,7 +48,7 @@ public class UpdateReservation extends UpdatePopup {
 	}
 
 	@Override
-	public void update(Model newData) {
+	public void update(Model newData) throws ControllerException{
 		if (!(newData instanceof Reservation))
 			throw new RuntimeException("Invalid data received");
 		Reservation reservation = (Reservation) newData;

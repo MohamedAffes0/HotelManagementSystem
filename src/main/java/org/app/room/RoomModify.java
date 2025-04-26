@@ -4,11 +4,12 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import org.app.user.ControllerException;
 import org.database.DBConnect;
 import org.models.Room.RoomState;
 
 public class RoomModify {
-    public static boolean roomModify(int id, int numberOfPeople, float price, RoomState state) throws Exception {
+    public static boolean roomModify(int id, int numberOfPeople, float price, RoomState state) throws ControllerException {
         Connection connection = null;
         CallableStatement stmt = null;
         try {
@@ -21,7 +22,7 @@ public class RoomModify {
             }
 
             if (numberOfPeople <= 0 || numberOfPeople > 999) {
-                throw new Exception("Le nombre de personnes doit être compris entre 1 et 999.");
+                throw new ControllerException("Le nombre de personnes doit être compris entre 1 et 999.");
             }
 
             String sql = "{ call modify_room(?, ?, ?, ?) }";

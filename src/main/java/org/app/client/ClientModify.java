@@ -5,11 +5,12 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import org.app.EmailChecker;
+import org.app.user.ControllerException;
 import org.database.DBConnect;
 import org.models.Person;
 
 public class ClientModify {
-    public static boolean clientModify(Person client) throws Exception {
+    public static boolean clientModify(Person client) throws ControllerException {
         Connection connection = null;
         CallableStatement stmt = null;
         try {
@@ -23,17 +24,17 @@ public class ClientModify {
 
             if (!EmailChecker.isValid(client.getMail())) {
                 System.out.println("Email invalide");
-                throw new Exception("Email invalide");
+                throw new ControllerException("Email invalide");
             }
 
             if (client.getName() == null || client.getName().isEmpty()) {
                 System.out.println("Nom invalide");
-                throw new Exception("Nom invalide");
+                throw new ControllerException("Nom invalide");
             }
 
             if (client.getLastName() == null || client.getLastName().isEmpty()) {
                 System.out.println("Prénom invalide");
-                throw new Exception("Prénom invalide");
+                throw new ControllerException("Prénom invalide");
             }
 
             String sql = "{ call modify_client(?, ?, ?, ?) }";

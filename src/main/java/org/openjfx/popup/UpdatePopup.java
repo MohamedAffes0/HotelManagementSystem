@@ -1,5 +1,6 @@
 package org.openjfx.popup;
 
+import org.app.user.ControllerException;
 import org.models.Model;
 import org.openjfx.popupfield.PopupField;
 import java.util.ResourceBundle;
@@ -23,7 +24,7 @@ public abstract class UpdatePopup extends Popup {
 
 	// Updates the data in the database and returns true if it was changed
 	// successfully.
-	public abstract void update(Model newData) throws Exception;
+	public abstract void update(Model newData) throws ControllerException;
 
 	public abstract void delete();
 
@@ -59,9 +60,7 @@ public abstract class UpdatePopup extends Popup {
 			
 			// Close the window only if we succeded
 			close();
-		} catch (Exception exception) {
-			// TODO: change this exception to a new more relevent class like
-			// ControllerException
+		} catch (ControllerException exception) {
 			setErrorMessage(exception.toString());
 		}
 	}

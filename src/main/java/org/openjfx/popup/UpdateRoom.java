@@ -2,6 +2,7 @@ package org.openjfx.popup;
 
 import org.app.room.RoomDelete;
 import org.app.room.RoomModify;
+import org.app.user.ControllerException;
 import org.models.Model;
 import org.models.Room;
 import org.models.Room.RoomState;
@@ -54,7 +55,7 @@ public class UpdateRoom extends UpdatePopup {
 	}
 
 	@Override
-	public void update(Model newData) throws Exception {
+	public void update(Model newData) throws ControllerException {
 		if (!(newData instanceof Room))
 			throw new RuntimeException("Invalid data received");
 		Room room = (Room) newData;

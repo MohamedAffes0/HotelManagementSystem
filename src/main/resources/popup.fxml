@@ -60,7 +60,7 @@
          <children>
             <Button fx:id="suggestedButton" defaultButton="true" maxWidth="1.7976931348623157E308" minWidth="150.0" mnemonicParsing="false" onAction="#suggestedPressed" styleClass="add-button" text="Suggested" />
             <Button fx:id="destructiveButton" cancelButton="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#destructivePressed" styleClass="delete-button" text="Destructive" />
-            <Button fx:id="cancelButton" cancelButton="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#cancelPressed" styleClass="delete-button" text="Cancel" />
+            <Button fx:id="cancelButton" cancelButton="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#cancelPressed" styleClass="cancel-button" text="Cancel"/>
          </children>
       </VBox>
    </children>

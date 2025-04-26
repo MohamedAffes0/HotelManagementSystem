@@ -1,5 +1,9 @@
 package org.openjfx;
 
+import javafx.scene.Node;
+
+import java.util.ArrayList;
+
 import org.app.DBLoader;
 import org.models.Model;
 import org.openjfx.popup.AddPopup;
@@ -89,6 +93,9 @@ public class ListScreen<T extends Model, L extends DBLoader> {
 		}
 
 		list.getChildren().clear();
+
+		ArrayList<ListButton> buttons = new ArrayList<>();
+
 		for (Object o : loader.getData()) {
 			T item = (T) o;
 			if (!item.filter(search, filter.getValue())) {
@@ -101,19 +108,16 @@ public class ListScreen<T extends Model, L extends DBLoader> {
 				ListButton controller = listButtonLoader.getController();
 				controller.setData(item);
 				controller.setPopup(updatePopup);
+				buttons.add(controller);
 			} catch (Exception exception) {
 				throw new RuntimeException(exception);
 			}
 		}
 
+
 		// Set the style for the first and last buttons
-		Button firstButton = (Button) list.getChildren().get(0);
-		firstButton.setStyle("-fx-background-radius: 12 12 0 0;");
-		Button lastButton = (Button) list.getChildren().get(list.getChildren().size() - 1);
-		lastButton.setStyle("-fx-background-radius: 0 0 12 12;");
-		if (list.getChildren().size() == 1) {
-			firstButton.setStyle("-fx-background-radius: 12;");
-		}
+		buttons.get(0).setStyle();
+		buttons.get(buttons.size() -1).setStyle();
 	}
 
 	public void loadFromDB() {

@@ -92,32 +92,52 @@ public class ListButton {
 				@Override
 				public void handle(WindowEvent event) {
 					if (popup.getData() == null) {
-						VBox parent = (VBox) button.getParent();
-						int index = getIndex();
+                        VBox parent = (VBox) button.getParent();
+                        int index = getIndex();
 
-						if (isFirst()) {
-							// Changer le top border radius
-							// parent.getChildren().get(index + 1) ;
-							System.out.println("change");
+						if (parent.getChildren().size() == 1) {
+							parent.getChildren().remove(parent.getChildren().indexOf(button));
+							return;
 						}
-						if (index == parent.getChildren().size() - 1 {
-							// Changer le bottom border radius
-							// parent.getChildren().get(index - 1) ;
-							System.out.println("change");
+                        if (isFirst()) {
+                            parent.getChildren().get(index +1).setStyle("-fx-background-radius: 12 12 0 0;");
+                        }
+                        if (isLast()) {
+                            parent.getChildren().get(index -1).setStyle("-fx-background-radius: 0 0 12 12;") ;
+                        }
+						if (parent.getChildren().size() == 2) {
+							if (isFirst()) {
+								parent.getChildren().get(index +1).setStyle("-fx-background-radius: 12;") ;
+							} else {
+								parent.getChildren().get(index -1).setStyle("-fx-background-radius: 12;") ;
+							}
 						}
 						parent.getChildren().remove(parent.getChildren().indexOf(button));
-					} else {
-						setData(popup.getData());
-					}
+                    } else {
+                        setData(popup.getData());
+                    }
 				}
 			});
 			stage.show();
-		}catch(
-
-	Exception e)
-	{
-		System.out.println(e);
-		System.out.println("Error opening add popup");
+		}catch(Exception e)
+		{
+			System.out.println(e);
+			System.out.println("Error opening add popup");
+		}
 	}
-}
+
+	public void setStyle() {
+		if (this.isFirst()) {
+			button.setStyle("-fx-background-radius: 12 12 0 0;");
+		}
+		if (this.isLast()) {
+			button.setStyle("-fx-background-radius: 0 0 12 12;");
+		}
+		if (this.isFirst() && this.isLast()) {
+			button.setStyle("-fx-background-radius: 12;");
+		}
+		if (!this.isFirst() && !this.isLast()) {
+			button.setStyle("-fx-background-radius: 0;");
+		}
+	}
 }

@@ -13,6 +13,7 @@ import javafx.stage.WindowEvent;
 import java.util.ArrayList;
 
 import org.models.Model;
+import org.models.ModelField;
 import org.openjfx.popup.UpdatePopup;
 
 import javafx.scene.Parent;
@@ -22,7 +23,6 @@ import javafx.scene.control.Button;
 public class ListButton {
 	Model data;
 	UpdatePopup popup;
-	
 
 	@FXML
 	public Button button;
@@ -39,16 +39,20 @@ public class ListButton {
 
 		this.data = data;
 
-		ArrayList<String> list = data.getStringData();
+		ArrayList<ModelField> fields = data.getFields();
 
-		if (list == null || list.isEmpty())
+		if (fields == null || fields.isEmpty())
 			throw new RuntimeException("No data in model");
 
-		id.setText(list.get(0));
+		id.setText(fields.get(0).getContent());
 
 		content.getChildren().clear();
-		for (int i = 1; i < list.size(); i++) {
-			Label label = new Label(list.get(i));
+		for (ModelField field : fields) {
+			Label label = new Label(field.getContent());
+
+			if (field.getStyleClass() != null)
+				label.getStyleClass().add(field.getStyleClass());
+
 			label.setMinWidth(120);
 			label.setAlignment(Pos.CENTER);
 			content.getChildren().add(label);
@@ -98,20 +102,20 @@ public class ListButton {
 					}
 					VBox parent = (VBox) button.getParent();
 					int index = getIndex();
-					
+
 					// Delete the button
 					parent.getChildren().remove(index);
-					
+
 					// Do nothing if the there are no buttons
 					if (parent.getChildren().size() == 0) {
 						return;
 					}
-					
+
 					// Change the preceeding button if not first
 					if (index > 0) {
-						updateStyle((Button)parent.getChildren().get(index - 1));
+						updateStyle((Button) parent.getChildren().get(index - 1));
 					}
-					
+
 					// Change the following button if not last
 					if (index < parent.getChildren().size()) {
 						parent.getChildren().get(index)
@@ -126,7 +130,8 @@ public class ListButton {
 		}
 	}
 
-	// Changes the border radius of the button if it's at the top or bottom of the list.
+	// Changes the border radius of the button if it's at the top or bottom of the
+	// list.
 	public static void updateStyle(Button button) {
 		VBox parent = (VBox) button.getParent();
 		int index = parent.getChildren().indexOf(button);

@@ -21,7 +21,7 @@ public abstract class UpdatePopup extends Popup {
 		setCancelText("Annuler");
 	}
 
-	public abstract void update(Model newData);
+	public abstract boolean update(Model newData);
 
 	public abstract void delete();
 
@@ -47,8 +47,10 @@ public abstract class UpdatePopup extends Popup {
 	// Called when the update button is pressed.
 	public void suggestedPressed(ActionEvent event) {
 		dataFromFields();
-		update(getData());
-		close();
+		if (update(getData())) {
+			close();
+		}
+		// close();
 	}
 
 	@Override

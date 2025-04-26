@@ -52,12 +52,12 @@ public class UpdateRoom extends UpdatePopup {
 	}
 
 	@Override
-	public void update(Model newData) {
+	public boolean update(Model newData) {
 		if (!(newData instanceof Room))
 			throw new RuntimeException("Invalid data received");
 		Room room = (Room) newData;
 
-		RoomModify.roomModify(room.getId(), room.getCapacity(), room.getPrice(), room.getState());
+		return RoomModify.roomModify(room.getId(), room.getCapacity(), room.getPrice(), room.getState());
 	}
 
 	@Override

@@ -49,6 +49,9 @@ public abstract class Popup implements Initializable {
 	// Closes the popup without doing anything.
 	private Button cancelButton;
 
+	@FXML
+	private Label errorLabel;
+
 	public Popup() {
 	}
 
@@ -108,6 +111,10 @@ public abstract class Popup implements Initializable {
 		cancelText = text;
 		if (cancelButton != null)
 			cancelButton.setText(text);
+	}
+
+	public void setErrorMessage(String message) {
+		errorLabel.setText(message);
 	}
 
 	// Removes the destructive button from the popup.

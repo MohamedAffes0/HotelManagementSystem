@@ -117,7 +117,7 @@ public class ListScreen<T extends Model, L extends DBLoader> {
 		
 		// Set the style for the first and last buttons
 		ListButton.updateStyle((Button)list.getChildren().get(0));
-		ListButton.updateStyle((Button)list.getChildren().get(list.getChildren().size()));
+		ListButton.updateStyle((Button)list.getChildren().get(list.getChildren().size() - 1));
 	}
 
 	public void loadFromDB() {

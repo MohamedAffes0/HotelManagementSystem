@@ -31,6 +31,7 @@ import org.openjfx.popup.AddRoom;
 import org.openjfx.popup.AddUser;
 import org.openjfx.popup.UpdateReservation;
 import org.openjfx.popup.UpdateRoom;
+import org.openjfx.popup.UpdateUser;
 
 public class MainMenu implements Initializable {
 	private App main;
@@ -60,8 +61,7 @@ public class MainMenu implements Initializable {
 		changeCurrentMenu(controller,
 				"Chambres",
 				FXCollections.observableArrayList("Etage", "Type", "Capacité", "Prix", "Etat"),
-				"Ajouter Chambre",
-				"/addRoom.fxml");
+				"Ajouter Chambre");
 	}
 
 	@FXML
@@ -71,19 +71,17 @@ public class MainMenu implements Initializable {
 		changeCurrentMenu(controller,
 				"Clients",
 				FXCollections.observableArrayList("Cin"),
-				"Ajouter Client",
-				"/addRoom.fxml");
+				"Ajouter Client");
 	}
 
 	@FXML
 	void comptesPressed(ActionEvent event) {
 		ListScreen<Employee, UserSelect> controller = new ListScreen<Employee, UserSelect>(new UserSelect(),
-				new AddUser(), new UpdateRoom());
+				new AddUser(), new UpdateUser());
 		changeCurrentMenu(controller,
 				"Comptes",
 				FXCollections.observableArrayList(),
-				"Ajouter Compte",
-				"/addRoom.fxml");
+				"Ajouter Compte");
 	}
 
 	@FXML
@@ -93,8 +91,7 @@ public class MainMenu implements Initializable {
 		changeCurrentMenu(controller,
 				"Réservations",
 				FXCollections.observableArrayList("Est Payé", "Client", "Chambre"),
-				"Ajouter Réservation",
-				"/addRoom.fxml");
+				"Ajouter Réservation");
 	}
 
 	@FXML
@@ -150,7 +147,7 @@ public class MainMenu implements Initializable {
 	}
 
 	private void changeCurrentMenu(ListScreen<?, ?> controller, String title, ObservableList<String> filterItems,
-			String addButtonText, String addPopupPath) {
+			String addButtonText) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/listScreen.fxml"));
 
 		try {

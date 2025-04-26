@@ -47,6 +47,7 @@ public abstract class UpdatePopup extends Popup {
 	// Called when the update button is pressed.
 	public void suggestedPressed(ActionEvent event) {
 		dataFromFields();
+		update(getData());
 		close();
 	}
 

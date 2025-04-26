@@ -2,7 +2,6 @@ package org.openjfx.popup;
 
 import org.app.client.ClientDelete;
 import org.app.client.ClientModify;
-import org.models.Employee;
 import org.models.Model;
 import org.models.Person;
 import org.openjfx.popupfield.TextPopupField;
@@ -26,8 +25,8 @@ public class UpdateClient extends UpdatePopup {
 	@Override
 	protected void dataFromFields() {
         Person person = (Person) getData();
-        person.setNom((String) getField(NAME).getValue());
-        person.setPrenom((String) getField(LASTNAME).getValue());
+        person.setName((String) getField(NAME).getValue());
+        person.setLastName((String) getField(LASTNAME).getValue());
         person.setMail((String) getField(MAIL).getValue());
 	}
 

@@ -45,11 +45,11 @@ public class Person extends Model{
         this.cin = cin;
     }
 
-    public void setNom(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public void setPrenom(String lastName) {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 

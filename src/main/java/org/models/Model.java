@@ -22,8 +22,6 @@ public abstract class Model {
 		icon.setScaleX(scale);
 		icon.setScaleY(scale);
 		icon.setFill(Color.web(colorHex));
-		//button.setGraphic(icon);
-		//button.setContentDisplay(ContentDisplay.LEFT);
 		return icon;
 	}
 }

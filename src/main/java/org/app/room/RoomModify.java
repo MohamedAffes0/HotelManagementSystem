@@ -8,7 +8,7 @@ import org.database.DBConnect;
 import org.models.Room.RoomState;
 
 public class RoomModify {
-    public static boolean roomModify(int id, int numberOfPeople, float price, RoomState state) {
+    public static boolean roomModify(int id, int numberOfPeople, float price, RoomState state) throws Exception {
         Connection connection = null;
         CallableStatement stmt = null;
         try {
@@ -18,6 +18,10 @@ public class RoomModify {
             if (connection == null) {
                 System.err.println("Échec de la connexion à la base de données.");
                 return false; // Indique que la connexion a échoué
+            }
+
+            if (numberOfPeople <= 0 || numberOfPeople > 999) {
+                throw new Exception("Le nombre de personnes doit être compris entre 1 et 999.");
             }
 
             String sql = "{ call modify_room(?, ?, ?, ?) }";

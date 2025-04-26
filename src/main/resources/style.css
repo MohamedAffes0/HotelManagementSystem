@@ -244,27 +244,44 @@ Text {
     -fx-text-fill: -font-color-black;
     -fx-padding: 4 10;
     -fx-background-radius: 10;
+    -fx-pref-width: 100px;
+
 }
 .label-occupee {
     -fx-background-color: -blue-label;
     -fx-text-fill: -font-color-black;
     -fx-padding: 4 10;
     -fx-background-radius: 10;
+    -fx-pref-width: 100px;
+
 }
 .label-maintenance {
     -fx-background-color: -red-label;
     -fx-text-fill: -font-color-black;
     -fx-padding: 4 10;
     -fx-background-radius: 10;
+    -fx-pref-width: 100px;
 }
 
 /* === ÉTIQUETTES (BADGES) POUR LES ÉTAGES, ICÔNES, ETC === */
-.badge {
+.floor-badge {
     -fx-background-color: -badge-color;
     -fx-text-fill: -font-color-black;
     -fx-padding: 4 10;
     -fx-background-radius: 10;
-    /* -fx-font-weight: bold; */
+    -fx-pref-width: 80px;
+}
+
+.person-badge {
+    -fx-background-color: -badge-color;
+    -fx-text-fill: -font-color-black;
+    -fx-padding: 4 10;
+    -fx-background-radius: 10;
+    -fx-pref-width: 60px;
+}
+
+.room-badge, .price-badge, .room-type-badge {
+    -fx-pref-width: 100px;
 }
 
 /* === DATE PICKER === */

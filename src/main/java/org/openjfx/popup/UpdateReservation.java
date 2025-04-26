@@ -46,12 +46,12 @@ public class UpdateReservation extends UpdatePopup {
 	}
 
 	@Override
-	public boolean update(Model newData) {
+	public void update(Model newData) {
 		if (!(newData instanceof Reservation))
 			throw new RuntimeException("Invalid data received");
 		Reservation reservation = (Reservation) newData;
 
-        return ReservationModify.reservationModify(reservation.getId(), reservation.getRoom(), reservation.getStartDate(), reservation.getEndDate(), reservation.isPaid());
+        ReservationModify.reservationModify(reservation.getId(), reservation.getRoom(), reservation.getStartDate(), reservation.getEndDate(), reservation.isPaid());
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package org.openjfx.popup;
 
+import org.app.user.ControllerException;
 import org.models.Model;
 import org.openjfx.popupfield.PopupField;
 import java.util.ResourceBundle;
@@ -21,13 +22,15 @@ public abstract class UpdatePopup extends Popup {
 		setCancelText("Annuler");
 	}
 
-	public abstract void update(Model newData);
+	// Updates the data in the database and returns true if it was changed
+	// successfully.
+	public abstract void update(Model newData) throws ControllerException;
 
 	public abstract void delete();
 
 	public abstract void fieldsFromData();
 
-	protected abstract void dataFromFields();
+	protected abstract Model dataFromFields();
 
 	public void setData(Model data) {
 		this.data = data;
@@ -46,9 +49,20 @@ public abstract class UpdatePopup extends Popup {
 	@Override
 	// Called when the update button is pressed.
 	public void suggestedPressed(ActionEvent event) {
-		dataFromFields();
-		update(getData());
-		close();
+		try {
+			Model data = dataFromFields();
+			
+			// Update can throw an exception
+			update(data);
+
+			// If update is successful then we set the data
+			setData(data);
+			
+			// Close the window only if we succeded
+			close();
+		} catch (ControllerException exception) {
+			setErrorMessage(exception.toString());
+		}
 	}
 
 	@Override

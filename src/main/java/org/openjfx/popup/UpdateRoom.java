@@ -2,6 +2,7 @@ package org.openjfx.popup;
 
 import org.app.room.RoomDelete;
 import org.app.room.RoomModify;
+import org.app.user.ControllerException;
 import org.models.Model;
 import org.models.Room;
 import org.models.Room.RoomState;
@@ -31,7 +32,9 @@ public class UpdateRoom extends UpdatePopup {
 	}
 
 	@Override
-	protected void dataFromFields() {
+	protected Room dataFromFields() {
+		Room room = (Room) getData();
+
 		RoomState roomState = RoomState.LIBRE;
 		switch ((String) getField(STATE).getValue()) {
 			case "Libre":
@@ -45,14 +48,14 @@ public class UpdateRoom extends UpdatePopup {
 				break;
 		}
 
-		Room room = (Room) getData();
-		room.setCapacity((int) getField(CAPACITY).getValue());
-		room.setPrice((float) getField(PRICE).getValue());
-		room.setState(roomState);
+		int capacity = (int) getField(CAPACITY).getValue();
+		float price = (float) getField(PRICE).getValue();
+
+		return new Room(room.getId(), room.getRoomType(), room.getFloor(), capacity, price, roomState);
 	}
 
 	@Override
-	public void update(Model newData) {
+	public void update(Model newData) throws ControllerException {
 		if (!(newData instanceof Room))
 			throw new RuntimeException("Invalid data received");
 		Room room = (Room) newData;
@@ -62,28 +65,28 @@ public class UpdateRoom extends UpdatePopup {
 
 	@Override
 	public void delete() {
-		RoomDelete.roomDelete(((Room)getData()).getId());
+		RoomDelete.roomDelete(((Room) getData()).getId());
 	}
 
 	@Override
 	public void fieldsFromData() {
-		Room room = (Room)getData();
+		Room room = (Room) getData();
 		switch (room.getState()) {
 			case LIBRE:
-				((ComboBoxPopupField)getField(STATE)).setValue("Libre");
+				((ComboBoxPopupField) getField(STATE)).setValue("Libre");
 				break;
 			case MAINTENANCE:
-				((ComboBoxPopupField)getField(STATE)).setValue("Maintenance");
+				((ComboBoxPopupField) getField(STATE)).setValue("Maintenance");
 				break;
 			case OCCUPEE:
-				((ComboBoxPopupField)getField(STATE)).setValue("Occupée");
+				((ComboBoxPopupField) getField(STATE)).setValue("Occupée");
 				break;
 			default:
 				break;
 		}
 
-		((NumberPopupField)getField(CAPACITY)).setValue(room.getCapacity());
-		((FloatPopupField)getField(PRICE)).setValue(room.getPrice());
+		((NumberPopupField) getField(CAPACITY)).setValue(room.getCapacity());
+		((FloatPopupField) getField(PRICE)).setValue(room.getPrice());
 	}
 
 }

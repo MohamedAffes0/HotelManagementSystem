@@ -34,6 +34,7 @@
 @room_script/modify_room.sql
 @user_script/modify_user.sql
 @reservation_script/modify_reservation.sql
+@client_script/modify_client.sql
 
 -- Suppressions
 @client_script/delete_client.sql

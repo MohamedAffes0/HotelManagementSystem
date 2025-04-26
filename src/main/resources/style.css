@@ -33,7 +33,7 @@
     -font-color-white-dusky: #aaaaaa;
     -font-color-white: #ffffff;
     -font-color-black: #2f2f2f;
-    -background-color-error: #f38ba8;
+    -background-color-error: #ED8795;
     -green-label: #81c784;
     -blue-label: #64b5f6;
     -red-label: #e57373;
@@ -42,7 +42,9 @@
     -add-button-color-hover: #80ac67;
     -delete-button-color: #73424F;
     -font-color-delete-button: #F38BA8;
-    -delete-button-color-hover: #bc606e;
+    -delete-button-color-hover: #A65F73;
+    -logout-button-color: #ED8795;
+    -logout-button-color-hover: #bc606e;
     -background-color-date-picker-today: #38373d;
     -font-color-date-cell: #dddddd;
 
@@ -177,11 +179,20 @@ Text {
 }
 
 .log-out-button {
-    -fx-background-color: -delete-button-color;
+    -fx-background-color: -logout-button-color;
 }
 
 .log-out-button:hover {
-    -fx-background-color: -delete-button-color-hover;
+    -fx-background-color: -logout-button-color-hover;
+}
+
+.cancel-button {
+    -fx-background-color: -button-color-dark;
+    -fx-text-fill: -font-color-white;
+}
+
+.cancel-button:hover {
+    -fx-background-color: -button-color-dark-hover;
 }
 
 /* === CARD === */
@@ -233,27 +244,95 @@ Text {
     -fx-text-fill: -font-color-black;
     -fx-padding: 4 10;
     -fx-background-radius: 10;
+    -fx-pref-width: 100px;
 }
 .label-occupee {
     -fx-background-color: -blue-label;
     -fx-text-fill: -font-color-black;
     -fx-padding: 4 10;
     -fx-background-radius: 10;
+    -fx-pref-width: 100px;
+
 }
 .label-maintenance {
     -fx-background-color: -red-label;
     -fx-text-fill: -font-color-black;
     -fx-padding: 4 10;
     -fx-background-radius: 10;
+    -fx-pref-width: 100px;
 }
 
 /* === ÉTIQUETTES (BADGES) POUR LES ÉTAGES, ICÔNES, ETC === */
-.badge {
+.floor-badge {
     -fx-background-color: -badge-color;
     -fx-text-fill: -font-color-black;
     -fx-padding: 4 10;
     -fx-background-radius: 10;
-    /* -fx-font-weight: bold; */
+    -fx-pref-width: 80px;
+}
+
+.person-badge {
+    -fx-background-color: -badge-color;
+    -fx-text-fill: -font-color-black;
+    -fx-padding: 4 10;
+    -fx-background-radius: 10;
+    -fx-pref-width: 60px;
+}
+
+.client-badge{
+    -fx-background-color: -badge-color;
+    -fx-text-fill: -font-color-black;
+    -fx-padding: 4 10;
+    -fx-background-radius: 10;
+    -fx-pref-width: 120px;
+}
+
+.employee-badge {
+    -fx-pref-width: 150px;
+}
+
+.employee-type-badge {
+    -fx-background-color: -badge-color;
+    -fx-text-fill: -font-color-black;
+    -fx-padding: 4 10;
+    -fx-background-radius: 10;
+    -fx-pref-width: 110px;
+}
+
+.active-user-badge {
+    -fx-background-color: -green-label;
+    -fx-text-fill: -font-color-black;
+    -fx-padding: 4 10;
+    -fx-background-radius: 10;
+    -fx-pref-width: 80px;
+}
+
+.inactive-user-badge {
+    -fx-background-color: -red-label;
+    -fx-text-fill: -font-color-black;
+    -fx-padding: 4 10;
+    -fx-background-radius: 10;
+    -fx-pref-width: 80px;
+}
+
+.room-badge, .price-badge, .room-type-badge {
+    -fx-pref-width: 100px;
+}
+
+.payed-badge {
+    -fx-background-color: -green-label;
+    -fx-text-fill: -font-color-black;
+    -fx-padding: 4 10;
+    -fx-background-radius: 10;
+    -fx-pref-width: 70px;
+}
+
+.unpaid-badge {
+    -fx-background-color: -red-label;
+    -fx-text-fill: -font-color-black;
+    -fx-padding: 4 10;
+    -fx-background-radius: 10;
+    -fx-pref-width: 70px;
 }
 
 /* === DATE PICKER === */

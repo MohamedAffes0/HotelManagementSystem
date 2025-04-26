@@ -73,6 +73,23 @@ public class Reservation extends Model {
 		this.paid = paid;
 	}
 
+	public void setStartDate(Date startDate) {
+		if (startDate == null) {
+			throw new IllegalArgumentException("Start date cannot be null.");
+		}
+		this.startDate = startDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		if (endDate == null) {
+			throw new IllegalArgumentException("End date cannot be null.");
+		}
+		if (startDate != null && startDate.after(endDate)) {
+			throw new IllegalArgumentException("Start date cannot be after end date.");
+		}
+		this.endDate = endDate;
+	}
+
 	@Override
 	public boolean filter(TextField search, String filterType) {
 		String searchText = search.getText();
@@ -124,19 +141,20 @@ public class Reservation extends Model {
 	}
 
 	@Override
-	public ArrayList<String> getStringData() {
-		ArrayList<String> data = new ArrayList<String>();
+	public ArrayList<ModelField> getFields() {
+		ArrayList<ModelField> data = new ArrayList<>();
 
-		// data.add("Id " + getId());
-		data.add(String.valueOf(getId()));
-		// data.add("Start " + getStartDate().toString());
-		data.add(getStartDate().toString());
-		// data.add("End " + getEndDate().toString());
-		data.add(getEndDate().toString());
-		data.add(isPaid() ? "Payé" : "Impayé");
-		data.add("Employée: " + getEmployee());
-		data.add("Client: " + getHotelClient());
-		data.add("Chambre " + getRoom());
+		//data.add(String.valueOf(getId()));
+		data.add(new ModelField("Chambre " + getRoom() + " Du  " + getStartDate().toString() + "  Au  " + getEndDate().toString(), null));
+		String styleClass = "";
+		if (isPaid()) {
+			styleClass = "payed-badge";
+		} else {
+			styleClass = "unpaid-badge";
+		}
+		data.add(new ModelField(isPaid() ? "Payé" : "Impayé", styleClass));
+		data.add(new ModelField("Employée: " + getEmployee(), "employee-badge"));
+		data.add(new ModelField("Client: " + getHotelClient(), "client-badge"));
 
 		return data;
 	}

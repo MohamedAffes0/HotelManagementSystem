@@ -1,24 +1,16 @@
-package org.app.reservation;
+package org.app.client;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.SQLException;
 
-import org.app.reservation.ReservationChecker.ReservationDate;
+import org.app.EmailChecker;
+import org.app.user.ControllerException;
 import org.database.DBConnect;
-import org.app.user.ControllerException; 
+import org.models.Person;
 
-public class ReservationModify {
-        public static void reservationModify(int id,int roomId, Date startDate, 
-            Date endDate, boolean isPaid) throws ControllerException {
-        
-        //verification de la disponibilité de la chambre
-        ReservationDate reservationDate = new ReservationDate(startDate, endDate);
-        if (ReservationChecker.reservationCheck(roomId, id, reservationDate) == false) {
-            System.err.println("La chambre est déjà réservée pour cette période.");
-            throw new ControllerException("La chambre est déjà réservée pour cette période.");
-        }
+public class ClientModify {
+    public static void clientModify(Person client) throws ControllerException {
 
         Connection connection = null;
         CallableStatement stmt = null;
@@ -31,12 +23,27 @@ public class ReservationModify {
                 throw new ControllerException("Échec de la connexion à la base de données.");
             }
 
-            String sql = "{ call modify_reservation(?, ?, ?, ?) }";
+            if (!EmailChecker.isValid(client.getMail())) {
+                System.out.println("Email invalide");
+                throw new ControllerException("Email invalide");
+            }
+
+            if (client.getName() == null || client.getName().isEmpty()) {
+                System.out.println("Nom invalide");
+                throw new ControllerException("Nom invalide");
+            }
+
+            if (client.getLastName() == null || client.getLastName().isEmpty()) {
+                System.out.println("Prénom invalide");
+                throw new ControllerException("Prénom invalide");
+            }
+
+            String sql = "{ call modify_client(?, ?, ?, ?) }";
             stmt = connection.prepareCall(sql);
-            stmt.setInt(1, id);
-            stmt.setDate(2, new Date(startDate.getTime())); // convertir Date en java.sql.Date
-            stmt.setDate(3, new Date(endDate.getTime()));
-            stmt.setInt(4, isPaid ? 1 : 0);
+            stmt.setInt(1, client.getCin());
+            stmt.setString(2, client.getName());
+            stmt.setString(3, client.getLastName());
+            stmt.setString(4, client.getMail());
 
             stmt.execute();
 
@@ -60,6 +67,7 @@ public class ReservationModify {
     }
 
     // public static void main(String[] args) {
-    //     System.out.println(reservationModify(13, 1,Date.valueOf("2025-01-01"), Date.valueOf("2025-01-02"), true));
+    //     Person person = new Person(12345679, "meddd", "affess", "xx@gmail.com");
+    //     System.out.println(clientModify(person));
     // }
 }

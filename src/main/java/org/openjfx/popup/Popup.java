@@ -49,6 +49,9 @@ public abstract class Popup implements Initializable {
 	// Closes the popup without doing anything.
 	private Button cancelButton;
 
+	@FXML
+	private Label errorLabel;
+
 	public Popup() {
 	}
 
@@ -110,13 +113,17 @@ public abstract class Popup implements Initializable {
 			cancelButton.setText(text);
 	}
 
+	public void setErrorMessage(String message) {
+		errorLabel.setText(message);
+	}
+
 	// Removes the destructive button from the popup.
 	public void removeDestructive() throws Exception {
 		if (destructiveButton == null) {
 			throw new Exception("The destructive button is either uninitialized or removed");
 		}
-		VBox buttonVontainer = (VBox) destructiveButton.getParent();
-		buttonVontainer.getChildren().remove(container.getChildren().indexOf(destructiveButton));
+		VBox buttonContainer = (VBox) destructiveButton.getParent();
+		buttonContainer.getChildren().remove(buttonContainer.getChildren().indexOf(destructiveButton));
 	}
 
 	// Changes the fields in the popup.

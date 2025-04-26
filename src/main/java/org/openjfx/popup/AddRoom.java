@@ -1,5 +1,6 @@
 package org.openjfx.popup;
 
+import org.models.Model;
 import org.models.Room;
 import org.app.room.RoomAdd;
 import org.app.room.RoomAdd.CreationStatus;
@@ -25,11 +26,8 @@ public class AddRoom extends AddPopup {
 	final int STATE = 4;
 	final int TYPE = 5;
 
-
 	public AddRoom() {
-		super();
-		// Fill the fields for the room
-		setFields(
+		super(
 				new NumberPopupField("Numéro"),
 				new NumberPopupField("Etage"),
 				new NumberPopupField("Capacité"),
@@ -42,9 +40,9 @@ public class AddRoom extends AddPopup {
 	}
 
 	@Override
-	public void addPressed(ActionEvent event) {
+	protected Model dataFromFields() {
 		RoomType roomType = RoomType.SIMPLE;
-		switch ((String)getField(TYPE).getValue()) {
+		switch ((String) getField(TYPE).getValue()) {
 			case "Simple":
 				roomType = RoomType.SIMPLE;
 				break;
@@ -56,7 +54,7 @@ public class AddRoom extends AddPopup {
 				break;
 		}
 		RoomState roomState = RoomState.LIBRE;
-		switch ((String)getField(STATE).getValue()) {
+		switch ((String) getField(STATE).getValue()) {
 			case "Libre":
 				roomState = RoomState.LIBRE;
 				break;
@@ -68,10 +66,13 @@ public class AddRoom extends AddPopup {
 				break;
 		}
 
-		Room room = new Room((int)getField(ID).getValue(), roomType, (int)getField(FLOOR).getValue(),
-				(int)getField(CAPACITY).getValue(), (float)getField(PRICE).getValue(), roomState);
+		return new Room((int) getField(ID).getValue(), roomType, (int) getField(FLOOR).getValue(),
+				(int) getField(CAPACITY).getValue(), (float) getField(PRICE).getValue(), roomState);
+	}
 
-		CreationStatus result = RoomAdd.roomAdd(room, RoomSelect.dataFromDB());
+	@Override
+	protected void addData(Model newData) {
+		CreationStatus result = RoomAdd.roomAdd((Room) newData, RoomSelect.dataFromDB());
 
 		switch (result) {
 			case SUCCESS:

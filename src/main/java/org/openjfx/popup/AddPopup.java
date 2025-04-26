@@ -15,7 +15,7 @@ public abstract class AddPopup extends Popup {
 		super();
 		setFields(fields);
 
-		setSuggestedText("Modifier");
+		setSuggestedText("Confirmer");
 		setCancelText("Annuler");
 	}
 

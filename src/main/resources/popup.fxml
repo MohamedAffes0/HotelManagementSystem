@@ -51,6 +51,7 @@
          </font>
       </Label>
       <Separator prefWidth="200.0" />
+      <Label fx:id="errorLabel" textFill="RED" />
       <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <content>
             <VBox fx:id="container" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="12.0" />
@@ -60,7 +61,7 @@
          <children>
             <Button fx:id="suggestedButton" defaultButton="true" maxWidth="1.7976931348623157E308" minWidth="150.0" mnemonicParsing="false" onAction="#suggestedPressed" styleClass="add-button" text="Suggested" />
             <Button fx:id="destructiveButton" cancelButton="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#destructivePressed" styleClass="delete-button" text="Destructive" />
-            <Button fx:id="cancelButton" cancelButton="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#cancelPressed" styleClass="cancel-button" text="Cancel"/>
+            <Button fx:id="cancelButton" cancelButton="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#cancelPressed" styleClass="cancel-button" text="Cancel" />
          </children>
       </VBox>
    </children>

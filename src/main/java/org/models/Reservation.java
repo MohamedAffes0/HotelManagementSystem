@@ -141,19 +141,14 @@ public class Reservation extends Model {
 	}
 
 	@Override
-	public ArrayList<String> getStringData() {
-		ArrayList<String> data = new ArrayList<String>();
+	public ArrayList<ModelField> getFields() {
+		ArrayList<ModelField> data = new ArrayList<>();
 
-		// data.add("Id " + getId());
-		data.add(String.valueOf(getId()));
-		// data.add("Start " + getStartDate().toString());
-		data.add(getStartDate().toString());
-		// data.add("End " + getEndDate().toString());
-		data.add(getEndDate().toString());
-		data.add(isPaid() ? "Payé" : "Impayé");
-		data.add("Employée: " + getEmployee());
-		data.add("Client: " + getHotelClient());
-		data.add("Chambre " + getRoom());
+		//data.add(String.valueOf(getId()));
+		data.add(new ModelField("Chambre " + getRoom() + " Du " + getStartDate().toString() + "Au" + getEndDate().toString(), null));
+		data.add(new ModelField(isPaid() ? "Payé" : "Impayé", null));
+		data.add(new ModelField("Employée: " + getEmployee(), null));
+		data.add(new ModelField("Client: " + getHotelClient(), null));
 
 		return data;
 	}

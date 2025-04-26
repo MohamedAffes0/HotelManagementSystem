@@ -277,7 +277,7 @@ Text {
     -fx-text-fill: -font-color-black;
     -fx-padding: 4 10;
     -fx-background-radius: 10;
-    -fx-pref-width: 80px;
+    -fx-pref-width: 60px;
 }
 
 .room-badge, .price-badge, .room-type-badge {

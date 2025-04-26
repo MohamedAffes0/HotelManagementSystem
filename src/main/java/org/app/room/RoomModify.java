@@ -9,7 +9,7 @@ import org.database.DBConnect;
 import org.models.Room.RoomState;
 
 public class RoomModify {
-    public static boolean roomModify(int id, int numberOfPeople, float price, RoomState state) throws ControllerException {
+    public static void roomModify(int id, int numberOfPeople, float price, RoomState state) throws ControllerException {
         Connection connection = null;
         CallableStatement stmt = null;
         try {
@@ -18,7 +18,7 @@ public class RoomModify {
             // Vérification de la connexion
             if (connection == null) {
                 System.err.println("Échec de la connexion à la base de données.");
-                return false; // Indique que la connexion a échoué
+                throw new ControllerException("Échec de la connexion à la base de données.");
             }
 
             if (numberOfPeople <= 0 || numberOfPeople > 999) {
@@ -43,11 +43,10 @@ public class RoomModify {
             }
 
             stmt.execute();
-            return true; // Indique que l'ajout a réussi
 
         } catch (SQLException exception) {
             exception.printStackTrace();
-            return false;
+            throw new ControllerException("Erreur de connexion à la base de données");
         } finally {
             // toujour executer le bloc finally
             // Fermeture des ressources JDBC

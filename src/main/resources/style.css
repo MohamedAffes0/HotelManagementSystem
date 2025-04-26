@@ -245,7 +245,6 @@ Text {
     -fx-padding: 4 10;
     -fx-background-radius: 10;
     -fx-pref-width: 100px;
-
 }
 .label-occupee {
     -fx-background-color: -blue-label;
@@ -280,8 +279,60 @@ Text {
     -fx-pref-width: 60px;
 }
 
+.client-badge{
+    -fx-background-color: -badge-color;
+    -fx-text-fill: -font-color-black;
+    -fx-padding: 4 10;
+    -fx-background-radius: 10;
+    -fx-pref-width: 120px;
+}
+
+.employee-badge {
+    -fx-pref-width: 150px;
+}
+
+.employee-type-badge {
+    -fx-background-color: -badge-color;
+    -fx-text-fill: -font-color-black;
+    -fx-padding: 4 10;
+    -fx-background-radius: 10;
+    -fx-pref-width: 110px;
+}
+
+.active-user-badge {
+    -fx-background-color: -green-label;
+    -fx-text-fill: -font-color-black;
+    -fx-padding: 4 10;
+    -fx-background-radius: 10;
+    -fx-pref-width: 80px;
+}
+
+.inactive-user-badge {
+    -fx-background-color: -red-label;
+    -fx-text-fill: -font-color-black;
+    -fx-padding: 4 10;
+    -fx-background-radius: 10;
+    -fx-pref-width: 80px;
+}
+
 .room-badge, .price-badge, .room-type-badge {
     -fx-pref-width: 100px;
+}
+
+.payed-badge {
+    -fx-background-color: -green-label;
+    -fx-text-fill: -font-color-black;
+    -fx-padding: 4 10;
+    -fx-background-radius: 10;
+    -fx-pref-width: 70px;
+}
+
+.unpaid-badge {
+    -fx-background-color: -red-label;
+    -fx-text-fill: -font-color-black;
+    -fx-padding: 4 10;
+    -fx-background-radius: 10;
+    -fx-pref-width: 70px;
 }
 
 /* === DATE PICKER === */

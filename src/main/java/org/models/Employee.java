@@ -27,9 +27,15 @@ final public class Employee extends Person {
 		ArrayList<ModelField> data = new ArrayList<>();
 
 		data.add(new ModelField(getName() + " " + getLastName(), null));
+		data.add(new ModelField(isAdmin() ? "Admin" : "Réceptionniste", "employee-type-badge"));
+		String styleClass = "";
+		if (isActive()) {
+			styleClass = "active-user-badge";
+		} else {
+			styleClass = "inactive-user-badge";
+		}
 		data.add(new ModelField(getMail(), null));
-		data.add(new ModelField(isAdmin() ? "Admin" : "Réceptionniste", null));
-		data.add(new ModelField(isActive() ? "Actif" : "Inactif", null));
+		data.add(new ModelField(isActive() ? "Actif" : "Inactif", styleClass));
 
 		return data;
 	}

@@ -4,6 +4,7 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.sql.Date;
 
 import org.app.client.ClientChecker;
@@ -37,7 +38,12 @@ public class ReservationAdd {
             System.err.println("La date de début est après la date de fin.");
             return CreationStatus.DATE_NOT_AVAILABLE; // Indique que la date n'est pas disponible
         }
-        if (reservation.getStartDate().before(new java.util.Date(System.currentTimeMillis()))) {
+        java.util.Date today = new java.util.Date(System.currentTimeMillis());
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(today);
+        calendar.add(Calendar.DAY_OF_MONTH, -1); // soustraire un jour pour la comparaison
+        today = calendar.getTime();
+        if (reservation.getStartDate().before(calendar.getTime())) {
             System.err.println("La date de début est dans le passé.");
             return CreationStatus.DATE_NOT_AVAILABLE; // Indique que la date n'est pas disponible
         }

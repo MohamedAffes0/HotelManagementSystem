@@ -145,10 +145,16 @@ public class Reservation extends Model {
 		ArrayList<ModelField> data = new ArrayList<>();
 
 		//data.add(String.valueOf(getId()));
-		data.add(new ModelField("Chambre " + getRoom() + " Du " + getStartDate().toString() + "Au" + getEndDate().toString(), null));
-		data.add(new ModelField(isPaid() ? "Payé" : "Impayé", null));
-		data.add(new ModelField("Employée: " + getEmployee(), null));
-		data.add(new ModelField("Client: " + getHotelClient(), null));
+		data.add(new ModelField("Chambre " + getRoom() + " Du  " + getStartDate().toString() + "  Au  " + getEndDate().toString(), null));
+		String styleClass = "";
+		if (isPaid()) {
+			styleClass = "payed-badge";
+		} else {
+			styleClass = "unpaid-badge";
+		}
+		data.add(new ModelField(isPaid() ? "Payé" : "Impayé", styleClass));
+		data.add(new ModelField("Employée: " + getEmployee(), "employee-badge"));
+		data.add(new ModelField("Client: " + getHotelClient(), "client-badge"));
 
 		return data;
 	}

@@ -1,5 +1,6 @@
 package org.openjfx.popup;
 
+import org.app.user.ControllerException;
 import org.app.user.UserDelete;
 import org.app.user.UserModify;
 import org.models.Employee;
@@ -51,7 +52,7 @@ public class UpdateUser extends UpdatePopup {
 	}
 
 	@Override
-	public void update(Model newData) {
+	public void update(Model newData) throws ControllerException{
 		if (!(newData instanceof Employee))
 			throw new RuntimeException("Invalid data received");
 		Employee employee = (Employee) newData;

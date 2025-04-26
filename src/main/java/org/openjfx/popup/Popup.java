@@ -115,8 +115,8 @@ public abstract class Popup implements Initializable {
 		if (destructiveButton == null) {
 			throw new Exception("The destructive button is either uninitialized or removed");
 		}
-		VBox buttonVontainer = (VBox) destructiveButton.getParent();
-		buttonVontainer.getChildren().remove(container.getChildren().indexOf(destructiveButton));
+		VBox buttonContainer = (VBox) destructiveButton.getParent();
+		buttonContainer.getChildren().remove(buttonContainer.getChildren().indexOf(destructiveButton));
 	}
 
 	// Changes the fields in the popup.

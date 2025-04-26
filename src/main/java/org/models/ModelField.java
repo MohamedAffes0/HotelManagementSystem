@@ -21,6 +21,13 @@ public class ModelField {
 		this.iconPosition = iconPosition;
 	}
 
+	public ModelField(String content, String styleClass, SVGPath icon) {
+		this.content = content;
+		this.styleClass = styleClass;
+		this.icon = icon;
+		this.iconPosition = ContentDisplay.LEFT;
+	}
+
 	public ModelField(String content, String styleClass) {
 		this.content = content;
 		this.styleClass = styleClass;

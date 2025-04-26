@@ -5,12 +5,12 @@ import java.sql.*;
 import org.database.DBConnect;
 
 public class UserModify {
-    public static boolean userModify(int id, boolean isAdmin, boolean isActive) {
+    public static void userModify(int id, boolean isAdmin, boolean isActive) throws ControllerException {
 
         // Vérification de la validité de l'ID
         if (id <= 0) {
             System.err.println("Le CIN doit être supérieur à 0.");
-            return false;
+            throw new ControllerException("Le CIN doit être supérieur à 0.");
         }
 
         Connection connection = null;
@@ -21,7 +21,7 @@ public class UserModify {
             // Vérification de la connexion
             if (connection == null) {
                 System.err.println("Échec de la connexion à la base de données.");
-                return false; // Indique que la connexion a échoué
+                throw new ControllerException("Échec de la connexion à la base de données.");
             }
 
             String sql = "{ call modify_user(?, ?, ?) }";
@@ -31,11 +31,10 @@ public class UserModify {
             stmt.setInt(3, isActive ? 1 : 0);
 
             stmt.execute();
-            return true; // Indique que l'ajout a réussi
 
         } catch (SQLException exception) {
             exception.printStackTrace();
-            return false;
+            throw new ControllerException("Erreur de connexion à la base de données");
         } finally {
             // toujour executer le bloc finally
             // Fermeture des ressources JDBC

@@ -7,15 +7,17 @@ import java.sql.SQLException;
 
 import org.app.reservation.ReservationChecker.ReservationDate;
 import org.database.DBConnect;
+import org.app.user.ControllerException; 
 
 public class ReservationModify {
-        public static boolean reservationModify(int id,int roomId, Date startDate, Date endDate, boolean isPaid) {
+        public static void reservationModify(int id,int roomId, Date startDate, 
+            Date endDate, boolean isPaid) throws ControllerException {
         
         //verification de la disponibilité de la chambre
         ReservationDate reservationDate = new ReservationDate(startDate, endDate);
         if (ReservationChecker.reservationCheck(roomId, id, reservationDate) == false) {
             System.err.println("La chambre est déjà réservée pour cette période.");
-            return false; // Indique que la réservation échoue
+            throw new ControllerException("La chambre est déjà réservée pour cette période.");
         }
 
         Connection connection = null;
@@ -26,7 +28,7 @@ public class ReservationModify {
             // Vérification de la connexion
             if (connection == null) {
                 System.err.println("Échec de la connexion à la base de données.");
-                return false; // Indique que la connexion a échoué
+                throw new ControllerException("Échec de la connexion à la base de données.");
             }
 
             String sql = "{ call modify_reservation(?, ?, ?, ?) }";
@@ -37,11 +39,10 @@ public class ReservationModify {
             stmt.setInt(4, isPaid ? 1 : 0);
 
             stmt.execute();
-            return true; // Indique que l'ajout a réussi
 
         } catch (SQLException exception) {
             exception.printStackTrace();
-            return false;
+            throw new ControllerException("Erreur de connexion à la base de données");
         } finally {
             // toujour executer le bloc finally
             // Fermeture des ressources JDBC

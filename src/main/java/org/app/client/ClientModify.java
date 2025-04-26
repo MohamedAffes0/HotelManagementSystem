@@ -10,7 +10,7 @@ import org.database.DBConnect;
 import org.models.Person;
 
 public class ClientModify {
-    public static boolean clientModify(Person client) throws ControllerException {
+    public static void clientModify(Person client) throws ControllerException {
         Connection connection = null;
         CallableStatement stmt = null;
         try {
@@ -19,7 +19,7 @@ public class ClientModify {
             // Vérification de la connexion
             if (connection == null) {
                 System.err.println("Échec de la connexion à la base de données.");
-                return false; // Indique que la connexion a échoué
+                throw new ControllerException("Échec de la connexion à la base de données.");
             }
 
             if (!EmailChecker.isValid(client.getMail())) {
@@ -45,11 +45,10 @@ public class ClientModify {
             stmt.setString(4, client.getMail());
 
             stmt.execute();
-            return true; // Indique que l'ajout a réussi
 
         } catch (SQLException exception) {
             exception.printStackTrace();
-            return false;
+            throw new ControllerException("Erreur de connexion à la base de données");
         } finally {
             // toujour executer le bloc finally
             // Fermeture des ressources JDBC

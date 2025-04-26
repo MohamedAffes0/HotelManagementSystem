@@ -9,7 +9,6 @@ import java.sql.Date;
 import org.app.client.ClientChecker;
 import org.app.client.ClientChecker.ClientStatus;
 import org.app.reservation.ReservationChecker.ReservationDate;
-import org.app.room.RoomSelect;
 import org.database.DBConnect;
 import org.models.Reservation;
 import org.models.Room;

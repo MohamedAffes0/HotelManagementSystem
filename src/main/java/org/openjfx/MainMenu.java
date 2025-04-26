@@ -29,6 +29,7 @@ import org.openjfx.popup.AddClient;
 import org.openjfx.popup.AddReservation;
 import org.openjfx.popup.AddRoom;
 import org.openjfx.popup.AddUser;
+import org.openjfx.popup.UpdateClient;
 import org.openjfx.popup.UpdateReservation;
 import org.openjfx.popup.UpdateRoom;
 import org.openjfx.popup.UpdateUser;
@@ -67,7 +68,7 @@ public class MainMenu implements Initializable {
 	@FXML
 	void clientsPressed(ActionEvent event) throws Exception {
 		ListScreen<Person, ClientSelect> controller = new ListScreen<Person, ClientSelect>(new ClientSelect(),
-				new AddClient(), new UpdateRoom());
+				new AddClient(), new UpdateClient());
 		changeCurrentMenu(controller,
 				"Clients",
 				FXCollections.observableArrayList("Cin"),

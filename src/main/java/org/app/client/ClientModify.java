@@ -4,6 +4,7 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import org.app.EmailChecker;
 import org.database.DBConnect;
 import org.models.Person;
 
@@ -18,6 +19,11 @@ public class ClientModify {
             if (connection == null) {
                 System.err.println("Échec de la connexion à la base de données.");
                 return false; // Indique que la connexion a échoué
+            }
+
+            if (!EmailChecker.isValid(client.getMail())) {
+                System.out.println("Email invalide");
+                return false; // Indique que l'email est invalide
             }
 
             String sql = "{ call modify_client(?, ?, ?, ?) }";

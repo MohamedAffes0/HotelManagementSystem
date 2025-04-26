@@ -9,7 +9,7 @@ import org.database.DBConnect;
 import org.models.Person;
 
 public class ClientModify {
-    public static boolean clientModify(Person client) {
+    public static boolean clientModify(Person client) throws Exception {
         Connection connection = null;
         CallableStatement stmt = null;
         try {
@@ -23,7 +23,17 @@ public class ClientModify {
 
             if (!EmailChecker.isValid(client.getMail())) {
                 System.out.println("Email invalide");
-                return false; // Indique que l'email est invalide
+                throw new Exception("Email invalide");
+            }
+
+            if (client.getName() == null || client.getName().isEmpty()) {
+                System.out.println("Nom invalide");
+                throw new Exception("Nom invalide");
+            }
+
+            if (client.getLastName() == null || client.getLastName().isEmpty()) {
+                System.out.println("Prénom invalide");
+                throw new Exception("Prénom invalide");
             }
 
             String sql = "{ call modify_client(?, ?, ?, ?) }";

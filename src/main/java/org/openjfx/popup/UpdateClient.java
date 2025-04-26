@@ -31,7 +31,7 @@ public class UpdateClient extends UpdatePopup {
 	}
 
 	@Override
-	public void update(Model newData) {
+	public void update(Model newData) throws Exception{
 		if (!(newData instanceof Person))
 			throw new RuntimeException("Invalid data received");
 		Person person = (Person) newData;

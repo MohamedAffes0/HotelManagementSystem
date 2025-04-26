@@ -96,12 +96,24 @@ public class Room extends Model {
 	public ArrayList<ModelField> getFields() {
 		ArrayList<ModelField> data = new ArrayList<>();
 
-		data.add(new ModelField("Chambre " + getId(), null));
-		data.add(new ModelField("Etage " + getFloor(), null));
-		data.add(new ModelField(getTypeString(), null));
-		data.add(new ModelField(getPrice() + " Dt", null));
-		data.add(new ModelField(getCapacity() + " Personnes", null));
-		data.add(new ModelField(getStateString(), null));
+		data.add(new ModelField("Chambre " + getId(), "room-badge"));
+		data.add(new ModelField("Etage " + getFloor(), "floor-badge"));
+		data.add(new ModelField(getTypeString(), "room-type-badge"));
+		data.add(new ModelField(getCapacity() + "" , "person-badge"));
+		data.add(new ModelField(getPrice() + " Dt", "price-badge"));
+		String styleClass = "";
+		switch (state) {
+			case LIBRE:
+				styleClass = "label-libre";
+				break;
+			case OCCUPEE:
+				styleClass = "label-occupee";
+				break;
+			case MAINTENANCE:
+				styleClass = "label-maintenance";
+				break;
+		}
+		data.add(new ModelField(getStateString(), styleClass));
 
 		return data;
 	}

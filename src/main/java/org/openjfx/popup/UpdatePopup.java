@@ -56,8 +56,6 @@ public abstract class UpdatePopup extends Popup {
 			// TODO: change this exception to a new more relevent class like
 			// ControllerException
 			setErrorMessage(exception.toString());
-		} finally {
-			setErrorMessage("Erreur!");
 		}
 	}
 

@@ -46,6 +46,67 @@ public class Room extends Model {
 	public Room() {
 	}
 
+	@Override
+	public boolean filter(TextField search, String filterType) {
+		String searchText = search.getText();
+
+		if (searchText.isEmpty()) {
+			return true;
+		}
+
+		// String is not empty so check filter type
+		switch (filterType) {
+			case "Etage":
+				// Replace all nume
+				search.setText(StringNumberExtract.extract(searchText));
+				search.positionCaret(search.getText().length());
+				return RoomFilter.filterByFloor(this, Integer.parseInt(search.getText()));
+			case "Capacité":
+				search.setText(StringNumberExtract.extract(searchText));
+				search.positionCaret(search.getText().length());
+				return RoomFilter.filterByNumberOfPeople(this, Integer.parseInt(search.getText()));
+			case "Prix":
+				search.setText(StringFloatExtract.extract(searchText));
+				search.positionCaret(search.getText().length());
+				// return RoomFilter.filterByPrice(this, Integer.parseInt(search.getText()) +
+				// 0.999f);
+				return RoomFilter.filterByPrice(this, Float.parseFloat(search.getText()));
+			case "Type":
+				RoomType type = typeFromSearch(searchText);
+
+				if (type == null) {
+					return true;
+				} else {
+					return RoomFilter.filterByType(this, type);
+				}
+			case "Etat":
+				RoomState state = stateFromSearch(searchText);
+
+				if (state == null) {
+					return true;
+				} else {
+					return RoomFilter.filterByState(this, state);
+				}
+			default:
+				return true;
+		}
+	}
+
+	@Override
+	public ArrayList<ModelField> getFields() {
+		ArrayList<ModelField> data = new ArrayList<>();
+
+		data.add(new ModelField("Chambre " + getId(), null));
+		data.add(new ModelField("Etage " + getFloor(), null));
+		data.add(new ModelField(getTypeString(), null));
+		data.add(new ModelField(getPrice() + " Dt", null));
+		data.add(new ModelField(getCapacity() + " Personnes", null));
+		data.add(new ModelField(getStateString(), null));
+
+		return data;
+	}
+
+	// Getters
 	public int getId() {
 		return id;
 	}
@@ -70,6 +131,7 @@ public class Room extends Model {
 		return state;
 	}
 
+	// Setters
 	public void setPrice(float price) {
 		this.price = price;
 	}
@@ -105,51 +167,6 @@ public class Room extends Model {
 				return "Maintenance";
 			default:
 				return "libre";
-		}
-	}
-
-	@Override
-	public boolean filter(TextField search, String filterType) {
-		String searchText = search.getText();
-
-		if (searchText.isEmpty()) {
-			return true;
-		}
-
-		// String is not empty so check filter type
-		switch (filterType) {
-			case "Etage":
-				// Replace all nume
-				search.setText(StringNumberExtract.extract(searchText));
-				search.positionCaret(search.getText().length());
-				return RoomFilter.filterByFloor(this, Integer.parseInt(search.getText()));
-			case "Capacité":
-				search.setText(StringNumberExtract.extract(searchText));
-				search.positionCaret(search.getText().length());
-				return RoomFilter.filterByNumberOfPeople(this, Integer.parseInt(search.getText()));
-			case "Prix":
-				search.setText(StringFloatExtract.extract(searchText));
-				search.positionCaret(search.getText().length());
-				// return RoomFilter.filterByPrice(this, Integer.parseInt(search.getText()) + 0.999f);
-				return RoomFilter.filterByPrice(this, Float.parseFloat(search.getText()));
-			case "Type":
-				RoomType type = typeFromSearch(searchText);
-
-				if (type == null) {
-					return true;
-				} else {
-					return RoomFilter.filterByType(this, type);
-				}
-			case "Etat":
-				RoomState state = stateFromSearch(searchText);
-
-				if (state == null) {
-					return true;
-				} else {
-					return RoomFilter.filterByState(this, state);
-				}
-			default:
-				return true;
 		}
 	}
 
@@ -202,7 +219,8 @@ public class Room extends Model {
 
 		searchText = searchText.toLowerCase();
 
-		// Return null if searchText = "s" because "sinple" and "suite" both start with "s"
+		// Return null if searchText = "s" because "sinple" and "suite" both start with
+		// "s"
 		if (searchText.equals("s")) {
 			return null;
 		}
@@ -236,17 +254,4 @@ public class Room extends Model {
 		return null;
 	}
 
-	@Override
-	public ArrayList<String> getStringData() {
-		ArrayList<String> data = new ArrayList<String>();
-
-		data.add("Chambre " + getId());
-		data.add("Etage " + getFloor());
-		data.add(getTypeString());
-		data.add(getPrice() + " Dt");
-		data.add(getCapacity() + " Personnes");
-		data.add(getStateString());
-
-		return data;
-	}
 }

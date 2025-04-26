@@ -14,7 +14,6 @@ public class Person extends Model{
     private String mail;
 
     public Person(int cin, String name, String lastName, String mail) {
-
         if (cin <= 0) {
             throw new IllegalArgumentException("L'ID doit être supérieur à 0.");
         }
@@ -77,14 +76,14 @@ public class Person extends Model{
 	}
 
 	@Override
-	public ArrayList<String> getStringData() {
-		ArrayList<String> data = new ArrayList<String>();
+	public ArrayList<ModelField> getFields() {
+		ArrayList<ModelField> data = new ArrayList<>();
 
-		data.add("Cin: " + getCin());
-		data.add("Nom " + getName());
-		data.add("Prenom " + getLastName());
+		data.add(new ModelField("Cin: " + getCin(), null));
+		data.add(new ModelField("Nom " + getName(), null));
+		data.add(new ModelField("Prenom " + getLastName(), null));
 		// data.add("Mail " + getMail());
-		data.add(getMail());
+		data.add(new ModelField(getMail(), null));
 
 		return data;
 	}

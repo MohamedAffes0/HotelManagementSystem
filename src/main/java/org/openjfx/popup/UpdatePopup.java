@@ -21,7 +21,9 @@ public abstract class UpdatePopup extends Popup {
 		setCancelText("Annuler");
 	}
 
-	public abstract void update(Model newData);
+	// Updates the data in the database and returns true if it was changed
+	// successfully.
+	public abstract void update(Model newData) throws Exception;
 
 	public abstract void delete();
 
@@ -47,8 +49,16 @@ public abstract class UpdatePopup extends Popup {
 	// Called when the update button is pressed.
 	public void suggestedPressed(ActionEvent event) {
 		dataFromFields();
-		update(getData());
-		close();
+		try {
+			update(getData());
+			close();
+		} catch (Exception exception) {
+			// TODO: change this exception to a new more relevent class like
+			// ControllerException
+			setErrorMessage(exception.toString());
+		} finally {
+			setErrorMessage("Erreur!");
+		}
 	}
 
 	@Override

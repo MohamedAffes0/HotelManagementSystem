@@ -52,7 +52,7 @@ public class UpdateRoom extends UpdatePopup {
 	}
 
 	@Override
-	public void update(Model newData) {
+	public void update(Model newData) throws Error{
 		if (!(newData instanceof Room))
 			throw new RuntimeException("Invalid data received");
 		Room room = (Room) newData;

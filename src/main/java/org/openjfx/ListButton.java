@@ -22,11 +22,7 @@ import javafx.scene.control.Button;
 public class ListButton {
 	Model data;
 	UpdatePopup popup;
-		
-	public class Element {
-		private String name;
-		private String styleClass;
-	}
+	
 
 	@FXML
 	public Button button;

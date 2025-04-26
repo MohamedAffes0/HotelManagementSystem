@@ -11,6 +11,7 @@ import org.models.Person;
 
 public class ClientModify {
     public static void clientModify(Person client) throws ControllerException {
+
         Connection connection = null;
         CallableStatement stmt = null;
         try {

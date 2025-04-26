@@ -53,7 +53,8 @@ public class ListButton {
 
 		content.getChildren().clear();
 
-		for (ModelField field : fields) {
+		for (int i = 1; i < fields.size(); i++) {
+			ModelField field = fields.get(i);
 			Label label = new Label(field.getContent());
 
 			if (field.getStyleClass() != null)

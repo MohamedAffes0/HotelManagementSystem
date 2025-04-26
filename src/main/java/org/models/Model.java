@@ -12,5 +12,5 @@ public abstract class Model {
 	// Returns true if this object fits the filter criterea.
 	public abstract boolean filter(TextField search, String filterType);
 
-	public abstract ArrayList<String> getStringData();
+	public abstract ArrayList<ModelField> getFields();
 }

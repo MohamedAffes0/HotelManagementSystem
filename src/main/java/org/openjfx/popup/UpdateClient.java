@@ -2,6 +2,7 @@ package org.openjfx.popup;
 
 import org.app.client.ClientDelete;
 import org.app.client.ClientModify;
+import org.app.user.ControllerException;
 import org.models.Model;
 import org.models.Person;
 import org.openjfx.popupfield.TextPopupField;
@@ -32,7 +33,7 @@ public class UpdateClient extends UpdatePopup {
 	}
 
 	@Override
-	public void update(Model newData) throws Exception {
+	public void update(Model newData) throws ControllerException {
 		if (!(newData instanceof Person))
 			throw new RuntimeException("Invalid data received");
 		Person person = (Person) newData;

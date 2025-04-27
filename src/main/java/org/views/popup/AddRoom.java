@@ -2,9 +2,9 @@ package org.views.popup;
 
 import org.models.Model;
 import org.models.Room;
-import org.app.room.RoomAdd;
-import org.app.room.RoomAdd.CreationStatus;
-import org.app.room.RoomSelect;
+import org.controllers.room.RoomAdd;
+import org.controllers.room.RoomAdd.CreationStatus;
+import org.controllers.room.RoomSelect;
 import org.models.Room.RoomState;
 import org.models.Room.RoomType;
 import org.views.popupfield.ComboBoxPopupField;
@@ -12,7 +12,6 @@ import org.views.popupfield.NumberPopupField;
 import org.views.popupfield.FloatPopupField;
 
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 
 /**

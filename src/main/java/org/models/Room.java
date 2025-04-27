@@ -5,9 +5,9 @@ import javafx.scene.control.TextField;
 
 import java.util.ArrayList;
 
-import org.app.StringFloatExtract;
-import org.app.StringNumberExtract;
-import org.app.room.RoomFilter;
+import org.controllers.StringFloatExtract;
+import org.controllers.StringNumberExtract;
+import org.controllers.room.RoomFilter;
 
 public class Room extends Model {
 

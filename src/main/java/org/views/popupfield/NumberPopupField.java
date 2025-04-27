@@ -1,6 +1,6 @@
 package org.views.popupfield;
 
-import org.app.StringNumberExtract;
+import org.controllers.StringNumberExtract;
 
 import javafx.event.EventHandler;
 import javafx.scene.control.TextField;

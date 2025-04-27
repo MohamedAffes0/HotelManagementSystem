@@ -1,8 +1,8 @@
 package org.views.popup;
 
-import org.app.user.ControllerException;
-import org.app.user.UserDelete;
-import org.app.user.UserModify;
+import org.controllers.user.ControllerException;
+import org.controllers.user.UserDelete;
+import org.controllers.user.UserModify;
 import org.models.Employee;
 import org.models.Model;
 import org.views.popupfield.ComboBoxPopupField;

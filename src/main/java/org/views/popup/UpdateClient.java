@@ -1,8 +1,8 @@
 package org.views.popup;
 
-import org.app.client.ClientDelete;
-import org.app.client.ClientModify;
-import org.app.user.ControllerException;
+import org.controllers.client.ClientDelete;
+import org.controllers.client.ClientModify;
+import org.controllers.user.ControllerException;
 import org.models.Model;
 import org.models.Person;
 import org.views.popupfield.TextPopupField;

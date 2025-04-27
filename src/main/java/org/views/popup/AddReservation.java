@@ -8,9 +8,9 @@ import org.models.Reservation;
 import org.views.popupfield.ComboBoxPopupField;
 import org.views.popupfield.DatePopupField;
 import org.views.popupfield.NumberPopupField;
-import org.app.reservation.ReservationAdd;
-import org.app.room.RoomSelect;
-import org.app.reservation.ReservationAdd.CreationStatus;
+import org.controllers.reservation.ReservationAdd;
+import org.controllers.room.RoomSelect;
+import org.controllers.reservation.ReservationAdd.CreationStatus;
 
 import javafx.collections.FXCollections;
 import javafx.stage.Stage;

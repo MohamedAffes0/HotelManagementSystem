@@ -1,8 +1,8 @@
 package org.views.popup;
 
-import org.app.user.UserAdd.CreationStatus;
-import org.app.user.UserSelect;
-import org.app.user.UserAdd;
+import org.controllers.user.UserAdd.CreationStatus;
+import org.controllers.user.UserSelect;
+import org.controllers.user.UserAdd;
 import org.models.Employee;
 import org.models.Model;
 import org.views.popupfield.ComboBoxPopupField;

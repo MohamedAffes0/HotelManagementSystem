@@ -245,6 +245,7 @@ Text {
     -fx-padding: 4 10;
     -fx-background-radius: 10;
     -fx-pref-width: 100px;
+    -fx-alignment: CENTER;
 }
 .label-occupee {
     -fx-background-color: -blue-label;
@@ -252,6 +253,7 @@ Text {
     -fx-padding: 4 10;
     -fx-background-radius: 10;
     -fx-pref-width: 100px;
+    -fx-alignment: CENTER;
 
 }
 .label-maintenance {
@@ -260,6 +262,7 @@ Text {
     -fx-padding: 4 10;
     -fx-background-radius: 10;
     -fx-pref-width: 100px;
+    -fx-alignment: CENTER;
 }
 
 /* === ÉTIQUETTES (BADGES) POUR LES ÉTAGES, ICÔNES, ETC === */
@@ -269,6 +272,7 @@ Text {
     -fx-padding: 4 10;
     -fx-background-radius: 10;
     -fx-pref-width: 80px;
+    -fx-alignment: CENTER;
 }
 
 .person-badge {
@@ -277,6 +281,7 @@ Text {
     -fx-padding: 4 10;
     -fx-background-radius: 10;
     -fx-pref-width: 60px;
+    -fx-alignment: CENTER;
 }
 
 .client-badge{
@@ -285,10 +290,12 @@ Text {
     -fx-padding: 4 10;
     -fx-background-radius: 10;
     -fx-pref-width: 120px;
+    -fx-alignment: CENTER;
 }
 
 .employee-badge {
     -fx-pref-width: 150px;
+    -fx-alignment: CENTER;
 }
 
 .employee-type-badge {
@@ -297,6 +304,7 @@ Text {
     -fx-padding: 4 10;
     -fx-background-radius: 10;
     -fx-pref-width: 110px;
+    -fx-alignment: CENTER;
 }
 
 .active-user-badge {
@@ -305,6 +313,7 @@ Text {
     -fx-padding: 4 10;
     -fx-background-radius: 10;
     -fx-pref-width: 80px;
+    -fx-alignment: CENTER;
 }
 
 .inactive-user-badge {
@@ -313,10 +322,12 @@ Text {
     -fx-padding: 4 10;
     -fx-background-radius: 10;
     -fx-pref-width: 80px;
+    -fx-alignment: CENTER;
 }
 
 .mail-field {
     -fx-pref-width: 180px;
+    -fx-alignment: CENTER;
 }
 
 .mail-field-user {
@@ -329,6 +340,7 @@ Text {
 
 .room-badge, .price-badge, .room-type-badge {
     -fx-pref-width: 100px;
+    -fx-alignment: CENTER;
 }
 
 .payed-badge {
@@ -337,6 +349,7 @@ Text {
     -fx-padding: 4 10;
     -fx-background-radius: 10;
     -fx-pref-width: 70px;
+    -fx-alignment: CENTER;
 }
 
 .unpaid-badge {
@@ -345,7 +358,10 @@ Text {
     -fx-padding: 4 10;
     -fx-background-radius: 10;
     -fx-pref-width: 70px;
+    -fx-alignment: CENTER;
 }
+
+
 
 /* === DATE PICKER === */
 

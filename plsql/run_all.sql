@@ -29,6 +29,7 @@
 @reservation_script/get_all_reservation.sql
 @room_script/requested_room.sql
 @client_script/faithful_clients.sql
+@room_script/get_available_rooms.sql
 
 -- Modifications
 @room_script/modify_room.sql

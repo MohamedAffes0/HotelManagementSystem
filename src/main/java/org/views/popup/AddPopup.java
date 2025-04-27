@@ -1,10 +1,10 @@
-package org.openjfx.popup;
+package org.views.popup;
 
 import javafx.event.ActionEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 import org.models.Model;
-import org.openjfx.popupfield.PopupField;
+import org.views.popupfield.PopupField;
 
 /**
  * AddPupup

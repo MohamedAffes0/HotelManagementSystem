@@ -1,4 +1,4 @@
-package org.openjfx.popupfield;
+package org.views.popupfield;
 
 import java.io.ObjectInputStream.GetField;
 
@@ -15,7 +15,7 @@ public abstract class PopupField {
 	protected HBox container = new HBox();
 	private Control field;
 	private Label name = new Label();
-	
+
 	PopupField(String name) {
 		this.name.setText(name);
 		this.name.setMaxHeight(500);
@@ -25,7 +25,7 @@ public abstract class PopupField {
 		HBox.setHgrow(anchorPane, Priority.ALWAYS);
 		container.getChildren().add(anchorPane);
 	}
-	
+
 	public HBox getContainer() {
 		return container;
 	}

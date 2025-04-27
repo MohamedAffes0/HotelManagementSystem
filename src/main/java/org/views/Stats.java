@@ -1,4 +1,4 @@
-package org.openjfx;
+package org.views;
 
 import java.net.URL;
 import java.util.ArrayList;

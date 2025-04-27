@@ -1,4 +1,4 @@
-package org.openjfx.popup;
+package org.views.popup;
 
 import org.models.Model;
 import org.models.Room;
@@ -7,9 +7,9 @@ import org.app.room.RoomAdd.CreationStatus;
 import org.app.room.RoomSelect;
 import org.models.Room.RoomState;
 import org.models.Room.RoomType;
-import org.openjfx.popupfield.ComboBoxPopupField;
-import org.openjfx.popupfield.NumberPopupField;
-import org.openjfx.popupfield.FloatPopupField;
+import org.views.popupfield.ComboBoxPopupField;
+import org.views.popupfield.NumberPopupField;
+import org.views.popupfield.FloatPopupField;
 
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;

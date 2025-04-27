@@ -1,4 +1,4 @@
-package org.openjfx.popup;
+package org.views.popup;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -8,8 +8,8 @@ import org.app.reservation.ReservationModify;
 import org.app.user.ControllerException;
 import org.models.Model;
 import org.models.Reservation;
-import org.openjfx.popupfield.ComboBoxPopupField;
-import org.openjfx.popupfield.DatePopupField;
+import org.views.popupfield.ComboBoxPopupField;
+import org.views.popupfield.DatePopupField;
 
 import javafx.collections.FXCollections;
 

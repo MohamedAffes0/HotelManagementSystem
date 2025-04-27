@@ -36,7 +36,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox alignment="CENTER" prefHeight="400.0" prefWidth="640.0" spacing="20.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.ConfirmationPending">
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="640.0" spacing="20.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.views.ConfirmationPending">
    <children>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Votre compte est en cours de confirmation, contactez un admin en cas de retard..." textAlignment="CENTER" wrappingWidth="400.0" />
       <Button mnemonicParsing="false" onAction="#loadInitial" text="Retourner à l'acceuil" />

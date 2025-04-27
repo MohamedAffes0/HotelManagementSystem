@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<Button fx:id="button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pressed" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.listbuttons.RoomButton">
+<Button fx:id="button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pressed" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.views.listbuttons.RoomButton">
    <graphic>
       <HBox alignment="CENTER" fillHeight="false" prefHeight="36.0" spacing="16.0">
          <children>

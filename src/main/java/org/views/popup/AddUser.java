@@ -1,12 +1,12 @@
-package org.openjfx.popup;
+package org.views.popup;
 
 import org.app.user.UserAdd.CreationStatus;
 import org.app.user.UserSelect;
 import org.app.user.UserAdd;
 import org.models.Employee;
 import org.models.Model;
-import org.openjfx.popupfield.ComboBoxPopupField;
-import org.openjfx.popupfield.TextPopupField;
+import org.views.popupfield.ComboBoxPopupField;
+import org.views.popupfield.TextPopupField;
 
 import javafx.collections.FXCollections;
 import javafx.stage.Stage;

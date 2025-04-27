@@ -1,9 +1,9 @@
-package org.openjfx;
+package org.views;
 
 import org.app.DBLoader;
 import org.models.Model;
-import org.openjfx.popup.AddPopup;
-import org.openjfx.popup.UpdatePopup;
+import org.views.popup.AddPopup;
+import org.views.popup.UpdatePopup;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

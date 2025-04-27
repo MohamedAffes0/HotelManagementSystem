@@ -1,4 +1,4 @@
-package org.openjfx;
+package org.views;
 
 import org.app.EmailChecker;
 import org.app.auth.LoginChecker;

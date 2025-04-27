@@ -1,4 +1,4 @@
-package org.openjfx.popup;
+package org.views.popup;
 
 import org.app.room.RoomDelete;
 import org.app.room.RoomModify;
@@ -6,9 +6,9 @@ import org.app.user.ControllerException;
 import org.models.Model;
 import org.models.Room;
 import org.models.Room.RoomState;
-import org.openjfx.popupfield.ComboBoxPopupField;
-import org.openjfx.popupfield.FloatPopupField;
-import org.openjfx.popupfield.NumberPopupField;
+import org.views.popupfield.ComboBoxPopupField;
+import org.views.popupfield.FloatPopupField;
+import org.views.popupfield.NumberPopupField;
 
 import javafx.collections.FXCollections;
 import javafx.scene.control.ComboBox;

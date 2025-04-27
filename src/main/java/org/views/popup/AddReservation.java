@@ -1,13 +1,13 @@
-package org.openjfx.popup;
+package org.views.popup;
 
 import java.time.LocalDate;
 import java.sql.Date;
 
 import org.models.Model;
 import org.models.Reservation;
-import org.openjfx.popupfield.ComboBoxPopupField;
-import org.openjfx.popupfield.DatePopupField;
-import org.openjfx.popupfield.NumberPopupField;
+import org.views.popupfield.ComboBoxPopupField;
+import org.views.popupfield.DatePopupField;
+import org.views.popupfield.NumberPopupField;
 import org.app.reservation.ReservationAdd;
 import org.app.room.RoomSelect;
 import org.app.reservation.ReservationAdd.CreationStatus;

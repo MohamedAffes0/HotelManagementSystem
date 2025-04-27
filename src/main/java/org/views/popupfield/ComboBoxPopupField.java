@@ -1,4 +1,4 @@
-package org.openjfx.popupfield;
+package org.views.popupfield;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

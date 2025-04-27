@@ -1,4 +1,4 @@
-package org.openjfx;
+package org.views;
 
 import java.util.Locale;
 
@@ -29,7 +29,7 @@ public class App extends Application {
         // System.out.println(Font.getDefault().getName());
 
         stage = primaryStage;
-        Parent root = FXMLLoader.load(getClass().getResource("/mainMenu.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/login.fxml"));
 
         var scene = new Scene(root, 1280, 720);
         

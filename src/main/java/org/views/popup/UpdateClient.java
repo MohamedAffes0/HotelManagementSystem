@@ -1,11 +1,11 @@
-package org.openjfx.popup;
+package org.views.popup;
 
 import org.app.client.ClientDelete;
 import org.app.client.ClientModify;
 import org.app.user.ControllerException;
 import org.models.Model;
 import org.models.Person;
-import org.openjfx.popupfield.TextPopupField;
+import org.views.popupfield.TextPopupField;
 
 public class UpdateClient extends UpdatePopup {
 	final int NAME = 0;

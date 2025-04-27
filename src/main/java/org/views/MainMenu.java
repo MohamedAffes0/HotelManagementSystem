@@ -1,4 +1,4 @@
-package org.openjfx;
+package org.views;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,14 +21,14 @@ import org.models.Employee;
 import org.models.Person;
 import org.models.Reservation;
 import org.models.Room;
-import org.openjfx.popup.AddClient;
-import org.openjfx.popup.AddReservation;
-import org.openjfx.popup.AddRoom;
-import org.openjfx.popup.AddUser;
-import org.openjfx.popup.UpdateClient;
-import org.openjfx.popup.UpdateReservation;
-import org.openjfx.popup.UpdateRoom;
-import org.openjfx.popup.UpdateUser;
+import org.views.popup.AddClient;
+import org.views.popup.AddReservation;
+import org.views.popup.AddRoom;
+import org.views.popup.AddUser;
+import org.views.popup.UpdateClient;
+import org.views.popup.UpdateReservation;
+import org.views.popup.UpdateRoom;
+import org.views.popup.UpdateUser;
 
 public class MainMenu implements Initializable {
 	private App main;

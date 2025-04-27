@@ -1,4 +1,4 @@
-package org.openjfx;
+package org.views;
 
 import javafx.fxml.FXML;
 import javafx.event.ActionEvent;

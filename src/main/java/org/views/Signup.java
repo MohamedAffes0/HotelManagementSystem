@@ -8,10 +8,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Label;
 
-import org.app.EmailChecker;
-import org.app.user.UserAdd;
-import org.app.user.UserSelect;
-import org.app.user.UserAdd.CreationStatus;
+import org.controllers.EmailChecker;
+import org.controllers.user.UserAdd;
+import org.controllers.user.UserSelect;
+import org.controllers.user.UserAdd.CreationStatus;
 import org.models.Employee;
 
 public class Signup {

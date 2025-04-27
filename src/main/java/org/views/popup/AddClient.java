@@ -1,12 +1,12 @@
 package org.views.popup;
 
-import org.app.client.ClientAdd.CreationStatus;
+import org.controllers.client.ClientAdd.CreationStatus;
 import org.models.Model;
 import org.models.Person;
 import org.views.popupfield.NumberPopupField;
 import org.views.popupfield.TextPopupField;
-import org.app.client.ClientAdd;
-import org.app.client.ClientSelect;
+import org.controllers.client.ClientAdd;
+import org.controllers.client.ClientSelect;
 
 import javafx.stage.Stage;
 

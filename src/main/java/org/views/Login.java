@@ -1,7 +1,7 @@
 package org.views;
 
-import org.app.EmailChecker;
-import org.app.auth.LoginChecker;
+import org.controllers.EmailChecker;
+import org.controllers.auth.LoginChecker;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

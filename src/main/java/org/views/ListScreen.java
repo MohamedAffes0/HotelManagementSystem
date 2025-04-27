@@ -1,6 +1,6 @@
 package org.views;
 
-import org.app.DBLoader;
+import org.controllers.DBLoader;
 import org.models.Model;
 import org.views.popup.AddPopup;
 import org.views.popup.UpdatePopup;

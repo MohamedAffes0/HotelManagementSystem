@@ -4,11 +4,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import org.app.client.ClientSelect;
-import org.app.client.ClientStats;
-import org.app.reservation.ReservationSelect;
-import org.app.room.RoomSelect;
-import org.app.room.RoomStats;
+import org.controllers.client.ClientSelect;
+import org.controllers.client.ClientStats;
+import org.controllers.reservation.ReservationSelect;
+import org.controllers.room.RoomSelect;
+import org.controllers.room.RoomStats;
 import org.models.Model;
 import org.models.Person;
 import org.models.Reservation;

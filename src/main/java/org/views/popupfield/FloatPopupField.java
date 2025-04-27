@@ -1,7 +1,7 @@
 package org.views.popupfield;
 
 
-import org.app.StringFloatExtract;
+import org.controllers.StringFloatExtract;
 
 import javafx.event.EventHandler;
 import javafx.scene.control.TextField;

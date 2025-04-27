@@ -1,11 +1,10 @@
 package org.views.popup;
 
 import java.time.LocalDate;
-import java.util.Date;
 
-import org.app.reservation.ReservationDelete;
-import org.app.reservation.ReservationModify;
-import org.app.user.ControllerException;
+import org.controllers.reservation.ReservationDelete;
+import org.controllers.reservation.ReservationModify;
+import org.controllers.user.ControllerException;
 import org.models.Model;
 import org.models.Reservation;
 import org.views.popupfield.ComboBoxPopupField;

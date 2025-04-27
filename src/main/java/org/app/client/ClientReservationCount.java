@@ -3,6 +3,7 @@ package org.app.client;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.app.reservation.ReservationSelect;
 import org.models.Person;
 import org.models.Reservation;
 
@@ -27,7 +28,10 @@ public class ClientReservationCount {
         ArrayList<Person> faithfulClients = new ArrayList<>();
         int totalReservations = 0;
         for (int i = 0; i < clients.size(); i++) {
-            totalReservations += reservationCount.get(clients.get(i).getCin());
+            Integer count = reservationCount.get(clients.get(i).getCin());
+            if (count != null) {
+                totalReservations += count;
+            }
         }
 
         double threshold = totalReservations * 0.1; // 10% of total reservations 
@@ -44,17 +48,17 @@ public class ClientReservationCount {
 
     // public static void main(String[] args) {
     //     // Test the clientReservationCount method
-    //     ArrayList<ReservationModel> reservations = ReservationSelect.reservationSelect();
+    //     ArrayList<Reservation> reservations = ReservationSelect.dataFromDB();
 
     //     HashMap<Integer, Integer> reservationCount = clientReservationCount(reservations);
     //     System.out.println(reservationCount);
 
     //     // Test the getFaithfulClients method
-    //     ArrayList<PersonModel> clients = ClientSelect.clientSelect();
-    //     ArrayList<PersonModel> faithfulClients = getFaithfulClients(clients, reservationCount);
+    //     ArrayList<Person> clients = ClientSelect.dataFromDB();
+    //     ArrayList<Person> faithfulClients = getFaithfulClients(clients, reservationCount);
     //     System.out.println("Faithful clients: ");
-    //     for (PersonModel client : faithfulClients) {
-    //         System.out.println(client.getId() + " " + client.getName() + " " + client.getLastName() + " " + client.getMail());
+    //     for (Person client : faithfulClients) {
+    //         System.out.println(client.getCin() + " " + client.getName() + " " + client.getLastName() + " " + client.getMail());
     //     }
     // }
 }

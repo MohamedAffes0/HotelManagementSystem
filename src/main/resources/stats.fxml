@@ -17,13 +17,13 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <VBox fx:id="regularClients" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="card" />
+                  <VBox fx:id="faithfulClients" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="card" />
                   <Label style="-fx-font-weight: bold;" text="Les chambres les plus demandées">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <VBox fx:id="MostCovetedRooms" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="card" />
+                  <VBox fx:id="mostCovetedRooms" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="card" />
                </children></VBox>
          </content>
       </ScrollPane>

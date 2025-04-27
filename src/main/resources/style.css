@@ -315,6 +315,18 @@ Text {
     -fx-pref-width: 80px;
 }
 
+.mail-field {
+    -fx-pref-width: 180px;
+}
+
+.mail-field-user {
+    -fx-pref-width: 200px;
+}
+
+.name-field, .last-name-field {
+    -fx-pref-width: 150px;
+}
+
 .room-badge, .price-badge, .room-type-badge {
     -fx-pref-width: 100px;
 }

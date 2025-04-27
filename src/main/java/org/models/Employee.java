@@ -34,7 +34,7 @@ final public class Employee extends Person {
 		} else {
 			styleClass = "inactive-user-badge";
 		}
-		data.add(new ModelField(getMail(), null));
+		data.add(new ModelField(getMail(), "mail-field"));
 		data.add(new ModelField(isActive() ? "Actif" : "Inactif", styleClass));
 
 		return data;

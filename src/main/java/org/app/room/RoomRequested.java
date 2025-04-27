@@ -31,7 +31,7 @@ public class RoomRequested {
                 return null; // Indique que la connexion a échoué
             }
 
-            String sql = "{ call requested_room(?, ?, ?, ?, ?,?) }";
+            String sql = "{ call requested_room(?, ?, ?, ?, ?, ?) }";
             stmt = connection.prepareCall(sql);
 
             stmt.registerOutParameter(1, Types.INTEGER);

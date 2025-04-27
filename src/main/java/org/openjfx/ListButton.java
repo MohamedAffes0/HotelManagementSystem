@@ -57,10 +57,9 @@ public class ListButton {
 			ModelField field = fields.get(i);
 			Label label = new Label(field.getContent());
 
+			// label.setAlignment(Pos.CENTER);
 			if (field.getStyleClass() != null)
 				label.getStyleClass().add(field.getStyleClass());
-
-			label.setAlignment(Pos.CENTER);
 
 			if (field.getIcon() != null) {
 				label.setGraphic(field.getIcon());

@@ -162,12 +162,12 @@ Text {
     -fx-background-color: -add-button-color-hover;
 } */
 
-.delete-button {
+.delete-button, .log-out-button {
     -fx-background-color: -delete-button-color;
     -fx-text-fill: -font-color-delete-button;
 }
 
-.delete-button:hover {
+.delete-button:hover, .log-out-button:hover {
     -fx-background-color: -delete-button-color-hover;
 }
 
@@ -178,13 +178,13 @@ Text {
     -fx-background-radius: 50px;
 }
 
-.log-out-button {
+/* .log-out-button {
     -fx-background-color: -logout-button-color;
 }
 
 .log-out-button:hover {
     -fx-background-color: -logout-button-color-hover;
-}
+} */
 
 .cancel-button {
     -fx-background-color: -button-color-dark;

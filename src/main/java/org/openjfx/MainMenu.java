@@ -5,10 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.SVGPath;
 import javafx.scene.Parent;
 import javafx.fxml.FXMLLoader;
 
@@ -16,7 +13,6 @@ import javafx.fxml.Initializable;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import org.app.client.ClientSelect;
 import org.app.reservation.ReservationSelect;
 import org.app.room.RoomSelect;
@@ -38,6 +34,9 @@ public class MainMenu implements Initializable {
 	private App main;
 
 	@FXML
+	private Button stats;
+
+	@FXML
 	private Button chambres;
 
 	@FXML
@@ -54,6 +53,22 @@ public class MainMenu implements Initializable {
 
 	@FXML
 	private Button logout;
+
+	@FXML
+	void statsPressed(ActionEvent event) throws Exception {
+
+		Parent menu = FXMLLoader.load(getClass().getResource("/stats.fxml"));
+
+		// Delete the previous menu and set this one
+		contentContainer.getChildren().clear();
+		contentContainer.getChildren().add(menu);
+
+		// Anchor it correctly so that it displays over the entire screen.
+		AnchorPane.setTopAnchor(menu, 0.0);
+		AnchorPane.setBottomAnchor(menu, 0.0);
+		AnchorPane.setLeftAnchor(menu, 0.0);
+		AnchorPane.setRightAnchor(menu, 0.0);
+	}
 
 	@FXML
 	void chambresPressed(ActionEvent event) throws Exception {
@@ -104,7 +119,6 @@ public class MainMenu implements Initializable {
 			exception.printStackTrace();
 		}
 	}
-	
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -131,7 +145,8 @@ public class MainMenu implements Initializable {
 		UiUtils.setIconToButton(reservations, svgPath, 0.8, "#ffffff");
 
 		// Set the icon for the "logout" button
-		svgPath = "M11 4.25a7.75 7.75 0 1 0 5.424 13.286a.75.75 0 1 0-1.05-1.072a6.25 6.25 0 1 1 0-8.929a.75.75 0 1 0 1.05-1.07A7.73 7.73 0 0 0 11 4.25" + "M12.53 9.53a.75.75 0 0 0-1.06-1.06l-3 3a.75.75 0 0 0 0 1.06l3 3a.75.75 0 1 0 1.06-1.06l-1.72-1.72H20a.75.75 0 0 0 0-1.5h-9.19z";
+		svgPath = "M11 4.25a7.75 7.75 0 1 0 5.424 13.286a.75.75 0 1 0-1.05-1.072a6.25 6.25 0 1 1 0-8.929a.75.75 0 1 0 1.05-1.07A7.73 7.73 0 0 0 11 4.25"
+				+ "M12.53 9.53a.75.75 0 0 0-1.06-1.06l-3 3a.75.75 0 0 0 0 1.06l3 3a.75.75 0 1 0 1.06-1.06l-1.72-1.72H20a.75.75 0 0 0 0-1.5h-9.19z";
 		UiUtils.setIconToButton(logout, svgPath, 0.8, "#F38BA8");
 
 		main = new App();

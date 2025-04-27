@@ -19,7 +19,7 @@ public abstract class AddPopup extends Popup {
 		setCancelText("Annuler");
 	}
 
-	protected abstract void addData(Model newData);
+	protected abstract void addData(Model newData) throws Exception;
 
 	protected abstract Model dataFromFields();
 
@@ -36,7 +36,11 @@ public abstract class AddPopup extends Popup {
 	@Override
 	// Called when the update button is pressed.
 	public void suggestedPressed(ActionEvent event) {
-		addData(dataFromFields());
-		close();
+		try {
+			addData(dataFromFields());
+			close();
+		} catch (Exception exception) {
+			setErrorMessage(exception.toString());
+		}
 	}
 }

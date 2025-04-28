@@ -52,8 +52,8 @@ public class AddReservation extends AddPopup {
 		LocalDate endDate = (LocalDate) getField(END_DATE).getValue();
 		return new Reservation(
 				1,
-				Date.valueOf(startDate),
-				Date.valueOf(endDate),
+				startDate == null ? null : Date.valueOf(startDate),
+				endDate == null ? null : Date.valueOf(endDate),
 				status,
 				3,
 				(int) getField(CLIENT).getValue(),

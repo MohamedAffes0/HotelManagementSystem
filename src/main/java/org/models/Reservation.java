@@ -19,19 +19,6 @@ public class Reservation extends Model {
 
 	public Reservation(int id, Date startDate, Date endDate, boolean paid, int employee, int hotelClient,
 			int room) {
-
-		if (id <= 0) {
-			throw new IllegalArgumentException("ID must be greater than 0.");
-		}
-
-		if (startDate == null || endDate == null) {
-			throw new IllegalArgumentException("Start date and end date cannot be null.");
-		}
-
-		if (startDate.after(endDate)) {
-			throw new IllegalArgumentException("Start date cannot be after end date.");
-		}
-
 		this.id = id;
 		this.startDate = startDate;
 		this.endDate = endDate;
@@ -74,19 +61,10 @@ public class Reservation extends Model {
 	}
 
 	public void setStartDate(Date startDate) {
-		if (startDate == null) {
-			throw new IllegalArgumentException("Start date cannot be null.");
-		}
 		this.startDate = startDate;
 	}
 
 	public void setEndDate(Date endDate) {
-		if (endDate == null) {
-			throw new IllegalArgumentException("End date cannot be null.");
-		}
-		if (startDate != null && startDate.after(endDate)) {
-			throw new IllegalArgumentException("Start date cannot be after end date.");
-		}
 		this.endDate = endDate;
 	}
 

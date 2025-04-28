@@ -14,10 +14,6 @@ public class Person extends Model {
 	private String mail;
 
 	public Person(int cin, String name, String lastName, String mail) {
-		if (cin <= 0) {
-			throw new IllegalArgumentException("L'ID doit être supérieur à 0.");
-		}
-
 		this.cin = cin;
 		this.name = name;
 		this.lastName = lastName;

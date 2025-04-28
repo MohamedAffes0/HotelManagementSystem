@@ -29,6 +29,9 @@ public class FloatPopupField extends PopupField {
 	}
 
 	public Float getValue() {
+		if (((TextField)getField()).getText().isEmpty()) {
+			return 0f;
+		}
 		return Float.parseFloat(((TextField)getField()).getText());
 	}
 

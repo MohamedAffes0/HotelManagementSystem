@@ -31,11 +31,6 @@ public class Room extends Model {
 	private RoomState state;
 
 	public Room(int id, RoomType roomType, int floor, int capacity, float price, RoomState state) {
-
-		if (id <= 0) {
-			throw new IllegalArgumentException("L'ID ne doit pas être vide.");
-		}
-
 		this.id = id;
 		this.roomType = roomType;
 		this.floor = floor;

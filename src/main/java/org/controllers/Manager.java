@@ -128,9 +128,6 @@ public abstract class Manager<T extends Model> {
 				if (statement != null) {
 					statement.close();
 				}
-				if (connection != null) {
-					connection.close();
-				}
 			} catch (SQLException exception) {
 				exception.printStackTrace();
 				throw new DBException();

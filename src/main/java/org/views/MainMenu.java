@@ -13,10 +13,8 @@ import javafx.fxml.Initializable;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import org.controllers.client.ClientSelect;
-import org.controllers.reservation.ReservationSelect;
-import org.controllers.room.RoomSelect;
-import org.controllers.user.UserSelect;
+
+import org.controllers.Controller;
 import org.models.Employee;
 import org.models.Person;
 import org.models.Reservation;
@@ -72,7 +70,7 @@ public class MainMenu implements Initializable {
 
 	@FXML
 	void chambresPressed(ActionEvent event) throws Exception {
-		ListScreen<Room, RoomSelect> controller = new ListScreen<Room, RoomSelect>(new RoomSelect(),
+		ListScreen<Room> controller = new ListScreen<Room>(Controller.getInstance().getRoomManager(),
 				new AddRoom(), new UpdateRoom());
 		changeCurrentMenu(controller,
 				"Chambres",
@@ -82,7 +80,7 @@ public class MainMenu implements Initializable {
 
 	@FXML
 	void clientsPressed(ActionEvent event) throws Exception {
-		ListScreen<Person, ClientSelect> controller = new ListScreen<Person, ClientSelect>(new ClientSelect(),
+		ListScreen<Person> controller = new ListScreen<Person>(Controller.getInstance().getClientManager(),
 				new AddClient(), new UpdateClient());
 		changeCurrentMenu(controller,
 				"Clients",
@@ -92,7 +90,7 @@ public class MainMenu implements Initializable {
 
 	@FXML
 	void comptesPressed(ActionEvent event) {
-		ListScreen<Employee, UserSelect> controller = new ListScreen<Employee, UserSelect>(new UserSelect(),
+		ListScreen<Employee> controller = new ListScreen<Employee>(Controller.getInstance().getUserManager(),
 				new AddUser(), new UpdateUser());
 		changeCurrentMenu(controller,
 				"Comptes",
@@ -102,8 +100,9 @@ public class MainMenu implements Initializable {
 
 	@FXML
 	void reservationsPressed(ActionEvent event) {
-		ListScreen<Reservation, ReservationSelect> controller = new ListScreen<Reservation, ReservationSelect>(
-				new ReservationSelect(), new AddReservation(), new UpdateReservation());
+		ListScreen<Reservation> controller = new ListScreen<Reservation>(
+				Controller.getInstance().getReservationManager(), new AddReservation(),
+				new UpdateReservation());
 		changeCurrentMenu(controller,
 				"Réservations",
 				FXCollections.observableArrayList("Est Payé", "Client", "Chambre"),
@@ -155,7 +154,7 @@ public class MainMenu implements Initializable {
 		main = new App();
 	}
 
-	private void changeCurrentMenu(ListScreen<?, ?> controller, String title, ObservableList<String> filterItems,
+	private void changeCurrentMenu(ListScreen<?> controller, String title, ObservableList<String> filterItems,
 			String addButtonText) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/listScreen.fxml"));
 

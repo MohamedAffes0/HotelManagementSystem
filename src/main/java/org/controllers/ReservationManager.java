@@ -222,18 +222,9 @@ public class ReservationManager extends Manager<Reservation> {
 			System.err.println("La date de début est après la date de fin.");
 			throw new ControllerException("La date de début est après la date de fin.");
 		}
-		java.util.Date today = new java.util.Date(System.currentTimeMillis());
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(today);
-		calendar.add(Calendar.DAY_OF_MONTH, -1); // soustraire un jour pour la comparaison
-		today = calendar.getTime();
-		if (data.getStartDate().before(calendar.getTime())) {
-			System.err.println("La date de début est dans le passé.");
-			throw new ControllerException("La date de début est dans le passé.");
-		}
 
 		// Check room availability
-		if (!reservationCheck(data.getRoom(), data.getRoom(), data.getStartDate(),
+		if (!reservationCheck(data.getRoom(), data.getId(), data.getStartDate(),
 				data.getEndDate())) {
 			System.err.println("La chambre est déjà réservée pour cette période.");
 			throw new ControllerException("La chambre est déjà réservée pour cette période.");

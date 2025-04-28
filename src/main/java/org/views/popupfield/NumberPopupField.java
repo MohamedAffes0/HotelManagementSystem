@@ -27,6 +27,10 @@ public class NumberPopupField extends PopupField<TextField, Integer> {
 
 	}
 
+	public void setOnAction(EventHandler<? super KeyEvent> event) {
+		getField().setOnKeyTyped(event);
+	}
+
 	public Integer getValue() {
 		if (isEmpty()) {
 			return 0;

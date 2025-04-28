@@ -35,6 +35,8 @@ public class AddReservation extends AddPopup {
 						FXCollections.observableArrayList("Payé", "Non payé")));
 		// ((ComboBoxPopupField)getField(ROOM)).setValue("Veuillez selectionner ");;
 		((DatePopupField) getField(START_DATE)).setOnAction(event -> updateRooms());
+		((DatePopupField) getField(END_DATE)).setOnAction(event -> updateRooms());
+		((NumberPopupField) getField(CAPACITY)).setOnAction(event -> updateRooms());
 		setTitle("Ajouter une réservation");
 	}
 
@@ -63,6 +65,7 @@ public class AddReservation extends AddPopup {
 				System.out.println(room);
 			}
 		} catch (Exception exception) {
+			((ComboBoxPopupField) getField(ROOM)).setItems("");
 			((ComboBoxPopupField) getField(ROOM)).setValue("Aucune chambre disponible");
 			System.out.println(exception.getMessage());
 		}

@@ -1,6 +1,7 @@
 package org.views.popup;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 
 import org.controllers.Controller;
 import org.controllers.exceptions.ControllerException;
@@ -72,7 +73,7 @@ public class UpdateReservation extends UpdatePopup {
 			((ComboBoxPopupField) getField(STATUS)).setValue("Non payé");
 		}
 
-		((DatePopupField) getField(START_DATE)).setValue(reservation.getStartDate());
-		((DatePopupField) getField(END_DATE)).setValue(reservation.getEndDate());
+		((DatePopupField) getField(START_DATE)).setValue(((java.sql.Date) reservation.getStartDate()).toLocalDate());
+		((DatePopupField) getField(END_DATE)).setValue(((java.sql.Date) reservation.getEndDate()).toLocalDate());
 	}
 }

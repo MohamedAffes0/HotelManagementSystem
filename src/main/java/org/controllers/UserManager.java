@@ -59,8 +59,9 @@ public class UserManager extends Manager<Employee> {
 			int isAdmin = stmt.getInt(4);
 			int isActive = stmt.getInt(5);
 
-			if (result == 1) {
+			if (result != 0) {
 				System.out.println("Utilisateur existant.");
+				Controller.getInstance().setCurrentUser(result);
 				if (isActive == 0) {
 					return LoginStatus.INACTIVE_USER;
 				} else if (isAdmin == 1) {

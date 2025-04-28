@@ -7,8 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.controllers.exceptions.ConnectionUnavailableException;
-import org.controllers.exceptions.ControllerException;
-import org.controllers.exceptions.DBException;
+import org.controllers.exceptions.ControllerException; import org.controllers.exceptions.DBException;
 import org.models.Model;
 
 import oracle.jdbc.OracleTypes;
@@ -158,9 +157,6 @@ public abstract class Manager<T extends Model> {
 			try {
 				if (stmt != null) {
 					stmt.close();
-				}
-				if (connection != null) {
-					connection.close();
 				}
 			} catch (SQLException exception) {
 				exception.printStackTrace();

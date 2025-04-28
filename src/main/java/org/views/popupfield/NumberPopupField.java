@@ -28,6 +28,9 @@ public class NumberPopupField extends PopupField {
 	}
 
 	public Integer getValue() {
+		if (((TextField) getField()).getText().isEmpty()) {
+			return 0;
+		}
 		return Integer.parseInt(((TextField) getField()).getText());
 	}
 

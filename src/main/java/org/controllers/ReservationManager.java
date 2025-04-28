@@ -233,7 +233,7 @@ public class ReservationManager extends Manager<Reservation> {
 		}
 
 		// Check room availability
-		if (!reservationCheck(data.getRoom(), data.getRoom(), data.getStartDate(),
+		if (!reservationCheck(data.getRoom(), data.getId(), data.getStartDate(),
 				data.getEndDate())) {
 			System.err.println("La chambre est déjà réservée pour cette période.");
 			throw new ControllerException("La chambre est déjà réservée pour cette période.");

@@ -17,7 +17,7 @@ import oracle.jdbc.OracleTypes;
  * Manager
  */
 public abstract class Manager<T extends Model> {
-	private ArrayList<T> data;
+	private ArrayList<T> data = new ArrayList<>();
 
 	protected Manager() {
 	}

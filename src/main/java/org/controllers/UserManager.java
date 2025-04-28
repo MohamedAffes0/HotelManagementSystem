@@ -82,9 +82,6 @@ public class UserManager extends Manager<Employee> {
 				if (stmt != null) {
 					stmt.close();
 				}
-				if (connection != null) {
-					connection.close();
-				}
 			} catch (SQLException exception) {
 				exception.printStackTrace();
 				throw new DBException();

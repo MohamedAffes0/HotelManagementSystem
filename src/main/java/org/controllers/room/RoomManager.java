@@ -3,10 +3,11 @@ package org.controllers.room;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import org.controllers.exceptions.ControllerException;
 import org.controllers.Manager;
-
+import org.models.Reservation;
 import org.models.Room;
 import org.models.Room.RoomState;
 import org.models.Room.RoomType;
@@ -102,12 +103,35 @@ public class RoomManager extends Manager<Room> {
 
 	@Override
 	protected void insertInputValidation(Room room) throws ControllerException {
+		ArrayList<Room> rooms = getData();
+		for (Room r : rooms) {
+			if (r.getId() == room.getId()) {
+				throw new ControllerException("L'identifiant existe deja.");
+			}
+		}
+
 		if (room.getId() <= 0) {
 			throw new ControllerException("L'identifiant doit etre superieur a zero.");
 		}
 
-		if (room.getCapacity() == 0) {
+		if (room.getCapacity() <= 0) {
 			throw new ControllerException("La capacité ne doit pas etre nulle.");
+		}
+
+		if (room.getPrice() <= 0) {
+			throw new ControllerException("Le prix ne doit pas etre nul.");
+		}
+
+		if (room.getFloor() < 0) {
+			throw new ControllerException("L'étage ne doit pas etre nul.");
+		}
+
+		if (room.getRoomType() == null) {
+			throw new ControllerException("Le type de chambre ne doit pas etre nul.");
+		}
+
+		if (room.getState() == null) {
+			throw new ControllerException("L'état de la chambre ne doit pas etre nul.");
 		}
 	}
 
@@ -136,5 +160,21 @@ public class RoomManager extends Manager<Room> {
 		}
 
 		return stmt;
+	}
+
+	@Override
+    protected void updateInputValidation(Room data) throws ControllerException {
+
+		if (data.getCapacity() <= 0) {
+			throw new ControllerException("La capacité ne doit pas etre nulle.");
+		}
+
+		if (data.getPrice() <= 0) {
+			throw new ControllerException("Le prix ne doit pas etre nul.");
+		}
+
+		if (data.getState() == null) {
+			throw new ControllerException("L'état de la chambre ne doit pas etre nul.");
+		}
 	}
 }

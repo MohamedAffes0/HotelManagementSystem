@@ -5,7 +5,7 @@
 In order to run you need to install [maven](https://maven.apache.org/).
 then you can simply run
 ```
-mvn clean javafx:run
+mvn clean javafx:run [path] [db user] [password]
 ```
 As for the database you need [Oracle DB](https://www.oracle.com/database/) alongside [SQL+](https://www.oracle.com/database/technologies/sqlplus-cloud.html).
 Then simply run the SQL files in the PLSQL directory.

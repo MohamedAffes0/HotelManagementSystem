@@ -24,7 +24,7 @@ public class ClientManager extends Manager<Person> {
 
 	@Override
 	protected String getSelectRequest() {
-		return "{ call get_all_users(?) }";
+		return "{ call get_all_clients(?) }";
 	}
 
 	@Override
@@ -61,7 +61,7 @@ public class ClientManager extends Manager<Person> {
 		}
 
 		// Verifier si l'email est valide
-		if (EmailChecker.isValid(data.getMail())) {
+		if (!EmailChecker.isValid(data.getMail())) {
 			throw new ControllerException("L'e-mail est invalide.");
 		}
 
@@ -103,7 +103,7 @@ public class ClientManager extends Manager<Person> {
 		}
 
 		// Verifier si l'email est valide
-		if (EmailChecker.isValid(data.getMail())) {
+		if (!EmailChecker.isValid(data.getMail())) {
 			throw new ControllerException("L'e-mail est invalide.");
 		}
 	}

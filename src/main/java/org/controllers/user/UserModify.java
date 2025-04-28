@@ -3,6 +3,7 @@ package org.controllers.user;
 import java.sql.*;
 
 import org.database.DBConnect;
+import org.controllers.exceptions.ControllerException;
 
 public class UserModify {
     public static void userModify(int id, boolean isAdmin, boolean isActive) throws ControllerException {

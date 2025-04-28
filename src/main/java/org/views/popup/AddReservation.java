@@ -6,6 +6,7 @@ import java.sql.Date;
 
 import org.models.Model;
 import org.models.Reservation;
+import org.models.Room;
 import org.views.popupfield.ComboBoxPopupField;
 import org.views.popupfield.DatePopupField;
 import org.views.popupfield.NumberPopupField;
@@ -42,11 +43,13 @@ public class AddReservation extends AddPopup {
 		LocalDate endDate = (LocalDate) getField(END_DATE).getValue();
 		int capacity = (int) getField(CAPACITY).getValue();
 		try {
+			System.out.println("Start date: " + startDate);
+			System.out.println("End date: " + endDate);
 			ArrayList<Integer> availableRooms = Controller.getInstance().getRoomManager()
 					.getAvaliableRooms(Date.valueOf(startDate), Date.valueOf(endDate), capacity);
 			if (availableRooms.isEmpty()) {
 				// Pour passer au bloc catch
-				throw new Exception();
+				throw new Exception("Aucune chambre disponible");
 			}
 			String[] rooms = new String[availableRooms.size()];
 
@@ -56,9 +59,12 @@ public class AddReservation extends AddPopup {
 			}
 
 			((ComboBoxPopupField) getField(ROOM)).setItems(rooms);
-
+			for (Integer room : availableRooms) {
+				System.out.println(room);
+			}
 		} catch (Exception exception) {
 			((ComboBoxPopupField) getField(ROOM)).setValue("Aucune chambre disponible");
+			System.out.println(exception.getMessage());
 		}
 	}
 
@@ -80,7 +86,7 @@ public class AddReservation extends AddPopup {
 		int room = 0;
 		String roomString = ((String) getField(ROOM).getValue());
 		if (roomString.contains("Chambre ")) {
-			room = Integer.parseInt(roomString.replace("Chambre", ""));
+			room = Integer.parseInt(roomString.replace("Chambre ", ""));
 		}
 
 		LocalDate startDate = (LocalDate) getField(START_DATE).getValue();

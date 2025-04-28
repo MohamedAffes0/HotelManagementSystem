@@ -12,7 +12,6 @@ import org.controllers.exceptions.ControllerException;
 import org.controllers.exceptions.DBException;
 import org.models.Employee;
 
-
 /**
  * UserManager
  */
@@ -28,8 +27,8 @@ public class UserManager extends Manager<Employee> {
 	public UserManager() {
 		super();
 	}
-	
-	public static LoginStatus checkLogin(String emailText, String passwordText) throws ControllerException {
+
+	public LoginStatus checkLogin(String emailText, String passwordText) throws ControllerException {
 		Connection connection = getConnection();
 
 		if (connection == null) {

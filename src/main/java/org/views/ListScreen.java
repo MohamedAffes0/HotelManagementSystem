@@ -1,6 +1,7 @@
 package org.views;
 
 import org.controllers.Manager;
+import org.controllers.exceptions.DBException;
 import org.models.Model;
 import org.views.popup.AddPopup;
 import org.views.popup.UpdatePopup;
@@ -46,6 +47,12 @@ public class ListScreen<T extends Model> {
 	protected Label title;
 
 	public ListScreen(Manager manager, AddPopup addPopup, UpdatePopup updatePopup) {
+		// TODO add proper error display
+		try {
+			manager.select();
+		}catch (DBException exception) {
+			System.out.println(exception);
+		}
 		this.manager = manager;
 		this.addPopup = addPopup;
 		this.updatePopup = updatePopup;

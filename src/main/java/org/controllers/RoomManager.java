@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.controllers.exceptions.ControllerException;
+import org.controllers.exceptions.DBException;
 import org.models.Reservation;
 import org.models.Room;
 import org.models.Room.RoomState;
@@ -25,9 +26,15 @@ public class RoomManager extends Manager<Room> {
 	 * Calculates the number of times each room was reserved.
 	 * 
 	 * @return HashMap<roomId, number of reservations>
+	 * @throws DBException 
 	 */
-	private HashMap<Integer, Integer> reservationCount() {
+	private HashMap<Integer, Integer> reservationCount() throws DBException {
 		ArrayList<Reservation> reservations = Controller.getInstance().getReservationManager().getData();
+
+		if (reservations.isEmpty()) {
+			Controller.getInstance().getReservationManager().select();
+			reservations = Controller.getInstance().getReservationManager().getData();
+		}
 
 		HashMap<Integer, Integer> reservationCount = new HashMap<>();
 
@@ -47,8 +54,9 @@ public class RoomManager extends Manager<Room> {
 	 * Returns an Array list containing the top 10% most visited rooms.
 	 * 
 	 * @return
+	 * @throws DBException 
 	 */
-	public ArrayList<Room> getMostCovetedRooms() {
+	public ArrayList<Room> getMostCovetedRooms() throws DBException {
 		HashMap<Integer, Integer> reservationCount = reservationCount();
 		ArrayList<Room> mostCovetedRooms = new ArrayList<>();
 		int totalReservations = 0;

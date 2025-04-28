@@ -145,15 +145,8 @@ public class UserManager extends Manager<Employee> {
 		}
 
 		// Verifier si l'email est valide
-		if (EmailChecker.isValid(data.getMail())) {
+		if (!EmailChecker.isValid(data.getMail())) {
 			throw new ControllerException("L'e-mail est invalide.");
-		}
-
-		// Check for existance
-		for (Employee employee : employees) {
-			if (employee.getId() == data.getId()) {
-				throw new ControllerException("Ce CIN existe deja.");
-			}
 		}
 	}
 

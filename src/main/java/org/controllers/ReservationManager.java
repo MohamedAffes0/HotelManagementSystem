@@ -48,7 +48,7 @@ public class ReservationManager extends Manager<Reservation> {
 		stmt.setDate(1, new Date(data.getStartDate().getTime())); // convertir Date en java.sql.Date
 		stmt.setDate(2, new Date(data.getEndDate().getTime()));
 		stmt.setInt(3, data.isPaid() ? 1 : 0);
-		stmt.setInt(4, data.getEmployee());
+		stmt.setInt(4, 1);
 		stmt.setInt(5, data.getHotelClient());
 		stmt.setInt(6, data.getRoom());
 		return stmt;
@@ -114,7 +114,7 @@ public class ReservationManager extends Manager<Reservation> {
 		}
 
 		// Check room availability
-		if (reservationCheck(data.getRoom(), 0, data.getStartDate(), data.getEndDate())) {
+		if (!reservationCheck(data.getRoom(), 0, data.getStartDate(), data.getEndDate())) {
 			System.err.println("La chambre est déjà réservée pour cette période.");
 			throw new ControllerException("La chambre est déjà réservée pour cette période.");
 		}
@@ -149,8 +149,7 @@ public class ReservationManager extends Manager<Reservation> {
 			while (result.next()) {
 				Date roomStartDate = result.getDate(1); // colonne 1 = date_debut
 				Date roomEndDate = result.getDate(2); // colonne 2 = date_fin
-				// TODO fix this condition
-				if (endDate.before(roomStartDate) || startDate.after(roomEndDate)) {
+				if (!endDate.before(roomStartDate) && !startDate.after(roomEndDate)) {
 					isValid = false; // Indique que la réservation échoue
 					break;
 				}

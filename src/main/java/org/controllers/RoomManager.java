@@ -114,7 +114,7 @@ public class RoomManager extends Manager<Room> {
 
 	@Override
 	protected String getSelectRequest() {
-		return "{ call get_all_users(?) }";
+		return "{ call get_all_rooms(?) }";
 	}
 
 	@Override

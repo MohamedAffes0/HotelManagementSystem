@@ -11,8 +11,6 @@ import java.util.Calendar;
 import org.controllers.exceptions.ConnectionUnavailableException;
 import org.controllers.exceptions.ControllerException;
 import org.controllers.exceptions.DBException;
-import org.controllers.reservation.ReservationChecker.ReservationDate;
-import org.models.Employee;
 import org.models.Person;
 import org.models.Reservation;
 import org.models.Room;

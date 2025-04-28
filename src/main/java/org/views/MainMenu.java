@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.Parent;
 import javafx.fxml.FXMLLoader;
 
@@ -152,6 +153,10 @@ public class MainMenu implements Initializable {
 		UiUtils.setIconToButton(logout, svgPath, 1, "#F38BA8");
 
 		main = new App();
+	}
+	
+	void setNonAdmin() {
+		((VBox) comptes.getParent()).getChildren().remove(comptes);
 	}
 
 	private void changeCurrentMenu(ListScreen<?> controller, String title, ObservableList<String> filterItems,

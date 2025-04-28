@@ -39,12 +39,10 @@ public class Login {
 				case NORMAL_USER:
 					System.out.println("Login successful! normal user");
 					main.changeScene("/mainMenu.fxml");
-					App.isAdminUser = false;
 					break;
 				case ADMIN_USER:
 					System.out.println("Login successful! admin user");
 					main.changeScene("/mainMenu.fxml");
-					App.isAdminUser = true;
 					break;
 				case USER_NOT_FOUND:
 					System.out.println("Login failed. User not found.");

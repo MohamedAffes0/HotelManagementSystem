@@ -5,7 +5,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import org.controllers.EmailChecker;
-import org.controllers.user.ControllerException;
+import org.controllers.exceptions.ControllerException;
 import org.database.DBConnect;
 import org.models.Person;
 

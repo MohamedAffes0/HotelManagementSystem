@@ -58,7 +58,7 @@ public class UserManager extends Manager<Employee> {
 
 		// Check email
 		for (Employee employee : employees) {
-			if (employee.getId() == data.getId()) {
+			if (employee.getMail() == data.getMail()) {
 				throw new ControllerException("Un compte utilisant cet e-mail existe deja.");
 			}
 		}

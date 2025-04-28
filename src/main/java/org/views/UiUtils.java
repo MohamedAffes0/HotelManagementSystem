@@ -12,6 +12,7 @@ public class UiUtils {
 		icon.setScaleX(scale);
 		icon.setScaleY(scale);
 		icon.setFill(Color.web(colorHex));
+		icon.setTranslateX(-5);
 		button.setGraphic(icon);
 		button.setContentDisplay(ContentDisplay.LEFT);
 	}

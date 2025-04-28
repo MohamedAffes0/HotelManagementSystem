@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 import org.controllers.reservation.ReservationChecker.ReservationDate;
 import org.database.DBConnect;
-import org.controllers.user.ControllerException;
+import org.controllers.exceptions.ControllerException;
 
 public class ReservationModify {
         public static void reservationModify(int id,int roomId, Date startDate, 

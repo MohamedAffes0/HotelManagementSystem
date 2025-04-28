@@ -28,6 +28,7 @@ public class ReservationAdd {
     // id a ignorer
     public static CreationStatus reservationAdd(Reservation reservation, ArrayList<Room> rooms) {
 
+        // verification de l'existence de client
         if (ClientChecker.clientCheck(reservation.getHotelClient()) == ClientStatus.CLIENT_NOT_FOUND) {
             System.err.println("Le client n'existe pas.");
             return CreationStatus.CLIENT_NON_EXISTENT; // Indique que le client n'existe pas

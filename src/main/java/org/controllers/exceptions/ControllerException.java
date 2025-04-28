@@ -1,4 +1,4 @@
-package org.controllers.user;
+package org.controllers.exceptions;
 
 /**
  * ControllerException

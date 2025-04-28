@@ -16,6 +16,8 @@ public abstract class Model {
 
 	public abstract ArrayList<ModelField> getFields();
 
+	public abstract int getId();
+
 	public SVGPath createIcon(String svgPath, double scale, String colorHex) {
 		SVGPath icon = new SVGPath();
 		icon.setContent(svgPath);

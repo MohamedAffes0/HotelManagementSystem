@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import org.controllers.room.RoomManager;
 import org.controllers.user.UserManager;
 
 /**
@@ -14,6 +15,7 @@ public class Controller {
 	private static Controller INSTANCE;
 	private Connection connection = null;
 	private UserManager userManager = new UserManager();
+	private RoomManager roomManager = new RoomManager();
 
 	private Controller() {
 	}
@@ -23,7 +25,6 @@ public class Controller {
 		if (INSTANCE == null) {
 			INSTANCE = new Controller();
 		}
-
 		return INSTANCE;
 	}
 
@@ -53,5 +54,9 @@ public class Controller {
 
 	public UserManager getUserManager() {
 		return userManager;
+	}
+
+	public RoomManager getRoomManager() {
+		return roomManager;
 	}
 }

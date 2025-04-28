@@ -10,6 +10,7 @@ import org.controllers.EmailChecker;
 import org.controllers.Manager;
 
 import org.models.Employee;
+import org.models.Room;
 
 /**
  * UserManager
@@ -102,5 +103,9 @@ public class UserManager extends Manager<Employee> {
 		statement.setInt(2, data.isAdmin() ? 1 : 0);
 		statement.setInt(3, data.isActive() ? 1 : 0);
 		return statement;
+	}
+
+	@Override
+    protected void updateInputValidation(Employee data) throws ControllerException {
 	}
 }

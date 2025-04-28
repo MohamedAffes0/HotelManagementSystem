@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import org.controllers.EmailChecker;
 import org.controllers.Manager;
 import org.controllers.exceptions.ControllerException;
+import org.models.Employee;
 import org.models.Person;
 
 public class ClientManager extends Manager<Person> {
@@ -89,5 +90,24 @@ public class ClientManager extends Manager<Person> {
         statement.setString(3, data.getLastName());
         statement.setString(4, data.getMail());
 		return statement;
+	}
+
+	@Override
+    protected void updateInputValidation(Person data) throws ControllerException {
+
+		// Verification des champs vides
+		if (data.getMail() == null || data.getMail().isEmpty()) {
+			throw new ControllerException("L'e-mail est obligatoire.");
+		}
+
+		if (data.getName() == null || data.getName().isEmpty()
+				|| data.getLastName() == null || data.getLastName().isEmpty()) {
+			throw new ControllerException("Veuillez saisir nom et un prenom.");
+		}
+
+		// Verifier si l'email est valide
+		if (EmailChecker.isValid(data.getMail())) {
+			throw new ControllerException("L'e-mail est invalide.");
+		}
 	}
 }

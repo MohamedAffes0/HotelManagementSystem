@@ -113,8 +113,7 @@ public class ReservationManager extends Manager<Reservation> {
         }
 
         // Check room availability
-        ReservationDate reservationDate = new ReservationDate(data.getStartDate(), data.getEndDate());
-        if (ReservationChecker.reservationCheck(data.getRoom(), 0, reservationDate) == false) {
+        if (!ReservationChecker.reservationCheck(data.getRoom(), 0, data.getStartDate(), data.getEndDate())) {
             System.err.println("La chambre est déjà réservée pour cette période.");
             throw new ControllerException("La chambre est déjà réservée pour cette période.");
         }
@@ -142,4 +141,43 @@ public class ReservationManager extends Manager<Reservation> {
         statement.setInt(4, data.isPaid() ? 1 : 0);
 		return statement;
 	}
+
+    @Override
+    protected void updateInputValidation(Reservation data) throws ControllerException {
+
+        // Verification des champs vides
+		if (data.getStartDate() == null) {
+			throw new ControllerException("Veuillez saisir une date de debut.");
+		}
+		if (data.getEndDate() == null) {
+			throw new ControllerException("Veuillez saisir une date de fin.");
+		}
+		if (data.getHotelClient() <= 9999999 || data.getHotelClient() >= 100000000) {
+			throw new ControllerException("Veuillez saisir un CIN valide.");
+		}
+        if (data.getRoom() <= 0) {
+            throw new ControllerException("Veuillez saisir un numero de chambre valide.");
+        }
+
+        // Check date validity
+        if (data.getStartDate().after(data.getEndDate())) {
+            System.err.println("La date de début est après la date de fin.");
+            throw new ControllerException("La date de début est après la date de fin.");
+        }
+        java.util.Date today = new java.util.Date(System.currentTimeMillis());
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(today);
+        calendar.add(Calendar.DAY_OF_MONTH, -1); // soustraire un jour pour la comparaison
+        today = calendar.getTime();
+        if (data.getStartDate().before(calendar.getTime())) {
+            System.err.println("La date de début est dans le passé.");
+            throw new ControllerException("La date de début est dans le passé.");
+        }
+
+        // Check room availability
+        if (!ReservationChecker.reservationCheck(data.getRoom(), data.getRoom(), data.getStartDate(), data.getEndDate())) {
+            System.err.println("La chambre est déjà réservée pour cette période.");
+            throw new ControllerException("La chambre est déjà réservée pour cette période.");
+        }
+    }
 }

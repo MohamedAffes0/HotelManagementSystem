@@ -1,6 +1,6 @@
 package org.views;
 
-import org.controllers.DBLoader;
+import org.controllers.Manager;
 import org.models.Model;
 import org.views.popup.AddPopup;
 import org.views.popup.UpdatePopup;
@@ -21,10 +21,10 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-public class ListScreen<T extends Model, L extends DBLoader> {
+public class ListScreen<T extends Model> {
 	private AddPopup addPopup;
 	private UpdatePopup updatePopup;
-	private L loader;
+	private Manager manager;
 	private final String LIST_BUTTON_PATH = "/listButton.fxml";
 
 	@FXML
@@ -45,8 +45,8 @@ public class ListScreen<T extends Model, L extends DBLoader> {
 	@FXML
 	protected Label title;
 
-	public ListScreen(L loader, AddPopup addPopup, UpdatePopup updatePopup) {
-		this.loader = loader;
+	public ListScreen(Manager manager, AddPopup addPopup, UpdatePopup updatePopup) {
+		this.manager = manager;
 		this.addPopup = addPopup;
 		this.updatePopup = updatePopup;
 	}
@@ -68,7 +68,7 @@ public class ListScreen<T extends Model, L extends DBLoader> {
 				@Override
 				public void handle(WindowEvent event) {
 					try {
-						loadFromDB();
+						manager.select();
 						updateList();
 					} catch (Exception exception) {
 						System.out.println("Erreur de connection a la base de donnée");
@@ -84,17 +84,17 @@ public class ListScreen<T extends Model, L extends DBLoader> {
 
 	@FXML
 	protected void updateList() {
-		if (loader.getData() == null) {
+		if (manager.getData() == null) {
 			throw new RuntimeException("Content not loaded from db");
 		}
 
 		list.getChildren().clear();
 
-		if (loader.getData().size() == 0) {
+		if (manager.getData().size() == 0) {
 			return;
 		}
 
-		for (Object o : loader.getData()) {
+		for (Object o : manager.getData()) {
 			T item = (T) o;
 			if (!item.filter(search, filter.getValue())) {
 				continue;
@@ -114,10 +114,6 @@ public class ListScreen<T extends Model, L extends DBLoader> {
 		// Set the style for the first and last buttons
 		ListButton.updateStyle((Button) list.getChildren().get(0));
 		ListButton.updateStyle((Button) list.getChildren().get(list.getChildren().size() - 1));
-	}
-
-	public void loadFromDB() {
-		loader.load();
 	}
 
 	public void setTitle(String title) {

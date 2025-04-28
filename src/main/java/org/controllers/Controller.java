@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import org.controllers.client.ClientManager;
+import org.controllers.reservation.ReservationManager;
 import org.controllers.room.RoomManager;
 import org.controllers.user.UserManager;
 
@@ -16,6 +18,8 @@ public class Controller {
 	private Connection connection = null;
 	private UserManager userManager = new UserManager();
 	private RoomManager roomManager = new RoomManager();
+	private ReservationManager reservationManager = new ReservationManager();
+	private ClientManager clientManager = new ClientManager();
 
 	private Controller() {
 	}
@@ -58,5 +62,13 @@ public class Controller {
 
 	public RoomManager getRoomManager() {
 		return roomManager;
+	}
+
+	public ReservationManager getReservationManager() {
+		return reservationManager;
+	}
+
+	public ClientManager getClientManager() {
+		return clientManager;
 	}
 }

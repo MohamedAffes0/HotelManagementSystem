@@ -96,6 +96,8 @@ public abstract class Manager<T extends Model> {
 	public void update(int id, T data) throws ControllerException {
 		Connection connection = getConnection();
 
+		updateInputValidation(data);
+
 		if (connection == null) {
 			throw new ConnectionUnavailableException();
 		}
@@ -201,6 +203,11 @@ public abstract class Manager<T extends Model> {
 	 * The statement will be executed once it is returned from this method.
 	 */
 	protected abstract CallableStatement getUpdateStatement(T data) throws SQLException;
+
+	/**
+	 * Returns true if the data is valid or throws an exception if it isn't.
+	 */
+	protected abstract void updateInputValidation(T data) throws ControllerException;
 
 	/**
 	 * Returns the request for the database which is a call to a plsql procedure

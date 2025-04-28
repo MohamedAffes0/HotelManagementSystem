@@ -45,8 +45,6 @@ public class AddReservation extends AddPopup {
 		LocalDate endDate = (LocalDate) getField(END_DATE).getValue();
 		int capacity = (int) getField(CAPACITY).getValue();
 		try {
-			System.out.println("Start date: " + startDate);
-			System.out.println("End date: " + endDate);
 			ArrayList<Integer> availableRooms = Controller.getInstance().getRoomManager()
 					.getAvaliableRooms(Date.valueOf(startDate), Date.valueOf(endDate), capacity);
 			if (availableRooms.isEmpty()) {
@@ -61,9 +59,6 @@ public class AddReservation extends AddPopup {
 			}
 
 			((ComboBoxPopupField) getField(ROOM)).setItems(rooms);
-			for (Integer room : availableRooms) {
-				System.out.println(room);
-			}
 		} catch (Exception exception) {
 			((ComboBoxPopupField) getField(ROOM)).setItems("");
 			((ComboBoxPopupField) getField(ROOM)).setValue("Aucune chambre disponible");

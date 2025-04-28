@@ -1,6 +1,6 @@
 package org.views.popup;
 
-import org.controllers.user.ControllerException;
+import org.controllers.exceptions.ControllerException;
 import org.models.Model;
 import org.views.popupfield.PopupField;
 import java.util.ResourceBundle;

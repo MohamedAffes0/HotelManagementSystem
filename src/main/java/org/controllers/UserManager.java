@@ -1,4 +1,4 @@
-package org.controllers.user;
+package org.controllers;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -10,9 +10,6 @@ import java.util.ArrayList;
 import org.controllers.exceptions.ConnectionUnavailableException;
 import org.controllers.exceptions.ControllerException;
 import org.controllers.exceptions.DBException;
-import org.controllers.EmailChecker;
-import org.controllers.Manager;
-
 import org.models.Employee;
 
 

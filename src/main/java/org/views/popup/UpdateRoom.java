@@ -1,8 +1,8 @@
 package org.views.popup;
 
-import org.controllers.room.RoomDelete;
-import org.controllers.room.RoomModify;
-import org.controllers.user.ControllerException;
+import org.controllers.Controller;
+import org.controllers.exceptions.ControllerException;
+import org.controllers.exceptions.DBException;
 import org.models.Model;
 import org.models.Room;
 import org.models.Room.RoomState;
@@ -56,15 +56,18 @@ public class UpdateRoom extends UpdatePopup {
 	@Override
 	public void update(Model newData) throws ControllerException {
 		if (!(newData instanceof Room))
-			throw new RuntimeException("Invalid data received");
-		Room room = (Room) newData;
-
-		RoomModify.roomModify(room.getId(), room.getCapacity(), room.getPrice(), room.getState());
+			throw new ControllerException("Invalid data received");
+		
+		Controller.getInstance().getRoomManager().update(getData().getId(), (Room) newData);
 	}
 
 	@Override
 	public void delete() {
-		RoomDelete.roomDelete(((Room) getData()).getId());
+		try {
+			Controller.getInstance().getRoomManager().delete(getData().getId());
+		} catch (DBException exception) {
+			setErrorMessage(exception.toString());
+		}
 	}
 
 	@Override

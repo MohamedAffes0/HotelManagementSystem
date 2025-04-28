@@ -1,12 +1,10 @@
 package org.views.popup;
 
-import org.controllers.user.UserAdd.CreationStatus;
-import org.controllers.user.UserSelect;
-import org.controllers.user.UserAdd;
 import org.models.Employee;
 import org.models.Model;
 import org.views.popupfield.ComboBoxPopupField;
 import org.views.popupfield.TextPopupField;
+import org.controllers.Controller;
 
 import javafx.collections.FXCollections;
 import javafx.stage.Stage;
@@ -46,24 +44,10 @@ public class AddUser extends AddPopup {
 	}
 
 	@Override
-	protected void addData(Model newData) {
-		CreationStatus result = UserAdd.userAdd((Employee) newData, UserSelect.dataFromDB());
-
-		switch (result) {
-			case SUCCESS:
-				// Close the window after adding the room
-				Stage stage = (Stage) getWindow();
-				stage.close();
-				break;
-			case CONNEXION_FAILED:
-				break;
-			case USER_EXISTS:
-				System.out.println("Exists");
-				break;
-			case EMPTY_FIELD:
-				System.out.println("Empty field");
-				break;
-		}
+	protected void addData(Model newData) throws Exception{
+			Controller.getInstance().getUserManager().insert((Employee) newData);
+			Stage stage = (Stage) getWindow();
+			stage.close();
 	}
 
 }

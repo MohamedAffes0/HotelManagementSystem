@@ -1,4 +1,4 @@
-package org.controllers.reservation;
+package org.controllers;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -8,8 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import org.controllers.Controller;
-import org.controllers.Manager;
 import org.controllers.exceptions.ConnectionUnavailableException;
 import org.controllers.exceptions.ControllerException;
 import org.controllers.exceptions.DBException;

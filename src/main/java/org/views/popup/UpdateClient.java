@@ -1,11 +1,11 @@
 package org.views.popup;
 
-import org.controllers.client.ClientDelete;
-import org.controllers.client.ClientModify;
-import org.controllers.user.ControllerException;
+import org.controllers.exceptions.ControllerException;
+import org.controllers.exceptions.DBException;
 import org.models.Model;
 import org.models.Person;
 import org.views.popupfield.TextPopupField;
+import org.controllers.Controller;
 
 public class UpdateClient extends UpdatePopup {
 	final int NAME = 0;
@@ -35,15 +35,18 @@ public class UpdateClient extends UpdatePopup {
 	@Override
 	public void update(Model newData) throws ControllerException {
 		if (!(newData instanceof Person))
-			throw new RuntimeException("Invalid data received");
-		Person person = (Person) newData;
+			throw new ControllerException("Invalid data received");
 
-		ClientModify.clientModify(person);
+		Controller.getInstance().getClientManager().update(getData().getId(), (Person) newData);
 	}
 
 	@Override
 	public void delete() {
-		ClientDelete.clientDelete(((Person) getData()).getCin());
+		try {
+			Controller.getInstance().getClientManager().delete(getData().getId());
+		} catch (DBException exception) {
+			setErrorMessage(exception.toString());
+		}
 	}
 
 	@Override

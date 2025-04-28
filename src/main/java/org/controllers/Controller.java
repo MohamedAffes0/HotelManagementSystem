@@ -4,11 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import org.controllers.client.ClientManager;
-import org.controllers.reservation.ReservationManager;
-import org.controllers.room.RoomManager;
-import org.controllers.user.UserManager;
-
 /**
  * Controller Singleton, manages data control and access to database.
  */

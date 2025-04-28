@@ -39,7 +39,22 @@ public class App extends Application {
 	}
 
 	public static void main(String[] args) {
+		if (args.length != 3) {
+			System.out.println("Usage: java -jar app.jar <url> <user> <password>");
+			return;
+		}
+
+		String url = args[0];
+		String user = args[1];
+		String password = args[2];
+		
+		try {
 		Controller.getInstance().initializeConnection(url, user, password);
+			
+		} catch (Exception e) {
+			System.out.println("Error: " + e.getMessage());
+			return;
+		}
 		Application.setUserAgentStylesheet("style.css");
 		launch();
 	}

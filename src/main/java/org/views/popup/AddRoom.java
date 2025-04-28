@@ -2,14 +2,12 @@ package org.views.popup;
 
 import org.models.Model;
 import org.models.Room;
-import org.controllers.room.RoomAdd;
-import org.controllers.room.RoomAdd.CreationStatus;
-import org.controllers.room.RoomSelect;
 import org.models.Room.RoomState;
 import org.models.Room.RoomType;
 import org.views.popupfield.ComboBoxPopupField;
 import org.views.popupfield.NumberPopupField;
 import org.views.popupfield.FloatPopupField;
+import org.controllers.Controller;
 
 import javafx.collections.FXCollections;
 import javafx.stage.Stage;
@@ -70,24 +68,10 @@ public class AddRoom extends AddPopup {
 	}
 
 	@Override
-	protected void addData(Model newData) {
-		CreationStatus result = RoomAdd.roomAdd((Room) newData, RoomSelect.dataFromDB());
-
-		switch (result) {
-			case SUCCESS:
-				// Close the window after adding the room
-				Stage stage = (Stage) getWindow();
-				stage.close();
-				break;
-			case DB_PROBLEM:
-				break;
-			case ID_EXISTS:
-				System.out.println("Exists");
-				break;
-			case EMPTY_FIELD:
-				System.out.println("Empty field");
-				break;
-		}
+	protected void addData(Model newData) throws Exception{
+		Controller.getInstance().getRoomManager().insert((Room) newData);
+		Stage stage = (Stage) getWindow();
+		stage.close();
 	}
 
 }

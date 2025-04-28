@@ -1,13 +1,11 @@
 package org.views.popup;
 
-import org.controllers.client.ClientAdd.CreationStatus;
 import org.models.Model;
 import org.models.Person;
 import org.views.popupfield.NumberPopupField;
 import org.views.popupfield.TextPopupField;
-import org.controllers.client.ClientAdd;
-import org.controllers.client.ClientSelect;
 
+import org.controllers.Controller;
 import javafx.stage.Stage;
 
 public class AddClient extends AddPopup {
@@ -37,22 +35,9 @@ public class AddClient extends AddPopup {
 	}
 
 	@Override
-	protected void addData(Model newData) {
-		CreationStatus result = ClientAdd.clientAdd((Person) newData, ClientSelect.dataFromDB());
-
-		switch (result) {
-			case SUCCESS:
-				// Close the window after adding the room
-				Stage stage = (Stage) getWindow();
-				stage.close();
-				break;
-			case DB_PROBLEM:
-				System.out.println("Database problem");
-				break;
-			case CIN_EXISTS:
-				System.out.println("Exists");
-				break;
-		}
+	protected void addData(Model newData) throws Exception{
+		Controller.getInstance().getClientManager().insert((Person) newData);
+		Stage stage = (Stage) getWindow();
+		stage.close();
 	}
-
 }

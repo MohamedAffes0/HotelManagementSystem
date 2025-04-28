@@ -1,8 +1,8 @@
 package org.views.popup;
 
-import org.controllers.user.ControllerException;
-import org.controllers.user.UserDelete;
-import org.controllers.user.UserModify;
+import org.controllers.Controller;
+import org.controllers.exceptions.ControllerException;
+import org.controllers.exceptions.DBException;
 import org.models.Employee;
 import org.models.Model;
 import org.views.popupfield.ComboBoxPopupField;
@@ -54,15 +54,18 @@ public class UpdateUser extends UpdatePopup {
 	@Override
 	public void update(Model newData) throws ControllerException{
 		if (!(newData instanceof Employee))
-			throw new RuntimeException("Invalid data received");
-		Employee employee = (Employee) newData;
+			throw new ControllerException("Invalid data received");
 
-		UserModify.userModify(employee.getId(), employee.isAdmin(), employee.isActive());
+		Controller.getInstance().getUserManager().update(getData().getId(), (Employee) newData);
 	}
 
 	@Override
 	public void delete() {
-		UserDelete.userDelete(((Employee) getData()).getId());
+		try {
+			Controller.getInstance().getUserManager().delete(getData().getId());
+		} catch (DBException exception) {
+			setErrorMessage(exception.toString());
+		}
 	}
 
 	@Override

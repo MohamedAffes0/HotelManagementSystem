@@ -7,9 +7,7 @@ import javafx.scene.control.ComboBox;
 /**
  * ComboBoxPopupField
  */
-public class ComboBoxPopupField extends PopupField {
-	// private ComboBox<String> field = new ComboBox<String>();
-
+public class ComboBoxPopupField extends PopupField<ComboBox<String>, String> {
 	public ComboBoxPopupField(String name) {
 		super(name);
 		setField(new ComboBox<String>());
@@ -35,8 +33,8 @@ public class ComboBoxPopupField extends PopupField {
 		return ((ComboBox<String>) getField()).getValue();
 	}
 
-	public void setValue(Object value) {
-		((ComboBox<String>) getField()).setValue((String) value);
+	public void setValue(String value) {
+		getField().setValue(value);
 	}
 
 	@Override

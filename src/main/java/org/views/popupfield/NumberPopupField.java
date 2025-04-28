@@ -9,7 +9,7 @@ import javafx.scene.input.KeyEvent;
 /**
  * NumberPopupField
  */
-public class NumberPopupField extends PopupField {
+public class NumberPopupField extends PopupField<TextField, Integer> {
 
 	public NumberPopupField(String name) {
 		super(name);
@@ -28,20 +28,20 @@ public class NumberPopupField extends PopupField {
 	}
 
 	public Integer getValue() {
-		if (((TextField) getField()).getText().isEmpty()) {
+		if (isEmpty()) {
 			return 0;
 		}
-		return Integer.parseInt(((TextField) getField()).getText());
+		return Integer.parseInt(getField().getText());
 	}
 
 	@Override
 	public boolean isEmpty() {
-		return ((TextField) getField()).getText().isEmpty();
+		return getField().getText().isEmpty();
 	}
 
 	@Override
-	public void setValue(Object value) {
-		((TextField) getField()).setText(((Integer) value).toString());
+	public void setValue(Integer value) {
+		getField().setText(value.toString());
 	}
 
 }

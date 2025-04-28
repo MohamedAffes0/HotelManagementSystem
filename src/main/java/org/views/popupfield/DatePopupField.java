@@ -1,14 +1,15 @@
 package org.views.popupfield;
 
 import java.time.LocalDate;
-import java.time.ZoneId;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.layout.HBox;
 
-public class DatePopupField extends PopupField {
+public class DatePopupField extends PopupField<DatePicker, LocalDate> {
 
 	private DatePicker datePicker;
 	private Button calendarButton;
@@ -43,6 +44,10 @@ public class DatePopupField extends PopupField {
 		container.getChildren().add(fieldWithButton);
 	}
 
+	public void setOnAction(EventHandler<ActionEvent> event) {
+		datePicker.setOnAction(event);
+	}
+
 	@Override
 	public LocalDate getValue() {
 		return datePicker.getValue();
@@ -54,19 +59,7 @@ public class DatePopupField extends PopupField {
 	}
 
 	@Override
-	public void setValue(Object value) {
-		if (value instanceof LocalDate) {
-			datePicker.setValue((LocalDate) value);
-		} else if (value instanceof String) {
-			datePicker.setValue(LocalDate.parse((String) value));
-		} else if (value instanceof java.sql.Date) {
-			datePicker.setValue(((java.sql.Date) value).toLocalDate());
-		} else
-		if (value instanceof java.util.Date) {
-			java.util.Date utilDate = (java.util.Date) value;
-			datePicker.setValue(utilDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-		} else {
-			throw new IllegalArgumentException("Invalid value type. Expected LocalDate or String.");
-		}
+	public void setValue(LocalDate value) {
+		datePicker.setValue(value);
 	}
 }

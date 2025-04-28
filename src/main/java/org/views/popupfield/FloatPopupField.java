@@ -8,9 +8,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 
 /**
- * NumberPopupField
+ * FloatPopupField
  */
-public class FloatPopupField extends PopupField {
+public class FloatPopupField extends PopupField<TextField, Float> {
 
 	public FloatPopupField(String name) {
 		super(name);
@@ -29,19 +29,19 @@ public class FloatPopupField extends PopupField {
 	}
 
 	public Float getValue() {
-		if (((TextField)getField()).getText().isEmpty()) {
+		if (isEmpty()) {
 			return 0f;
 		}
-		return Float.parseFloat(((TextField)getField()).getText());
+		return Float.parseFloat(getField().getText());
 	}
 
 	@Override
 	public boolean isEmpty() {
-		return ((TextField)getField()).getText().isEmpty();
+		return getField().getText().isEmpty();
 	}
 
 	@Override
-	public void setValue(Object value) {
-		((TextField)getField()).setText(((Float)value).toString());
+	public void setValue(Float value) {
+		getField().setText(value.toString());
 	}
 }

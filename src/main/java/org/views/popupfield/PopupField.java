@@ -1,7 +1,5 @@
 package org.views.popupfield;
 
-import java.io.ObjectInputStream.GetField;
-
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -9,11 +7,14 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 
 /**
- * PopupField
+ * Base class for add and update popups.
+ * 
+ * @param <T> The type of the control that it contains
+ * @param <V> The type of its value
  */
-public abstract class PopupField {
+public abstract class PopupField<T extends Control, V> {
 	protected HBox container = new HBox();
-	private Control field;
+	private T field;
 	private Label name = new Label();
 
 	PopupField(String name) {
@@ -38,7 +39,7 @@ public abstract class PopupField {
 		return name.getText();
 	}
 
-	public void setField(Control field) {
+	public void setField(T field) {
 		this.field = field;
 		if (field != null) {
 			this.field.setPrefWidth(200);
@@ -46,13 +47,13 @@ public abstract class PopupField {
 		}
 	}
 
-	public Control getField() {
+	public T getField() {
 		return field;
 	}
 
-	public abstract Object getValue();
+	public abstract V getValue();
 
-	public abstract void setValue(Object value);
+	public abstract void setValue(V value);
 
 	public abstract boolean isEmpty();
 }

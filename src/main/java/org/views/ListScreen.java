@@ -25,7 +25,7 @@ import javafx.stage.WindowEvent;
 public class ListScreen<T extends Model> {
 	private AddPopup addPopup;
 	private UpdatePopup updatePopup;
-	private Manager manager;
+	private Manager<?> manager;
 	private final String LIST_BUTTON_PATH = "/listButton.fxml";
 
 	@FXML
@@ -46,7 +46,7 @@ public class ListScreen<T extends Model> {
 	@FXML
 	protected Label title;
 
-	public ListScreen(Manager manager, AddPopup addPopup, UpdatePopup updatePopup) {
+	public ListScreen(Manager<?> manager, AddPopup addPopup, UpdatePopup updatePopup) {
 		// TODO add proper error display
 		try {
 			manager.select();

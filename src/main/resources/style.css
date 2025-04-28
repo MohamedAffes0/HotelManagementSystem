@@ -224,7 +224,7 @@ Text {
 .menu-button {
     -fx-background-color: -button-color-dark;
     -fx-text-fill: -font-color-white;
-    -fx-padding: 10 8;
+    -fx-padding: 10 15;
     -fx-background-radius: 10;
     -fx-font-weight: bold;
     -fx-cursor: hand;

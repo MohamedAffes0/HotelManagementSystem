@@ -2,8 +2,8 @@ package org.models;
 
 import java.util.ArrayList;
 
-import org.app.StringNumberExtract;
-import org.app.client.ClientFilter;
+import org.controllers.StringNumberExtract;
+import org.controllers.client.ClientFilter;
 
 import javafx.scene.control.TextField;
 

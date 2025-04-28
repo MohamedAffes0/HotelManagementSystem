@@ -3,8 +3,8 @@ package org.models;
 import java.sql.Date;
 import java.util.ArrayList;
 
-import org.app.StringNumberExtract;
-import org.app.reservation.ReservationFilter;
+import org.controllers.StringNumberExtract;
+import org.controllers.reservation.ReservationFilter;
 
 import javafx.scene.control.TextField;
 

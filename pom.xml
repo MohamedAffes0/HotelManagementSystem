@@ -52,10 +52,16 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>org.views.App</mainClass>
+                            <arguments>
+                                <argument>jdbc:oracle:thin:@localhost:1521/ORCLPDB</argument>
+                                <argument>hotel_user</argument>
+                                <argument>2426</argument>
+                            </arguments>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
         </plugins>
     </build>
+    
 </project>

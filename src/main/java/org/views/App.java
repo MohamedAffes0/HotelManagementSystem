@@ -39,17 +39,17 @@ public class App extends Application {
 	}
 
 	public static void main(String[] args) {
-		if (args.length != 3) {
-			System.out.println("Usage: java -jar app.jar <url> <user> <password>");
-			return;
-		}
+		// if (args.length != 3) {
+		// 	System.out.println("Usage: java -jar app.jar <url> <user> <password>");
+		// 	return;
+		// }
 
-		String url = args[0];
-		String user = args[1];
-		String password = args[2];
+		// String url = args[0];
+		// String user = args[1];
+		// String password = args[2];
 		
 		try {
-		Controller.getInstance().initializeConnection(url, user, password);
+		Controller.getInstance().initializeConnection("jdbc:oracle:thin:@localhost:1521/ORCLPDB", "hotel_user", "2426");
 			
 		} catch (Exception e) {
 			System.out.println("Error: " + e.getMessage());

@@ -56,8 +56,8 @@ public class UserManager extends Manager<Employee> {
 
 			stmt.execute();
 			int result = stmt.getInt(3);
-			int isAdmin = stmt.getInt(4);
-			int isActive = stmt.getInt(5);
+			int isActive = stmt.getInt(4);
+			int isAdmin = stmt.getInt(5);
 
 			if (result != 0) {
 				System.out.println("Utilisateur existant.");

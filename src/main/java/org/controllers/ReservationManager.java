@@ -56,9 +56,19 @@ public class ReservationManager extends Manager<Reservation> {
 
 	@Override
 	protected void insertInputValidation(Reservation data) throws ControllerException {
-
 		ArrayList<Room> rooms = Controller.getInstance().getRoomManager().getData();
 		ArrayList<Person> clients = Controller.getInstance().getClientManager().getData();
+
+		// Select the rooms if
+		if (rooms.isEmpty()) {
+			Controller.getInstance().getRoomManager().select();
+			rooms = Controller.getInstance().getRoomManager().getData();
+		}
+
+		if (clients.isEmpty()) {
+			Controller.getInstance().getClientManager().select();
+			clients = Controller.getInstance().getClientManager().getData();
+		}
 
 		// Verification des champs vides
 		if (data.getStartDate() == null) {

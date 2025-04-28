@@ -1,17 +1,22 @@
 package org.controllers;
 
 import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.controllers.exceptions.ConnectionUnavailableException;
 import org.controllers.exceptions.ControllerException;
 import org.controllers.exceptions.DBException;
 import org.models.Reservation;
 import org.models.Room;
 import org.models.Room.RoomState;
 import org.models.Room.RoomType;
+
+import oracle.jdbc.OracleTypes;
 
 /**
  * UserManager
@@ -23,38 +28,10 @@ public class RoomManager extends Manager<Room> {
 	}
 
 	/**
-	 * Calculates the number of times each room was reserved.
-	 * 
-	 * @return HashMap<roomId, number of reservations>
-	 * @throws DBException 
-	 */
-	private HashMap<Integer, Integer> reservationCount() throws DBException {
-		ArrayList<Reservation> reservations = Controller.getInstance().getReservationManager().getData();
-
-		if (reservations.isEmpty()) {
-			Controller.getInstance().getReservationManager().select();
-			reservations = Controller.getInstance().getReservationManager().getData();
-		}
-
-		HashMap<Integer, Integer> reservationCount = new HashMap<>();
-
-		for (Reservation reservation : reservations) {
-			int currentReservation = reservation.getRoom();
-			if (reservationCount.containsKey(currentReservation)) {
-				reservationCount.replace(currentReservation,
-						reservationCount.get(currentReservation) + 1);
-			} else {
-				reservationCount.put(currentReservation, 1);
-			}
-		}
-		return reservationCount;
-	}
-
-	/**
 	 * Returns an Array list containing the top 10% most visited rooms.
 	 * 
 	 * @return
-	 * @throws DBException 
+	 * @throws DBException
 	 */
 	public ArrayList<Room> getMostCovetedRooms() throws DBException {
 		HashMap<Integer, Integer> reservationCount = reservationCount();
@@ -77,6 +54,93 @@ public class RoomManager extends Manager<Room> {
 		}
 
 		return mostCovetedRooms;
+	}
+
+	/**
+	 * Returns an {@code ArrayList} of room ids that are available from
+	 * {@code startDate} to
+	 * {@code endDate} and that have {@code capacity}.
+	 */
+	public ArrayList<Integer> getAvaliableRooms(Date startDate, Date endDate, int capacity)
+			throws ControllerException {
+		Connection connection = getConnection();
+
+		if (connection == null) {
+			throw new ConnectionUnavailableException();
+		}
+
+		if (startDate == null || endDate == null) {
+			new ControllerException("Les dates de début et de fin ne doivent pas être nulles.");
+		}
+
+		if (startDate.after(endDate)) {
+			new ControllerException("La date de début doit préceder la date de fin.");
+		}
+
+		ArrayList<Integer> availableRooms = new ArrayList<>();
+		CallableStatement stmt = null;
+		ResultSet resultSet = null;
+
+		try {
+			String sql = "{ ? = call get_available_rooms(?, ?, ?) }";
+			stmt = connection.prepareCall(sql);
+			stmt.registerOutParameter(1, OracleTypes.CURSOR);
+			stmt.setDate(2, startDate);
+			stmt.setDate(3, endDate);
+			stmt.setInt(4, capacity);
+			stmt.execute();
+
+			resultSet = (ResultSet) stmt.getObject(1);
+			while (resultSet.next()) {
+				int roomId = resultSet.getInt("id_chambre");
+				availableRooms.add(roomId);
+			}
+
+			return availableRooms;
+		} catch (SQLException exception) {
+			exception.printStackTrace();
+			throw new DBException();
+		} finally {
+			try {
+				if (resultSet != null) {
+					resultSet.close();
+				}
+				if (stmt != null) {
+					stmt.close();
+				}
+			} catch (SQLException exception) {
+				exception.printStackTrace();
+				throw new DBException();
+			}
+		}
+	}
+
+	/**
+	 * Calculates the number of times each room was reserved.
+	 * 
+	 * @return HashMap<roomId, number of reservations>
+	 * @throws DBException
+	 */
+	private HashMap<Integer, Integer> reservationCount() throws DBException {
+		ArrayList<Reservation> reservations = Controller.getInstance().getReservationManager().getData();
+
+		if (reservations.isEmpty()) {
+			Controller.getInstance().getReservationManager().select();
+			reservations = Controller.getInstance().getReservationManager().getData();
+		}
+
+		HashMap<Integer, Integer> reservationCount = new HashMap<>();
+
+		for (Reservation reservation : reservations) {
+			int currentReservation = reservation.getRoom();
+			if (reservationCount.containsKey(currentReservation)) {
+				reservationCount.replace(currentReservation,
+						reservationCount.get(currentReservation) + 1);
+			} else {
+				reservationCount.put(currentReservation, 1);
+			}
+		}
+		return reservationCount;
 	}
 
 	@Override

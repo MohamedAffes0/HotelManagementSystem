@@ -1,14 +1,11 @@
-package org.controllers.room;
+package org.controllers;
 
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.controllers.exceptions.ControllerException;
-import org.controllers.Controller;
-import org.controllers.Manager;
 import org.models.Room;
 import org.models.Room.RoomState;
 import org.models.Room.RoomType;
@@ -20,56 +17,6 @@ public class RoomManager extends Manager<Room> {
 
 	public RoomManager() {
 		super();
-	}
-
-	/**
-	 * Calculates the number of times each room was reserved.
-	 * 
-	 * @return HashMap<roomId, number of reservations>
-	 */
-	private HashMap<Integer, Integer> reservationCount() {
-		ArrayList<Reservation> reservations = Controller.getInstance().getReservationManager().getData();
-
-		HashMap<Integer, Integer> reservationCount = new HashMap<>();
-
-		for (Reservation reservation : reservations) {
-			int currentReservation = reservation.getRoom();
-			if (reservationCount.containsKey(currentReservation)) {
-				reservationCount.replace(currentReservation,
-						reservationCount.get(currentReservation) + 1);
-			} else {
-				reservationCount.put(currentReservation, 1);
-			}
-		}
-		return reservationCount;
-	}
-
-	/**
-	 * Returns an Array list containing the top 10% most visited rooms.
-	 * 
-	 * @return
-	 */
-	public ArrayList<Room> getMostCovetedRooms() {
-		HashMap<Integer, Integer> reservationCount = reservationCount();
-		ArrayList<Room> mostCovetedRooms = new ArrayList<>();
-		int totalReservations = 0;
-		for (Room room : getData()) {
-			Integer count = reservationCount.get(room.getId());
-			if (count != null) {
-				totalReservations += count;
-			}
-		}
-
-		double threshold = totalReservations * 0.1; // 10% of total reservations
-
-		for (Room room : getData()) {
-			int roomId = room.getId();
-			if (reservationCount.containsKey(roomId) && reservationCount.get(roomId) >= threshold) {
-				mostCovetedRooms.add(room);
-			}
-		}
-
-		return mostCovetedRooms;
 	}
 
 	@Override
@@ -214,7 +161,7 @@ public class RoomManager extends Manager<Room> {
 	}
 
 	@Override
-	protected void updateInputValidation(Room data) throws ControllerException {
+    protected void updateInputValidation(Room data) throws ControllerException {
 
 		if (data.getCapacity() <= 0) {
 			throw new ControllerException("La capacité ne doit pas etre nulle.");

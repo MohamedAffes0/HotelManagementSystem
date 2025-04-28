@@ -2,9 +2,9 @@ package org.views.popup;
 
 import java.time.LocalDate;
 
-import org.controllers.reservation.ReservationDelete;
-import org.controllers.reservation.ReservationModify;
-import org.controllers.user.ControllerException;
+import org.controllers.Controller;
+import org.controllers.exceptions.ControllerException;
+import org.controllers.exceptions.DBException;
 import org.models.Model;
 import org.models.Reservation;
 import org.views.popupfield.ComboBoxPopupField;
@@ -49,16 +49,18 @@ public class UpdateReservation extends UpdatePopup {
 	@Override
 	public void update(Model newData) throws ControllerException{
 		if (!(newData instanceof Reservation))
-			throw new RuntimeException("Invalid data received");
-		Reservation reservation = (Reservation) newData;
+			throw new ControllerException("Invalid data received");
 
-		ReservationModify.reservationModify(reservation.getId(), reservation.getRoom(),
-				reservation.getStartDate(), reservation.getEndDate(), reservation.isPaid());
+		Controller.getInstance().getReservationManager().update(getData().getId(), (Reservation) newData);
 	}
 
 	@Override
 	public void delete() {
-		ReservationDelete.reservationDelete(((Reservation) getData()).getId());
+		try {
+			Controller.getInstance().getReservationManager().delete(getData().getId());
+		} catch (DBException exception) {
+			setErrorMessage(exception.toString());
+		}
 	}
 
 	@Override

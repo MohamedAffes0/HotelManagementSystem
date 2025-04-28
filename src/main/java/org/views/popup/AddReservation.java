@@ -8,9 +8,7 @@ import org.models.Reservation;
 import org.views.popupfield.ComboBoxPopupField;
 import org.views.popupfield.DatePopupField;
 import org.views.popupfield.NumberPopupField;
-import org.controllers.reservation.ReservationAdd;
-import org.controllers.room.RoomSelect;
-import org.controllers.reservation.ReservationAdd.CreationStatus;
+import org.controllers.Controller;
 
 import javafx.collections.FXCollections;
 import javafx.stage.Stage;
@@ -63,29 +61,9 @@ public class AddReservation extends AddPopup {
 	}
 
 	@Override
-	protected void addData(Model newData) {
-		CreationStatus result = ReservationAdd.reservationAdd((Reservation) newData, RoomSelect.dataFromDB());
-
-		switch (result) {
-			case SUCCESS:
-				// Close the window after adding the room
-				Stage stage = (Stage) getWindow();
-				stage.close();
-				break;
-			case DB_PROBLEM:
-				break;
-			case ROOM_NON_EXISTENT:
-				System.out.println("Room does not exist");
-				break;
-			case ROOM_NOT_AVAILABLE:
-				System.out.println("Room not available");
-				break;
-			case DATE_NOT_AVAILABLE:
-				System.out.println("Date not available");
-				break;
-			case CLIENT_NON_EXISTENT:
-				System.out.println("Client does not exist");
-				break;
-		}
+	protected void addData(Model newData) throws Exception{
+		Controller.getInstance().getReservationManager().insert((Reservation) newData);
+		Stage stage = (Stage) getWindow();
+		stage.close();
 	}
 }

@@ -24,6 +24,11 @@ public class Person extends Model {
 		this.mail = mail;
 	}
 
+	@Override
+	public int getId() {
+		return cin;
+	}
+
 	public int getCin() {
 		return cin;
 	}

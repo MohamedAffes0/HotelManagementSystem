@@ -66,7 +66,7 @@ public abstract class Manager<T extends Model> {
 		}
 	}
 
-	public void insert(T data) throws ControllerException, DBException {
+	public void insert(T data) throws ControllerException {
 		if (getConnection() == null) {
 			throw new ConnectionUnavailableException();
 		}

@@ -10,7 +10,6 @@ import org.controllers.EmailChecker;
 import org.controllers.Manager;
 
 import org.models.Employee;
-import org.models.Room;
 
 /**
  * UserManager

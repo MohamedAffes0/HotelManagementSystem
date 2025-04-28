@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 import org.controllers.exceptions.ControllerException;
 import org.controllers.Manager;
-import org.models.Reservation;
 import org.models.Room;
 import org.models.Room.RoomState;
 import org.models.Room.RoomType;

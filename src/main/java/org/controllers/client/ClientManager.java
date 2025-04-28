@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import org.controllers.EmailChecker;
 import org.controllers.Manager;
 import org.controllers.exceptions.ControllerException;
-import org.models.Employee;
 import org.models.Person;
 
 public class ClientManager extends Manager<Person> {

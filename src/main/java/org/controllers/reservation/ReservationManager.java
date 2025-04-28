@@ -108,7 +108,8 @@ public class ReservationManager extends Manager<Reservation> {
 			throw new ControllerException("La date de début est après la date de fin.");
 		}
 		java.util.Date today = new java.util.Date(System.currentTimeMillis());
-		Calendar calendar = Calendar.getInstance(); calendar.setTime(today);
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(today);
 		calendar.add(Calendar.DAY_OF_MONTH, -1); // soustraire un jour pour la comparaison
 		today = calendar.getTime();
 		if (data.getStartDate().before(calendar.getTime())) {

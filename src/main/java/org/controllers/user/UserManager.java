@@ -1,24 +1,100 @@
 package org.controllers.user;
 
 import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 
+import org.controllers.exceptions.ConnectionUnavailableException;
 import org.controllers.exceptions.ControllerException;
+import org.controllers.exceptions.DBException;
 import org.controllers.EmailChecker;
 import org.controllers.Manager;
 
 import org.models.Employee;
 import org.models.Room;
 
+
 /**
  * UserManager
  */
 public class UserManager extends Manager<Employee> {
 
+	public static enum LoginStatus {
+		USER_NOT_FOUND,
+		INACTIVE_USER,
+		ADMIN_USER,
+		NORMAL_USER,
+	}
+
 	public UserManager() {
 		super();
+	}
+	
+	public static LoginStatus checkLogin(String emailText, String passwordText) throws ControllerException {
+		Connection connection = getConnection();
+
+		if (connection == null) {
+			throw new ConnectionUnavailableException();
+		}
+		CallableStatement stmt = null;
+		// Vérification des champs vides
+		if (emailText == null || emailText.isEmpty()) {
+			throw new ControllerException("L'email ne doit pas etre vide.");
+		}
+
+		// Vérification des champs vides
+		if (passwordText == null || passwordText.isEmpty()) {
+			throw new ControllerException("Le mot de passe ne doit pas être vide.");
+		}
+
+		try {
+			String sql = "{ call check_login(?, ?, ?, ?, ?) }";
+			stmt = connection.prepareCall(sql);
+			stmt.setString(1, emailText);
+			stmt.setString(2, passwordText);
+			stmt.registerOutParameter(3, Types.INTEGER);
+			stmt.registerOutParameter(4, Types.INTEGER);
+			stmt.registerOutParameter(5, Types.INTEGER);
+
+			stmt.execute();
+			int result = stmt.getInt(3);
+			int isAdmin = stmt.getInt(4);
+			int isActive = stmt.getInt(5);
+
+			if (result == 1) {
+				System.out.println("Utilisateur existant.");
+				if (isActive == 0) {
+					return LoginStatus.INACTIVE_USER;
+				} else if (isAdmin == 1) {
+					return LoginStatus.ADMIN_USER; // Admin
+				} else {
+					return LoginStatus.NORMAL_USER; // Utilisateur normal
+				}
+			} else {
+				System.out.println("Utilisateur non trouvé.");
+				return LoginStatus.USER_NOT_FOUND;
+			}
+
+		} catch (SQLException exception) {
+			exception.printStackTrace();
+			throw new DBException();
+		} finally {
+			// Fermeture des ressources JDBC
+			try {
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}
+			} catch (SQLException exception) {
+				exception.printStackTrace();
+				throw new DBException();
+			}
+		}
 	}
 
 	@Override
@@ -106,6 +182,6 @@ public class UserManager extends Manager<Employee> {
 	}
 
 	@Override
-    protected void updateInputValidation(Employee data) throws ControllerException {
+	protected void updateInputValidation(Employee data) throws ControllerException {
 	}
 }

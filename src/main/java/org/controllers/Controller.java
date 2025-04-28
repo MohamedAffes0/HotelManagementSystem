@@ -12,6 +12,7 @@ public class Controller {
 	private static Controller INSTANCE;
 	private Connection connection = null;
 	private UserManager userManager = new UserManager();
+	private int currentUser = -1;
 	private RoomManager roomManager = new RoomManager();
 	private ReservationManager reservationManager = new ReservationManager();
 	private ClientManager clientManager = new ClientManager();
@@ -49,6 +50,14 @@ public class Controller {
 	// getters
 	public Connection getConnection() {
 		return connection;
+	}
+
+	public void setCurrentUser(int currentUser) {
+		this.currentUser = currentUser;
+	}
+
+	public int getCurrentUser() {
+		return currentUser;
 	}
 
 	public UserManager getUserManager() {

@@ -58,25 +58,6 @@ public class Person extends Model {
 	}
 
 	@Override
-	public boolean filter(TextField search, String filterType) {
-		String searchText = search.getText();
-
-		if (searchText.isEmpty()) {
-			return true;
-		}
-
-		// String is not empty so check filter type
-		switch (filterType) {
-			case "Cin":
-				search.setText(StringNumberExtract.extract(searchText));
-				search.positionCaret(search.getText().length());
-				return ClientFilter.filterByCin(this, search.getText());
-			default:
-				return true;
-		}
-	}
-
-	@Override
 	public ArrayList<ModelField> getFields() {
 		ArrayList<ModelField> data = new ArrayList<>();
 

@@ -25,7 +25,7 @@ import javafx.stage.WindowEvent;
 public class ListScreen<T extends Model> {
 	private AddPopup addPopup;
 	private UpdatePopup updatePopup;
-	private Manager<?> manager;
+	private Manager<T> manager;
 	private final String LIST_BUTTON_PATH = "/listButton.fxml";
 
 	@FXML
@@ -46,11 +46,10 @@ public class ListScreen<T extends Model> {
 	@FXML
 	protected Label title;
 
-	public ListScreen(Manager<?> manager, AddPopup addPopup, UpdatePopup updatePopup) {
-		// TODO add proper error display
+	public ListScreen(Manager<T> manager, AddPopup addPopup, UpdatePopup updatePopup) {
 		try {
 			manager.select();
-		}catch (DBException exception) {
+		} catch (DBException exception) {
 			System.out.println(exception);
 		}
 		this.manager = manager;
@@ -91,21 +90,17 @@ public class ListScreen<T extends Model> {
 
 	@FXML
 	protected void updateList() {
-		if (manager.getData() == null) {
+		if (manager.getData() == null)
 			throw new RuntimeException("Content not loaded from db");
-		}
 
 		list.getChildren().clear();
 
-		if (manager.getData().size() == 0) {
+		if (manager.getData().size() == 0)
 			return;
-		}
 
-		for (Object o : manager.getData()) {
-			T item = (T) o;
-			if (!item.filter(search, filter.getValue())) {
+		for (T item : manager.getData()) {
+			if (!manager.filter(item, filter.getValue(), search.getText()))
 				continue;
-			}
 
 			try {
 				FXMLLoader listButtonLoader = new FXMLLoader(getClass().getResource(LIST_BUTTON_PATH));
@@ -118,9 +113,9 @@ public class ListScreen<T extends Model> {
 			}
 		}
 
-		if (list.getChildren().size() == 0) {
+		if (list.getChildren().size() == 0)
 			return;
-		}
+
 		// Set the style for the first and last buttons
 		ListButton.updateStyle((Button) list.getChildren().get(0));
 		ListButton.updateStyle((Button) list.getChildren().get(list.getChildren().size() - 1));

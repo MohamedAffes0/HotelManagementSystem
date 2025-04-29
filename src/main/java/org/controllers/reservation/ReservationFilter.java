@@ -25,7 +25,13 @@ public class ReservationFilter {
             return true;
         }
 
-        String reservationClientId = String.valueOf(reservation.getHotelClient());
+        String clientHotel = "";
+		int numberOfZeros = 8 - String.valueOf(reservation.getHotelClient()).length();
+		for (int i = 0; i < numberOfZeros; i++) {
+			clientHotel += "0";
+		}
+		clientHotel = clientHotel + String.valueOf(reservation.getHotelClient());
+        String reservationClientId = clientHotel;
         return reservationClientId.contains(clientId);
     }
 

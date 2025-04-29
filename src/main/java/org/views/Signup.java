@@ -9,10 +9,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Label;
 
 import org.controllers.EmailChecker;
-import org.controllers.user.UserAdd;
-import org.controllers.user.UserSelect;
-import org.controllers.user.UserAdd.CreationStatus;
 import org.models.Employee;
+import org.controllers.Controller;
 
 public class Signup {
 
@@ -47,29 +45,16 @@ public class Signup {
 		String lastNameText = prenom.getText();
 		String emailText = email.getText().trim();
 		String passwordText = password.getText().trim();
-
-		// Test if fields are empty
-		if (nameText.isEmpty() || lastNameText.isEmpty() || emailText.isEmpty() || passwordText.isEmpty()) {
-			error.setText("Veuillez remplir les champs!");
-			return;
-		}
-
-		if (EmailChecker.isValid(emailText)) {
-			error.setText("Email Invalide");
-		}
 		// Appel de la méthode userAdd avec les valeurs des champs de texte
 		Employee user = new Employee(1, nameText, lastNameText, emailText, passwordText, false,
 				false);
-		CreationStatus result = UserAdd.userAdd(user, UserSelect.dataFromDB());
-
-		if (result == CreationStatus.SUCCESS) {
-			System.out.println("Utilisateur ajouté avec succès !");
+		
+		try {
+			Controller.getInstance().getUserManager().insert(user);
 			App main = new App();
-			main.changeScene("/confirmationPending.fxml");
-		} else {
-			System.out.println("Échec de l'ajout de l'utilisateur.");
-			error.setText("Verifier la connexion ou si vous avez deja un compte!");
+            main.changeScene("/confirmationPending.fxml");
+		} catch (Exception exception) {
+			error.setText(exception.toString());
 		}
 	}
-
 }

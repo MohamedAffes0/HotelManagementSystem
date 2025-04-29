@@ -132,7 +132,14 @@ public class Reservation extends Model {
 		}
 		data.add(new ModelField(isPaid() ? "Payé" : "Impayé", styleClass));
 		data.add(new ModelField("Employée: " + getEmployee(), "employee-badge"));
-		data.add(new ModelField("Client: " + getHotelClient(), "client-badge"));
+
+		String clientHotel = "";
+		int numberOfZeros = 8 - String.valueOf(getHotelClient()).length();
+		for (int i = 0; i < numberOfZeros; i++) {
+			clientHotel += "0";
+		}
+		clientHotel = clientHotel + String.valueOf(getHotelClient());
+		data.add(new ModelField("Client: " + clientHotel, "client-badge"));
 
 		return data;
 	}

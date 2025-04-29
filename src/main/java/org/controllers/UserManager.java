@@ -128,10 +128,14 @@ public class UserManager extends Manager<Employee> {
 	@Override
 	protected void insertInputValidation(Employee data) throws ControllerException {
 		ArrayList<Employee> employees = getData();
+		if (employees.isEmpty()) {
+			select();
+			employees = getData();
+		}
 
 		// Check email
 		for (Employee employee : employees) {
-			if (employee.getMail() == data.getMail()) {
+			if (employee.getMail().equals(data.getMail())) {
 				throw new ControllerException("Un compte utilisant cet e-mail existe deja.");
 			}
 		}

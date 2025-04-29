@@ -37,7 +37,7 @@ public class RoomManager extends Manager<Room> {
 		HashMap<Integer, Integer> reservationCount = reservationCount();
 		ArrayList<Room> mostCovetedRooms = new ArrayList<>();
 		int totalReservations = 0;
-		
+
 		if (getData().isEmpty()) {
 			select();
 		}
@@ -146,6 +146,88 @@ public class RoomManager extends Manager<Room> {
 			}
 		}
 		return reservationCount;
+	}
+
+	@Override
+	public boolean filter(Room room, String criterea, String searchText) {
+		if (searchText.isEmpty()) {
+			return true;
+		}
+		// String is not empty so check filter type
+		switch (criterea) {
+			case "Etage":
+				return room.getFloor() == Integer.parseInt(StringNumberExtract.extract(searchText));
+			case "Capacité":
+				int numberOfPeople = Integer.parseInt(StringNumberExtract.extract(searchText));
+				return room.getCapacity() >= numberOfPeople;
+			case "Prix":
+				float price = Float.parseFloat(StringFloatExtract.extract(searchText));
+				return room.getPrice() <= price;
+			case "Type":
+				searchText = searchText.toLowerCase();
+
+				RoomType roomType = null;
+				// Return true if searchText = "s" as both "simple" and "suite" start with "s"
+				if (searchText.equals("s"))
+					return true;
+
+				// Simple
+				if ("simple".contains(searchText))
+					roomType = RoomType.SIMPLE;
+				if (searchText.contains("simple"))
+					roomType = RoomType.SIMPLE;
+
+				// Suite
+				if (searchText.contains("suite"))
+					roomType = RoomType.SUITE;
+				if ("suite".contains(searchText))
+					roomType = RoomType.SUITE;
+
+				// Double
+				if ("double".contains(searchText))
+					roomType = RoomType.DOUBLE;
+				if (searchText.contains("double"))
+					roomType = RoomType.DOUBLE;
+
+				// Result
+				if (roomType == null)
+					return false;
+				else
+					return room.getRoomType().equals(roomType);
+			case "Etat":
+				searchText = searchText.toLowerCase();
+				RoomState state = null;
+
+				// Occupée
+				if ("occupée".contains(searchText))
+					state = RoomState.OCCUPEE;
+				if ("occupee".contains(searchText))
+					state = RoomState.OCCUPEE;
+				if (searchText.contains("occupée"))
+					state = RoomState.OCCUPEE;
+				if (searchText.contains("occupee"))
+					state = RoomState.OCCUPEE;
+
+				// Libre
+				if ("libre".contains(searchText.toLowerCase()))
+					state = RoomState.LIBRE;
+				if (searchText.toLowerCase().contains("libre"))
+					state = RoomState.LIBRE;
+
+				// Maintenance
+				if ("maintenance".contains(searchText.toLowerCase()))
+					state = RoomState.MAINTENANCE;
+				if (searchText.toLowerCase().contains("maintenance"))
+					state = RoomState.MAINTENANCE;
+
+				if (state == null) {
+					return false;
+				} else {
+					return room.getState() == state;
+				}
+			default:
+				return true;
+		}
 	}
 
 	@Override

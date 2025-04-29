@@ -38,7 +38,7 @@ public class ClientManager extends Manager<Person> {
 	 * Returns the top 10% most faithful clients. `clients` is an `ArrayList`
 	 * containing all the clients.
 	 */
-	public  ArrayList<Person> getFaithfulClients() throws DBException {
+	public ArrayList<Person> getFaithfulClients() throws DBException {
 		ArrayList<Person> clients = getData();
 		if (clients.isEmpty()) {
 			select();
@@ -64,6 +64,22 @@ public class ClientManager extends Manager<Person> {
 		}
 
 		return faithfulClients;
+	}
+
+	@Override
+	public boolean filter(Person client, String criterea, String searchText) {
+		if (searchText.isEmpty()) {
+			return true;
+		}
+
+		// String is not empty so check filter type
+		switch (criterea) {
+			case "Cin":
+				String cin = String.valueOf(client.getCin());
+				return cin.contains(StringNumberExtract.extract(searchText));
+			default:
+				return true;
+		}
 	}
 
 	@Override

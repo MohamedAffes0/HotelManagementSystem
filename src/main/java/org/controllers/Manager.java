@@ -175,7 +175,9 @@ public abstract class Manager<T extends Model> {
 			}
 		}
 	}
-
+	
+	//TODO add documentation
+	public abstract boolean filter(T data, String criterea, String search);
 	/**
 	 * Returns a model from a line of a ResultSet
 	 * 

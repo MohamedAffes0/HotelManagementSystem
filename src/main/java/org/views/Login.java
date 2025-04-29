@@ -42,7 +42,7 @@ public class Login {
 			switch (Controller.getInstance().getUserManager().checkLogin(emailText, passwordText)) {
 				case NORMAL_USER:
 					System.out.println("Login successful! normal user");
-					((MainMenu) main.changeScene("/mainMenu.fxml")).setNonAdmin();;
+					((MainMenu) main.changeScene("/mainMenu.fxml")).setNonAdmin();
 					break;
 				case ADMIN_USER:
 					System.out.println("Login successful! admin user");

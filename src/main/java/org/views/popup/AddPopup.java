@@ -11,7 +11,7 @@ import org.views.popupfield.PopupField;
  */
 public abstract class AddPopup extends Popup {
 
-	public AddPopup(PopupField... fields) {
+	public AddPopup(PopupField<?, ?>... fields) {
 		super();
 		setFields(fields);
 

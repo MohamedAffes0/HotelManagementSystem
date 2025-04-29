@@ -4,14 +4,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import org.controllers.client.ClientSelect;
-import org.controllers.client.ClientStats;
-import org.controllers.reservation.ReservationSelect;
-import org.controllers.room.RoomSelect;
-import org.controllers.room.RoomStats;
+import org.controllers.Controller;
 import org.models.Model;
 import org.models.Person;
-import org.models.Reservation;
 import org.models.Room;
 
 import javafx.fxml.FXML;
@@ -32,12 +27,10 @@ public class Stats implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		try {
-			ArrayList<Reservation> reservations = ReservationSelect.dataFromDB();
-
-			ArrayList<Person> clients = ClientStats.getFaithfulClients(ClientSelect.dataFromDB(), reservations);
+			ArrayList<Person> clients = Controller.getInstance().getClientManager().getFaithfulClients();
 			updateList(faithfulClients, clients);
 
-			ArrayList<Room> rooms = RoomStats.getMostCovetedRooms(RoomSelect.dataFromDB(), reservations);
+			ArrayList<Room> rooms = Controller.getInstance().getRoomManager().getMostCovetedRooms();
 			updateList(mostCovetedRooms, rooms);
 		} catch (Exception exception) {
 		}

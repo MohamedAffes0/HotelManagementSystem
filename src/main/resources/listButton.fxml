@@ -9,7 +9,7 @@
    <graphic>
       <HBox alignment="CENTER" fillHeight="false" prefHeight="36.0" spacing="16.0">
          <children>
-            <Label fx:id="id" text="ID" />
+            <Label fx:id="id" text="ID" style="-fx-font-weight: bold;"/>
             <AnchorPane maxWidth="1.7976931348623157E308" minWidth="1.0" HBox.hgrow="ALWAYS" />
             <HBox fx:id="content" alignment="CENTER" fillHeight="false" prefHeight="36.0" spacing="16.0" />
          </children>

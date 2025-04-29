@@ -35,6 +35,9 @@ public class Login {
 		String passwordText = password.getText();
 		App main = new App();
 
+		email.getStyleClass().remove("text-field-error");
+		password.getStyleClass().remove("text-field-error");
+
 		try {
 			switch (Controller.getInstance().getUserManager().checkLogin(emailText, passwordText)) {
 				case NORMAL_USER:
@@ -60,6 +63,12 @@ public class Login {
 			}
 		} catch (ControllerException exception) {
 			error.setText(exception.toString());
+			if (exception.getMessage().contains("email")) {
+				email.getStyleClass().add("text-field-error");
+			}
+			if (exception.getMessage().contains("mot de passe")) {
+				password.getStyleClass().add("text-field-error");
+			}
 		}
 	}
 

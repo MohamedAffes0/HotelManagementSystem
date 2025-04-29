@@ -1,24 +1,9 @@
 /* === STYLE GÉNÉRAL === */
-@font-face {
-    font-family: "Adwaita Mono Bold";
-    src: url("fonts/AdwaitaMono-Bold.ttf");
-}
 
 @font-face {
-    font-family: "JetBrainsMonoNL NFM Regular";
-    src: url("fonts/JetBrainsMonoNLNerdFontMono-Regular.ttf");
+    font-family: "Inter Regular";
+    src: url("fonts/Inter-VariableFont_opsz,wght.ttf");
 }
-
-@font-face {
-    font-family: "Segoe UI This";
-    src: url("fonts/segoeuithis.ttf");
-}
-
-@font-face {
-    font-family: "Segoe UI This Bold";
-    src: url("fonts/segoeuithisbd.ttf");
-}
-
 
 .root {
     -background-color: #222226;
@@ -53,8 +38,8 @@
     -fx-font-weight: bold; */
     /* -fx-font-family: "JetBrainsMonoNL NFM Regular"; */
     /* -fx-font-weight: bold; */
-    -fx-font-family: "Segoe UI This Bold";
-    -fx-font-weight: small;
+    -fx-font-family: "Inter Regular";
+    -fx-font-weight: 200;
     -fx-text-fill: -font-color-white;
 }
 
@@ -147,7 +132,7 @@ Text {
     -fx-border-radius: 10;
     -fx-cursor: hand;
     -fx-padding: 10 18;
-    -fx-alignment: center;
+    -fx-alignment: CENTER;
 }
 .button:hover {
     -fx-background-color: -button-color-hover;
@@ -218,7 +203,7 @@ Text {
     -fx-background-color: -button-color-dark-hover;
 }
 .card-button Label {
-    -fx-font-weight: small;
+    -fx-font-weight: normal;
     -fx-font-size: 12px;
 }
 .menu-button {
@@ -436,7 +421,7 @@ Text {
 .date-picker .date-cell {
     -fx-background-color: transparent;
     -fx-padding: 0;
-    -fx-alignment: BASELINE_CENTER;
+    -fx-alignment: CENTER;
     -fx-text-fill: -font-color-date-cell;
     -fx-font-size: 1em;
 }

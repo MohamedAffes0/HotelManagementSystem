@@ -99,7 +99,10 @@ public class UserManager extends Manager<Employee> {
 		String password = resultSet.getString("mdp");
 		boolean isAdmin = resultSet.getInt("is_admin") == 1 ? true : false;
 		boolean isActive = resultSet.getInt("is_active") == 1 ? true : false;
-		return new Employee(id, name, lastName, mail, password, isAdmin, isActive);
+		if (id != Controller.getInstance().getCurrentUser()) {
+			return new Employee(id, name, lastName, mail, password, isAdmin, isActive);
+		}
+		return null;
 	}
 
 	@Override

@@ -56,10 +56,10 @@ public class AddReservation extends AddPopup {
 
 			int i = 0;
 			for (Integer roomId : availableRooms) {
-				rooms[i++] = "Chambre " + roomId.toString();
 				if (rooms[i] == currentValue) {
 					isValidValue = true;
 				}
+				rooms[i++] = "Chambre " + roomId.toString();
 			}
 
 			((ComboBoxPopupField) getField(ROOM)).setItems(rooms);

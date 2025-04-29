@@ -37,6 +37,11 @@ public class RoomManager extends Manager<Room> {
 		HashMap<Integer, Integer> reservationCount = reservationCount();
 		ArrayList<Room> mostCovetedRooms = new ArrayList<>();
 		int totalReservations = 0;
+		
+		if (getData().isEmpty()) {
+			select();
+		}
+
 		for (Room room : getData()) {
 			Integer count = reservationCount.get(room.getId());
 			if (count != null) {

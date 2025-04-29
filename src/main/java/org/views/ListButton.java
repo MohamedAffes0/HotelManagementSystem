@@ -91,6 +91,9 @@ public class ListButton {
 
 	@FXML
 	void pressed(ActionEvent event) {
+		if (popup == null) {
+			return;
+		}
 		try {
 			popup.setData(data);
 			// Load the Popup

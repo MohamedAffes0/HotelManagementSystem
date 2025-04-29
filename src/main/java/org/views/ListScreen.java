@@ -118,6 +118,9 @@ public class ListScreen<T extends Model> {
 			}
 		}
 
+		if (list.getChildren().size() == 0) {
+			return;
+		}
 		// Set the style for the first and last buttons
 		ListButton.updateStyle((Button) list.getChildren().get(0));
 		ListButton.updateStyle((Button) list.getChildren().get(list.getChildren().size() - 1));

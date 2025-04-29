@@ -151,6 +151,14 @@ public abstract class Manager<T extends Model> {
 			stmt.setInt(1, id);
 
 			stmt.execute();
+			if (!getData().isEmpty()) {
+				for (int i = 0; i < getData().size(); i++) {
+					if (getData().get(i).getId() == id) {
+						getData().remove(i);
+						break;
+					}
+				}
+			}
 		} catch (SQLException exception) {
 			exception.printStackTrace();
 			throw new DBException();

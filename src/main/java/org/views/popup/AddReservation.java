@@ -35,11 +35,14 @@ public class AddReservation extends AddPopup {
 		((DatePopupField) getField(START_DATE)).setOnAction(event -> updateRooms());
 		((DatePopupField) getField(END_DATE)).setOnAction(event -> updateRooms());
 		((NumberPopupField) getField(CAPACITY)).setOnAction(event -> updateRooms());
-		((ComboBoxPopupField) getField(ROOM)).setValue("Aucune chambre disponible");
+		((ComboBoxPopupField) getField(ROOM)).setValue("Aucune chambre");
 		setTitle("Ajouter une réservation");
 	}
 
 	public void updateRooms() {
+		if (getField(START_DATE).getValue() == null || getField(END_DATE).getValue() == null) {
+			return;
+		}
 		LocalDate startDate = (LocalDate) getField(START_DATE).getValue();
 		LocalDate endDate = (LocalDate) getField(END_DATE).getValue();
 		int capacity = (int) getField(CAPACITY).getValue();
@@ -48,7 +51,7 @@ public class AddReservation extends AddPopup {
 					.getAvaliableRooms(Date.valueOf(startDate), Date.valueOf(endDate), capacity);
 			if (availableRooms.isEmpty()) {
 				// Pour passer au bloc catch
-				throw new Exception("Aucune chambre disponible");
+				throw new Exception("Aucune chambre");
 			}
 			String[] rooms = new String[availableRooms.size()];
 			String currentValue = (String) getField(ROOM).getValue();
@@ -67,9 +70,8 @@ public class AddReservation extends AddPopup {
 				((ComboBoxPopupField) getField(ROOM)).setValue(currentValue);
 			}
 		} catch (Exception exception) {
-			((ComboBoxPopupField) getField(ROOM)).setItems("");
-			((ComboBoxPopupField) getField(ROOM)).setValue("Aucune chambre disponible");
-			System.out.println(exception.getMessage());
+			((ComboBoxPopupField) getField(ROOM)).setItems("Aucune chambre");
+			((ComboBoxPopupField) getField(ROOM)).setValue("Aucune chambre");
 		}
 	}
 
@@ -90,16 +92,14 @@ public class AddReservation extends AddPopup {
 
 		int room = 0;
 		String roomString = ((String) getField(ROOM).getValue());
-		if (roomString.contains("Chambre ")) {
+		if (roomString != null && roomString.contains("Chambre ")) {
 			room = Integer.parseInt(roomString.replace("Chambre ", ""));
 		}
 
-		LocalDate startDate = (LocalDate) getField(START_DATE).getValue();
-		LocalDate endDate = (LocalDate) getField(END_DATE).getValue();
 		return new Reservation(
 				1,
-				startDate == null ? null : Date.valueOf(startDate),
-				endDate == null ? null : Date.valueOf(endDate),
+				getField(START_DATE).getValue() == null ? null : Date.valueOf((LocalDate) getField(START_DATE).getValue()),
+				getField(END_DATE).getValue() == null ? null : Date.valueOf((LocalDate) getField(END_DATE).getValue()),
 				status,
 				3,
 				(int) getField(CLIENT).getValue(),

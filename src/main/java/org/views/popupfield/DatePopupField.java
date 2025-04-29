@@ -33,7 +33,7 @@ public class DatePopupField extends PopupField<DatePicker, LocalDate> {
 
 		// Crée un HBox avec le DatePicker à gauche et le bouton à droite
 		HBox fieldWithButton = new HBox(5, datePicker, calendarButton);
-		fieldWithButton.setStyle("-fx-alignment: center-left;");
+		fieldWithButton.setStyle("-fx-alignment: center_left;");
 		fieldWithButton.setAlignment(Pos.CENTER_LEFT);
 
 		// Important : pour que getField() retourne bien le DatePicker

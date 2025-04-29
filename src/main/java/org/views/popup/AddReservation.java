@@ -6,7 +6,6 @@ import java.sql.Date;
 
 import org.models.Model;
 import org.models.Reservation;
-import org.models.Room;
 import org.views.popupfield.ComboBoxPopupField;
 import org.views.popupfield.DatePopupField;
 import org.views.popupfield.NumberPopupField;
@@ -33,10 +32,10 @@ public class AddReservation extends AddPopup {
 				new NumberPopupField("Client"),
 				new ComboBoxPopupField("Statut",
 						FXCollections.observableArrayList("Payé", "Non payé")));
-		// ((ComboBoxPopupField)getField(ROOM)).setValue("Veuillez selectionner ");;
 		((DatePopupField) getField(START_DATE)).setOnAction(event -> updateRooms());
 		((DatePopupField) getField(END_DATE)).setOnAction(event -> updateRooms());
 		((NumberPopupField) getField(CAPACITY)).setOnAction(event -> updateRooms());
+		((ComboBoxPopupField) getField(ROOM)).setValue("Aucune chambre disponible");
 		setTitle("Ajouter une réservation");
 	}
 
@@ -52,13 +51,21 @@ public class AddReservation extends AddPopup {
 				throw new Exception("Aucune chambre disponible");
 			}
 			String[] rooms = new String[availableRooms.size()];
+			String currentValue = (String) getField(ROOM).getValue();
+			boolean isValidValue = false;
 
 			int i = 0;
 			for (Integer roomId : availableRooms) {
 				rooms[i++] = "Chambre " + roomId.toString();
+				if (rooms[i] == currentValue) {
+					isValidValue = true;
+				}
 			}
 
 			((ComboBoxPopupField) getField(ROOM)).setItems(rooms);
+			if (isValidValue) {
+				((ComboBoxPopupField) getField(ROOM)).setValue(currentValue);
+			}
 		} catch (Exception exception) {
 			((ComboBoxPopupField) getField(ROOM)).setItems("");
 			((ComboBoxPopupField) getField(ROOM)).setValue("Aucune chambre disponible");

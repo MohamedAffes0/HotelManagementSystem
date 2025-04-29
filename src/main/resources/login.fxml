@@ -24,7 +24,7 @@
                         <Insets />
                      </VBox.margin>
                   </Label>
-                  <Label fx:id="error" maxWidth="300" textFill="#bf616a">
+                  <Label fx:id="error" maxWidth="300" textFill="#ed6666">
                      <padding>
                         <Insets bottom="-13.0" />
                      </padding>

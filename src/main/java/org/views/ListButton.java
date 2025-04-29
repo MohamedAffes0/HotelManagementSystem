@@ -58,6 +58,7 @@ public class ListButton {
 			// label.setAlignment(Pos.CENTER);
 			if (field.getStyleClass() != null)
 				label.getStyleClass().add(field.getStyleClass());
+				label.setStyle("-fx-font-weight: bold;");
 
 			if (field.getIcon() != null) {
 				label.setGraphic(field.getIcon());

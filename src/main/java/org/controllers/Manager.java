@@ -45,7 +45,10 @@ public abstract class Manager<T extends Model> {
 
 			result = (ResultSet) stmt.getObject(1);
 			while (result.next()) {
-				data.add(dataFromResultSet(result));
+				T o = dataFromResultSet(result);
+				if (o != null) {
+					data.add(o);
+				}
 			}
 			result.close();
 

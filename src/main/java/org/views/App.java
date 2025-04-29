@@ -28,6 +28,7 @@ public class App extends Application {
 
 		stage.setTitle("Emerald Coast Dashboard");
 		stage.setScene(scene);
+		Application.setUserAgentStylesheet("style.css");
 		stage.show();
 	}
 
@@ -60,7 +61,6 @@ public class App extends Application {
 			System.out.println("Error: " + e.getMessage());
 			return;
 		}
-		Application.setUserAgentStylesheet("style.css");
 		launch();
 	}
 }

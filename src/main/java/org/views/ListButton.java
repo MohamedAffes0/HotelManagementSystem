@@ -58,7 +58,7 @@ public class ListButton {
 			// label.setAlignment(Pos.CENTER);
 			if (field.getStyleClass() != null)
 				label.getStyleClass().add(field.getStyleClass());
-				label.setStyle("-fx-font-weight: bold;");
+			label.setStyle("-fx-font-weight: bold;");
 
 			if (field.getIcon() != null) {
 				label.setGraphic(field.getIcon());
@@ -97,46 +97,33 @@ public class ListButton {
 		try {
 			popup.setData(data);
 			// Load the Popup
-			Parent content = popup.load();
+			popup.load("Modifier", () -> {
+				if (popup.getData() != null) {
+					setData(popup.getData());
+					return;
+				}
+				VBox parent = (VBox) button.getParent();
+				int index = getIndex();
 
-			// Create the stage and configure it
-			Stage stage = new Stage();
-			Scene scene = new Scene(content);
-			stage.setResizable(false);
-			// stage.setTitle("Ajout " + title.getText());
-			stage.setScene(scene);
-			// Reload list after closing the popup.
-			stage.setOnHidden(new EventHandler<WindowEvent>() {
-				@Override
-				public void handle(WindowEvent event) {
-					if (popup.getData() != null) {
-						setData(popup.getData());
-						return;
-					}
-					VBox parent = (VBox) button.getParent();
-					int index = getIndex();
+				// Delete the button
+				parent.getChildren().remove(index);
 
-					// Delete the button
-					parent.getChildren().remove(index);
+				// Do nothing if the there are no buttons
+				if (parent.getChildren().size() == 0) {
+					return;
+				}
 
-					// Do nothing if the there are no buttons
-					if (parent.getChildren().size() == 0) {
-						return;
-					}
+				// Change the preceeding button if not first
+				if (index > 0) {
+					updateStyle((Button) parent.getChildren().get(index - 1));
+					return;
+				}
 
-					// Change the preceeding button if not first
-					if (index > 0) {
-						updateStyle((Button) parent.getChildren().get(index - 1));
-						return;
-					}
-
-					// Change the following button if not last
-					if (index < parent.getChildren().size()) {
-						updateStyle((Button) parent.getChildren().get(index));
-					}
+				// Change the following button if not last
+				if (index < parent.getChildren().size()) {
+					updateStyle((Button) parent.getChildren().get(index));
 				}
 			});
-			stage.show();
 		} catch (Exception e) {
 			System.out.println(e);
 			System.out.println("Error opening add popup");

@@ -1,14 +1,17 @@
 package org.views.popup;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import javafx.stage.WindowEvent;
 import javafx.fxml.Initializable;
 
 import java.io.IOException;
@@ -16,13 +19,17 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
+import org.views.ListScreen;
 import org.views.popupfield.PopupField;
 
 /**
  * AddPupup
  */
 public abstract class Popup implements Initializable {
+	public static boolean isPopupOpen = false;
 	private ArrayList<PopupField> fields = new ArrayList<>();
 	private String titleText;
 	private String suggestedText = "Suggested";
@@ -85,6 +92,7 @@ public abstract class Popup implements Initializable {
 		suggestedButton.setText(suggestedText);
 		destructiveButton.setText(destuctiveText);
 		cancelButton.setText(cancelText);
+		// stage.setOnHidden(event -> setPopupOpen(false));
 	}
 
 	// Changes the title at the top of the popup.
@@ -117,6 +125,10 @@ public abstract class Popup implements Initializable {
 		errorLabel.setText(message);
 	}
 
+	public static void setPopupOpen(boolean isPopupOpen) {
+		Popup.isPopupOpen = isPopupOpen;
+	}
+
 	// Removes the destructive button from the popup.
 	public void removeDestructive() throws Exception {
 		if (destructiveButton == null) {
@@ -137,13 +149,27 @@ public abstract class Popup implements Initializable {
 	}
 
 	// Loads the fxml file and returns its root.
-	public Parent load() throws IOException {
+	public void load(String title, Runnable onClosed) throws IOException {
+		if (isPopupOpen) {
+			return;
+		}
+
+		setPopupOpen(true);
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(filePath));
 
 		// Set self as a controller
 		loader.setController(this);
 
-		return loader.load();
+		// Create the stage and configure it
+		Stage stage = new Stage();
+		Scene scene = new Scene(loader.load());
+		stage.setResizable(false);
+		stage.setTitle(title);
+		stage.setScene(scene);
+		// Reload list after closing the popup.
+		stage.setOnHidden(event -> windowClosed(onClosed));
+		stage.show();
+		isPopupOpen = true;
 	}
 
 	// Returns the popup's current window if it's loaded, else returns null.
@@ -153,6 +179,12 @@ public abstract class Popup implements Initializable {
 		}
 
 		return title.getScene().getWindow();
+	}
+	
+	// Called when the popup is closed
+	private void windowClosed(Runnable func) {
+		func.run();
+		isPopupOpen = false;
 	}
 
 	public void close() {

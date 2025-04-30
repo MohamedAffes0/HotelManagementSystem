@@ -1,3 +1,5 @@
+-- retour tous à la liste de tous les clients
+
 CREATE OR REPLACE PROCEDURE get_all_clients(
     p_cursor OUT SYS_REFCURSOR
 ) AS

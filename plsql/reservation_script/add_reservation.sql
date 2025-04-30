@@ -1,3 +1,5 @@
+-- ajout d'une réservation à la table reservation
+
 CREATE OR REPLACE PROCEDURE add_reservation (
     p_date_debut IN DATE,
     p_date_fin IN DATE,
@@ -8,7 +10,7 @@ CREATE OR REPLACE PROCEDURE add_reservation (
 ) AS
 BEGIN
     INSERT INTO reservation (id_reservation, date_debut, date_fin, paid, employe, client_hotel, chambre)
-    VALUES (reservation_id_seq.NEXTVAL, p_date_debut, p_date_fin, p_paid, p_id_employe, p_id_client, p_id_chambre);
+    VALUES (reservation_id_seq.NEXTVAL, p_date_debut, p_date_fin, p_paid, p_id_employe, p_id_client, p_id_chambre); -- l'id de reservation est généré automatiquement
     COMMIT;
 EXCEPTION
     WHEN DUP_VAL_ON_INDEX THEN

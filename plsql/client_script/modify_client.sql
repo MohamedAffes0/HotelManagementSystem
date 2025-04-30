@@ -1,3 +1,5 @@
+-- modifier un client
+
 CREATE OR REPLACE PROCEDURE modify_client (
     p_cin IN NUMBER,
     p_nom IN STRING DEFAULT NULL,

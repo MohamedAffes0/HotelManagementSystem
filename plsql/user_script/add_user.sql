@@ -1,3 +1,5 @@
+-- ajouter un utilisateur
+
 CREATE OR REPLACE PROCEDURE add_employe (
     p_nom IN VARCHAR2 DEFAULT NULL,
     p_prenom IN VARCHAR2 DEFAULT NULL,

@@ -1,3 +1,5 @@
+-- ajouter une chambre
+
 CREATE OR REPLACE PROCEDURE add_room (
     p_id IN NUMBER,
     p_type IN VARCHAR2 DEFAULT NULL, -- 'simple', 'double', 'suite'

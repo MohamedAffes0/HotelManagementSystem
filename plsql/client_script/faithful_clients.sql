@@ -1,3 +1,5 @@
+-- retourne les clients fidèles (10% des réservations)
+
 CREATE OR REPLACE FUNCTION faithful_clients 
 RETURN SYS_REFCURSOR
 AS

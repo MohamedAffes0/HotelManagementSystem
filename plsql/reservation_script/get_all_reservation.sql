@@ -1,3 +1,5 @@
+-- lire tous les reservations
+
 CREATE OR REPLACE PROCEDURE get_all_reservation(
     p_cursor OUT SYS_REFCURSOR
 ) AS

@@ -1,3 +1,5 @@
+-- modifier un utilisateur (sont role et son etat)
+
 CREATE OR REPLACE PROCEDURE modify_user(
     p_id IN NUMBER,
     p_admin IN NUMBER DEFAULT 0,

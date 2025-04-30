@@ -1,3 +1,5 @@
+-- verifier si un client existe dans la table client_hotel
+
 CREATE OR REPLACE PROCEDURE check_client (
     p_cin IN NUMBER,
     p_exists OUT NUMBER

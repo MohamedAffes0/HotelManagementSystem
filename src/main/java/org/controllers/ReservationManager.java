@@ -47,8 +47,13 @@ public class ReservationManager extends Manager<Reservation> {
 					return true;
 				return reservation.isPaid() == paid;
 			case "Client":
-				String cin = String.valueOf(reservation.getHotelClient());
-				return cin.contains(StringNumberExtract.extract(searchText));
+				String clientHotel = "";
+				int numberOfZeros = 8 - String.valueOf(reservation.getHotelClient()).length();
+				for (int i = 0; i < numberOfZeros; i++) {
+					clientHotel += "0";
+				}
+				clientHotel = clientHotel + String.valueOf(reservation.getHotelClient());
+				return clientHotel.contains(StringNumberExtract.extract(searchText));
 			case "Chambre":
 				String room = String.valueOf(reservation.getRoom());
 				return room.contains(StringNumberExtract.extract(searchText));

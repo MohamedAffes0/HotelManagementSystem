@@ -14,6 +14,7 @@ public class FileManager {
 		public String user;
 		public String password;
 
+        // Default constructor with default values
 		public Config() {
 			this.url = "jdbc:oracle:thin:@localhost:1521/ORCLPDB";
 			this.user = "hotel_user";
@@ -23,17 +24,17 @@ public class FileManager {
 
     public static Config getConfig() {
         Gson gson = new Gson();
-		String dataFolder = System.getenv("APPDATA") + "\\dbconfig.json";
+		String dataFolder = System.getenv("APPDATA") + "\\dbconfig.json"; // retourne le chemin du dossier AppData de l'utilisateur courant
         try (FileReader reader = new FileReader(dataFolder)) {
-            Config data = gson.fromJson(reader, Config.class);
+            Config data = gson.fromJson(reader, Config.class); // lit le fichier JSON et le convertit en objet Config
             return data;
         } catch (IOException exception) {
             System.out.println("Error reading config file: " + exception.getMessage());
 			Config data = new Config();
-			Gson builder = new GsonBuilder().setPrettyPrinting().create();
+			Gson builder = new GsonBuilder().setPrettyPrinting().create(); // crée un objet Gson pour écrire le fichier JSON
             String json = builder.toJson(data);
 			try (FileWriter writer = new FileWriter(dataFolder)) {
-                writer.write(json);
+                writer.write(json); // écrit l'objet Config dans le fichier JSON
                 return data;
             } catch (IOException e) {
                 System.err.println("Erreur lors de l'écriture du fichier : " + e.getMessage());

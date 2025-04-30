@@ -1,4 +1,4 @@
--- Cette procédure PL/SQL supprime toutes les vues de l'utilisateur actuel dans la base de données Oracle.
+-- supprimer toutes les vues de l'utilisateur
 BEGIN
     FOR obj IN (
         SELECT object_name, object_type
@@ -15,7 +15,7 @@ BEGIN
 END;
 /
 
--- Suppression de toutes les contraintes de clés primaires et étrangères dans la base de données Oracle
+-- Suppression de toutes les contraintes de clés primaires et étrangères
 BEGIN
     FOR r IN (SELECT constraint_name, table_name, constraint_type 
         FROM user_constraints 
@@ -39,8 +39,7 @@ BEGIN
 END;
 /
 
--- Cette procédure supprime toutes les séquences de l'utilisateur actuel dans Oracle.
-
+-- supprimer toutes les séquences dans la db
 BEGIN
     FOR r IN (SELECT sequence_name FROM user_sequences) LOOP
         -- Vérifier si la séquence existe avant de la supprimer
@@ -54,8 +53,8 @@ BEGIN
     END LOOP;
 END;
 /
--- Cette procédure PL/SQL supprime toutes les tables de l'utilisateur actuel dans la base de données Oracle.
 
+-- supprimer toutes les tables dans la db
 BEGIN
     FOR r IN (SELECT table_name FROM user_tables) LOOP
         -- Vérifier si la table existe avant de la supprimer

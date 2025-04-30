@@ -18,6 +18,7 @@ public class AddUser extends AddPopup {
 	final int STATUS = 5;
 
 	public AddUser() {
+		// Champs de saisie pour l'utilisateur
 		super(
 				new TextPopupField("Nom"),
 				new TextPopupField("Prénom"),
@@ -28,7 +29,7 @@ public class AddUser extends AddPopup {
 				new ComboBoxPopupField("Statut",
 						FXCollections.observableArrayList("Actif", "Inactif")));
 
-		setTitle("Ajouter un utilisateur");
+		setTitle("Ajouter un utilisateur"); // Titre de la fenêtre contextuelle
 	}
 
 	@Override
@@ -45,9 +46,9 @@ public class AddUser extends AddPopup {
 
 	@Override
 	protected void addData(Model newData) throws Exception{
-			Controller.getInstance().getUserManager().insert((Employee) newData);
-			Stage stage = (Stage) getWindow();
-			stage.close();
+			Controller.getInstance().getUserManager().insert((Employee) newData); // Ajouter l'utilisateur à la base de données
+			Stage stage = (Stage) getWindow(); // Récupérer la scène de la fenêtre contextuelle
+			stage.close(); // Fermer la fenêtre contextuelle
 	}
 
 }

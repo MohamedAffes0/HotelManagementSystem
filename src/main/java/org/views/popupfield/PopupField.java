@@ -13,9 +13,10 @@ import javafx.scene.layout.Priority;
  * @param <V> The type of its value
  */
 public abstract class PopupField<T extends Control, V> {
-	protected HBox container = new HBox();
-	private T field;
-	private Label name = new Label();
+
+	protected HBox container = new HBox(); // Le conteneur de la popup
+	private T field; // Le champ qui sera utilisé dans la popup
+	private Label name = new Label(); // Le nom du champ qui sera utilisé dans la popup
 
 	PopupField(String name) {
 		this.name.setText(name);

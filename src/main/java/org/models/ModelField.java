@@ -9,10 +9,11 @@ import javafx.scene.shape.SVGPath;
  * for that particular field in the button.
  */
 public class ModelField {
-	private String content = "";
-	private String styleClass;
-	private SVGPath icon;
-	private ContentDisplay iconPosition;
+
+	private String content = ""; // contenu de la cellule
+	private String styleClass; // classe CSS de la cellule
+	private SVGPath icon; // icône SVG de la cellule
+	private ContentDisplay iconPosition; // position de l'icône (gauche ou droite)
 
 	public ModelField(String content, String styleClass, SVGPath icon, ContentDisplay iconPosition) {
 		this.content = content;

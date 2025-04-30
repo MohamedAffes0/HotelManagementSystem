@@ -12,13 +12,14 @@ import javafx.scene.input.KeyEvent;
 public class NumberPopupField extends PopupField<TextField, Integer> {
 
 	public NumberPopupField(String name) {
-		super(name);
-		TextField field = new TextField();
-		setField(field);
+		super(name); // Le nom du champ qui sera utilisé dans la popup
+		TextField field = new TextField(); 
+		setField(field); // Le champ qui sera utilisé dans la popup
 
 		field.setOnKeyTyped(new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent event) {
+				// Lorsque l'utilisateur tape dans le champ, on ne garde que les chiffres
 				String text = field.getText();
 				field.setText(StringNumberExtract.extract(text));
 				field.positionCaret(text.length());
@@ -28,6 +29,7 @@ public class NumberPopupField extends PopupField<TextField, Integer> {
 	}
 
 	public void setOnAction(EventHandler<? super KeyEvent> event) {
+		// Définit l'action à effectuer lorsque la valeur est modifiée
 		getField().setOnKeyTyped(event);
 	}
 

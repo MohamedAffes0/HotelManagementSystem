@@ -1,3 +1,5 @@
+-- retourner les chambres disponibles pour une période donnée
+
 CREATE OR REPLACE FUNCTION get_available_rooms(
     p_start_date IN DATE,
     p_end_date   IN DATE,

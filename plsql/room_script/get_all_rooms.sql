@@ -1,3 +1,5 @@
+-- lire tous les chambres
+
 CREATE OR REPLACE PROCEDURE get_all_rooms(
     p_cursor OUT SYS_REFCURSOR
 ) AS

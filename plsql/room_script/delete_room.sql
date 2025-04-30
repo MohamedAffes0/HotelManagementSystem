@@ -1,3 +1,5 @@
+-- supprime une chambre de la table chambre
+
 CREATE OR REPLACE PROCEDURE delete_room(
     p_id IN NUMBER
 ) AS

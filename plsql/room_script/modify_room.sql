@@ -1,3 +1,5 @@
+-- modifier une chambre
+
 CREATE OR REPLACE PROCEDURE modify_room (
     p_id IN NUMBER,
     p_nb_personnes IN NUMBER DEFAULT 0,

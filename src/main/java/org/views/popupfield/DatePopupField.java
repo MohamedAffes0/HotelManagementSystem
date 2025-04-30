@@ -15,7 +15,7 @@ public class DatePopupField extends PopupField<DatePicker, LocalDate> {
 	private Button calendarButton;
 
 	public DatePopupField(String name) {
-		super(name);
+		super(name); // Le nom du champ qui sera utilisé dans la popup
 
 		// Crée et configure le DatePicker
 		datePicker = new DatePicker();
@@ -24,7 +24,6 @@ public class DatePopupField extends PopupField<DatePicker, LocalDate> {
 
 		// Crée le bouton calendrier
 		calendarButton = new Button("");
-
 		calendarButton.getStyleClass().add("calendar-button");
 		calendarButton.setPrefWidth(30); // Limite la largeur du bouton à 30px
 
@@ -45,7 +44,8 @@ public class DatePopupField extends PopupField<DatePicker, LocalDate> {
 	}
 
 	public void setOnAction(EventHandler<ActionEvent> event) {
-		datePicker.setOnAction(event);
+		// Définit l'action à effectuer lorsque la date est sélectionnée
+		datePicker.setOnAction(event); 
 	}
 
 	@Override

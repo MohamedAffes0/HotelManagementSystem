@@ -1,3 +1,5 @@
+-- verifier si une chambre existe dans la table chambre
+
 CREATE OR REPLACE PROCEDURE check_room (
     p_id IN NUMBER,
     p_exists OUT NUMBER

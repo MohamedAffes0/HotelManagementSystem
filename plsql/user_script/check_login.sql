@@ -1,3 +1,6 @@
+-- verifier si user existe dans la table employe
+-- retourner l'id de l'utilisateur, son statut (actif ou non) et son rôle (admin ou employé)
+
 CREATE OR REPLACE PROCEDURE check_login (
     p_email IN VARCHAR2,
     p_password IN VARCHAR2,

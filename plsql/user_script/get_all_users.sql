@@ -1,3 +1,5 @@
+-- retourner tous les utilisateurs
+
 CREATE OR REPLACE PROCEDURE get_all_users(
     p_cursor OUT SYS_REFCURSOR
 ) AS

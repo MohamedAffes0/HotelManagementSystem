@@ -17,6 +17,7 @@ import org.models.Employee;
  */
 public class UserManager extends Manager<Employee> {
 
+	// Enum pour les statuts de connexion
 	public static enum LoginStatus {
 		USER_NOT_FOUND,
 		INACTIVE_USER,
@@ -28,6 +29,7 @@ public class UserManager extends Manager<Employee> {
 		super();
 	}
 
+	// Vérifie si l'utilisateur existe dans la base de données et renvoie le statut de connexion
 	public LoginStatus checkLogin(String emailText, String passwordText) throws ControllerException {
 		Connection connection = getConnection();
 
@@ -133,12 +135,14 @@ public class UserManager extends Manager<Employee> {
 	@Override
 	protected void insertInputValidation(Employee data) throws ControllerException {
 		ArrayList<Employee> employees = getData();
+
+		// Si la liste est vide, on la remplit
 		if (employees.isEmpty()) {
 			select();
 			employees = getData();
 		}
 
-		// Check email
+		// verification de l'existence de l'utilisateur (email)
 		for (Employee employee : employees) {
 			if (employee.getMail().equals(data.getMail())) {
 				throw new ControllerException("Un compte utilisant cet e-mail existe deja.");

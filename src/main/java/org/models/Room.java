@@ -3,16 +3,19 @@ package org.models;
 import javafx.scene.control.ContentDisplay;
 
 import java.util.ArrayList;
+import org.views.UiUtils;
 
 
 public class Room extends Model {
 
+	// enum pour l'etat de la chambres
 	public static enum RoomState {
 		LIBRE,
 		OCCUPEE,
 		MAINTENANCE
 	}
 
+	// enum pour les types de chambres
 	public static enum RoomType {
 		SIMPLE,
 		DOUBLE,
@@ -38,6 +41,7 @@ public class Room extends Model {
 	public Room() {
 	}
 
+	// retourner les champs de la chambre pour l'affichage dans la liste
 	@Override
 	public ArrayList<ModelField> getFields() {
 		ArrayList<ModelField> data = new ArrayList<>();
@@ -45,7 +49,7 @@ public class Room extends Model {
 		data.add(new ModelField("Chambre " + getId(), "room-badge"));
 		data.add(new ModelField("Etage " + getFloor(), "floor-badge"));
 		data.add(new ModelField(getTypeString(), "room-type-badge"));
-		data.add(new ModelField(String.valueOf(getCapacity()), "person-badge", createIcon(
+		data.add(new ModelField(String.valueOf(getCapacity()), "person-badge", UiUtils.createIcon(
 				"M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z",
 				0.8, "#2f2f2f"), ContentDisplay.RIGHT));
 		data.add(new ModelField(getPrice() + " Dt", "price-badge"));

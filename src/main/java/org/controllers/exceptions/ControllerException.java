@@ -1,5 +1,6 @@
 package org.controllers.exceptions;
 
+// exception levée lorsque une erreur se produit dans le controller
 /**
  * ControllerException
  */
@@ -13,4 +14,5 @@ public class ControllerException extends Exception{
 	public String toString() {
 		return getMessage();
 	}
+
 }

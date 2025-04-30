@@ -1,4 +1,4 @@
--- Script to create the database and user for the hotel management system
+-- creation de la base de donnees
 
 create USER hote_user identified BY 2426;
 GRANT CONNECT, RESOURCE TO "hotel_user";

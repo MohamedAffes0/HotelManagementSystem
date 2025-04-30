@@ -1,8 +1,10 @@
+-- modifier une reservation
+
 CREATE OR REPLACE PROCEDURE modify_reservation (
     p_id IN NUMBER,
     p_date_debut IN DATE,
     p_date_fin IN DATE,
-    p_paid IN NUMBER DEFAULT 0 -- 0 for unpaid, 1 for paid
+    p_paid IN NUMBER DEFAULT 0 -- 0 payé, 1 non payé
 ) AS
 BEGIN
     UPDATE reservation 

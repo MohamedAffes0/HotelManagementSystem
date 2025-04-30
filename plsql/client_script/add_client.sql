@@ -1,3 +1,5 @@
+-- jouter un client à la table client_hotel
+
 CREATE OR REPLACE PROCEDURE add_client_hotel (
     p_cin INT,
     p_nom VARCHAR2 DEFAULT NULL,

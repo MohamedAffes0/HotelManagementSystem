@@ -23,31 +23,32 @@ import org.views.popupfield.PopupField;
  * AddPupup
  */
 public abstract class Popup implements Initializable {
+
 	public static boolean isPopupOpen = false;
-	private ArrayList<PopupField> fields = new ArrayList<>();
-	private String titleText;
-	private String suggestedText = "Suggested";
-	private String destuctiveText = "Destructive";
-	private String cancelText = "Cancel";
-	final String filePath = "/popup.fxml";
+	private ArrayList<PopupField> fields = new ArrayList<>(); // liste de tous les champs de la popup
+	private String titleText; // le titre de la popup
+	private String suggestedText = "Suggested"; // le texte du bouton ajouter ou modifier
+	private String destuctiveText = "Destructive"; // le texte du bouton suprimer
+	private String cancelText = "Cancel"; // le texte du bouton annuler
+	final String filePath = "/popup.fxml"; // le chemin du fichier fxml de la popup
 
 	@FXML
 	private Label title;
 
 	@FXML
-	// Container for all the fields in the popup.
+	// Conteneur pour tous les champs de la popup.
 	private VBox container;
 
 	@FXML
-	// Button that does the intended action of the popup. Like an add or an update.
+	// Bouton qui effectue l'action prévue de la popup. Comme un ajout ou une mise à jour.
 	private Button suggestedButton;
 
 	@FXML
-	// A red button that does a destructive action like delete.
+	// Un bouton rouge qui effectue une action destructrice comme supprimer.
 	private Button destructiveButton;
 
 	@FXML
-	// Closes the popup without doing anything.
+	// Ferme la popup sans effectuer d'action.
 	private Button cancelButton;
 
 	@FXML
@@ -61,23 +62,24 @@ public abstract class Popup implements Initializable {
 	}
 
 	@FXML
-	// Called when the cancel button is pressed.
+	// Appelé lorsque le bouton annuler est pressé.
 	public void cancelPressed(ActionEvent event) {
 		Stage stage = (Stage) title.getScene().getWindow();
 		stage.close();
 	}
 
 	@FXML
-	// Called when the suggested button is pressed.
+	// Appelé lorsque le bouton suggéré est pressé.
 	public void suggestedPressed(ActionEvent event) {
 	}
 
 	@FXML
+	// Appelé lorsque le bouton destructif est pressé.
 	public void destructivePressed(ActionEvent event) {
 	}
 
 	@Override
-	// Called when the fxml file is fully loaded.
+	// Appelé lorsque le fichier fxml est entièrement chargé.
 	public void initialize(URL location, ResourceBundle resources) {
 		for (PopupField field : fields) {
 			container.getChildren().add(field.getContainer());
@@ -86,10 +88,9 @@ public abstract class Popup implements Initializable {
 		suggestedButton.setText(suggestedText);
 		destructiveButton.setText(destuctiveText);
 		cancelButton.setText(cancelText);
-		// stage.setOnHidden(event -> setPopupOpen(false));
 	}
 
-	// Changes the title at the top of the popup.
+	// Modifie le titre en haut de la popup.
 	public void setTitle(String newTitle) {
 		titleText = newTitle;
 		if (title != null) {
@@ -97,33 +98,38 @@ public abstract class Popup implements Initializable {
 		}
 	}
 
+	// Modifie le texte du bouton suggéré.
 	public void setSuggestedText(String text) {
 		suggestedText = text;
 		if (suggestedButton != null)
 			suggestedButton.setText(text);
 	}
 
+	// Modifie le texte du bouton destructif.
 	public void setDestructiveText(String text) {
 		destuctiveText = text;
 		if (destructiveButton != null)
 			destructiveButton.setText(text);
 	}
 
+	// Modifie le texte du bouton annuler.
 	public void setCancelText(String text) {
 		cancelText = text;
 		if (cancelButton != null)
 			cancelButton.setText(text);
 	}
 
+	// Modifie le texte de l'erreur.
 	public void setErrorMessage(String message) {
 		errorLabel.setText(message);
 	}
 
+	// si la popup est ouverte ou non.
 	public static void setPopupOpen(boolean isPopupOpen) {
 		Popup.isPopupOpen = isPopupOpen;
 	}
 
-	// Removes the destructive button from the popup.
+	// Supprime le bouton destructif de la popup.
 	public void removeDestructive() throws Exception {
 		if (destructiveButton == null) {
 			throw new Exception("The destructive button is either uninitialized or removed");
@@ -132,17 +138,17 @@ public abstract class Popup implements Initializable {
 		buttonContainer.getChildren().remove(buttonContainer.getChildren().indexOf(destructiveButton));
 	}
 
-	// Changes the fields in the popup.
+	// Modifie les champs dans la popup.
 	public void setFields(PopupField... fields) {
 		this.fields = new ArrayList<PopupField>(Arrays.asList(fields));
 	}
 
-	// Retruns the field at the specified index.
+	// Renvoie le champ à l'index spécifié.
 	public PopupField getField(int index) {
 		return fields.get(index);
 	}
 
-	// Loads the fxml file and returns its root.
+	// Charge le fichier fxml et renvoie sa racine.
 	public void load(String title, Runnable onClosed) throws IOException {
 		if (isPopupOpen) {
 			return;
@@ -151,22 +157,22 @@ public abstract class Popup implements Initializable {
 		setPopupOpen(true);
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(filePath));
 
-		// Set self as a controller
+		// Définir soi-même comme contrôleur
 		loader.setController(this);
 
-		// Create the stage and configure it
+		// Créez la fenêtre (stage) et configurez-la
 		Stage stage = new Stage();
 		Scene scene = new Scene(loader.load());
 		stage.setResizable(false);
 		stage.setTitle(title);
 		stage.setScene(scene);
-		// Reload list after closing the popup.
+		// Recharger la liste après la fermeture de la popup.
 		stage.setOnHidden(event -> windowClosed(onClosed));
 		stage.show();
 		isPopupOpen = true;
 	}
 
-	// Returns the popup's current window if it's loaded, else returns null.
+	// Renvoie la fenêtre actuelle de la popup si elle est chargée, sinon renvoie null.
 	public Window getWindow() {
 		if (title == null) {
 			return null;
@@ -175,14 +181,15 @@ public abstract class Popup implements Initializable {
 		return title.getScene().getWindow();
 	}
 	
-	// Called when the popup is closed
+	// Appelé lorsque la popup est fermée
 	private void windowClosed(Runnable func) {
 		func.run();
 		isPopupOpen = false;
 	}
 
+	// ferme la popup.
 	public void close() {
-		Stage stage = (Stage) title.getScene().getWindow();
+		Stage stage = (Stage) title.getScene().getWindow(); // Récupérer la fenêtre actuelle
 		stage.close();
 	}
 }

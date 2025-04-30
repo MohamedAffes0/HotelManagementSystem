@@ -14,18 +14,20 @@ public class UpdateUser extends UpdatePopup {
 	final int STATUS = 1;
 
 	public UpdateUser() {
+		// Champs de saisie pour l'utilisateur
 		super(
 				new ComboBoxPopupField("Type",
 						FXCollections.observableArrayList("Admin", "Employé")),
 				new ComboBoxPopupField("Statut",
 						FXCollections.observableArrayList("Actif", "Inactif")));
 
-		setTitle("Modifier un utilisateur");
+		setTitle("Modifier un utilisateur"); // Titre de la fenêtre contextuelle
 	}
 
 	@Override
 	protected Employee dataFromFields() {
-		Employee employee = (Employee) getData();
+
+		Employee employee = (Employee) getData(); // Récupérer les données actuelles de l'utilisateur
 
 		boolean isAdmin = false;
 		switch ((String) getField(TYPE).getValue()) {
@@ -53,24 +55,29 @@ public class UpdateUser extends UpdatePopup {
 
 	@Override
 	public void update(Model newData) throws ControllerException{
+		// Vérifier si les données reçues sont valides
 		if (!(newData instanceof Employee))
 			throw new ControllerException("Invalid data received");
 
+		// Mettre à jour l'utilisateur dans la base de données
 		Controller.getInstance().getUserManager().update(getData().getId(), (Employee) newData);
 	}
 
 	@Override
 	public void delete() {
 		try {
+			// Supprimer l'utilisateur de la base de données
 			Controller.getInstance().getUserManager().delete(getData().getId());
 		} catch (DBException exception) {
+			// Afficher le message d'erreur dans la fenêtre contextuelle
 			setErrorMessage(exception.toString());
 		}
 	}
 
 	@Override
 	public void fieldsFromData() {
-		Employee employee = (Employee) getData();
+		Employee employee = (Employee) getData(); // Récupérer les données de l'utilisateur
+
 		if (employee.isAdmin()) {
 			((ComboBoxPopupField) getField(TYPE)).setValue("Admin");
 		} else {

@@ -11,29 +11,35 @@ import javafx.event.ActionEvent;
  * UpdatePopup
  */
 public abstract class UpdatePopup extends Popup {
+
 	private Model data;
 
 	public UpdatePopup(PopupField... fields) {
-		super();
-		setFields(fields);
 
-		setSuggestedText("Modifier");
-		setDestructiveText("Supprimer");
-		setCancelText("Annuler");
+		super();
+
+		// Définir les champs de la fenêtre contextuelle a partir de la bouton de la liste pressé.
+		setFields(fields); 
+
+		setSuggestedText("Modifier"); // Définir le texte du bouton de suggestion.
+		setDestructiveText("Supprimer"); // Définir le texte du bouton de suppression.
+		setCancelText("Annuler"); // Définir le texte du bouton d'annulation.
 	}
 
-	// Updates the data in the database and returns true if it was changed
-	// successfully.
+	// Méthode abstraite pour mettre à jour les données depuis le bouton de la liste pressé.
 	public abstract void update(Model newData) throws ControllerException;
 
+	// Méthode abstraite pour supprimer les données depuis le bouton de la liste pressé.
 	public abstract void delete();
 
+	// Méthode abstraite pour obtenir les données à partir des champs de saisie.
 	public abstract void fieldsFromData();
 
+	// Méthode abstraite pour obtenir les données à partir des champs de saisie.
 	protected abstract Model dataFromFields();
 
 	public void setData(Model data) {
-		this.data = data;
+		this.data = data; // Mettre à jour les données de la fenêtre contextuelle.
 	}
 
 	public Model getData() {
@@ -42,34 +48,32 @@ public abstract class UpdatePopup extends Popup {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		super.initialize(location, resources);
-		fieldsFromData();
+		super.initialize(location, resources); // Initialiser la fenêtre contextuelle.
+		fieldsFromData(); // Remplir les champs de la fenêtre contextuelle avec les données.
 	}
 
 	@Override
-	// Called when the update button is pressed.
+	// Appelé lorsque le bouton de mise à jour est pressé.
 	public void suggestedPressed(ActionEvent event) {
 		try {
 			Model data = dataFromFields();
 			
-			// Update can throw an exception
-			update(data);
+			update(data); // La mise à jour peut générer une exception
 
-			// If update is successful then we set the data
-			setData(data);
+			setData(data); // Si la mise à jour est réussie, alors nous définissons les données
 			
-			// Close the window only if we succeded
-			close();
+			
+			close(); // Fermer la fenêtre uniquement si nous avons réussi
 		} catch (ControllerException exception) {
-			setErrorMessage(exception.toString());
+			setErrorMessage(exception.toString()); // Afficher le message d'erreur dans la fenêtre contextuelle
 		}
 	}
 
 	@Override
-	// Called when the delete button is pressed.
+	// Appelé lorsque le bouton de suppression est pressé.
 	public void destructivePressed(ActionEvent event) {
-		delete();
-		data = null;
-		close();
+		delete(); // Supprimer les données de la fenêtre contextuelle.
+		data = null; // Réinitialiser les données de la fenêtre contextuelle.
+		close(); // Fermer la fenêtre contextuelle.
 	}
 }

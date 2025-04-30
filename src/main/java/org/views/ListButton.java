@@ -33,34 +33,40 @@ public class ListButton {
 
 		this.data = data;
 
+		// Définir le texte du bouton sur le premier champ du modèle
 		ArrayList<ModelField> fields = data.getFields();
 
+		// Vérifier si le modèle contient des champs
 		if (fields == null || fields.isEmpty())
 			throw new RuntimeException("No data in model");
 
-		id.setText(fields.get(0).getContent());
+		id.setText(fields.get(0).getContent()); // Le premier champ est le nom du modèle
+		// ajouter une icône si elle existe
 		if (fields.get(0).getIcon() != null) {
 			id.setGraphic(fields.get(0).getIcon());
 			id.setContentDisplay(fields.get(0).getIconPosition());
 		}
 
+		// Supprimer tous les champs sauf le premier
 		content.getChildren().clear();
 
+		// Ajouter tous les champs sauf le premier
 		for (int i = 1; i < fields.size(); i++) {
-			ModelField field = fields.get(i);
-			Label label = new Label(field.getContent());
+			ModelField field = fields.get(i); // Le champ qui sera utilisé dans la popup
+			Label label = new Label(field.getContent()); // Le nom du champ qui sera utilisé dans la popup
 
-			// label.setAlignment(Pos.CENTER);
+			// ajouter un style si il existe
 			if (field.getStyleClass() != null)
 				label.getStyleClass().add(field.getStyleClass());
 			label.setStyle("-fx-font-weight: bold;");
 
+			// ajouter une icône si elle existe
 			if (field.getIcon() != null) {
 				label.setGraphic(field.getIcon());
 				label.setContentDisplay(field.getIconPosition());
 			}
 
-			content.getChildren().add(label);
+			content.getChildren().add(label); // Ajouter le champ au bouton
 		}
 	}
 
@@ -68,30 +74,32 @@ public class ListButton {
 		this.popup = popup;
 	}
 
+	// Retourne l'index du bouton dans la liste
 	public int getIndex() {
 		VBox parent = (VBox) button.getParent();
 		return parent.getChildren().indexOf(button);
 	}
 
-	// Returns true if the button is the first in the list.
+	// Retourne vrai si le bouton est le premier dans la liste.
 	public boolean isFirst() {
 		return getIndex() == 0;
-
 	}
 
+	// Retourne vrai si le bouton est le dernier dans la liste.
 	public boolean isLast() {
 		VBox parent = (VBox) button.getParent();
 		return getIndex() == (parent.getChildren().size() - 1);
 	}
 
 	@FXML
+	// Appelé lorsque le bouton est pressé
 	void pressed(ActionEvent event) {
 		if (popup == null) {
 			return;
 		}
 		try {
-			popup.setData(data);
-			// Load the Popup
+			popup.setData(data); // passer les données au popup
+			// Charger la fenêtre contextuelle
 			popup.load("Modifier", () -> {
 				if (popup.getData() != null) {
 					setData(popup.getData());
@@ -100,21 +108,21 @@ public class ListButton {
 				VBox parent = (VBox) button.getParent();
 				int index = getIndex();
 
-				// Delete the button
+				// Supprimer le bouton
 				parent.getChildren().remove(index);
 
-				// Do nothing if the there are no buttons
+				// Ne rien faire s'il n'y a pas de boutons
 				if (parent.getChildren().size() == 0) {
 					return;
 				}
 
-				// Change the preceeding button if not first
+				// on modifie le style du bouton précédent s'il n'est pas le premier
 				if (index > 0) {
 					updateStyle((Button) parent.getChildren().get(index - 1));
 					return;
 				}
 
-				// Change the following button if not last
+				// Modifier le bouton suivant s'il n'est pas le dernier
 				if (index < parent.getChildren().size()) {
 					updateStyle((Button) parent.getChildren().get(index));
 				}
@@ -125,32 +133,31 @@ public class ListButton {
 		}
 	}
 
-	// Changes the border radius of the button if it's at the top or bottom of the
-	// list.
+	// Modifie le rayon de bordure du bouton s'il est en haut ou en bas de la liste.
 	public static void updateStyle(Button button) {
 		VBox parent = (VBox) button.getParent();
-		int index = parent.getChildren().indexOf(button);
-		int listSize = parent.getChildren().size();
+		int index = parent.getChildren().indexOf(button); // L'index du bouton dans la liste
+		int listSize = parent.getChildren().size(); // La taille de la liste
 
-		// There is only 1 button
+		// Il n'y a qu'un seul bouton
 		if (listSize == 1) {
 			button.setStyle("-fx-background-radius: 12;");
 			return;
 		}
 
-		// The button is at the top
+		// Le bouton est en haut
 		if (index == 0) {
 			button.setStyle("-fx-background-radius: 12 12 0 0;");
 			return;
 		}
 
-		// The button is at the bottom
+		// Le bouton est en bas
 		if (index == (listSize - 1)) {
 			button.setStyle("-fx-background-radius: 0 0 12 12;");
 			return;
 		}
 
-		// The button is in the middle (neither top nor bottom)
+		// Le bouton est au milieu (ni en haut ni en bas)
 		button.setStyle("-fx-background-radius: 0;");
 	}
 }

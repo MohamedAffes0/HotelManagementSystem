@@ -1,3 +1,5 @@
+-- retourne les chambre les plus demandées 
+
 CREATE OR REPLACE PROCEDURE requested_room(
     p_id OUT NUMBER,
     p_type OUT chambre.type_chambre%TYPE,
@@ -14,9 +16,8 @@ BEGIN
         FROM reservation 
         GROUP BY chambre 
         ORDER BY COUNT(*) DESC
-        FETCH FIRST 1 ROWS ONLY
+        FETCH FIRST 3 ROWS ONLY
     );
-
 EXCEPTION
     WHEN NO_DATA_FOUND THEN
         p_id := 0;

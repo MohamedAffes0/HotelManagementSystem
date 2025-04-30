@@ -16,24 +16,37 @@ public class ClientManager extends Manager<Person> {
 		super();
 	}
 
+	// retourner le nombre de réservations par client
 	public static HashMap<Integer, Integer> clientReservationCount() throws DBException {
 		ArrayList<Reservation> reservations = Controller.getInstance().getReservationManager().getData();
+
+		// Si la liste des réservations est vide, on appelle la méthode select() pour remplir la liste
 		if (reservations.isEmpty()) {
 			Controller.getInstance().getReservationManager().select();
 			reservations = Controller.getInstance().getReservationManager().getData();
 		}
+
 		HashMap<Integer, Integer> reservationCount = new HashMap<>();
+
+		// Parcourir la liste des réservations et compter le nombre de réservations par client
 		for (int i = 0; i < reservations.size(); i++) {
+
+			if (reservations.get(i).getHotelClient() == null) {
+				continue; // Passer si le client de l'hôtel est nul
+			}
+
 			int currentClient = reservations.get(i).getHotelClient();
 			if (reservationCount.containsKey(currentClient)) {
-				reservationCount.replace(currentClient, reservationCount.get(currentClient) + 1);
+				reservationCount.replace(currentClient, reservationCount.get(currentClient) + 1); // Incrémenter le compteur
 			} else {
-				reservationCount.put(currentClient, 1);
+				reservationCount.put(currentClient, 1); // Initialiser le compteur à 1
 			}
 		}
+
 		return reservationCount;
 	}
 
+	// retourne les 10% des clients les plus fidèles
 	/*
 	 * Returns the top 10% most faithful clients. `clients` is an `ArrayList`
 	 * containing all the clients.
@@ -41,7 +54,7 @@ public class ClientManager extends Manager<Person> {
 	public ArrayList<Person> getFaithfulClients() throws DBException {
 		ArrayList<Person> clients = getData();
 		if (clients.isEmpty()) {
-			select();
+			select(); // Remplir la liste des clients si elle est vide
 		}
 
 		HashMap<Integer, Integer> reservationCount = clientReservationCount();
@@ -50,16 +63,17 @@ public class ClientManager extends Manager<Person> {
 		for (int i = 0; i < clients.size(); i++) {
 			Integer count = reservationCount.get(clients.get(i).getCin());
 			if (count != null) {
-				totalReservations += count;
+				totalReservations += count; // Compter le nombre total de réservations
 			}
 		}
 
 		double threshold = totalReservations * 0.1; // 10% of total reservations
 
+		// Parcourir la liste des clients et ajouter ceux qui ont un nombre de reservations superieur au seuil calculé
 		for (int i = 0; i < clients.size(); i++) {
 			int clientId = clients.get(i).getCin();
 			if (reservationCount.containsKey(clientId) && reservationCount.get(clientId) >= threshold) {
-				faithfulClients.add(clients.get(i));
+				faithfulClients.add(clients.get(i)); // Ajouter le client à la liste des clients fidèles
 			}
 		}
 
@@ -72,11 +86,11 @@ public class ClientManager extends Manager<Person> {
 			return true;
 		}
 
-		// String is not empty so check filter type
+		// La chaîne n'est pas vide, donc vérifier le type de filtre
 		switch (criterea) {
 			case "Cin":
 				String cin = String.valueOf(client.getCin());
-				return cin.contains(StringNumberExtract.extract(searchText));
+				return cin.contains(StringNumberExtract.extract(searchText)); // Vérifier si le CIN contient la chaîne de recherche
 			default:
 				return true;
 		}
@@ -110,9 +124,10 @@ public class ClientManager extends Manager<Person> {
 
 	@Override
 	protected void insertInputValidation(Person data) throws ControllerException {
+
 		ArrayList<Person> clients = getData();
 
-		// Check existance
+		// Vérifier l'existence
 		for (Person client : clients) {
 			if (client.getCin() == data.getCin()) {
 				throw new ControllerException("Ce CIN existe deja.");
@@ -134,7 +149,7 @@ public class ClientManager extends Manager<Person> {
 			throw new ControllerException("L'e-mail est invalide.");
 		}
 
-		// Check cin
+		// Vérifier le CIN
 		if (data.getCin() < 0 || data.getCin() > 99999999) {
 			throw new ControllerException("CIN invalide.");
 		}

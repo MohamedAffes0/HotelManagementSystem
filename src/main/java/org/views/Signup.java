@@ -8,7 +8,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Label;
 
-import org.controllers.EmailChecker;
 import org.models.Employee;
 import org.controllers.Controller;
 

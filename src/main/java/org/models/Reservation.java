@@ -3,11 +3,6 @@ package org.models;
 import java.sql.Date;
 import java.util.ArrayList;
 
-import org.controllers.StringNumberExtract;
-import org.controllers.reservation.ReservationFilter;
-
-import javafx.scene.control.TextField;
-
 public class Reservation extends Model {
 	private int id;
 	private Date startDate;

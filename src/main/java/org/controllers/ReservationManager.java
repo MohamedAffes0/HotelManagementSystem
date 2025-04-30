@@ -36,11 +36,11 @@ public class ReservationManager extends Manager<Reservation> {
 
 				if ("payé".contains(searchText.toLowerCase()))
 					paid = true;
-				if ("paye".contains(searchText.toLowerCase()))
+				else if ("paye".contains(searchText.toLowerCase()))
 					paid = true;
-				if ("impayé".contains(searchText.toLowerCase()))
+				else if ("impayé".contains(searchText.toLowerCase()))
 					paid = false;
-				if ("impaye".contains(searchText.toLowerCase()))
+				else if ("impaye".contains(searchText.toLowerCase()))
 					paid = false;
 
 				if (paid == null)

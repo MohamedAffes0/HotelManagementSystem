@@ -6,7 +6,6 @@ import java.sql.Date;
 
 import org.models.Model;
 import org.models.Reservation;
-import org.models.Room.RoomState;
 import org.views.popupfield.ComboBoxPopupField;
 import org.views.popupfield.DatePopupField;
 import org.views.popupfield.NumberPopupField;

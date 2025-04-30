@@ -6,7 +6,6 @@ import org.controllers.exceptions.DBException;
 import org.models.Model;
 import org.models.Room;
 import org.models.Room.RoomState;
-import org.views.popupfield.ComboBoxPopupField;
 import org.views.popupfield.FloatPopupField;
 import org.views.popupfield.NumberPopupField;
 

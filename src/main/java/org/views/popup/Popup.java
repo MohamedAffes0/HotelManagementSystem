@@ -23,6 +23,7 @@ import org.views.popupfield.PopupField;
  * AddPupup
  */
 public abstract class Popup implements Initializable {
+
 	public static boolean isPopupOpen = false;
 	private ArrayList<PopupField> fields = new ArrayList<>();
 	private String titleText;

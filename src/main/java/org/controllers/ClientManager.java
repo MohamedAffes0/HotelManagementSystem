@@ -24,6 +24,11 @@ public class ClientManager extends Manager<Person> {
 		}
 		HashMap<Integer, Integer> reservationCount = new HashMap<>();
 		for (int i = 0; i < reservations.size(); i++) {
+
+			if (reservations.get(i).getHotelClient() == null) {
+				continue; // Passer si le client de l'hôtel est nul
+			}
+			
 			int currentClient = reservations.get(i).getHotelClient();
 			if (reservationCount.containsKey(currentClient)) {
 				reservationCount.replace(currentClient, reservationCount.get(currentClient) + 1);

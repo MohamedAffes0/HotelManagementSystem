@@ -30,6 +30,7 @@ public class Login {
 
 	@FXML
 	void loginPressed(ActionEvent event) throws Exception {
+
 		String emailText = email.getText();
 		String passwordText = password.getText();
 		App main = new App();

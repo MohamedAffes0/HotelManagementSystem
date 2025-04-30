@@ -9,6 +9,7 @@ import javafx.scene.shape.SVGPath;
  * for that particular field in the button.
  */
 public class ModelField {
+
 	private String content = "";
 	private String styleClass;
 	private SVGPath icon;

@@ -3,6 +3,8 @@ package org.controllers.exceptions;
 /**
  * DBException
  */
+// exception levée lorsque la connexion à la base de données n'est pas disponible
+
 public class DBException extends ControllerException{
 	
 	public DBException() {
@@ -12,4 +14,5 @@ public class DBException extends ControllerException{
 	public DBException(String message) {
 		super(message);
 	}
+
 }

@@ -16,12 +16,13 @@ import javafx.stage.Stage;
  * JavaFX App
  */
 public class App extends Application {
-	private static Stage stage;
+
+	private static Stage stage; // Pour changer la scène de l'application duarant l'execution d'autre fichiers FXML
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		// Used to fix date picker appearing in different languages.
-		Locale.setDefault(Locale.FRANCE);
+
+		Locale.setDefault(Locale.FRANCE); // Définir les paramètres régionaux par défaut sur le français
 
 		stage = primaryStage;
 		Parent root = FXMLLoader.load(getClass().getResource("/login.fxml"));
@@ -40,14 +41,11 @@ public class App extends Application {
 		Scene scene = stage.getScene();
 		scene.setRoot(root);
 		return loader.getController();
-		//Parent root = FXMLLoader.load(getClass().getResource(file));
-		//Scene scene = stage.getScene();
-		//scene.setRoot(root);
 	}
 
 	public static void main(String[] args) {
 
-		Config config = FileManager.getConfig();
+		Config config = FileManager.getConfig(); // Récupérer la configuration de la base de données à partir du fichier config.json
 
 		try {
 			Controller.getInstance().initializeConnection(config.url, config.user, config.password);

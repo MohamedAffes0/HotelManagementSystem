@@ -15,8 +15,10 @@ import oracle.jdbc.OracleTypes;
 /**
  * Manager
  */
+// generic class qui gère les données de la base de données
 public abstract class Manager<T extends Model> {
-	private ArrayList<T> data = new ArrayList<>();
+
+	private ArrayList<T> data = new ArrayList<>(); // liste de données
 
 	protected Manager() {
 	}
@@ -176,8 +178,16 @@ public abstract class Manager<T extends Model> {
 		}
 	}
 	
-	//TODO add documentation
+	/**
+	 * Filters the given data based on the specified criteria and search term.
+	 *
+	 * @param data     The data to be filtered.
+	 * @param criterea The criteria used for filtering the data.
+	 * @param search   The search term to match against the data.
+	 * @return {@code true} if the data matches the criteria and search term, {@code false} otherwise.
+	 */
 	public abstract boolean filter(T data, String criterea, String search);
+	
 	/**
 	 * Returns a model from a line of a ResultSet
 	 * 

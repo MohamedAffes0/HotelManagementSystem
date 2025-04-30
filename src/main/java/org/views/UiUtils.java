@@ -6,6 +6,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.SVGPath;
 
 public class UiUtils {
+
     public static void setIconToButton(Button button, String svgPath, double scale, String colorHex) {
 		SVGPath icon = new SVGPath();
 		icon.setContent(svgPath);
@@ -15,5 +16,14 @@ public class UiUtils {
 		icon.setTranslateX(-5);
 		button.setGraphic(icon);
 		button.setContentDisplay(ContentDisplay.LEFT);
+	}
+
+	public static SVGPath createIcon(String svgPath, double scale, String colorHex) {
+		SVGPath icon = new SVGPath();
+		icon.setContent(svgPath);
+		icon.setScaleX(scale);
+		icon.setScaleY(scale);
+		icon.setFill(Color.web(colorHex));
+		return icon;
 	}
 }

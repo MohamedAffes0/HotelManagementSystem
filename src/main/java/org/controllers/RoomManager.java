@@ -34,6 +34,7 @@ public class RoomManager extends Manager<Room> {
 	 * @throws DBException
 	 */
 	public ArrayList<Room> getMostCovetedRooms() throws DBException {
+
 		HashMap<Integer, Integer> reservationCount = reservationCount();
 		ArrayList<Room> mostCovetedRooms = new ArrayList<>();
 		int totalReservations = 0;
@@ -49,7 +50,7 @@ public class RoomManager extends Manager<Room> {
 			}
 		}
 
-		double threshold = totalReservations * 0.1; // 10% of total reservations
+		double threshold = totalReservations * 0.1; // 10% des réservations
 
 		for (Room room : getData()) {
 			int roomId = room.getId();
@@ -153,7 +154,7 @@ public class RoomManager extends Manager<Room> {
 		if (searchText.isEmpty()) {
 			return true;
 		}
-		// String is not empty so check filter type
+		// La chaîne n'est pas vide, donc vérifier le type de filtre
 		switch (criterea) {
 			case "Etage":
 				return room.getFloor() == Integer.parseInt(StringNumberExtract.extract(searchText));
@@ -167,7 +168,7 @@ public class RoomManager extends Manager<Room> {
 				searchText = searchText.toLowerCase();
 
 				RoomType roomType = null;
-				// Return true if searchText = "s" as both "simple" and "suite" start with "s"
+				// Retourner vrai si searchText = "s" car "simple" et "suite" commencent tous deux par "s"
 				if (searchText.equals("s"))
 					return true;
 
@@ -241,7 +242,6 @@ public class RoomManager extends Manager<Room> {
 
 		int resultSet = (int) stmt.getObject(1);
 		stmt.close();
-		System.out.println(resultSet);
 		switch (resultSet) {
 			case 0:
 				return RoomState.LIBRE;

@@ -58,11 +58,11 @@ public class MainMenu implements Initializable {
 
 		Parent menu = FXMLLoader.load(getClass().getResource("/stats.fxml"));
 
-		// Delete the previous menu and set this one
+		// Supprimez le menu précédent et définissez celui-ci
 		contentContainer.getChildren().clear();
 		contentContainer.getChildren().add(menu);
 
-		// Anchor it correctly so that it displays over the entire screen.
+		// Ancrez-le correctement afin qu'il s'affiche sur tout l'écran.
 		AnchorPane.setTopAnchor(menu, 0.0);
 		AnchorPane.setBottomAnchor(menu, 0.0);
 		AnchorPane.setLeftAnchor(menu, 0.0);

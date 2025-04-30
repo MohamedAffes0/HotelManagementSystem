@@ -91,7 +91,7 @@ public class ListButton {
 		}
 		try {
 			popup.setData(data);
-			// Load the Popup
+			// Charger la fenêtre contextuelle
 			popup.load("Modifier", () -> {
 				if (popup.getData() != null) {
 					setData(popup.getData());
@@ -100,21 +100,21 @@ public class ListButton {
 				VBox parent = (VBox) button.getParent();
 				int index = getIndex();
 
-				// Delete the button
+				// Supprimer le bouton
 				parent.getChildren().remove(index);
 
-				// Do nothing if the there are no buttons
+				// Ne rien faire s'il n'y a pas de boutons
 				if (parent.getChildren().size() == 0) {
 					return;
 				}
 
-				// Change the preceeding button if not first
+				// Modifier le bouton précédent s'il n'est pas le premier
 				if (index > 0) {
 					updateStyle((Button) parent.getChildren().get(index - 1));
 					return;
 				}
 
-				// Change the following button if not last
+				// Modifier le bouton suivant s'il n'est pas le dernier
 				if (index < parent.getChildren().size()) {
 					updateStyle((Button) parent.getChildren().get(index));
 				}

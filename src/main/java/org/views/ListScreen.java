@@ -55,7 +55,7 @@ public class ListScreen<T extends Model> {
 	@FXML
 	private void addPressed(ActionEvent event) {
 		try {
-			// Load the Popup
+			// charger le popup d'ajout
 			addPopup.load("Ajout" + title.getText(), () -> {
 				try {
 					manager.select();
@@ -98,7 +98,7 @@ public class ListScreen<T extends Model> {
 		if (list.getChildren().size() == 0)
 			return;
 
-		// Set the style for the first and last buttons
+		// Définir le style pour les premiers et derniers boutons
 		ListButton.updateStyle((Button) list.getChildren().get(0));
 		ListButton.updateStyle((Button) list.getChildren().get(list.getChildren().size() - 1));
 	}
@@ -108,7 +108,7 @@ public class ListScreen<T extends Model> {
 	}
 
 	public void setFilterItems(ObservableList<String> items) {
-		// Delete the search if no filter are provided.
+		// Supprimer la barre de recherche si aucun filtre n'est fourni.
 		if (items.isEmpty()) {
 			VBox mainContainer = (VBox) searchContainer.getParent();
 			mainContainer.getChildren().remove(1);

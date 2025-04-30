@@ -7,12 +7,15 @@ import java.sql.SQLException;
 /**
  * Controller Singleton, manages data control and access to database.
  */
+// implimentation de la classe Controller
+// qui est un singleton et qui gère l'accès à la base de données et la gestion des données
+
 public class Controller {
 
 	private static Controller INSTANCE;
 	private Connection connection = null;
 	private UserManager userManager = new UserManager();
-	private int currentUser = -1;
+	private int currentUser = -1; // user id de l'utilisateur connecté
 	private RoomManager roomManager = new RoomManager();
 	private ReservationManager reservationManager = new ReservationManager();
 	private ClientManager clientManager = new ClientManager();
@@ -20,7 +23,6 @@ public class Controller {
 	private Controller() {
 	}
 
-	// Synchronized is added here to ensure thread safety.
 	public static synchronized Controller getInstance() {
 		if (INSTANCE == null) {
 			INSTANCE = new Controller();

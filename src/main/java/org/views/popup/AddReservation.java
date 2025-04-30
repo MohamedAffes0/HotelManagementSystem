@@ -19,9 +19,9 @@ public class AddReservation extends AddPopup {
 	final int END_DATE = 1;
 	final int CAPACITY = 2;
 	final int ROOM = 3;
-	final int CLIENT = 4;
-	final int STATUS = 5; // payé ou non payé
-	// final int EMPLOYEE = 5;
+	final int IS_MAINTENANCE = 4;
+	final int CLIENT = 5;
+	final int STATUS = 6; // payé ou non payé
 
 	public AddReservation() {
 		super(
@@ -29,6 +29,8 @@ public class AddReservation extends AddPopup {
 				new DatePopupField("Date de fin"),
 				new NumberPopupField("Capacité"),
 				new ComboBoxPopupField("Chambre"),
+				new ComboBoxPopupField("Type",
+						FXCollections.observableArrayList("Client", "En maintenance")),
 				new NumberPopupField("Client"),
 				new ComboBoxPopupField("Statut",
 						FXCollections.observableArrayList("Payé", "Non payé")));
@@ -96,13 +98,26 @@ public class AddReservation extends AddPopup {
 			room = Integer.parseInt(roomString.replace("Chambre ", ""));
 		}
 
+		boolean isMaintenance = false;
+		switch ((String) getField(IS_MAINTENANCE).getValue()) {
+			case "Client":
+				isMaintenance = false;
+				break;
+			case "En maintenance":
+				isMaintenance = true;
+				break;
+			default:
+				isMaintenance = false;
+				break;
+		}
+
 		return new Reservation(
 				1,
 				getField(START_DATE).getValue() == null ? null : Date.valueOf((LocalDate) getField(START_DATE).getValue()),
 				getField(END_DATE).getValue() == null ? null : Date.valueOf((LocalDate) getField(END_DATE).getValue()),
 				status,
-				3,
-				(int) getField(CLIENT).getValue(),
+				Controller.getInstance().getCurrentUser(),
+				isMaintenance? null : (int) getField(CLIENT).getValue(),
 				room);
 	}
 

@@ -1,5 +1,21 @@
--- Suppression de toutes les contraintes de clés primaires et étrangères dans la base de données Oracle
+-- Cette procédure PL/SQL supprime toutes les vues de l'utilisateur actuel dans la base de données Oracle.
+BEGIN
+    FOR obj IN (
+        SELECT object_name, object_type
+        FROM user_objects
+        WHERE object_type IN ('PROCEDURE', 'FUNCTION')
+    ) LOOP
+        BEGIN
+            EXECUTE IMMEDIATE 'DROP ' || obj.object_type || ' ' || obj.object_name;
+        EXCEPTION
+            WHEN OTHERS THEN
+                DBMS_OUTPUT.PUT_LINE('Échec DROP de ' || obj.object_type || ' ' || obj.object_name || ' : ' || SQLERRM);
+        END;
+    END LOOP;
+END;
+/
 
+-- Suppression de toutes les contraintes de clés primaires et étrangères dans la base de données Oracle
 BEGIN
     FOR r IN (SELECT constraint_name, table_name, constraint_type 
         FROM user_constraints 

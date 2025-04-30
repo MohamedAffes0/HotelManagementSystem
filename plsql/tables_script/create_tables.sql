@@ -24,9 +24,7 @@ CREATE table chambre(
     type_chambre VARCHAR2(20),--simple, double, suite--
     etage int check (etage >= 0),--l'étage de la chambre--
     nb_personnes int,--le nombre de personnes--
-    prix float,--le prix de la chambre--
-    etat NUMBER(1), -- 0 for libre, 1 for occupée --, 2 for maintenance --
-    CONSTRAINT check_etat CHECK (etat IN (0, 1, 2)) --l'état de la chambre--
+    prix float --le prix de la chambre--
 );
 
 create table reservation(
@@ -35,7 +33,7 @@ create table reservation(
     date_fin date,
     paid NUMBER(1), -- 0 for unpaid, 1 for paid --
     employe int,--l'employé qui a fait la réservation--
-    client_hotel int,--le client qui a fait la réservation--
+    client_hotel int DEFAULT NULL,--le client qui a fait la réservation | si null alors reservation de maintenance--
     chambre int,--la chambre réservée--
     CONSTRAINT fk_employe FOREIGN KEY (employe) REFERENCES employe(id) ON DELETE SET NULL,
     CONSTRAINT fk_client_hotel FOREIGN KEY (client_hotel) REFERENCES client_hotel(cin) ON DELETE SET NULL,

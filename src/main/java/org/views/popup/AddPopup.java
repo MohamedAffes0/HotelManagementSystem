@@ -40,6 +40,7 @@ public abstract class AddPopup extends Popup {
 			addData(dataFromFields());
 			close();
 		} catch (Exception exception) {
+			exception.printStackTrace();
 			setErrorMessage(exception.toString());
 		}
 	}

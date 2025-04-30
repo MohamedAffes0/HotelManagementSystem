@@ -250,6 +250,15 @@ Text {
     -fx-alignment: CENTER;
 }
 
+.label-maintenance-reservation{
+    -fx-background-color: -red-label;
+    -fx-text-fill: -font-color-black;
+    -fx-padding: 4 10;
+    -fx-background-radius: 10;
+    -fx-pref-width: 120px;
+    -fx-alignment: CENTER;
+}
+
 /* === ÉTIQUETTES (BADGES) POUR LES ÉTAGES, ICÔNES, ETC === */
 .floor-badge {
     -fx-background-color: -badge-color;

@@ -47,6 +47,9 @@ public class ReservationManager extends Manager<Reservation> {
 					return true;
 				return reservation.isPaid() == paid;
 			case "Client":
+				if (reservation.getHotelClient() == null) {
+					return true;
+				}
 				String clientHotel = "";
 				int numberOfZeros = 8 - String.valueOf(reservation.getHotelClient()).length();
 				for (int i = 0; i < numberOfZeros; i++) {
@@ -69,7 +72,10 @@ public class ReservationManager extends Manager<Reservation> {
 		Date endDate = resultSet.getDate("date_fin");
 		boolean isPaid = resultSet.getInt("paid") == 1 ? true : false;
 		int employee = resultSet.getInt("employe");
-		int hotelClient = resultSet.getInt("client_hotel");
+		Integer hotelClient = resultSet.getInt("client_hotel");
+		if (hotelClient == 0) {
+			hotelClient = null; // Si le client est null, on le met à null
+		}
 		int room = resultSet.getInt("chambre");
 		return new Reservation(id, startDate, endDate, isPaid, employee, hotelClient, room);
 	}
@@ -88,7 +94,11 @@ public class ReservationManager extends Manager<Reservation> {
 		stmt.setDate(2, new Date(data.getEndDate().getTime()));
 		stmt.setInt(3, data.isPaid() ? 1 : 0);
 		stmt.setInt(4, Controller.getInstance().getCurrentUser());
-		stmt.setInt(5, data.getHotelClient());
+		if (data.getHotelClient() == null) {
+			stmt.setNull(5, java.sql.Types.INTEGER);
+		} else {
+			stmt.setInt(5, data.getHotelClient());
+		}
 		stmt.setInt(6, data.getRoom());
 		return stmt;
 	}
@@ -98,7 +108,7 @@ public class ReservationManager extends Manager<Reservation> {
 		ArrayList<Room> rooms = Controller.getInstance().getRoomManager().getData();
 		ArrayList<Person> clients = Controller.getInstance().getClientManager().getData();
 
-		// Select the rooms if
+		// Select the rooms and clients if they are empty
 		if (rooms.isEmpty()) {
 			Controller.getInstance().getRoomManager().select();
 			rooms = Controller.getInstance().getRoomManager().getData();
@@ -116,7 +126,7 @@ public class ReservationManager extends Manager<Reservation> {
 		if (data.getEndDate() == null) {
 			throw new ControllerException("Veuillez saisir une date de fin.");
 		}
-		if (data.getHotelClient() < 0 || data.getHotelClient() > 99999999) {
+		if (data.getHotelClient() != null && (data.getHotelClient() < 0 || data.getHotelClient() > 99999999)) {
 			throw new ControllerException("Veuillez saisir un CIN valide.");
 		}
 		if (data.getRoom() <= 0) {
@@ -136,15 +146,17 @@ public class ReservationManager extends Manager<Reservation> {
 		}
 
 		// Check client existence
-		boolean clientExists = false;
-		for (Person client : clients) {
-			if (client.getId() == data.getHotelClient()) {
-				clientExists = true;
-				break;
+		if (data.getHotelClient() != null) {
+			boolean clientExists = false;
+			for (Person client : clients) {
+				if (client.getId() == data.getHotelClient()) {
+					clientExists = true;
+					break;
+				}
 			}
-		}
-		if (!clientExists) {
-			throw new ControllerException("Le client n'existe pas.");
+			if (!clientExists) {
+				throw new ControllerException("Le client n'existe pas.");
+			}
 		}
 
 		// Check date validity
@@ -246,7 +258,7 @@ public class ReservationManager extends Manager<Reservation> {
 		if (data.getEndDate() == null) {
 			throw new ControllerException("Veuillez saisir une date de fin.");
 		}
-		if (data.getHotelClient() <= 9999999 || data.getHotelClient() >= 100000000) {
+		if (data.getHotelClient() != null && (data.getHotelClient() <= 9999999 || data.getHotelClient() >= 100000000)) {
 			throw new ControllerException("Veuillez saisir un CIN valide.");
 		}
 		if (data.getRoom() <= 0) {

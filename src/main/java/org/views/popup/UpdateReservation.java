@@ -1,7 +1,6 @@
 package org.views.popup;
 
 import java.time.LocalDate;
-import java.time.ZoneId;
 
 import org.controllers.Controller;
 import org.controllers.exceptions.ControllerException;

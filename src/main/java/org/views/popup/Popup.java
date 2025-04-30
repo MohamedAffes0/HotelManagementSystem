@@ -1,17 +1,14 @@
 package org.views.popup;
 
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import javafx.stage.WindowEvent;
 import javafx.fxml.Initializable;
 
 import java.io.IOException;
@@ -19,10 +16,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
-import java.util.function.Consumer;
-import java.util.function.Function;
 
-import org.views.ListScreen;
 import org.views.popupfield.PopupField;
 
 /**

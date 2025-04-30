@@ -2,11 +2,6 @@ package org.models;
 
 import java.util.ArrayList;
 
-import org.controllers.StringNumberExtract;
-import org.controllers.client.ClientFilter;
-
-import javafx.scene.control.TextField;
-
 public class Person extends Model {
 	private int cin;
 	private String name;

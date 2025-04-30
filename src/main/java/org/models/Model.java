@@ -2,7 +2,6 @@ package org.models;
 
 import java.util.ArrayList;
 
-import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.SVGPath;
 
@@ -11,9 +10,6 @@ import javafx.scene.shape.SVGPath;
  * Contains a getContent abstract method that returns
  */
 public abstract class Model {
-	// Returns true if this object fits the filter criterea.
-	public abstract boolean filter(TextField search, String filterType);
-
 	public abstract ArrayList<ModelField> getFields();
 
 	public abstract int getId();

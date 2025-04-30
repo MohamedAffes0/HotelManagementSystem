@@ -24,6 +24,40 @@ public class ReservationManager extends Manager<Reservation> {
 	}
 
 	@Override
+	public boolean filter(Reservation reservation, String criterea, String searchText) {
+		if (searchText.isEmpty()) {
+			return true;
+		}
+
+		// String is not empty so check filter type
+		switch (criterea) {
+			case "Est Payé":
+				Boolean paid = null;
+
+				if ("payé".contains(searchText.toLowerCase()))
+					paid = true;
+				if ("paye".contains(searchText.toLowerCase()))
+					paid = true;
+				if ("impayé".contains(searchText.toLowerCase()))
+					paid = false;
+				if ("impaye".contains(searchText.toLowerCase()))
+					paid = false;
+
+				if (paid == null)
+					return true;
+				return reservation.isPaid() == paid;
+			case "Client":
+				String cin = String.valueOf(reservation.getHotelClient());
+				return cin.contains(StringNumberExtract.extract(searchText));
+			case "Chambre":
+				String room = String.valueOf(reservation.getRoom());
+				return room.contains(StringNumberExtract.extract(searchText));
+			default:
+				return true;
+		}
+	}
+
+	@Override
 	protected Reservation dataFromResultSet(ResultSet resultSet) throws SQLException {
 		int id = resultSet.getInt("id_reservation");
 		Date startDate = resultSet.getDate("date_debut");

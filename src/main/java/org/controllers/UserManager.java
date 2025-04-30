@@ -91,6 +91,11 @@ public class UserManager extends Manager<Employee> {
 	}
 
 	@Override
+	public boolean filter(Employee data, String criterea, String search) {
+		return true;
+	}
+
+	@Override
 	protected Employee dataFromResultSet(ResultSet resultSet) throws SQLException {
 		int id = resultSet.getInt("id");
 		String name = resultSet.getString("nom");

@@ -3,6 +3,8 @@ package org.views;
 import java.util.Locale;
 
 import org.controllers.Controller;
+import org.controllers.FileManager;
+import org.controllers.FileManager.Config;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -44,23 +46,16 @@ public class App extends Application {
 	}
 
 	public static void main(String[] args) {
-		// if (args.length != 3) {
-		// System.out.println("Usage: java -jar app.jar <url> <user> <password>");
-		// return;
-		// }
 
-		// String url = args[0];
-		// String user = args[1];
-		// String password = args[2];
+		Config config = FileManager.getConfig();
 
 		try {
-			Controller.getInstance().initializeConnection("jdbc:oracle:thin:@localhost:1521/ORCLPDB",
-					"hotel_user", "2426");
-
+			Controller.getInstance().initializeConnection(config.url, config.user, config.password);
 		} catch (Exception e) {
 			System.out.println("Error: " + e.getMessage());
 			return;
 		}
+		
 		launch();
 	}
 }

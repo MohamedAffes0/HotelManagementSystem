@@ -3,7 +3,7 @@ CREATE OR REPLACE PROCEDURE get_all_rooms(
 ) AS
 BEGIN
     OPEN p_cursor FOR
-        SELECT id_chambre, type_chambre, etage, nb_personnes, prix, etat
+        SELECT id_chambre, type_chambre, etage, nb_personnes, prix
         FROM chambre;
 END;
 /

@@ -15,6 +15,7 @@ final public class Employee extends Person {
 		this.isActive = isActive;
 	}
 
+	// retourner les champs de l'employé pour l'affichage dans la liste
 	@Override
 	public ArrayList<ModelField> getFields() {
 		ArrayList<ModelField> data = new ArrayList<>();

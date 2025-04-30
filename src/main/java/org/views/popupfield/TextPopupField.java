@@ -8,8 +8,8 @@ import javafx.scene.control.TextField;
 public class TextPopupField extends PopupField<TextField, String> {
 
 	public TextPopupField(String name) {
-		super(name);
-		setField(new TextField());
+		super(name); // Le nom du champ qui sera utilisé dans la popup
+		setField(new TextField()); // Le champ qui sera utilisé dans la popup
 	}
 
 	@Override

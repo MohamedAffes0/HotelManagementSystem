@@ -31,11 +31,12 @@ public class Login {
 	@FXML
 	void loginPressed(ActionEvent event) throws Exception {
 
-		String emailText = email.getText();
-		String passwordText = password.getText();
-		App main = new App();
+		String emailText = email.getText(); // Récupérer le texte du champ email
+		String passwordText = password.getText(); // Récupérer le texte du champ mot de passe
+		App main = new App(); // Créer une nouvelle instance de App pour changer la scène
 
-		email.getStyleClass().remove("text-field-error");
+		// Effacer les messages d'erreur précédents
+		email.getStyleClass().remove("text-field-error"); 
 		password.getStyleClass().remove("text-field-error");
 
 		try {
@@ -51,6 +52,7 @@ public class Login {
 				case USER_NOT_FOUND:
 					System.out.println("Login failed. User not found.");
 					error.setText("Email ou mot de passe incorrecte.");
+					// Ajout de la classe d'erreur pour le champ email et mot de passe
 					email.getStyleClass().add("text-field-error");
 					password.getStyleClass().add("text-field-error");
 					break;
@@ -64,9 +66,11 @@ public class Login {
 		} catch (ControllerException exception) {
 			error.setText(exception.toString());
 			if (exception.getMessage().contains("email")) {
+				// Ajout de la classe d'erreur pour le champ email
 				email.getStyleClass().add("text-field-error");
 			}
 			if (exception.getMessage().contains("mot de passe")) {
+				// Ajout de la classe d'erreur pour le champ mot de passe
 				password.getStyleClass().add("text-field-error");
 			}
 		}
@@ -74,7 +78,7 @@ public class Login {
 
 	@FXML
 	void loadSignup(MouseEvent event) throws Exception {
-		App main = new App();
+		App main = new App(); // Créer une nouvelle instance de App pour changer la scène
 		main.changeScene("/signup.fxml");
 	}
 }

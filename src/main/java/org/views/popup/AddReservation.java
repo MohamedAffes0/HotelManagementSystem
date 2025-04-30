@@ -24,6 +24,7 @@ public class AddReservation extends AddPopup {
 	final int STATUS = 6; // payé ou non payé
 
 	public AddReservation() {
+		// Champs de saisie pour la réservation
 		super(
 				new DatePopupField("Date de début"),
 				new DatePopupField("Date de fin"),
@@ -41,14 +42,19 @@ public class AddReservation extends AddPopup {
 		setTitle("Ajouter une réservation");
 	}
 
+	// mettre à jour les chambres disponibles
 	public void updateRooms() {
+
+		// Vérifier si les champs de date et de capacité sont remplis
 		if (getField(START_DATE).getValue() == null || getField(END_DATE).getValue() == null) {
 			return;
 		}
+
 		LocalDate startDate = (LocalDate) getField(START_DATE).getValue();
 		LocalDate endDate = (LocalDate) getField(END_DATE).getValue();
 		int capacity = (int) getField(CAPACITY).getValue();
 		try {
+			// Récupérer les chambres disponibles
 			ArrayList<Integer> availableRooms = Controller.getInstance().getRoomManager()
 					.getAvaliableRooms(Date.valueOf(startDate), Date.valueOf(endDate), capacity);
 			if (availableRooms.isEmpty()) {
@@ -59,6 +65,7 @@ public class AddReservation extends AddPopup {
 			String currentValue = (String) getField(ROOM).getValue();
 			boolean isValidValue = false;
 
+			// verifier si la chambre actuelle est disponible
 			int i = 0;
 			for (Integer roomId : availableRooms) {
 				if (rooms[i] == currentValue) {
@@ -69,9 +76,11 @@ public class AddReservation extends AddPopup {
 
 			((ComboBoxPopupField) getField(ROOM)).setItems(rooms);
 			if (isValidValue) {
-				((ComboBoxPopupField) getField(ROOM)).setValue(currentValue);
+				// garder la valeur actuelle si elle est valide
+				((ComboBoxPopupField) getField(ROOM)).setValue(currentValue); 
 			}
 		} catch (Exception exception) {
+			// Si aucune chambre n'est disponible, on met la valeur de la chambre à "Aucune chambre"
 			((ComboBoxPopupField) getField(ROOM)).setItems("Aucune chambre");
 			((ComboBoxPopupField) getField(ROOM)).setValue("Aucune chambre");
 		}
@@ -94,6 +103,8 @@ public class AddReservation extends AddPopup {
 
 		int room = 0;
 		String roomString = ((String) getField(ROOM).getValue());
+		
+		// Vérifier si la chambre est valide et extraire le numéro de chambre
 		if (roomString != null && roomString.contains("Chambre ")) {
 			room = Integer.parseInt(roomString.replace("Chambre ", ""));
 		}

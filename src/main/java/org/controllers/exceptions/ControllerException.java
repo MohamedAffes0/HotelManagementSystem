@@ -1,9 +1,9 @@
 package org.controllers.exceptions;
 
+// exception levée lorsque une erreur se produit dans le controller
 /**
  * ControllerException
  */
-// exception levée lorsque une erreur se produit dans le controller
 public class ControllerException extends Exception{
 
 	public ControllerException(String message) {

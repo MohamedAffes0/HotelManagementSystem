@@ -8,12 +8,14 @@ import org.views.UiUtils;
 
 public class Room extends Model {
 
+	// enum pour l'etat de la chambres
 	public static enum RoomState {
 		LIBRE,
 		OCCUPEE,
 		MAINTENANCE
 	}
 
+	// enum pour les types de chambres
 	public static enum RoomType {
 		SIMPLE,
 		DOUBLE,
@@ -39,6 +41,7 @@ public class Room extends Model {
 	public Room() {
 	}
 
+	// retourner les champs de la chambre pour l'affichage dans la liste
 	@Override
 	public ArrayList<ModelField> getFields() {
 		ArrayList<ModelField> data = new ArrayList<>();

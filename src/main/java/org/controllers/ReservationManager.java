@@ -29,7 +29,7 @@ public class ReservationManager extends Manager<Reservation> {
 			return true;
 		}
 
-		// String is not empty so check filter type
+		// La chaîne n'est pas vide, donc vérifier le type de filtre
 		switch (criterea) {
 			case "Est Payé":
 				Boolean paid = null;
@@ -47,15 +47,19 @@ public class ReservationManager extends Manager<Reservation> {
 					return true;
 				return reservation.isPaid() == paid;
 			case "Client":
+				// verifier si le reservation est de maintenance
 				if (reservation.getHotelClient() == null) {
 					return true;
 				}
+
+				// verifier si le CIN est commencé par des 0 donc on doit le completer
 				String clientHotel = "";
 				int numberOfZeros = 8 - String.valueOf(reservation.getHotelClient()).length();
 				for (int i = 0; i < numberOfZeros; i++) {
 					clientHotel += "0";
 				}
 				clientHotel = clientHotel + String.valueOf(reservation.getHotelClient());
+
 				return clientHotel.contains(StringNumberExtract.extract(searchText));
 			case "Chambre":
 				String room = String.valueOf(reservation.getRoom());
@@ -74,7 +78,7 @@ public class ReservationManager extends Manager<Reservation> {
 		int employee = resultSet.getInt("employe");
 		Integer hotelClient = resultSet.getInt("client_hotel");
 		if (hotelClient == 0) {
-			hotelClient = null; // Si le client est null, on le met à null
+			hotelClient = null; // Si le client est null, on le met à null (reservation de maintenance)
 		}
 		int room = resultSet.getInt("chambre");
 		return new Reservation(id, startDate, endDate, isPaid, employee, hotelClient, room);
@@ -95,7 +99,7 @@ public class ReservationManager extends Manager<Reservation> {
 		stmt.setInt(3, data.isPaid() ? 1 : 0);
 		stmt.setInt(4, Controller.getInstance().getCurrentUser());
 		if (data.getHotelClient() == null) {
-			stmt.setNull(5, java.sql.Types.INTEGER);
+			stmt.setNull(5, java.sql.Types.INTEGER); // Si le client est null, on le met à null (reservation de maintenance)
 		} else {
 			stmt.setInt(5, data.getHotelClient());
 		}
@@ -108,7 +112,7 @@ public class ReservationManager extends Manager<Reservation> {
 		ArrayList<Room> rooms = Controller.getInstance().getRoomManager().getData();
 		ArrayList<Person> clients = Controller.getInstance().getClientManager().getData();
 
-		// Select the rooms and clients if they are empty
+		// Sélectionner les chambres et les clients si elles sont vides
 		if (rooms.isEmpty()) {
 			Controller.getInstance().getRoomManager().select();
 			rooms = Controller.getInstance().getRoomManager().getData();
@@ -133,7 +137,7 @@ public class ReservationManager extends Manager<Reservation> {
 			throw new ControllerException("Veuillez saisir un numero de chambre valide.");
 		}
 
-		// Check room existence
+		// Vérifier l'existence de la chambre
 		boolean roomExists = false;
 		for (Room room : rooms) {
 			if (room.getId() == data.getRoom()) {
@@ -145,7 +149,7 @@ public class ReservationManager extends Manager<Reservation> {
 			throw new ControllerException("La chambre n'existe pas.");
 		}
 
-		// Check client existence
+		// Vérifier l'existence du client
 		if (data.getHotelClient() != null) {
 			boolean clientExists = false;
 			for (Person client : clients) {
@@ -159,7 +163,7 @@ public class ReservationManager extends Manager<Reservation> {
 			}
 		}
 
-		// Check date validity
+		// Vérifier la validité des dates
 		if (data.getStartDate().after(data.getEndDate())) {
 			throw new ControllerException("La date de début est après la date de fin.");
 		}
@@ -172,19 +176,21 @@ public class ReservationManager extends Manager<Reservation> {
 			throw new ControllerException("La date de début est dans le passé.");
 		}
 
-		// Check room availability
+		// Vérifier la disponibilité de la chambre
 		if (!reservationCheck(data.getRoom(), 0, data.getStartDate(), data.getEndDate())) {
 			throw new ControllerException("La chambre est déjà réservée pour cette période.");
 		}
 
 	}
 
+	// verifier si la chambre est disponible entre deux dates
+	// reservationToModify est l'id de la reservation a modifier
 	/**
 	 * Checks if the time between {@code startDate} and {@code endDate} for the room
 	 * with {@code roomId} is available and returns true if it is.
-	 * {@code reservationToAdd} will be ignored during the search.
+	 * {@code reservationToModify} will be ignored during the search.
 	 */
-	private boolean reservationCheck(int roomId, int reservationToAdd, Date startDate, Date endDate)
+	private boolean reservationCheck(int roomId, int reservationToModify, Date startDate, Date endDate)
 			throws DBException {
 		Connection connection = getConnection();
 
@@ -198,7 +204,7 @@ public class ReservationManager extends Manager<Reservation> {
 			String sql = "{ call check_reservation(?, ?, ?) }";
 			stmt = connection.prepareCall(sql);
 			stmt.setInt(1, roomId);
-			stmt.setInt(2, reservationToAdd);
+			stmt.setInt(2, reservationToModify);
 			stmt.registerOutParameter(3, OracleTypes.CURSOR);
 
 			stmt.execute();
@@ -265,13 +271,13 @@ public class ReservationManager extends Manager<Reservation> {
 			throw new ControllerException("Veuillez saisir un numero de chambre valide.");
 		}
 
-		// Check date validity
+		// Vérifier la validité des dates
 		if (data.getStartDate().after(data.getEndDate())) {
 			System.err.println("La date de début est après la date de fin.");
 			throw new ControllerException("La date de début est après la date de fin.");
 		}
 
-		// Check room availability
+		// Vérifier la disponibilité de la chambre
 		if (!reservationCheck(data.getRoom(), data.getId(), data.getStartDate(),
 				data.getEndDate())) {
 			System.err.println("La chambre est déjà réservée pour cette période.");

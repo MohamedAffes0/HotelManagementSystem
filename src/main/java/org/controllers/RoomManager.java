@@ -27,6 +27,7 @@ public class RoomManager extends Manager<Room> {
 		super();
 	}
 
+	// retourne les 10% des chambres les plus visitées
 	/**
 	 * Returns an Array list containing the top 10% most visited rooms.
 	 * 
@@ -40,9 +41,10 @@ public class RoomManager extends Manager<Room> {
 		int totalReservations = 0;
 
 		if (getData().isEmpty()) {
-			select();
+			select(); // Remplir la liste des chambres si elle est vide
 		}
 
+		// Calculer le nombre total de réservations
 		for (Room room : getData()) {
 			Integer count = reservationCount.get(room.getId());
 			if (count != null) {
@@ -52,6 +54,7 @@ public class RoomManager extends Manager<Room> {
 
 		double threshold = totalReservations * 0.1; // 10% des réservations
 
+		// Parcourir la liste des chambres et ajouter celles qui dépassent le seuil
 		for (Room room : getData()) {
 			int roomId = room.getId();
 			if (reservationCount.containsKey(roomId) && reservationCount.get(roomId) >= threshold) {
@@ -62,6 +65,7 @@ public class RoomManager extends Manager<Room> {
 		return mostCovetedRooms;
 	}
 
+	// retourne une liste de chambres disponibles entre deux dates
 	/**
 	 * Returns an {@code ArrayList} of room ids that are available from
 	 * {@code startDate} to
@@ -75,10 +79,12 @@ public class RoomManager extends Manager<Room> {
 			throw new ConnectionUnavailableException();
 		}
 
+		// Vérifier si les dates de début et de fin sont nulles
 		if (startDate == null || endDate == null) {
 			new ControllerException("Les dates de début et de fin ne doivent pas être nulles.");
 		}
 
+		// vérifier si la date de début est après la date de fin
 		if (startDate.after(endDate)) {
 			new ControllerException("La date de début doit préceder la date de fin.");
 		}
@@ -99,7 +105,7 @@ public class RoomManager extends Manager<Room> {
 			resultSet = (ResultSet) stmt.getObject(1);
 			while (resultSet.next()) {
 				int roomId = resultSet.getInt("id_chambre");
-				availableRooms.add(roomId);
+				availableRooms.add(roomId); // Ajouter l'ID de la chambre à la liste des chambres disponibles
 			}
 
 			return availableRooms;
@@ -121,6 +127,7 @@ public class RoomManager extends Manager<Room> {
 		}
 	}
 
+	// retourne une hashmap contenant le nombre de reservations par chambre
 	/**
 	 * Calculates the number of times each room was reserved.
 	 * 
@@ -130,6 +137,7 @@ public class RoomManager extends Manager<Room> {
 	private HashMap<Integer, Integer> reservationCount() throws DBException {
 		ArrayList<Reservation> reservations = Controller.getInstance().getReservationManager().getData();
 
+		// Vérifier si la liste des réservations est vide
 		if (reservations.isEmpty()) {
 			Controller.getInstance().getReservationManager().select();
 			reservations = Controller.getInstance().getReservationManager().getData();
@@ -137,6 +145,7 @@ public class RoomManager extends Manager<Room> {
 
 		HashMap<Integer, Integer> reservationCount = new HashMap<>();
 
+		// Parcourir la liste des réservations et compter le nombre de réservations par chambre
 		for (Reservation reservation : reservations) {
 			int currentReservation = reservation.getRoom();
 			if (reservationCount.containsKey(currentReservation)) {
@@ -149,6 +158,7 @@ public class RoomManager extends Manager<Room> {
 		return reservationCount;
 	}
 
+	// retourner vrai si la chambre correspond au critère de recherche
 	@Override
 	public boolean filter(Room room, String criterea, String searchText) {
 		if (searchText.isEmpty()) {
@@ -231,6 +241,7 @@ public class RoomManager extends Manager<Room> {
 		}
 	}
 
+	// retourne l'état de la chambre
 	private RoomState getRoomState(int roomId) throws SQLException {
 
 		String sql = "{ ? = call get_room_state(?) }";
@@ -313,12 +324,15 @@ public class RoomManager extends Manager<Room> {
 	@Override
 	protected void insertInputValidation(Room room) throws ControllerException {
 		ArrayList<Room> rooms = getData();
+
+		// Vérifier l'existence de l'identifiant
 		for (Room r : rooms) {
 			if (r.getId() == room.getId()) {
 				throw new ControllerException("L'identifiant existe deja.");
 			}
 		}
 
+		// verifier la validation des champs
 		if (room.getId() <= 0) {
 			throw new ControllerException("L'identifiant doit etre superieur a zero.");
 		}
@@ -360,6 +374,7 @@ public class RoomManager extends Manager<Room> {
 	@Override
 	protected void updateInputValidation(Room data) throws ControllerException {
 
+		// verifier la validation des champs
 		if (data.getCapacity() <= 0) {
 			throw new ControllerException("La capacité ne doit pas etre nulle.");
 		}

@@ -7,6 +7,7 @@ import javafx.scene.shape.SVGPath;
 
 public class UiUtils {
 
+	// Méthode pour définir une icône sur un bouton avec un chemin SVG spécifique, une échelle et une couleur
     public static void setIconToButton(Button button, String svgPath, double scale, String colorHex) {
 		SVGPath icon = new SVGPath();
 		icon.setContent(svgPath);
@@ -18,6 +19,7 @@ public class UiUtils {
 		button.setContentDisplay(ContentDisplay.LEFT);
 	}
 
+	// Méthode pour créer une icône SVG avec un chemin spécifique, une échelle et une couleur
 	public static SVGPath createIcon(String svgPath, double scale, String colorHex) {
 		SVGPath icon = new SVGPath();
 		icon.setContent(svgPath);

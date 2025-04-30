@@ -24,6 +24,7 @@ public class AddClient extends AddPopup {
 		setTitle("Ajouter un client");
 	}
 
+	// retourne le modèle de données à partir des champs de saisie
 	@Override
 	public Person dataFromFields() {
 		return new Person(
@@ -31,9 +32,9 @@ public class AddClient extends AddPopup {
 				(String) getField(NAME).getValue(),
 				(String) getField(LASTNAME).getValue(),
 				(String) getField(EMAIL).getValue());
-
 	}
 
+	// ajouter les données a partir de la base de données
 	@Override
 	protected void addData(Model newData) throws Exception{
 		Controller.getInstance().getClientManager().insert((Person) newData);

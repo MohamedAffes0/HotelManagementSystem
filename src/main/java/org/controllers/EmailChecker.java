@@ -8,18 +8,17 @@ public class EmailChecker {
         int altIndex = emailText.indexOf("@");
         
         if (altIndex == -1) {
-            return false;
+            return false; // Si il n'y a pas de @
         }
         
         int dotIndex = emailText.lastIndexOf(".");
 
         if (dotIndex == -1) {
-            return false;
+            return false; // Si il n'y a pas de .
         }
-        
-        // Si il n'y a pas de . apres le @
+
         if (altIndex > dotIndex) {
-            return false;
+            return false; // Si il n'y a pas de . apres le @
         }
         
         return true;

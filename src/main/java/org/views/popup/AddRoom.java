@@ -23,6 +23,7 @@ public class AddRoom extends AddPopup {
 	final int TYPE = 4;
 
 	public AddRoom() {
+		// Champs de saisie pour la chambre
 		super(
 				new NumberPopupField("Numéro"),
 				new NumberPopupField("Etage"),
@@ -30,7 +31,8 @@ public class AddRoom extends AddPopup {
 				new FloatPopupField("Prix"),
 				new ComboBoxPopupField("Type",
 						FXCollections.observableArrayList("Simple", "Double", "Suite")));
-		setTitle("Ajouter une chambre");
+
+		setTitle("Ajouter une chambre"); // Titre de la fenêtre contextuelle
 	}
 
 	@Override
@@ -54,9 +56,9 @@ public class AddRoom extends AddPopup {
 
 	@Override
 	protected void addData(Model newData) throws Exception{
-		Controller.getInstance().getRoomManager().insert((Room) newData);
-		Stage stage = (Stage) getWindow();
-		stage.close();
+		Controller.getInstance().getRoomManager().insert((Room) newData); // Ajouter la chambre à la base de données
+		Stage stage = (Stage) getWindow(); // Récupérer la scène de la fenêtre contextuelle
+		stage.close(); // Fermer la fenêtre contextuelle
 	}
 
 }

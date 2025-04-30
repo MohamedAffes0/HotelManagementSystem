@@ -53,10 +53,13 @@ public class Person extends Model {
 		this.mail = mail;
 	}
 
+	// retourner les champs de l'employé pour l'affichage dans la liste
 	@Override
 	public ArrayList<ModelField> getFields() {
+
 		ArrayList<ModelField> data = new ArrayList<>();
 
+		// formater le cin pour qu'il ait 8 chiffres
 		String clientId = "";
 		int numberOfZeros = 8 - String.valueOf(getCin()).length();
 		for (int i = 0; i < numberOfZeros; i++) {

@@ -22,7 +22,8 @@ public class App extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
-		Locale.setDefault(Locale.FRANCE); // Définir les paramètres régionaux par défaut sur le français
+		// Définir les paramètres régionaux par défaut sur le français
+		Locale.setDefault(Locale.FRANCE);
 
 		stage = primaryStage;
 		Parent root = FXMLLoader.load(getClass().getResource("/login.fxml"));
@@ -35,6 +36,7 @@ public class App extends Application {
 		stage.show();
 	}
 
+	// Méthode pour changer la scène de l'application
 	public Object changeScene(String file) throws Exception {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(file));
 		Parent root = loader.load();
@@ -45,9 +47,11 @@ public class App extends Application {
 
 	public static void main(String[] args) {
 
-		Config config = FileManager.getConfig(); // Récupérer la configuration de la base de données à partir du fichier config.json
+		// Récupérer la configuration de la base de données à partir du fichier config.json
+		Config config = FileManager.getConfig();
 
 		try {
+			// Vérifier si la configuration est valide
 			Controller.getInstance().initializeConnection(config.url, config.user, config.password);
 		} catch (Exception e) {
 			System.out.println("Error: " + e.getMessage());

@@ -63,14 +63,15 @@ public class Reservation extends Model {
 		this.endDate = endDate;
 	}
 
+	// retourner les champs de la reservation pour l'affichage dans la liste
 	@Override
 	public ArrayList<ModelField> getFields() {
 		ArrayList<ModelField> data = new ArrayList<>();
 
-		// data.add(String.valueOf(getId()));
 		data.add(new ModelField("Chambre " + getRoom() + " Du  " + getStartDate().toString() + "  Au  "
 				+ getEndDate().toString(), null));
 
+		// Si la reservation est de client (non maintenance), on affiche le badge
 		if (getHotelClient() != null) {
 			String styleClass = "";
 			if (isPaid()) {
@@ -82,6 +83,8 @@ public class Reservation extends Model {
 		}
 		data.add(new ModelField("Employée: " + getEmployee(), "employee-badge"));
 
+		// si la reservation de maintenance, on affiche le badge de maintenance
+		// sinon on affiche le badge du client
 		if (getHotelClient() == null) {
 			data.add(new ModelField("Maintenance", "label-maintenance-reservation"));
 		} else {
@@ -93,6 +96,7 @@ public class Reservation extends Model {
 			clientHotel = clientHotel + String.valueOf(getHotelClient());
 			data.add(new ModelField("Client: " + clientHotel, "client-badge"));
 		}
+		
 		return data;
 	}
 

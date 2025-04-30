@@ -13,13 +13,14 @@ import javafx.scene.input.KeyEvent;
 public class FloatPopupField extends PopupField<TextField, Float> {
 
 	public FloatPopupField(String name) {
-		super(name);
+		super(name); // Le nom du champ qui sera utilisé dans la popup
 		TextField field = new TextField();
-		setField(field);
+		setField(field); // Le champ qui sera utilisé dans la popup
 
 		field.setOnKeyTyped(new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent event) {
+				// Lorsque l'utilisateur tape dans le champ, on ne garde que les chiffres et le point
 				String text = field.getText();
 				field.setText(StringFloatExtract.extract(text));
 				field.positionCaret(text.length());

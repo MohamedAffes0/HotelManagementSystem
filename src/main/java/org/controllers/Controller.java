@@ -4,12 +4,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+// implimentation de la classe Controller
+// qui est un singleton et qui gère l'accès à la base de données et la gestion des données
 /**
  * Controller Singleton, manages data control and access to database.
  */
-// implimentation de la classe Controller
-// qui est un singleton et qui gère l'accès à la base de données et la gestion des données
-
 public class Controller {
 
 	private static Controller INSTANCE;
@@ -34,6 +33,7 @@ public class Controller {
 	 * Attempts to establish a connection to the given database URL.
 	 * The {@code connection} is set to null if the method fails.
 	 */
+	// initialise la connexion à la base de données
 	public void initializeConnection(String url, String user, String password) throws SQLException {
 		connection = DriverManager.getConnection(url, user, password);
 	}
@@ -43,6 +43,7 @@ public class Controller {
 	 * 
 	 * @throws SQLException
 	 */
+	// ferme la connexion à la base de données
 	public void closeConnection() throws SQLException {
 		if (connection != null) {
 			connection.close();

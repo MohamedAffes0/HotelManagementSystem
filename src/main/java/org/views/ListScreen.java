@@ -43,7 +43,7 @@ public class ListScreen<T extends Model> {
 
 	public ListScreen(Manager<T> manager, AddPopup addPopup, UpdatePopup updatePopup) {
 		try {
-			manager.select();
+			manager.select(); // charger le contenu de la base de données
 		} catch (DBException exception) {
 			System.out.println(exception);
 		}
@@ -53,13 +53,14 @@ public class ListScreen<T extends Model> {
 	}
 
 	@FXML
+	// si le bouton est cliqué, ouvrir le popup d'ajout
 	private void addPressed(ActionEvent event) {
 		try {
 			// charger le popup d'ajout
 			addPopup.load("Ajout" + title.getText(), () -> {
 				try {
-					manager.select();
-					updateList();
+					manager.select(); // recharger le contenu de la base de données
+					updateList(); // mettre à jour la liste
 				} catch (Exception exception) {
 					System.out.println(exception.getMessage());
 				}
@@ -72,18 +73,23 @@ public class ListScreen<T extends Model> {
 
 	@FXML
 	protected void updateList() {
+
+		// Vérifier si le manager a des données
 		if (manager.getData() == null)
 			throw new RuntimeException("Content not loaded from db");
 
-		list.getChildren().clear();
+		list.getChildren().clear(); // vider la liste avant de la remplir
 
 		if (manager.getData().size() == 0)
-			return;
+			return; // ne pas afficher la liste si elle est vide
 
+		// verification de la barre de recherche
 		for (T item : manager.getData()) {
-			if (!manager.filter(item, filter.getValue(), search.getText()))
-				continue;
 
+			if (!manager.filter(item, filter.getValue(), search.getText()))
+				continue; // ne pas afficher l'élément si il ne correspond pas au filtre
+
+			// charger le bouton de la liste
 			try {
 				FXMLLoader listButtonLoader = new FXMLLoader(getClass().getResource(LIST_BUTTON_PATH));
 				list.getChildren().add(listButtonLoader.load());
@@ -96,7 +102,7 @@ public class ListScreen<T extends Model> {
 		}
 
 		if (list.getChildren().size() == 0)
-			return;
+			return; // ne pas afficher la liste si elle est vide
 
 		// Définir le style pour les premiers et derniers boutons
 		ListButton.updateStyle((Button) list.getChildren().get(0));
@@ -108,18 +114,23 @@ public class ListScreen<T extends Model> {
 	}
 
 	public void setFilterItems(ObservableList<String> items) {
+
 		// Supprimer la barre de recherche si aucun filtre n'est fourni.
 		if (items.isEmpty()) {
 			VBox mainContainer = (VBox) searchContainer.getParent();
 			mainContainer.getChildren().remove(1);
 			return;
 		}
-		filter.setItems(items);
-		filter.setValue(items.get(0));
+
+		filter.setItems(items); // ajouter les éléments au filtre
+		filter.setValue(items.get(0)); // valeur par défaut
 	}
 
 	public void setAddButtonText(String text) {
-		addButton.setText(text);
+
+		addButton.setText(text); // changer le texte du bouton d'ajout
+
+		// changer l'icône du bouton d'ajout
 		UiUtils.setIconToButton(addButton,
 				"M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"
 						+ "M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4",

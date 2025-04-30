@@ -27,6 +27,7 @@ public class Stats implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		try {
+			// Charger les données depuis la base de données et mettre à jour les listes
 			ArrayList<Person> clients = Controller.getInstance().getClientManager().getFaithfulClients();
 			updateList(faithfulClients, clients);
 
@@ -37,20 +38,25 @@ public class Stats implements Initializable {
 	}
 
 	private void updateList(VBox list, ArrayList<? extends Model> data) throws Exception {
+
+		// Vérifier si la liste et les données est vide
 		if (list == null) {
 			throw new Exception("Null list object");
 		}
 
+		// Vérifier si les données sont nulles
 		if (data == null) {
 			throw new Exception("Content not loaded from db");
 		}
 
+		//vider la liste avant de la remplir
 		list.getChildren().clear();
 
 		if (data.size() == 0) {
-			return;
+			return; // Si la liste est vide, ne pas ajouter de boutons
 		}
 
+		// Créer un bouton pour chaque élément de la liste et l'ajouter à la liste
 		for (Model model : data) {
 			try {
 				FXMLLoader listButtonLoader = new FXMLLoader(getClass().getResource(LIST_BUTTON_PATH));
@@ -62,7 +68,7 @@ public class Stats implements Initializable {
 			}
 		}
 
-		// Set the style for the first and last buttons
+		// Définir le style pour les premiers et derniers boutons
 		ListButton.updateStyle((Button) list.getChildren().get(0));
 		ListButton.updateStyle((Button) list.getChildren().get(list.getChildren().size() - 1));
 	}

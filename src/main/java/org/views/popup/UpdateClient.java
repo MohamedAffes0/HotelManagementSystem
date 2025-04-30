@@ -13,17 +13,18 @@ public class UpdateClient extends UpdatePopup {
 	final int MAIL = 2;
 
 	public UpdateClient() {
+		// Champs de saisie pour le client
 		super(
 				new TextPopupField("Nom"),
 				new TextPopupField("Prénom"),
 				new TextPopupField("Email"));
 
-		setTitle("Modifier un client");
+		setTitle("Modifier un client"); // Titre de la fenêtre contextuelle
 	}
 
 	@Override
 	protected Person dataFromFields() {
-		Person currentData = (Person) getData();
+		Person currentData = (Person) getData(); // Récupérer les données actuelles du client
 
 		String name = (String) getField(NAME).getValue();
 		String lastName = (String) getField(LASTNAME).getValue();
@@ -34,18 +35,21 @@ public class UpdateClient extends UpdatePopup {
 
 	@Override
 	public void update(Model newData) throws ControllerException {
+		// Vérifier si les données reçues sont valides
 		if (!(newData instanceof Person))
 			throw new ControllerException("Invalid data received");
 
-		Controller.getInstance().getClientManager().update(getData().getId(), (Person) newData);
+		// Mettre à jour le client dans la base de données
+		Controller.getInstance().getClientManager().update(getData().getId(), (Person) newData); 
 	}
 
 	@Override
 	public void delete() {
 		try {
+			// Supprimer le client de la base de données
 			Controller.getInstance().getClientManager().delete(getData().getId());
 		} catch (DBException exception) {
-			setErrorMessage(exception.toString());
+			setErrorMessage(exception.toString()); // Afficher le message d'erreur dans la fenêtre contextuelle
 		}
 	}
 

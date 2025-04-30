@@ -20,8 +20,7 @@ public class AddRoom extends AddPopup {
 	final int FLOOR = 1;
 	final int CAPACITY = 2;
 	final int PRICE = 3;
-	final int STATE = 4;
-	final int TYPE = 5;
+	final int TYPE = 4;
 
 	public AddRoom() {
 		super(
@@ -29,8 +28,6 @@ public class AddRoom extends AddPopup {
 				new NumberPopupField("Etage"),
 				new NumberPopupField("Capacité"),
 				new FloatPopupField("Prix"),
-				new ComboBoxPopupField("Etat",
-						FXCollections.observableArrayList("Libre", "Occupée", "Maintenance")),
 				new ComboBoxPopupField("Type",
 						FXCollections.observableArrayList("Simple", "Double", "Suite")));
 		setTitle("Ajouter une chambre");
@@ -50,21 +47,9 @@ public class AddRoom extends AddPopup {
 				roomType = RoomType.SUITE;
 				break;
 		}
-		RoomState roomState = RoomState.LIBRE;
-		switch ((String) getField(STATE).getValue()) {
-			case "Libre":
-				roomState = RoomState.LIBRE;
-				break;
-			case "Occupée":
-				roomState = RoomState.OCCUPEE;
-				break;
-			case "Maintenance":
-				roomState = RoomState.MAINTENANCE;
-				break;
-		}
 
 		return new Room((int) getField(ID).getValue(), roomType, (int) getField(FLOOR).getValue(),
-				(int) getField(CAPACITY).getValue(), (float) getField(PRICE).getValue(), roomState);
+				(int) getField(CAPACITY).getValue(), (float) getField(PRICE).getValue(), RoomState.LIBRE);
 	}
 
 	@Override

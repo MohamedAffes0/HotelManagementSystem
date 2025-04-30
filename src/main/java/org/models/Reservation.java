@@ -9,10 +9,10 @@ public class Reservation extends Model {
 	private Date endDate;
 	private boolean paid;
 	private int employee;
-	private int hotelClient;
+	private Integer hotelClient;
 	private int room;
 
-	public Reservation(int id, Date startDate, Date endDate, boolean paid, int employee, int hotelClient,
+	public Reservation(int id, Date startDate, Date endDate, boolean paid, int employee, Integer hotelClient,
 			int room) {
 		this.id = id;
 		this.startDate = startDate;
@@ -43,7 +43,7 @@ public class Reservation extends Model {
 		return employee;
 	}
 
-	public int getHotelClient() {
+	public Integer getHotelClient() {
 		return hotelClient;
 	}
 
@@ -70,23 +70,29 @@ public class Reservation extends Model {
 		// data.add(String.valueOf(getId()));
 		data.add(new ModelField("Chambre " + getRoom() + " Du  " + getStartDate().toString() + "  Au  "
 				+ getEndDate().toString(), null));
-		String styleClass = "";
-		if (isPaid()) {
-			styleClass = "payed-badge";
-		} else {
-			styleClass = "unpaid-badge";
+
+		if (getHotelClient() != null) {
+			String styleClass = "";
+			if (isPaid()) {
+				styleClass = "payed-badge";
+			} else {
+				styleClass = "unpaid-badge";
+			}
+			data.add(new ModelField(isPaid() ? "Payé" : "Impayé", styleClass));
 		}
-		data.add(new ModelField(isPaid() ? "Payé" : "Impayé", styleClass));
 		data.add(new ModelField("Employée: " + getEmployee(), "employee-badge"));
 
-		String clientHotel = "";
-		int numberOfZeros = 8 - String.valueOf(getHotelClient()).length();
-		for (int i = 0; i < numberOfZeros; i++) {
-			clientHotel += "0";
+		if (getHotelClient() == null) {
+			data.add(new ModelField("Maintenance", "label-maintenance-reservation"));
+		} else {
+			String clientHotel = "";
+			int numberOfZeros = 8 - String.valueOf(getHotelClient()).length();
+			for (int i = 0; i < numberOfZeros; i++) {
+				clientHotel += "0";
+			}
+			clientHotel = clientHotel + String.valueOf(getHotelClient());
+			data.add(new ModelField("Client: " + clientHotel, "client-badge"));
 		}
-		clientHotel = clientHotel + String.valueOf(getHotelClient());
-		data.add(new ModelField("Client: " + clientHotel, "client-badge"));
-
 		return data;
 	}
 

@@ -64,8 +64,8 @@ public class ListScreen<T extends Model> {
 					System.out.println(exception.getMessage());
 				}
 			});
-		} catch (Exception e) {
-			System.out.println(e);
+		} catch (Exception exception) {
+			exception.printStackTrace();
 			System.out.println("Error opening add popup");
 		}
 	}

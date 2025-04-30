@@ -119,8 +119,8 @@ public class ListButton {
 					updateStyle((Button) parent.getChildren().get(index));
 				}
 			});
-		} catch (Exception e) {
-			System.out.println(e);
+		} catch (Exception exception) {
+			exception.printStackTrace();
 			System.out.println("Error opening add popup");
 		}
 	}

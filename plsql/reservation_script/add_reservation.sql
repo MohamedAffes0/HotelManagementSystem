@@ -3,7 +3,7 @@ CREATE OR REPLACE PROCEDURE add_reservation (
     p_date_fin IN DATE,
     p_paid IN NUMBER DEFAULT 0,
     p_id_employe IN NUMBER,
-    p_id_client IN NUMBER,
+    p_id_client IN NUMBER DEFAULT NULL,
     p_id_chambre IN NUMBER
 ) AS
 BEGIN

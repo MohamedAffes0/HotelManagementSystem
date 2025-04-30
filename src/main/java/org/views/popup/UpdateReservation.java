@@ -18,27 +18,45 @@ public class UpdateReservation extends UpdatePopup {
 	final int STATUS = 2;
 
 	public UpdateReservation() {
-		super(
+		super(new DatePopupField("Date de début"),
+			new DatePopupField("Date de fin"),
+			new ComboBoxPopupField("Statut",
+			FXCollections.observableArrayList("Payé", "Non payé")));
+		setTitle("Modifier la réservation");
+	}
+
+	@Override
+	public void setData(Model data) {
+		super.setData(data);
+		if (((Reservation) getData()).getHotelClient() == null) {
+			setFields(new DatePopupField("Date de début"),
+			new DatePopupField("Date de fin"));
+		}
+		else {
+			setFields(
 				new DatePopupField("Date de début"),
 				new DatePopupField("Date de fin"),
 				new ComboBoxPopupField("Statut",
 						FXCollections.observableArrayList("Payé", "Non payé")));
-
-		setTitle("Modifier la réservation");
+		}
 	}
 
 	@Override
 	protected Reservation dataFromFields() {
 		Reservation currentData = (Reservation) getData();
-		boolean reservationStatus = false;
-		switch ((String) getField(STATUS).getValue()) {
-			case "Payé":
-				reservationStatus = true;
-				break;
-			case "Non payé":
-				reservationStatus = false;
-				break;
+		boolean reservationStatus = ((Reservation) getData()).isPaid();
+
+		if (((Reservation)getData()).getHotelClient() != null) {
+			switch ((String) getField(STATUS).getValue()) {
+				case "Payé":
+					reservationStatus = true;
+					break;
+				case "Non payé":
+					reservationStatus = false;
+					break;
+			}
 		}
+
 		java.sql.Date startDate = java.sql.Date.valueOf((LocalDate) getField(START_DATE).getValue());
 		java.sql.Date endDate = java.sql.Date.valueOf((LocalDate) getField(END_DATE).getValue());
 
@@ -66,10 +84,12 @@ public class UpdateReservation extends UpdatePopup {
 	@Override
 	public void fieldsFromData() {
 		Reservation reservation = (Reservation) getData();
-		if (reservation.isPaid()) {
-			((ComboBoxPopupField) getField(STATUS)).setValue("Payé");
-		} else {
-			((ComboBoxPopupField) getField(STATUS)).setValue("Non payé");
+		if (reservation.getHotelClient() != null) {
+			if (reservation.isPaid()) {
+				((ComboBoxPopupField) getField(STATUS)).setValue("Payé");
+			} else {
+				((ComboBoxPopupField) getField(STATUS)).setValue("Non payé");
+			}
 		}
 
 		((DatePopupField) getField(START_DATE)).setValue(((java.sql.Date) reservation.getStartDate()).toLocalDate());

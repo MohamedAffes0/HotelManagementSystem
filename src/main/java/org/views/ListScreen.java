@@ -5,6 +5,7 @@ import org.controllers.exceptions.DBException;
 import org.models.Model;
 import org.views.popup.AddPopup;
 import org.views.popup.UpdatePopup;
+import org.views.popup.Popup;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -29,22 +30,22 @@ public class ListScreen<T extends Model> {
 	private final String LIST_BUTTON_PATH = "/listButton.fxml";
 
 	@FXML
-	protected Button addButton;
+	private Button addButton;
 
 	@FXML
-	protected ComboBox<String> filter;
+	private ComboBox<String> filter;
 
 	@FXML
-	protected VBox list;
+	private VBox list;
 
 	@FXML
 	private HBox searchContainer;
 
 	@FXML
-	protected TextField search;
+	private TextField search;
 
 	@FXML
-	protected Label title;
+	private Label title;
 
 	public ListScreen(Manager<T> manager, AddPopup addPopup, UpdatePopup updatePopup) {
 		try {
@@ -58,30 +59,17 @@ public class ListScreen<T extends Model> {
 	}
 
 	@FXML
-	protected void addPressed(ActionEvent event) {
+	private void addPressed(ActionEvent event) {
 		try {
 			// Load the Popup
-			Parent content = addPopup.load();
-
-			// Create the stage and configure it
-			Stage stage = new Stage();
-			Scene scene = new Scene(content);
-			stage.setResizable(false);
-			stage.setTitle("Ajout " + title.getText());
-			stage.setScene(scene);
-			// Reload list after closing the popup.
-			stage.setOnHidden(new EventHandler<WindowEvent>() {
-				@Override
-				public void handle(WindowEvent event) {
-					try {
-						manager.select();
-						updateList();
-					} catch (Exception exception) {
-						System.out.println("Erreur de connection a la base de donnée");
-					}
+			addPopup.load("Ajout" + title.getText(), () -> {
+				try {
+					manager.select();
+					updateList();
+				} catch (Exception exception) {
+					System.out.println(exception.getMessage());
 				}
 			});
-			stage.show();
 		} catch (Exception e) {
 			System.out.println(e);
 			System.out.println("Error opening add popup");

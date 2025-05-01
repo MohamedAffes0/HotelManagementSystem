@@ -1,6 +1,6 @@
 CREATE OR REPLACE PROCEDURE check_room (
-    p_id IN NUMBER,
-    p_exists OUT NUMBER
+    p_id IN NUMBER, --the id of the room
+    p_exists OUT NUMBER --1 if the room exists else 0
 ) AS
 BEGIN
     BEGIN

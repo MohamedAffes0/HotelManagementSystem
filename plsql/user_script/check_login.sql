@@ -1,9 +1,9 @@
 CREATE OR REPLACE PROCEDURE check_login (
-    p_email IN VARCHAR2,
-    p_password IN VARCHAR2,
-    p_exists OUT NUMBER,
-    p_active OUT NUMBER,
-    p_admin OUT NUMBER
+    p_email IN VARCHAR2, --employee mail
+    p_password IN VARCHAR2,--employee password
+    p_exists OUT NUMBER,--check if the employee exists in the database
+    p_active OUT NUMBER, --check if the account is active
+    p_admin OUT NUMBER --check if the user is admin
 ) AS
 BEGIN
     BEGIN
@@ -15,6 +15,7 @@ BEGIN
         FROM EMPLOYE
         WHERE mail = p_email AND mdp = p_password;
 
+        --p_exists equals 1 if the user exists, else 0
         IF p_exists > 0 THEN
             p_exists := 1;
         ELSE
@@ -22,10 +23,12 @@ BEGIN
         END IF;
     END;
     EXCEPTION
+        --when no data is found
         WHEN no_data_found THEN
             p_exists := 0;
             p_active := 0;
             p_admin := 0;
+        --handling other exceptions
         WHEN OTHERS THEN
             p_exists := 0;
             p_active := 0;

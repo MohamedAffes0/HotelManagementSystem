@@ -150,7 +150,7 @@ public class ClientManager extends Manager<Person> {
 		}
 
 		// Vérifier le CIN
-		if (data.getCin() < 0 || data.getCin() > 99999999) {
+		if (data.getCin() < 1 || data.getCin() > 99999999) {
 			throw new ControllerException("CIN invalide.");
 		}
 

@@ -34,10 +34,6 @@
     -font-color-date-cell: #dddddd;
 
     -fx-background-color: -background-color;
-    /* -fx-font-family: "Adwaita Mono Bold";
-    -fx-font-weight: bold; */
-    /* -fx-font-family: "JetBrainsMonoNL NFM Regular"; */
-    /* -fx-font-weight: bold; */
     -fx-font-family: "Inter Regular";
     -fx-font-weight: 200;
     -fx-text-fill: -font-color-white;
@@ -47,7 +43,6 @@
 .label {
     -fx-text-fill: -font-color-white;
     -fx-font-size: 1.25em;
-    /* -fx-font-weight: bold; */
 }
 
 /* === TEXT === */
@@ -78,8 +73,6 @@ Text {
     -fx-background-radius: 10;
     -fx-padding: 8;
     -fx-font-size: 16px;
-    /* -fx-scale-x: 1.05;
-    -fx-scale-y: 1.05; */
 }
 
 .text-field:focused {
@@ -138,15 +131,6 @@ Text {
     -fx-background-color: -button-color-hover;
 }
 
-/* .add-button {
-    -fx-background-color: -add-button-color;
-    -fx-text-fill: -font-color-black;
-} */
-
-/* .add-button:hover {
-    -fx-background-color: -add-button-color-hover;
-} */
-
 .delete-button, .log-out-button {
     -fx-background-color: -delete-button-color;
     -fx-text-fill: -font-color-delete-button;
@@ -162,14 +146,6 @@ Text {
     -fx-border-radius: 50px;
     -fx-background-radius: 50px;
 }
-
-/* .log-out-button {
-    -fx-background-color: -logout-button-color;
-}
-
-.log-out-button:hover {
-    -fx-background-color: -logout-button-color-hover;
-} */
 
 .cancel-button {
     -fx-background-color: -button-color-dark;

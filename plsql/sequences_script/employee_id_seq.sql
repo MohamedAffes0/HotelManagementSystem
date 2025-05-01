@@ -1,7 +1,7 @@
--- sesuence pour l'id de reservation
+-- sequence pour l'id de reservation
 
 CREATE SEQUENCE employe_id_seq
-START WITH 1
+START WITH 2
 INCREMENT BY 1
 NOCACHE
 NOCYCLE;

@@ -31,7 +31,7 @@ public class ReservationManager extends Manager<Reservation> {
 
 		// La chaîne n'est pas vide, donc vérifier le type de filtre
 		switch (criterea) {
-			case "Est Payé":
+			case "Etat":
 				Boolean paid = null;
 
 				if ("payé".contains(searchText.toLowerCase()))

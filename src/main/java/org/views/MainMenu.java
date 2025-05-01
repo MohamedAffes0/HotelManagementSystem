@@ -116,7 +116,7 @@ public class MainMenu implements Initializable {
 		// changer le menu actuel pour le menu des réservations
 		changeCurrentMenu(controller,
 				"Réservations",
-				FXCollections.observableArrayList("Est Payé", "Client", "Chambre"),
+				FXCollections.observableArrayList("Etat", "Client", "Chambre"),
 				"Ajouter Réservation");
 	}
 

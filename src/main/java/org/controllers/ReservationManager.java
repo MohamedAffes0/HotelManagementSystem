@@ -130,7 +130,7 @@ public class ReservationManager extends Manager<Reservation> {
 		if (data.getEndDate() == null) {
 			throw new ControllerException("Veuillez saisir une date de fin.");
 		}
-		if (data.getHotelClient() != null && (data.getHotelClient() < 0 || data.getHotelClient() > 99999999)) {
+		if (data.getHotelClient() != null && (data.getHotelClient() < 1 || data.getHotelClient() > 99999999)) {
 			throw new ControllerException("Veuillez saisir un CIN valide.");
 		}
 		if (data.getRoom() <= 0) {
@@ -281,7 +281,7 @@ public class ReservationManager extends Manager<Reservation> {
 		if (!reservationCheck(data.getRoom(), data.getId(), data.getStartDate(),
 				data.getEndDate())) {
 			System.err.println("La chambre est déjà réservée pour cette période.");
-			throw new ControllerException("La chambre est déjà réservée pour cette période.");
+			throw new ControllerException("La chambre est réservée pour cette période.");
 		}
 	}
 }

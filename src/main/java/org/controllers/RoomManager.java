@@ -44,6 +44,8 @@ public class RoomManager extends Manager<Room> {
 			select(); // Remplir la liste des chambres si elle est vide
 		}
 
+		updateRoomState(); // Mettre à jour l'état de la chambre
+
 		// Calculer le nombre total de réservations
 		for (Room room : getData()) {
 			Integer count = reservationCount.get(room.getId());
@@ -262,6 +264,19 @@ public class RoomManager extends Manager<Room> {
 				return RoomState.MAINTENANCE;
 			default:
 				return RoomState.LIBRE;
+		}
+	}
+
+	private void updateRoomState() {
+		// Mettre à jour l'état de la chambre dans la liste
+		try {
+			for (Room room : getData()) {
+				int id = room.getId();
+				RoomState state = getRoomState(id);
+				room.setState(state);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 

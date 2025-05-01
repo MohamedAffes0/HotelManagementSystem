@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -165,6 +166,10 @@ public abstract class Popup implements Initializable {
 		Scene scene = new Scene(loader.load());
 		stage.setResizable(false);
 		stage.setTitle(title);
+
+		// Définir l'icône de l'application
+		stage.getIcons().add(new Image(getClass().getResourceAsStream("/hotel-icon.png")));
+
 		stage.setScene(scene);
 		// Recharger la liste après la fermeture de la popup.
 		stage.setOnHidden(event -> windowClosed(onClosed));

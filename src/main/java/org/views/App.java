@@ -37,7 +37,7 @@ public class App extends Application {
 		stage.getIcons().add(new Image(getClass().getResourceAsStream("/hotel-icon.png")));
 
 		stage.setScene(scene);
-		Application.setUserAgentStylesheet("style.css");
+		Application.setUserAgentStylesheet("style.css"); // Définir la feuille de style
 		stage.show();
 	}
 

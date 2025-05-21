@@ -1,6 +1,6 @@
-<div align="center">
-    <img src="https://github.com/MohamedAffes0/HotelManagementSystem/blob/Mohamed/docs/images/logo-with-text.png" height="100px">
-</div>
+<p align="center">
+    <img src="https://github.com/MohamedAffes0/HotelManagementSystem/blob/Mohamed/docs/images/logo-with-text.png">
+</p>
 
 This project is developed as part of my studies in the integrated preparatory program MI2. It is a hotel management application that includes both administration and reception functionalities. The goal is to streamline the management of reservations, guests, rooms, and staff through an intuitive and efficient interface.
 

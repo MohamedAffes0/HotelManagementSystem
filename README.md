@@ -1,5 +1,8 @@
-# HotelManagementSystem
- HotelManagementSystem This project is developed as part of my studies in the integrated preparatory program MI2. It is a hotel management application that includes both administration and reception functionalities. The goal is to streamline the management of reservations, guests, rooms, and staff through an intuitive and efficient interface.
+<div align="center">
+    <img src="https://github.com/MohamedAffes0/HotelManagementSystem/blob/Mohamed/docs/images/logo-with-text.png">
+</div>
+
+This project is developed as part of my studies in the integrated preparatory program MI2. It is a hotel management application that includes both administration and reception functionalities. The goal is to streamline the management of reservations, guests, rooms, and staff through an intuitive and efficient interface.
 
 ## Running the code
 In order to run you need to install [maven](https://maven.apache.org/).

@@ -16,7 +16,7 @@
 # Introduction
 **Emerald Coast Dashboard** is a hotel management application that includes both administation and reception features. It was developed as the semester final project using **Java**, **JavaFX** , **[Oracle DB](https://www.oracle.com/database/)** and **[SQL*Plus](https://www.oracle.com/database/technologies/sqlplus-cloud.html)**.
 
-This is a group project made by [Ayoub Ouali](https://github.com/the-viceroy), [Mohamed Affes](https://github.com/MohamedAffes0) and [Mayssa Ben M'rad](https://github.com/mayssabenmrad). Refer to [Project roles documentation](/docs/gestion_projet.md) for more details
+This is a group project made by [Ayoub Ouali](https://github.com/the-viceroy), [Mohamed Affes](https://github.com/MohamedAffes0) and [Mayssa Ben M'rad](https://github.com/mayssabenmrad).
 
 # Key Features
 * Important statistics generation

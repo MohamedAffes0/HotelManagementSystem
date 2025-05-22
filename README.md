@@ -1,16 +1,59 @@
-# HotelManagementSystem
- HotelManagementSystem This project is developed as part of my studies in the integrated preparatory program MI2. It is a hotel management application that includes both administration and reception functionalities. The goal is to streamline the management of reservations, guests, rooms, and staff through an intuitive and efficient interface.
+<p align="center">
+    <picture>
+            <source media="(prefers-color-scheme: dark)" srcset="https://github.com/MohamedAffes0/HotelManagementSystem/blob/Mohamed/docs/images/logo-with-text-dark-mode.png">
+            <source media="(prefers-color-scheme: light)" srcset="https://github.com/MohamedAffes0/HotelManagementSystem/blob/Mohamed/docs/images/logo-with-text-light-mode.png">
+            <img src="https://github.com/MohamedAffes0/HotelManagementSystem/blob/Mohamed/docs/images/logo-with-text-light-mode.png">
+    </picture>
+</p>
 
-## Running the code
-In order to run you need to install [maven](https://maven.apache.org/).
-then you can simply run
+<p align="center">
+    <img src="https://img.shields.io/badge/Made%20with-Java-red.svg">
+    <img src="https://img.shields.io/badge/Using-OracleDB-red.svg">
+    <img src="https://img.shields.io/badge/License-MIT-green.svg">
+    <img src="https://img.shields.io/badge/Groupe-MI2A-blue.svg">
+</p>
+
+# Introduction
+**Emerald Coast Dashboard** is a hotel management application that includes both administation and reception features. It was developed as the semester final project using **Java**, **JavaFX** , **[Oracle DB](https://www.oracle.com/database/)** and **[SQL*Plus](https://www.oracle.com/database/technologies/sqlplus-cloud.html)**.
+
+This is a group project made by [Ayoub Ouali](https://github.com/the-viceroy), [Mohamed Affes](https://github.com/MohamedAffes0) and [Mayssa Ben M'rad](https://github.com/mayssabenmrad). Refer to [Project roles documentation](/docs/gestion_projet.md) for more details
+
+# Key Features
+* Important statistics generation
+* Reservations management
+* Rooms management
+* Clients management
+* Accounts management
+
+# Screenshot
+<p>
+    <img src="https://github.com/MohamedAffes0/HotelManagementSystem/blob/Mohamed/docs/images/screenshot.png">
+</p>
+
+# Getting started
+## Required tools
+Before starting you need to have the following tools in your development environment.
+* [Maven](https://maven.apache.org/).
+* [Java Development Kit (JDK)](https://www.oracle.com/java/technologies/downloads/).
+* [Oracle DB](https://www.oracle.com/database/).
+* [SQL*Plus](https://www.oracle.com/database/technologies/sqlplus-cloud.html).
+
+## Running the project
+To run the project first use the following command to resolve dependencies
+```
+mvn dependency:resolve
+```
+then use to start the project
 ```
 mvn clean javafx:run
 ```
-As for the database you need [Oracle DB](https://www.oracle.com/database/) alongside [SQL+](https://www.oracle.com/database/technologies/sqlplus-cloud.html).
-Then simply run the SQL files in the PLSQL directory.
 
-## Functionality
-### Creating Accounts
-A preexisting admin account needs to approve any new account and needs to assign them either an admin or receptionist status.
-Only once the approval step is step is done can the user access the dashboard.
+# Project structure
+## docs/
+Houses project's documentation in Markdown format.
+## models/
+Houses the UML models used for conception. Refer to [Conception documentation](/docs/conception.md) for more details.
+## plsql
+Houses the Oracle PL/SQL scripts. Refer to [Database documentation](/docs/analyse_plsql.md) for more details.
+## src/main
+Houses the source code for the project and the needed assets for the gui app. Refer to [Java side documentation](/docs/analyse_java.md) for more details

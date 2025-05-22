@@ -1,10 +1,6 @@
 # Technologies utilisées
-
-| Couche | Technologie | Rôle |
-|--------|-------------|------|
-| Front‑end | **JavaFX 19** | UI desktop, FXML, animations |
-| Back‑end | **Java 21** | Logique métier, contrôleurs, JDBC |
-| Base de données | **Oracle 21c** & **PL/SQL** | Stockage, procédures, triggers |
-| Construction | **Maven 3.9** | Gestion des dépendances / build |
-| Assurance qualité | **JUnit 5** | Tests unitaires Java |
-| Gestion de sources | **Git / GitHub** | Suivi de versions |
+**Interface graphique:** [JavaFX](https://openjfx.io/)
+**Language de programmation principale:** [Java](https://www.java.com/)
+**Base de données:** [OracleDB](https://www.oracle.com/database/)
+**Gestion de projet:** [Maven](https://maven.apache.org/)
+**système de contrôle de version:** [Git](https://git-scm.com)

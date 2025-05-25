@@ -127,7 +127,7 @@ public class AddReservation extends AddPopup {
 				getField(START_DATE).getValue() == null ? null : Date.valueOf((LocalDate) getField(START_DATE).getValue()),
 				getField(END_DATE).getValue() == null ? null : Date.valueOf((LocalDate) getField(END_DATE).getValue()),
 				status,
-				Controller.getInstance().getCurrentUser(),
+				Controller.getInstance().getCurrentUser().getId(),
 				isMaintenance? null : (int) getField(CLIENT).getValue(),
 				room);
 	}

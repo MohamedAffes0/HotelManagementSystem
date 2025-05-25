@@ -16,7 +16,7 @@ public class FileManager {
 
         // Default constructor with default values
 		public Config() {
-			this.url = "jdbc:oracle:thin:@localhost:1521/ORCLPDB";
+			this.url = "jdbc:oracle:thin:@localhost:1521/FREEPDB1";
 			this.user = "hotel_user";
 			this.password = "2426";
 		}

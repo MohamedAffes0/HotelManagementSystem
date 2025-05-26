@@ -107,7 +107,7 @@ public class UserManager extends Manager<Employee> {
 		String password = resultSet.getString("mdp");
 		boolean isAdmin = resultSet.getInt("is_admin") == 1 ? true : false;
 		boolean isActive = resultSet.getInt("is_active") == 1 ? true : false;
-		if (id != Controller.getInstance().getCurrentUser().getId()) {
+		if (Controller.getInstance().getCurrentUser() != null && id != Controller.getInstance().getCurrentUser().getId()) {
 			return new Employee(id, name, lastName, mail, password, isAdmin, isActive);
 		}
 		return null;
@@ -167,7 +167,7 @@ public class UserManager extends Manager<Employee> {
 			throw new ControllerException("L'e-mail est invalide.");
 		}
 
-		if (data.getMail().equals(Controller.getInstance().getCurrentUser().getMail())) {
+		if (Controller.getInstance().getCurrentUser() != null && data.getMail().equals(Controller.getInstance().getCurrentUser().getMail())) {
 			throw new ControllerException("Un compte utilisant cet e-mail existe deja.");
 		}
 	}

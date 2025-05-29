@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import org.models.Employee;
+
 // implimentation de la classe Controller
 // qui est un singleton et qui gère l'accès à la base de données et la gestion des données
 /**
@@ -14,7 +16,7 @@ public class Controller {
 	private static Controller INSTANCE;
 	private Connection connection = null;
 	private UserManager userManager = new UserManager();
-	private int currentUser = -1; // user id de l'utilisateur connecté
+	private Employee currentUser = null; // user id de l'utilisateur connecté
 	private RoomManager roomManager = new RoomManager();
 	private ReservationManager reservationManager = new ReservationManager();
 	private ClientManager clientManager = new ClientManager();
@@ -55,11 +57,11 @@ public class Controller {
 		return connection;
 	}
 
-	public void setCurrentUser(int currentUser) {
+	public void setCurrentUser(Employee currentUser) {
 		this.currentUser = currentUser;
 	}
 
-	public int getCurrentUser() {
+	public Employee getCurrentUser() {
 		return currentUser;
 	}
 

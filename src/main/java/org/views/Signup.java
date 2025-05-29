@@ -32,7 +32,8 @@ public class Signup {
 	private TextField prenom;
 
 	@FXML
-	// si le bouton "submit" est pressé, chargez le fichier FXML pour la page de connexion
+	// si le bouton "submit" est pressé, chargez le fichier FXML pour la page de
+	// connexion
 	void loadLogin(MouseEvent event) throws Exception {
 		App main = new App();
 		main.changeScene("/login.fxml");
@@ -50,11 +51,11 @@ public class Signup {
 		// Appel de la méthode userAdd avec les valeurs des champs de texte
 		Employee user = new Employee(1, nameText, lastNameText, emailText, passwordText, false,
 				false);
-		
+
 		try {
 			Controller.getInstance().getUserManager().insert(user);
 			App main = new App();
-            main.changeScene("/confirmationPending.fxml"); // Changer la scène vers la page de confirmation
+			main.changeScene("/confirmationPending.fxml"); // Changer la scène vers la page de confirmation
 		} catch (Exception exception) {
 			// Afficher le message d'erreur dans le label d'erreur
 			error.setText(exception.toString());

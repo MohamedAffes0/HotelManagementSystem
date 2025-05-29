@@ -97,7 +97,7 @@ public class ReservationManager extends Manager<Reservation> {
 		stmt.setDate(1, new Date(data.getStartDate().getTime())); // convertir Date en java.sql.Date
 		stmt.setDate(2, new Date(data.getEndDate().getTime()));
 		stmt.setInt(3, data.isPaid() ? 1 : 0);
-		stmt.setInt(4, Controller.getInstance().getCurrentUser());
+		stmt.setInt(4, Controller.getInstance().getCurrentUser().getId());
 		if (data.getHotelClient() == null) {
 			stmt.setNull(5, java.sql.Types.INTEGER); // Si le client est null, on le met à null (reservation de maintenance)
 		} else {
